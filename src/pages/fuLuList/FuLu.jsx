@@ -91,6 +91,10 @@ export default class FuLu extends PureComponent {
       payload: { ...pagination, ...params },
     });
     const { fuLu: { datas } } = this.props;
+    // 先执行清空详情操作
+    await dispatch({
+      type: 'fuLu/emptyProfile',
+    });
     if (datas && datas.list && datas.list.length > 0) {
       this.handleProfileClick(datas.list[0]);
     } else {
@@ -135,22 +139,24 @@ export default class FuLu extends PureComponent {
     this.setState({ loadingModel: 'profile' });
     await this.operatePlatServiceData('update', params);
     message.success('修改平台服务信息成功');
+    // 触发查询点击事件
+    document.getElementById('chaXun').click();
     this.handleDisplay();
   }
 
-  async handleLockPlatService(params, loadingModel = 'list') {
-    this.setState({ loadingModel });
-    await this.operatePlatServiceData('modify', { ...params, state: 'L' });
-    message.success('激活平台服务信息成功');
-    this.handleDisplay();
-  }
+  // async handleLockPlatService(params, loadingModel = 'list') {
+  //   this.setState({ loadingModel });
+  //   await this.operatePlatServiceData('modify', { ...params, state: 'L' });
+  //   message.success('激活平台服务信息成功');
+  //   this.handleDisplay();
+  // }
 
-  async handleUnLockPlatService(params, loadingModel = 'list') {
-    this.setState({ loadingModel });
-    await this.operatePlatServiceData('modify', { ...params, state: 'A' });
-    message.success('解锁平台服务信息成功');
-    this.handleDisplay();
-  }
+  // async handleUnLockPlatService(params, loadingModel = 'list') {
+  //   this.setState({ loadingModel });
+  //   await this.operatePlatServiceData('modify', { ...params, state: 'A' });
+  //   message.success('解锁平台服务信息成功');
+  //   this.handleDisplay();
+  // }
 
   async handleDeletePlatService(params, loadingModel = 'list') {
     this.setState({ loadingModel });
@@ -346,7 +352,7 @@ export default class FuLu extends PureComponent {
           <Button disabled={selectedRows.length > 0 ? '' : 'disabled'}><DeleteOutlined /> 批量删除</Button>
         </Popconfirm>
         <span style={{ float: 'right', marginBottom: 24 }}>
-          <Button type="primary" htmlType="submit" onClick={this.handleSearch.bind(this)}>查询</Button>
+          <Button id="chaXun" type="primary" htmlType="submit" onClick={this.handleSearch.bind(this)}>查询</Button>
           <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset.bind(this)}>重置</Button>
             {/*<a style={{ marginLeft: 8 }} onClick={this.toggleForm.bind(this)}>*/}
               {/*{this.state.expandForm ? up : down}*/}
@@ -442,9 +448,14 @@ export default class FuLu extends PureComponent {
   renderProfile() {
     const { currentModel } = this.state;
     if (currentModel === 'display') {
-      const { fuLu: { data: detailData } } = this.props;
+      const { fuLu: { data: detailData }, xiaoShuo: { xiaoShuoList } } = this.props;
       if (detailData) {
-        return (<StandardProfile data={detailData} />);
+        return (
+          <StandardProfile
+            xiaoShuoList={xiaoShuoList}
+            data={detailData}
+          />
+        );
       }
     }
   }

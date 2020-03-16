@@ -20,3 +20,18 @@ export async function saveFuLu(params) {
     data: { ...params },
   });
 }
+
+// 修改符箓信息
+export async function updateFuLu(params) {
+  return request('/chenXian/chen/xian/fuLu', {
+    method: 'POST',
+    data: { ...params },
+  });
+}
+
+// 删除符箓信息
+export async function delFuLu(params) {
+  return request(`/chenXian/chen/xian/fuLu/${params.id}`, {
+    method: 'DELETE',
+  });
+}

@@ -1,4 +1,4 @@
-import { queryFuLu, getFuLu, saveFuLu } from '../services/fuLu';
+import { queryFuLu, getFuLu, saveFuLu, updateFuLu, delFuLu } from '../services/fuLu';
 const Model = {
   namespace: 'fuLu',
   state: {
@@ -33,6 +33,16 @@ const Model = {
         payload: response,
       });
     },
+    *update({ payload }, { call, put }) {
+      const response = yield call(updateFuLu, payload);
+      yield put({
+        type: 'change',
+        payload: response,
+      });
+    },
+    *del({ payload }, { call, put }) {
+      yield call(delFuLu, payload);
+    },
   },
   reducers: {
     save(state, { payload }) {
@@ -40,6 +50,12 @@ const Model = {
     },
     change(state, { payload }) {
       return { ...state, data: payload };
+    },
+    emptyProfile(state) {
+      return {
+        ...state,
+        data: {},
+      };
     },
   },
 };
