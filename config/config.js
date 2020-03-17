@@ -113,6 +113,17 @@ export default {
               component: './Welcome',
             },
             {
+              name: 'xiuXing',
+              icon: 'table',
+              routes: [
+                {
+                  name: 'fuLu',
+                  path: '/fuLuList',
+                  component: './fuLuList/FuLu',
+                },
+              ],
+            },
+            {
               path: '/admin',
               name: 'admin',
               icon: 'crown',
@@ -133,12 +144,6 @@ export default {
               icon: 'table',
               path: '/list',
               component: './ListTableList',
-            },
-            {
-              name: 'fuLu.table-list',
-              icon: 'table',
-              path: '/fuLuList',
-              component: './fuLuList/FuLu',
             },
             {
               component: './404',
