@@ -185,6 +185,7 @@ export default class FuLu extends PureComponent {
             params[key] = values[key];
           }
         });
+        this.handleDisplay();
         this.loadPlatServiceData(params);
       })
       .catch(errorInfo => {
@@ -293,7 +294,7 @@ export default class FuLu extends PureComponent {
         </Col>
         <Col md={8} sm={24}>
           <FormItem label="小说" name="xiaoShuoId">
-            <Select placeholder="请选择小说">
+            <Select placeholder="请选择小说" allowClear>
               {xiaoShuoList && xiaoShuoList.length > 0 ? xiaoShuoList.map(xiaoShuo => {
                 const { dataCode, dataName } = xiaoShuo;
                 return <Option key={dataCode} value={dataCode}>{dataName}</Option>
@@ -366,12 +367,13 @@ export default class FuLu extends PureComponent {
     const { currentModel } = this.state;
 
     if (currentModel === 'display') {
-      const detailData = this.props.fuLu.data;
+      const { fuLu: { data: detailData, datas } } = this.props;
       if (detailData) {
+        const profileBtn = datas && datas.list && datas.list.length <= 0;
         return (
           <Fragment>
             <ButtonGroup>
-              <Button onClick={() => { this.handleEditBtnClick(); }}><EditOutlined /> 修改</Button>
+              <Button disabled={profileBtn} onClick={() => { this.handleEditBtnClick(); }}><EditOutlined /> 修改</Button>
               {/*<Popconfirm placement="top" title="确定要锁定吗？" onConfirm={() => { this.handleLockPlatService(detailData, 'profile'); }} okText="确定" cancelText="取消">*/}
                 {/*<Button disabled={detailData.state === 'A' ? '' : 'disabled'}><LockOutlined />锁定</Button>*/}
               {/*</Popconfirm>*/}
@@ -379,7 +381,7 @@ export default class FuLu extends PureComponent {
                 {/*<Button disabled={detailData.state === 'L' ? '' : 'disabled'}><UnlockOutlined /> 激活</Button>*/}
               {/*</Popconfirm>*/}
               <Popconfirm placement="top" title="确定要删除吗？" onConfirm={() => { this.handleDeletePlatService(detailData, 'profile'); }} okText="确定" cancelText="取消">
-                <Button><DeleteOutlined /> 删除</Button>
+                <Button disabled={profileBtn}><DeleteOutlined /> 删除</Button>
               </Popconfirm>
             </ButtonGroup>
           </Fragment>
