@@ -5,6 +5,7 @@ export default {
   'menu.xiuXing.faShu': '法术管理',
   'menu.xiuXing.gongFa': '功法管理',
   'menu.xiuXing.kuiLei': '傀儡管理',
+  'menu.xiuXing.lingCai': '灵材管理',
   'menu.more-blocks': '更多区块',
   'menu.home': '首页',
   'menu.admin': '管理页',

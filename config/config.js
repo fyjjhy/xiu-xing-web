@@ -136,6 +136,11 @@ export default {
                   path: '/kuiLeiList',
                   component: './kuiLeiList/KuiLei',
                 },
+                {
+                  name: 'lingCai',
+                  path: '/lingCaiList',
+                  component: './lingCaiList/LingCai',
+                },
               ],
             },
             {
