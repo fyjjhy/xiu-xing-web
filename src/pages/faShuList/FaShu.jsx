@@ -41,12 +41,8 @@ let columns = [{
   dataIndex: 'faShuMiaoShu',
   width: 'auto',
 }, {
-  title: '法术状态',
-  dataIndex: 'faShuState',
-  width: '90px',
-}, {
   title: '更新时间',
-  dataIndex: 'stateTime',
+  dataIndex: 'updateTime',
   width: '160px',
 }, {
   title: '操作',
@@ -81,14 +77,8 @@ const profileColumns = [{
   valueList: 'service|/chenXian/chen/xian/xiaoShuo',
   displayType: 'S',
 }, {
-  columnName: '法术状态',
-  columnCode: 'faShuState',
-  profileField: 'Y',
-  addField: 'N',
-  displayType: 'I',
-}, {
   columnName: '更新时间',
-  columnCode: 'stateTime',
+  columnCode: 'updateTime',
   profileField: 'Y',
   displayType: 'I',
 }, {
