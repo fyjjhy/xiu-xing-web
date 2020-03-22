@@ -1,4 +1,13 @@
-import { DownOutlined, PlusOutlined, LockOutlined, UnlockOutlined, EditOutlined, DeleteOutlined, UpOutlined } from '@ant-design/icons';
+/* eslint-disable react/jsx-no-bind */
+import {
+  // DownOutlined,
+  PlusOutlined,
+  // LockOutlined,
+  // UnlockOutlined,
+  EditOutlined,
+  DeleteOutlined,
+  // UpOutlined
+} from '@ant-design/icons';
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'dva';
 
@@ -32,12 +41,8 @@ let columns = [{
   dataIndex: 'fuLuMiaoShu',
   width: 'auto',
 }, {
-  title: '符箓状态',
-  dataIndex: 'fuLuState',
-  width: '90px',
-}, {
   title: '更新时间',
-  dataIndex: 'stateTime',
+  dataIndex: 'updateTime',
   width: '160px',
 }, {
   title: '操作',
@@ -45,6 +50,45 @@ let columns = [{
   width: '110px',
 }];
 
+const profileColumns = [{
+  columnName: 'id',
+  columnCode: 'id',
+  hiddenField: 'Y',
+  displayType: 'I',
+}, {
+  columnName: '符箓代码',
+  columnCode: 'fuLuCode',
+  profileField: 'Y',
+  addField: 'N',
+  displayType: 'I',
+}, {
+  columnName: '符箓名称',
+  columnCode: 'fuLuName',
+  profileField: 'Y',
+  addField: 'Y',
+  editField: 'Y',
+  displayType: 'I',
+}, {
+  columnName: '小说',
+  columnCode: 'xiaoShuoId',
+  profileField: 'Y',
+  addField: 'Y',
+  editField: 'Y',
+  valueList: 'service|/chenXian/chen/xian/xiaoShuo',
+  displayType: 'S',
+}, {
+  columnName: '更新时间',
+  columnCode: 'updateTime',
+  profileField: 'Y',
+  displayType: 'I',
+}, {
+  columnName: '符箓描述',
+  columnCode: 'fuLuMiaoShu',
+  profileField: 'Y',
+  addField: 'Y',
+  editField: 'Y',
+  displayType: 'T',
+}];
 
 @connect(({ fuLu, xiaoShuo, loading }) => ({
   fuLu,
@@ -53,8 +97,9 @@ let columns = [{
 }))
 export default class FuLu extends PureComponent {
   formRef = React.createRef();
+
   state = {
-    expandForm: false,
+    // expandForm: false,
     formValues: {},
     selectedRows: [],
     currentModel: 'display',
@@ -63,14 +108,14 @@ export default class FuLu extends PureComponent {
   };
 
   UNSAFE_componentWillMount() {
-    columns = columns.map((col) => {
+    columns = columns.map(col => {
       const colum = {};
       if (col.dataIndex === 'fuLuName') {
         colum.render = ((text, record) => <a onClick={() => { this.handleProfileClick(record); }}>{text}</a>);
       } else if (col.dataIndex === 'id') {
         colum.render = ((text, record) => this.renderLinkGroup(record));
       } else if (col.dataIndex === 'xiaoShuoId') {
-        colum.render = ((text, record) => this.renderXiaoShuo(text));
+        colum.render = (text => this.renderXiaoShuo(text));
       }
       return { ...col, ...colum };
     });
@@ -96,11 +141,10 @@ export default class FuLu extends PureComponent {
       type: 'fuLu/emptyProfile',
     });
     if (datas && datas.list && datas.list.length > 0) {
+      this.setState({ currentRowInfo: { ...datas.list[0] } });
       this.handleProfileClick(datas.list[0]);
-    } else {
-      if (pagination.current !== 1) {
-        this.loadPlatServiceData({ ...params, current: 1 });
-      }
+    } else if (pagination.current !== 1) {
+      this.loadPlatServiceData({ ...params, current: 1 });
     }
   }
 
@@ -189,6 +233,7 @@ export default class FuLu extends PureComponent {
         this.loadPlatServiceData(params);
       })
       .catch(errorInfo => {
+        console.log(errorInfo);
         /*
         errorInfo:
           {
@@ -220,11 +265,11 @@ export default class FuLu extends PureComponent {
     this.loadPlatServiceData();
   }
 
-  toggleForm() {
-    this.setState({
-      expandForm: !this.state.expandForm,
-    });
-  }
+  // toggleForm() {
+  //   this.setState({
+  //     expandForm: !this.state.expandForm,
+  //   });
+  // }
 
   handleSelectRows(rows) {
     this.setState({
@@ -251,27 +296,38 @@ export default class FuLu extends PureComponent {
   }
 
   // 表格行的类名
-  // handleRowClassName = (record) => {
-  //   const { currentRowInfo } = this.state;
-  //   console.log('rowInfo', currentRowInfo, record);
-  //   if (currentRowInfo && currentRowInfo.id === record.id) {
-  //     return 'selected';
-  //   }
-  // }
+  handleRowClassName = record => {
+    const { currentRowInfo } = this.state;
+    if (currentRowInfo && currentRowInfo.id === record.id) {
+      return 'selected';
+    }
+    return '';
+  }
 
   // 设置行属性
-  // handleOnTableClick = (record) => {
-  //   this.setState({ currentRowInfo: { ...record } });
-  //   this.operatePlatServiceData("get", record);
-  // }
+  handleOnTableClick = record => {
+    this.setState({ currentRowInfo: { ...record } });
+  }
+
+  handleData = () => {
+    const { fuLu: { data }, xiaoShuo: { xiaoShuoList } } = this.props;
+    if (xiaoShuoList && xiaoShuoList.length > 0) {
+      const [xiaoShuoInfo] = xiaoShuoList.filter(xiaoShuo => xiaoShuo.dataCode === data.xiaoShuoId);
+      if (xiaoShuoInfo) {
+        const { dataName } = xiaoShuoInfo;
+        data.xiaoShuoId = dataName;
+      }
+    }
+    return data;
+  }
 
   renderXiaoShuo(text) {
     if (text) {
       const { xiaoShuo: { xiaoShuoList } } = this.props;
       if (xiaoShuoList && xiaoShuoList.length > 0) {
-        const [xiaoShuo] = xiaoShuoList.filter(xiaoShuo => xiaoShuo.dataCode === text);
-        if (xiaoShuo) {
-          return xiaoShuo.dataName;
+        const [xiaoShuoInfo] = xiaoShuoList.filter(xiaoShuo => xiaoShuo.dataCode === text);
+        if (xiaoShuoInfo) {
+          return xiaoShuoInfo.dataName;
         }
       }
     }
@@ -331,7 +387,7 @@ export default class FuLu extends PureComponent {
     return (
       <Form layout="inline" ref={this.formRef}>
         {this.renderSimpleForm()}
-        {/*{ this.state.expandForm ? this.renderAdvancedForm() : ''}*/}
+        {/* { this.state.expandForm ? this.renderAdvancedForm() : ''} */}
       </Form>
     );
   }
@@ -343,21 +399,21 @@ export default class FuLu extends PureComponent {
     return (
       <Fragment>
         <Button type="primary" onClick={this.handleAddBtnClick.bind(this)}><PlusOutlined /> 新增</Button>
-        {/*<Popconfirm placement="top" title="确定要锁定这些平台服务吗？" onConfirm={() => { console.log(selectedRows); }} okText="确定" cancelText="取消">*/}
-          {/*<Button disabled={selectedRows.length > 0 ? '' : 'disabled'}><LockOutlined /> 批量锁定</Button>*/}
-        {/*</Popconfirm>*/}
-        {/*<Popconfirm placement="top" title="确定要激活这些平台服务吗？" onConfirm={() => { console.log(selectedRows); }} okText="确定" cancelText="取消">*/}
-          {/*<Button disabled={selectedRows.length > 0 ? '' : 'disabled'}><UnlockOutlined /> 批量激活</Button>*/}
-        {/*</Popconfirm>*/}
+        {/* <Popconfirm placement="top" title="确定要锁定这些平台服务吗？" onConfirm={() => { console.log(selectedRows); }} okText="确定" cancelText="取消"> */}
+        {/* <Button disabled={selectedRows.length > 0 ? '' : 'disabled'}><LockOutlined /> 批量锁定</Button> */}
+        {/* </Popconfirm> */}
+        {/* <Popconfirm placement="top" title="确定要激活这些平台服务吗？" onConfirm={() => { console.log(selectedRows); }} okText="确定" cancelText="取消"> */}
+        {/* <Button disabled={selectedRows.length > 0 ? '' : 'disabled'}><UnlockOutlined /> 批量激活</Button> */}
+        {/* </Popconfirm> */}
         <Popconfirm placement="top" title="确定要删除这些平台服务吗？" onConfirm={() => { console.log(selectedRows); }} okText="确定" cancelText="取消">
           <Button disabled={selectedRows.length > 0 ? '' : 'disabled'}><DeleteOutlined /> 批量删除</Button>
         </Popconfirm>
         <span style={{ float: 'right', marginBottom: 24 }}>
           <Button id="chaXun" type="primary" htmlType="submit" onClick={this.handleSearch.bind(this)}>查询</Button>
           <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset.bind(this)}>重置</Button>
-            {/*<a style={{ marginLeft: 8 }} onClick={this.toggleForm.bind(this)}>*/}
-              {/*{this.state.expandForm ? up : down}*/}
-            {/*</a>*/}
+          {/* <a style={{ marginLeft: 8 }} onClick={this.toggleForm.bind(this)}> */}
+          {/* {this.state.expandForm ? up : down} */}
+          {/* </a> */}
         </span>
       </Fragment>
     );
@@ -365,7 +421,6 @@ export default class FuLu extends PureComponent {
 
   renderButtonGroup() {
     const { currentModel } = this.state;
-
     if (currentModel === 'display') {
       const { fuLu: { data: detailData, datas } } = this.props;
       if (detailData) {
@@ -374,12 +429,12 @@ export default class FuLu extends PureComponent {
           <Fragment>
             <ButtonGroup>
               <Button disabled={profileBtn} onClick={() => { this.handleEditBtnClick(); }}><EditOutlined /> 修改</Button>
-              {/*<Popconfirm placement="top" title="确定要锁定吗？" onConfirm={() => { this.handleLockPlatService(detailData, 'profile'); }} okText="确定" cancelText="取消">*/}
-                {/*<Button disabled={detailData.state === 'A' ? '' : 'disabled'}><LockOutlined />锁定</Button>*/}
-              {/*</Popconfirm>*/}
-              {/*<Popconfirm placement="top" title="确定要激活吗？" onConfirm={() => { this.handleUnLockPlatService(detailData, 'profile'); }} okText="确定" cancelText="取消">*/}
-                {/*<Button disabled={detailData.state === 'L' ? '' : 'disabled'}><UnlockOutlined /> 激活</Button>*/}
-              {/*</Popconfirm>*/}
+              {/* <Popconfirm placement="top" title="确定要锁定吗？" onConfirm={() => { this.handleLockPlatService(detailData, 'profile'); }} okText="确定" cancelText="取消"> */}
+              {/* <Button disabled={detailData.state === 'A' ? '' : 'disabled'}><LockOutlined />锁定</Button> */}
+              {/* </Popconfirm> */}
+              {/* <Popconfirm placement="top" title="确定要激活吗？" onConfirm={() => { this.handleUnLockPlatService(detailData, 'profile'); }} okText="确定" cancelText="取消"> */}
+              {/* <Button disabled={detailData.state === 'L' ? '' : 'disabled'}><UnlockOutlined /> 激活</Button> */}
+              {/* </Popconfirm> */}
               <Popconfirm placement="top" title="确定要删除吗？" onConfirm={() => { this.handleDeletePlatService(detailData, 'profile'); }} okText="确定" cancelText="取消">
                 <Button disabled={profileBtn}><DeleteOutlined /> 删除</Button>
               </Popconfirm>
@@ -388,6 +443,7 @@ export default class FuLu extends PureComponent {
         );
       }
     }
+    return '';
   }
 
   renderLinkGroup(detailData) {
@@ -396,30 +452,41 @@ export default class FuLu extends PureComponent {
         <Fragment>
           <a onClick={() => { this.handleEditBtnClick(detailData); }}>修改</a>
           <Divider type="vertical" />
-          {/*<Popconfirm placement="top" title="确定要锁定吗？" onConfirm={() => { this.handleLockPlatService(detailData); }} okText="确定" cancelText="取消">*/}
-            {/*<a disabled={detailData.state === 'A' ? '' : 'disabled'}>锁定</a>*/}
-          {/*</Popconfirm>*/}
-          {/*<Divider type="vertical" />*/}
-          {/*<Popconfirm placement="top" title="确定要激活吗？" onConfirm={() => { this.handleUnLockPlatService(detailData); }} okText="确定" cancelText="取消">*/}
-            {/*<a disabled={detailData.state === 'L' ? '' : 'disabled'}>激活</a>*/}
-          {/*</Popconfirm>*/}
-          {/*<Divider type="vertical" />*/}
+          {/* <Popconfirm placement="top" title="确定要锁定吗？" onConfirm={() => { this.handleLockPlatService(detailData); }} okText="确定" cancelText="取消"> */}
+          {/* <a disabled={detailData.state === 'A' ? '' : 'disabled'}>锁定</a> */}
+          {/* </Popconfirm> */}
+          {/* <Divider type="vertical" /> */}
+          {/* <Popconfirm placement="top" title="确定要激活吗？" onConfirm={() => { this.handleUnLockPlatService(detailData); }} okText="确定" cancelText="取消"> */}
+          {/* <a disabled={detailData.state === 'L' ? '' : 'disabled'}>激活</a> */}
+          {/* </Popconfirm> */}
+          {/* <Divider type="vertical" /> */}
           <Popconfirm placement="top" title="确定要删除吗？" onConfirm={() => { this.handleDeletePlatService(detailData); }} okText="确定" cancelText="取消">
             <a>删除</a>
           </Popconfirm>
         </Fragment>
       );
     }
+    return '';
   }
 
   renderEditForm() {
     const { currentModel } = this.state;
     const { fuLu: { data: selectRecord  } } = this.props;
     if (currentModel === 'edit') {
-      const { xiaoShuo: { xiaoShuoList } } = this.props;
+      const profile = selectRecord || {};
       return (
         <StandardForm
-          xiaoShuoList={xiaoShuoList}
+          title="编辑法术"
+          currentModel={currentModel}
+          formColumnList={profileColumns}
+          // xiaoShuoList={xiaoShuoList}
+          initialValues={{
+            fuLuName: profile.fuLuName,
+            fuLuCode: profile.fuLuCode,
+            xiaoShuoId: profile.xiaoShuoId,
+            fuLuMiaoShu: profile.fuLuMiaoShu,
+            id: profile.id
+          }}
           // showDialog
           // visible
           data={selectRecord}
@@ -428,16 +495,28 @@ export default class FuLu extends PureComponent {
         />
       );
     }
+    return '';
   }
 
   // 点击打开新增模态框
   renderAddDialog() {
     const { currentModel } = this.state;
     if (currentModel === 'add') {
-      const { xiaoShuo: { xiaoShuoList } } = this.props;
+      // const { xiaoShuo: { xiaoShuoList }, faShu: { data  } } = this.props;
+      // const profile = data || {};
       return (
         <StandardForm
-          xiaoShuoList={xiaoShuoList}
+          formColumnList={profileColumns}
+          currentModel={currentModel}
+          title="新增符箓"
+          // initialValues={{
+          //   fuShuName: profile.fuShuName,
+          //   fuShuCode: profile.fuShuCode,
+          //   xiaoShuoId: profile.xiaoShuoId,
+          //   fuShuMiaoShu: profile.fuShuMiaoShu,
+          //   id: profile.id
+          // }}
+          // xiaoShuoList={xiaoShuoList}
           showDialog
           visible
           onSubmit={this.handleAddPlatService.bind(this)}
@@ -445,21 +524,23 @@ export default class FuLu extends PureComponent {
         />
       );
     }
+    return '';
   }
 
   renderProfile() {
     const { currentModel } = this.state;
     if (currentModel === 'display') {
-      const { fuLu: { data: detailData }, xiaoShuo: { xiaoShuoList } } = this.props;
+      const { fuLu: { data: detailData } } = this.props;
       if (detailData) {
         return (
           <StandardProfile
-            xiaoShuoList={xiaoShuoList}
-            data={detailData}
+            profileColumns={profileColumns}
+            data={this.handleData()}
           />
         );
       }
     }
+    return '';
   }
 
   render() {
@@ -483,14 +564,12 @@ export default class FuLu extends PureComponent {
               columns={columns}
               onChange={this.handleStandardTableChange.bind(this)}
               onSelectRow={this.handleSelectRows.bind(this)}
-              // rowClassName={this.handleRowClassName}// 表格行的类名
-              // onRow={(record) => {
-              //   return {
-              //     onClick: () => {
-              //       this.handleOnTableClick(record);
-              //     },
-              //   };
-              // }}
+              rowClassName={this.handleRowClassName}// 表格行的类名
+              onRow={record => ({
+                onClick: () => {
+                  this.handleOnTableClick(record);
+                },
+              })}
             />
           </div>
         </Card>
@@ -503,4 +582,3 @@ export default class FuLu extends PureComponent {
     );
   }
 }
-
