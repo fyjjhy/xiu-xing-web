@@ -121,6 +121,11 @@ export default {
                   path: '/fuLuList',
                   component: './fuLuList/FuLu',
                 },
+                {
+                  name: 'faShu',
+                  path: '/faShuList',
+                  component: './faShuList/FaShu',
+                },
               ],
             },
             {

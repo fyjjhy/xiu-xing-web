@@ -2,6 +2,7 @@ export default {
   'menu.welcome': '欢迎',
   'menu.xiuXing': '修行信息',
   'menu.xiuXing.fuLu': '符箓管理',
+  'menu.xiuXing.faShu': '法术管理',
   'menu.more-blocks': '更多区块',
   'menu.home': '首页',
   'menu.admin': '管理页',
