@@ -126,6 +126,11 @@ export default {
                   path: '/faShuList',
                   component: './faShuList/FaShu',
                 },
+                {
+                  name: 'gongFa',
+                  path: '/gongFaList',
+                  component: './gongFaList/GongFa',
+                },
               ],
             },
             {
