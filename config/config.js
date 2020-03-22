@@ -131,6 +131,11 @@ export default {
                   path: '/gongFaList',
                   component: './gongFaList/GongFa',
                 },
+                {
+                  name: 'kuiLei',
+                  path: '/kuiLeiList',
+                  component: './kuiLeiList/KuiLei',
+                },
               ],
             },
             {

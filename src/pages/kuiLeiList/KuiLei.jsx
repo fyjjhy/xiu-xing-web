@@ -18,27 +18,27 @@ import StandardTable from '../../components/StandardTable';
 import StandardProfile from '../../components/StandardProfile';
 import StandardForm from '../../components/StandardForm';
 
-import styles from './GongFa.less';
+import styles from './KuiLei.less';
 
 const { Item: FormItem } = Form;
 const { Group: ButtonGroup } = Button;
 const { Option } = Select;
 
 let columns = [{
-  title: '功法代码',
-  dataIndex: 'gongFaCode',
+  title: '傀儡代码',
+  dataIndex: 'kuiLeiCode',
   width: '90px',
 }, {
-  title: '功法名称',
-  dataIndex: 'gongFaName',
+  title: '傀儡名称',
+  dataIndex: 'kuiLeiName',
   width: '175px',
 }, {
   title: '小说',
   dataIndex: 'xiaoShuoId',
   width: '175px',
 }, {
-  title: '功法描述',
-  dataIndex: 'gongFaMiaoShu',
+  title: '傀儡描述',
+  dataIndex: 'kuiLeiMiaoShu',
   width: 'auto',
 }, {
   title: '更新时间',
@@ -56,14 +56,14 @@ const profileColumns = [{
   hiddenField: 'Y',
   displayType: 'I',
 }, {
-  columnName: '功法代码',
-  columnCode: 'gongFaCode',
+  columnName: '傀儡代码',
+  columnCode: 'kuiLeiCode',
   profileField: 'Y',
   addField: 'N',
   displayType: 'I',
 }, {
-  columnName: '功法名称',
-  columnCode: 'gongFaName',
+  columnName: '傀儡名称',
+  columnCode: 'kuiLeiName',
   profileField: 'Y',
   addField: 'Y',
   editField: 'Y',
@@ -82,8 +82,8 @@ const profileColumns = [{
   profileField: 'Y',
   displayType: 'I',
 }, {
-  columnName: '功法描述',
-  columnCode: 'gongFaMiaoShu',
+  columnName: '傀儡描述',
+  columnCode: 'kuiLeiMiaoShu',
   profileField: 'Y',
   addField: 'Y',
   editField: 'Y',
@@ -92,12 +92,12 @@ const profileColumns = [{
 
 
 
-@connect(({ gongFa, xiaoShuo, loading }) => ({
-  gongFa,
+@connect(({ kuiLei, xiaoShuo, loading }) => ({
+  kuiLei,
   xiaoShuo,
-  loading: loading.models.gongFa,
+  loading: loading.models.kuiLei,
 }))
-export default class GongFa extends PureComponent {
+export default class KuiLei extends PureComponent {
   formRef = React.createRef();
 
   state = {
@@ -112,7 +112,7 @@ export default class GongFa extends PureComponent {
   UNSAFE_componentWillMount() {
     columns = columns.map(col => {
       const colum = {};
-      if (col.dataIndex === 'gongFaName') {
+      if (col.dataIndex === 'kuiLeiName') {
         colum.render = ((text, record) => <a onClick={() => { this.handleProfileClick(record); }}>{text}</a>);
       } else if (col.dataIndex === 'id') {
         colum.render = ((text, record) => this.renderLinkGroup(record));
@@ -131,16 +131,16 @@ export default class GongFa extends PureComponent {
   }
 
   async loadPlatServiceData(params = {}) {
-    const { dispatch, gongFa: { datas: { pagination } } } = this.props;
+    const { dispatch, kuiLei: { datas: { pagination } } } = this.props;
     this.setState({ loadingModel: 'list' });
     await dispatch({
-      type: 'gongFa/query',
+      type: 'kuiLei/query',
       payload: { ...pagination, ...params },
     });
-    const { gongFa: { datas } } = this.props;
+    const { kuiLei: { datas } } = this.props;
     // 先执行清空详情操作
     await dispatch({
-      type: 'gongFa/emptyProfile',
+      type: 'kuiLei/emptyProfile',
     });
     if (datas && datas.list && datas.list.length > 0) {
       this.setState({ currentRowInfo: { ...datas.list[0] } });
@@ -162,7 +162,7 @@ export default class GongFa extends PureComponent {
     if (params) {
       const { dispatch } = this.props;
       await dispatch({
-        type: `gongFa/${action}`,
+        type: `kuiLei/${action}`,
         payload: params,
       });
     }
@@ -177,7 +177,7 @@ export default class GongFa extends PureComponent {
 
   async handleAddPlatService(params) {
     await this.operatePlatServiceData('add', params);
-    message.success('新增功法信息成功');
+    message.success('新增傀儡信息成功');
     this.handleFormReset();
   }
 
@@ -312,7 +312,7 @@ export default class GongFa extends PureComponent {
   }
 
   handleData = () => {
-    const { gongFa: { data }, xiaoShuo: { xiaoShuoList } } = this.props;
+    const { kuiLei: { data }, xiaoShuo: { xiaoShuoList } } = this.props;
     if (xiaoShuoList && xiaoShuoList.length > 0) {
       const [xiaoShuoInfo] = xiaoShuoList.filter(xiaoShuo => xiaoShuo.dataCode === data.xiaoShuoId);
       if (xiaoShuoInfo) {
@@ -341,13 +341,13 @@ export default class GongFa extends PureComponent {
     return (
       <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
         <Col md={8} sm={24}>
-          <FormItem label="功法名称" name="gongFaName">
-            <Input placeholder="请输入功法名称" />
+          <FormItem label="傀儡名称" name="kuiLeiName">
+            <Input placeholder="请输入傀儡名称" />
           </FormItem>
         </Col>
         <Col md={8} sm={24}>
-          <FormItem label="功法描述" name="gongFaMiaoShu">
-            <Input placeholder="请输入功法描述" />
+          <FormItem label="傀儡描述" name="kuiLeiMiaoShu">
+            <Input placeholder="请输入傀儡描述" />
           </FormItem>
         </Col>
         <Col md={8} sm={24}>
@@ -424,7 +424,7 @@ export default class GongFa extends PureComponent {
   renderButtonGroup() {
     const { currentModel } = this.state;
     if (currentModel === 'display') {
-      const { gongFa: { data: detailData, datas } } = this.props;
+      const { kuiLei: { data: detailData, datas } } = this.props;
       if (detailData) {
         const profileBtn = datas && datas.list && datas.list.length <= 0;
         return (
@@ -473,20 +473,20 @@ export default class GongFa extends PureComponent {
 
   renderEditForm() {
     const { currentModel } = this.state;
-    const { gongFa: { data: selectRecord  } } = this.props;
+    const { kuiLei: { data: selectRecord  } } = this.props;
     if (currentModel === 'edit') {
       const profile = selectRecord || {};
       return (
         <StandardForm
-          title="编辑功法"
+          title="编辑傀儡"
           currentModel={currentModel}
           formColumnList={profileColumns}
           // xiaoShuoList={xiaoShuoList}
           initialValues={{
-            gongFaName: profile.gongFaName,
-            gongFaCode: profile.gongFaCode,
+            kuiLeiName: profile.kuiLeiName,
+            kuiLeiCode: profile.kuiLeiCode,
             xiaoShuoId: profile.xiaoShuoId,
-            gongFaMiaoShu: profile.gongFaMiaoShu,
+            kuiLeiMiaoShu: profile.kuiLeiMiaoShu,
             id: profile.id
           }}
           // showDialog
@@ -504,13 +504,13 @@ export default class GongFa extends PureComponent {
   renderAddDialog() {
     const { currentModel } = this.state;
     if (currentModel === 'add') {
-      // const { xiaoShuo: { xiaoShuoList }, gongFa: { data  } } = this.props;
+      // const { xiaoShuo: { xiaoShuoList }, kuiLei: { data  } } = this.props;
       // const profile = data || {};
       return (
         <StandardForm
           formColumnList={profileColumns}
           currentModel={currentModel}
-          title="新增功法"
+          title="新增傀儡"
           // initialValues={{
           //   fuShuName: profile.fuShuName,
           //   fuShuCode: profile.fuShuCode,
@@ -532,7 +532,7 @@ export default class GongFa extends PureComponent {
   renderProfile() {
     const { currentModel } = this.state;
     if (currentModel === 'display') {
-      const { gongFa: { data: detailData } } = this.props;
+      const { kuiLei: { data: detailData } } = this.props;
       if (detailData) {
         return (
           <StandardProfile
@@ -546,7 +546,7 @@ export default class GongFa extends PureComponent {
   }
 
   render() {
-    const { gongFa: { datas }, loading } = this.props;
+    const { kuiLei: { datas }, loading } = this.props;
     const { selectedRows, currentModel, loadingModel } = this.state;
 
     return (
@@ -575,7 +575,7 @@ export default class GongFa extends PureComponent {
             />
           </div>
         </Card>
-        <Card title="功法信息" bordered={false} extra={this.renderButtonGroup()} loading={currentModel !== 'add' && loadingModel === 'profile' ? loading : false}>
+        <Card title="傀儡信息" bordered={false} extra={this.renderButtonGroup()} loading={currentModel !== 'add' && loadingModel === 'profile' ? loading : false}>
           {this.renderProfile()}
           {this.renderEditForm()}
         </Card>
