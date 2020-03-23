@@ -116,31 +116,12 @@ export default {
               name: 'xiuXing',
               icon: 'table',
               routes: [
-                {
-                  name: 'fuLu',
-                  path: '/fuLuList',
-                  component: './fuLuList/FuLu',
-                },
-                {
-                  name: 'faShu',
-                  path: '/faShuList',
-                  component: './faShuList/FaShu',
-                },
-                {
-                  name: 'gongFa',
-                  path: '/gongFaList',
-                  component: './gongFaList/GongFa',
-                },
-                {
-                  name: 'kuiLei',
-                  path: '/kuiLeiList',
-                  component: './kuiLeiList/KuiLei',
-                },
-                {
-                  name: 'lingCai',
-                  path: '/lingCaiList',
-                  component: './lingCaiList/LingCai',
-                },
+                { name: 'fuLu', path: '/fuLuList', component: './fuLuList/FuLu' },
+                { name: 'faShu', path: '/faShuList', component: './faShuList/FaShu' },
+                { name: 'gongFa', path: '/gongFaList', component: './gongFaList/GongFa' },
+                { name: 'kuiLei', path: '/kuiLeiList', component: './kuiLeiList/KuiLei' },
+                { name: 'lingCai', path: '/lingCaiList', component: './lingCaiList/LingCai' },
+                { name: 'lingDan', path: '/lingDanList', component: './lingDanList/LingDan' },
               ],
             },
             {
