@@ -122,6 +122,7 @@ export default {
                 { name: 'kuiLei', path: '/kuiLeiList', component: './kuiLeiList/KuiLei' },
                 { name: 'lingCai', path: '/lingCaiList', component: './lingCaiList/LingCai' },
                 { name: 'lingDan', path: '/lingDanList', component: './lingDanList/LingDan' },
+                { name: 'lingQi', path: '/lingQiList', component: './lingQiList/LingQi' },
               ],
             },
             {
