@@ -124,6 +124,7 @@ export default {
                 { name: 'lingDan', path: '/lingDanList', component: './lingDanList/LingDan' },
                 { name: 'lingQi', path: '/lingQiList', component: './lingQiList/LingQi' },
                 { name: 'yaoShou', path: '/yaoShouList', component: './yaoShouList/YaoShou' },
+                { name: 'zhenFa', path: '/zhenFaList', component: './zhenFaList/ZhenFa' },
                 { name: 'qiTaLingWu', path: '/qiTaLingWuList', component: './qiTaLingWuList/QiTaLingWu' },
                 { name: 'renWu', path: '/renWuList', component: './renWuList/RenWu' },
               ],
