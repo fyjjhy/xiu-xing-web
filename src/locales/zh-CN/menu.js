@@ -8,6 +8,7 @@ export default {
   'menu.xiuXing.lingCai': '灵材管理',
   'menu.xiuXing.lingDan': '灵丹管理',
   'menu.xiuXing.lingQi': '灵器管理',
+  'menu.xiuXing.yaoShou': '妖兽管理',
   'menu.xiuXing.qiTaLingWu': '其他灵物管理',
   'menu.xiuXing.renWu': '人物管理',
   'menu.more-blocks': '更多区块',
