@@ -380,9 +380,6 @@ export default class ZongMen extends PureComponent {
                 const { dataCode, dataName } = fenLei;
                 return <Option key={dataCode} value={dataCode}>{dataName}</Option>
               })}
-              <Option key="修仙门派" value="修仙门派">修仙门派</Option>
-              <Option key="江湖门派" value="江湖门派">江湖门派</Option>
-              <Option key="修仙家族" value="修仙家族">修仙家族</Option>
             </Select>
           </FormItem>
         </Col>
