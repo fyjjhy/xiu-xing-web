@@ -13,6 +13,7 @@ export default {
   'menu.xiuXing.qiTaLingWu': '其他灵物管理',
   'menu.xiuXing.renWu': '人物管理',
   'menu.xiuXing.zongMen': '宗门管理',
+  'menu.xiuXing.jiGou': '机构管理',
   'menu.more-blocks': '更多区块',
   'menu.home': '首页',
   'menu.admin': '管理页',

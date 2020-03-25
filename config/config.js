@@ -128,6 +128,7 @@ export default {
                 { name: 'qiTaLingWu', path: '/qiTaLingWuList', component: './qiTaLingWuList/QiTaLingWu' },
                 { name: 'renWu', path: '/renWuList', component: './renWuList/RenWu' },
                 { name: 'zongMen', path: '/zongMenList', component: './zongMenList/ZongMen' },
+                { name: 'jiGou', path: '/jiGouList', component: './jiGouList/JiGou' },
               ],
             },
             {
