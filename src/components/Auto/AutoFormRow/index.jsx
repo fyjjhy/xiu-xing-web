@@ -1,16 +1,16 @@
-import { PlusOutlined, LoadingOutlined } from '@ant-design/icons';
-import React, { PureComponent, Fragment } from 'react';
-import { Form, Select, TreeSelect, DatePicker, Upload, message, Checkbox, Radio, AutoComplete, Input } from 'antd';
-import { stringify } from 'qs';
+import {PlusOutlined, LoadingOutlined} from '@ant-design/icons';
+import React, {PureComponent, Fragment} from 'react';
+import {Form, Select, TreeSelect, DatePicker, Upload, message, Checkbox, Radio, AutoComplete, Input} from 'antd';
+import {stringify} from 'qs';
 import moment from 'moment';
-import { getValueList, getDictData, getQueryData, makeCancelable } from '../../../services/loadData';
+import {getValueList, getDictData, getQueryData, makeCancelable} from '../../../services/loadData';
 // import Ellipsis from '../../Ellipsis';
 
-const { TextArea } = Input;
-const { Group: RadioGroup } = Radio;
-const { Item: FormItem } = Form;
-const { Option } = Select;
-const { RangePicker } = DatePicker;
+const {TextArea} = Input;
+const {Group: RadioGroup} = Radio;
+const {Item: FormItem} = Form;
+const {Option} = Select;
+const {RangePicker} = DatePicker;
 const dateFormat = 'YYYY-MM-DD';
 const dateTimeFormat = 'YYYY-MM-DD HH:mm:ss';
 const monthFormat = 'YYYY年MM月';
@@ -53,7 +53,7 @@ export default class AutoFormRow extends PureComponent {
   }
 
   handleData() {
-    const { column } = this.props;
+    const {column} = this.props;
     const [valueType, ...rest] = getValueList(column);
     this.makeCancelableLoadData = makeCancelable(this.loadData(valueType, rest));
     if (valueType) {
@@ -70,14 +70,14 @@ export default class AutoFormRow extends PureComponent {
   }
 
   onMultipleSelectChange = (value, column) => {
-    const { columnCode } = column;
-    const { onExtraValueChange } = this.props;
+    const {columnCode} = column;
+    const {onExtraValueChange} = this.props;
     if (onExtraValueChange) {
       let transValue = '';
       if (value && value.length > 0) {
         transValue = value.join(',');
       }
-      onExtraValueChange({ [`${columnCode}Values`]: transValue });
+      onExtraValueChange({[`${columnCode}Values`]: transValue});
     }
   }
 
@@ -108,11 +108,12 @@ export default class AutoFormRow extends PureComponent {
   // }
 
   getPlaceHolder = column => {
-    const { columnName, columnCode } = column;
-    const { [`${columnCode}Placeholder`]: placeholder } = this.props;
+    const {columnName, columnCode} = column;
+    const {[`${columnCode}Placeholder`]: placeholder} = this.props;
     if (column.placeholder) {
       return column.placeholder;
-    } if (placeholder) {
+    }
+    if (placeholder) {
       return placeholder;
     }
 
@@ -130,9 +131,9 @@ export default class AutoFormRow extends PureComponent {
   }
 
   formatValue = (column, initialValue) => {
-    const { defaultValue, displayType, columnCode } = column;
+    const {defaultValue, displayType, columnCode} = column;
     if (displayType === 'D') {
-      const { taskOrder } = this.props;
+      const {taskOrder} = this.props;
       if (taskOrder) {
         if (taskOrder[columnCode] === 'day') {
           return [moment(new Date(), dateFormat), moment(new Date(), dateFormat)];
@@ -165,7 +166,7 @@ export default class AutoFormRow extends PureComponent {
       return initialValue || defaultValue;
     }
     if (displayType === 'SD') {
-      return initialValue || { timeSelect: defaultValue, timeDatePicker: moment(new Date(), monthFormat) };
+      return initialValue || {timeSelect: defaultValue, timeDatePicker: moment(new Date(), monthFormat)};
     }
     if (column.valueType !== 'N') {
       return initialValue;
@@ -174,11 +175,11 @@ export default class AutoFormRow extends PureComponent {
   }
 
   handleUpChange = info => {
-    let { fileList } = info;
+    let {fileList} = info;
     fileList = fileList.slice(-1);
     const [file] = fileList;
     if (file.status === 'uploading') {
-      this.setState({ uploadLoading: true, fileList });
+      this.setState({uploadLoading: true, fileList});
       return;
     }
     if (file.status !== 'done') {
@@ -205,31 +206,32 @@ export default class AutoFormRow extends PureComponent {
   }
 
   handleUpload = () => {
-    const { initialValue } = this.props;
-    const { previewImage, uploadLoading } = this.state;
+    const {initialValue} = this.props;
+    const {previewImage, uploadLoading} = this.state;
     const uploadButton = (
       <div>
-        {uploadLoading ? <LoadingOutlined /> : <PlusOutlined />}
+        {uploadLoading ? <LoadingOutlined/> : <PlusOutlined/>}
         <div className="ant-upload-text">Upload</div>
       </div>
     );
     return (
-      previewImage || initialValue ? <img alt="" style={{ width: '180px' }} src={previewImage || initialValue} /> : uploadButton
+      previewImage || initialValue ?
+        <img alt="" style={{width: '180px'}} src={previewImage || initialValue}/> : uploadButton
     );
   }
 
   // 自动完成，查询搜索方法
   handleAutoCompleteSearch = value => {
-    let { column: { columnCode } } = this.props;
-    const { valueListData } = this.state;
+    let {column: {columnCode}} = this.props;
+    const {valueListData} = this.state;
     if (valueListData && valueListData.length > 0) {
       const [url, paramCode] = valueListData[0].split('?');
       if (url) {
         if (paramCode) {
           columnCode = paramCode;
         }
-        const queryParam = { url, columnCode, queryParam: { current: 1, pageSize: 5, [columnCode]: value } };
-        const { autoCompleteSearch } = this.props;
+        const queryParam = {url, columnCode, queryParam: {current: 1, pageSize: 5, [columnCode]: value}};
+        const {autoCompleteSearch} = this.props;
         if (autoCompleteSearch) {
           autoCompleteSearch(queryParam);
         }
@@ -257,7 +259,7 @@ export default class AutoFormRow extends PureComponent {
     const [first, ...rest] = params;
     let head = first;
     if (rest.length > 0) {
-      const { rowInfo } = this.props;
+      const {rowInfo} = this.props;
       const values = {};
       rest.forEach(key => {
         const row = rowInfo[key];
@@ -280,6 +282,9 @@ export default class AutoFormRow extends PureComponent {
         break;
       case 'AC':
         valueListData = params;
+        break;
+      case 'constant':
+        valueListData = JSON.parse(params);
         break;
       default:
     }
@@ -351,7 +356,7 @@ export default class AutoFormRow extends PureComponent {
   }
 
   renderCustomFormItem() {
-    const { customFormItem, column } = this.props;
+    const {customFormItem, column} = this.props;
     if (customFormItem) {
       if (customFormItem[column.columnCode]) {
         return customFormItem[column.columnCode](FormItem, this.props);
@@ -361,10 +366,10 @@ export default class AutoFormRow extends PureComponent {
   }
 
   renderAutoComplete() {
-    const { column } = this.props;
-    const { columnCode } = column;
-    const { metaModel: { funcModelCode } } = this.props;
-    const { [funcModelCode]: { [`${columnCode}AutoCompleteSource`]: dataSource } } = this.props;
+    const {column} = this.props;
+    const {columnCode} = column;
+    const {metaModel: {funcModelCode}} = this.props;
+    const {[funcModelCode]: {[`${columnCode}AutoCompleteSource`]: dataSource}} = this.props;
     let source = [];
     if (dataSource && dataSource.length > 0) {
       source = dataSource;
@@ -382,25 +387,25 @@ export default class AutoFormRow extends PureComponent {
   }
 
   renderAutoOption = item => {
-    const { column: { columnCode } } = this.props;
+    const {column: {columnCode}} = this.props;
     let code = columnCode;
-    const { valueListData } = this.state;
+    const {valueListData} = this.state;
     if (valueListData && valueListData.length > 0) {
       const [, paramCode] = valueListData[0].split('?');
       if (paramCode) {
         code = paramCode;
       }
     }
-    const { id, [code]: text } = item;
+    const {id, [code]: text} = item;
     return (
-      <AutoComplete.Option value={text} key={id} >
+      <AutoComplete.Option value={text} key={id}>
         {/* <Ellipsis tooltip length={30} >{text}</Ellipsis> */}
       </AutoComplete.Option>
     );
   }
 
   renderRadio() {
-    const { valueListData } = this.state;
+    const {valueListData} = this.state;
     return (
       <RadioGroup>
         {valueListData ? valueListData.map((data, index) => {
@@ -416,14 +421,14 @@ export default class AutoFormRow extends PureComponent {
   }
 
   renderPassword() {
-    const { column } = this.props;
+    const {column} = this.props;
     return (
-      <Input type="password" placeholder={this.getPlaceHolder(column)} />
+      <Input type="password" placeholder={this.getPlaceHolder(column)}/>
     );
   }
 
   renderCheckbox() {
-    const { valueListData } = this.state;
+    const {valueListData} = this.state;
     return (
       <Checkbox.Group>
         {valueListData ? this.renderCheck() : ''}
@@ -432,11 +437,11 @@ export default class AutoFormRow extends PureComponent {
   }
 
   renderCheck() {
-    const { valueListData } = this.state;
+    const {valueListData} = this.state;
     return valueListData.map((data, index) => {
       let newLine;
       if (index > 0) {
-        newLine = (<br />);
+        newLine = (<br/>);
       }
       return (
         <Fragment key={data.dataCode}>
@@ -452,10 +457,10 @@ export default class AutoFormRow extends PureComponent {
   //   )
 
   renderDatePicker = () => (
-      <RangePicker
-        format={dateFormat}
-      />
-    );
+    <RangePicker
+      format={dateFormat}
+    />
+  );
 
   // renderDateTimePicker = () => {
   //   const { column: { columnCode }, form: { getFieldsValue } } = this.props;
@@ -478,8 +483,8 @@ export default class AutoFormRow extends PureComponent {
   // }
 
   renderUpload = () => {
-    const { initialValue } = this.props;
-    const { fileList } = this.state;
+    const {initialValue} = this.props;
+    const {fileList} = this.state;
     return (
       <Upload
         action="/v1/plat/configuration/resources/upload"
@@ -498,22 +503,22 @@ export default class AutoFormRow extends PureComponent {
   }
 
   renderInput() {
-    const { column } = this.props;
+    const {column} = this.props;
     return (
-      <Input placeholder={this.getPlaceHolder(column)} />
+      <Input placeholder={this.getPlaceHolder(column)}/>
     );
   }
 
   renderTextArea() {
-    const { column } = this.props;
+    const {column} = this.props;
     return (
-      <TextArea placeholder={this.getPlaceHolder(column)} autoSize />
+      <TextArea placeholder={this.getPlaceHolder(column)} autoSize/>
     );
   }
 
   renderSelect() {
-    const { column } = this.props;
-    const { valueListData } = this.state;
+    const {column} = this.props;
+    const {valueListData} = this.state;
     return (
       <Select allowClear placeholder={this.getPlaceHolder(column)}>
         {valueListData ? this.renderOption() : ''}
@@ -522,15 +527,17 @@ export default class AutoFormRow extends PureComponent {
   }
 
   renderMultipleSelect() {
-    const { column } = this.props;
-    const { valueListData } = this.state;
+    const {column} = this.props;
+    const {valueListData} = this.state;
     return (
       <Select
         tokenSeparators={[',']}
         mode="multiple"
         allowClear
         placeholder={this.getPlaceHolder(column)}
-        onChange={value => { this.onMultipleSelectChange(value, column); }}
+        onChange={value => {
+          this.onMultipleSelectChange(value, column);
+        }}
       >
         {valueListData ? this.renderOption() : ''}
       </Select>
@@ -538,33 +545,33 @@ export default class AutoFormRow extends PureComponent {
   }
 
   renderOption() {
-    const { valueListData } = this.state;
+    const {valueListData} = this.state;
     return valueListData.map(data => <Option key={data.dataCode}>{data.dataName}</Option>);
   }
 
   renderTreeSelect() {
-    const { column } = this.props;
-    const { valueListData } = this.state;
+    const {column} = this.props;
+    const {valueListData} = this.state;
     return (
       <TreeSelect
         allowClear
         treeData={valueListData || []}
         placeholder={this.getPlaceHolder(column)}
-        dropdownStyle={{ maxHeight: 200, overflow: 'auto' }}
+        dropdownStyle={{maxHeight: 200, overflow: 'auto'}}
       />
     );
   }
 
   renderMultipleTreeSelect() {
-    const { column } = this.props;
-    const { valueListData } = this.state;
+    const {column} = this.props;
+    const {valueListData} = this.state;
     return (
       <TreeSelect
         allowClear
         multiple
         treeData={valueListData || []}
         placeholder={this.getPlaceHolder(column)}
-        dropdownStyle={{ maxHeight: 200, overflow: 'auto' }}
+        dropdownStyle={{maxHeight: 200, overflow: 'auto'}}
       />
     );
   }
@@ -577,7 +584,7 @@ export default class AutoFormRow extends PureComponent {
     // } else {
     //   rules = this.getValidateRules(column, currentModel);
     // }
-    const { columnName, columnCode } = column;
+    const {columnName, columnCode} = column;
     // const options = {};
     // if (displayType === 'U') {
     //   options.getValueFromEvent = this.normFile.bind(null, displayType);
@@ -598,21 +605,22 @@ export default class AutoFormRow extends PureComponent {
   }
 
   renderFormItemText = column => {
-    const { props } = this;
-    const { initialValue, noLabel } = props;
+    const {props} = this;
+    const {initialValue, noLabel} = props;
     return (
-      <FormItem {...props} style={{ marginBottom: 0 }} label={noLabel ? undefined : column.columnName}>
+      <FormItem {...props} style={{marginBottom: 0}} label={noLabel ? undefined : column.columnName}>
         <span>{this.formatValue(column, initialValue)}</span>
       </FormItem>
     );
   }
 
   render() {
-    const { column, currentModel } = this.props;
-    const { editField } = column;
+    const {column, currentModel} = this.props;
+    const {editField} = column;
     if (currentModel === 'add') {
       return this.renderFormItem(column);
-    } if (currentModel === 'edit') {
+    }
+    if (currentModel === 'edit') {
       return editField !== 'Y' ? this.renderFormItemText(column) : this.renderFormItem(column);
     }
     return this.renderFormItem(column);
