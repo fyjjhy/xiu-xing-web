@@ -12,6 +12,7 @@ export default {
   'menu.xiuXing.zhenFa': '阵法管理',
   'menu.xiuXing.qiTaLingWu': '其他灵物管理',
   'menu.xiuXing.renWu': '人物管理',
+  'menu.xiuXing.baiJiaXing': '百家姓管理',
   'menu.xiuXing.zongMen': '宗门管理',
   'menu.xiuXing.jiGou': '机构管理',
   'menu.more-blocks': '更多区块',
