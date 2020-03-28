@@ -18,6 +18,7 @@ export default {
   'menu.xiuXing.zongMen': '宗门管理',
   'menu.xiuXing.jiGou': '机构管理',
   'menu.xiuXing.jingJie': '境界管理',
+  'menu.xiuXing.pinJi': '品级管理',
   'menu.more-blocks': '更多区块',
   'menu.home': '首页',
   'menu.admin': '管理页',

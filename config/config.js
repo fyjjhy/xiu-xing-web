@@ -134,6 +134,7 @@ export default {
                 { name: 'zongMen', path: '/zongMenList', component: './zongMenList/ZongMen' },
                 { name: 'jiGou', path: '/jiGouList', component: './jiGouList/JiGou' },
                 { name: 'jingJie', path: '/jingJieList', component: './jingJieList/JingJie' },
+                { name: 'pinJi', path: '/pinJiList', component: './pinJiList/PinJi' },
               ],
             },
             {
