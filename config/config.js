@@ -4,6 +4,7 @@ import slash from 'slash2';
 import themePluginConfig from './themePluginConfig';
 // import proxy from './proxy';
 import webpackPlugin from './plugin.config';
+
 const { pwa } = defaultSettings; // preview.pro.ant.design only do not use in your production ;
 // preview.pro.ant.design 专用环境变量，请不要在你的项目中使用它。
 
@@ -128,9 +129,11 @@ export default {
                 { name: 'cangKu', path: '/cangKuList', component: './cangKuList/CangKu' },
                 { name: 'qiTaLingWu', path: '/qiTaLingWuList', component: './qiTaLingWuList/QiTaLingWu' },
                 { name: 'renWu', path: '/renWuList', component: './renWuList/RenWu' },
+                { name: 'diMing', path: '/diMingList', component: './diMingList/DiMing' },
                 { name: 'baiJiaXing', path: '/baiJiaXingList', component: './baiJiaXingList/BaiJiaXing' },
                 { name: 'zongMen', path: '/zongMenList', component: './zongMenList/ZongMen' },
                 { name: 'jiGou', path: '/jiGouList', component: './jiGouList/JiGou' },
+                { name: 'jingJie', path: '/jingJieList', component: './jingJieList/JingJie' },
               ],
             },
             {
