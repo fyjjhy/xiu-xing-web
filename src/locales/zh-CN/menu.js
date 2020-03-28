@@ -10,6 +10,7 @@ export default {
   'menu.xiuXing.lingQi': '灵器管理',
   'menu.xiuXing.yaoShou': '妖兽管理',
   'menu.xiuXing.zhenFa': '阵法管理',
+  'menu.xiuXing.cangKu': '仓库管理',
   'menu.xiuXing.qiTaLingWu': '其他灵物管理',
   'menu.xiuXing.renWu': '人物管理',
   'menu.xiuXing.baiJiaXing': '百家姓管理',
