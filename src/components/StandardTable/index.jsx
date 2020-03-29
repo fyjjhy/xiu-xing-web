@@ -4,7 +4,7 @@ import styles from './index.less';
 
 function initTotalList(columns) {
   const totalList = [];
-  columns.forEach((column) => {
+  columns.forEach(column => {
     if (column.needTotal) {
       totalList.push({ ...column, total: 0 });
     }
@@ -21,7 +21,7 @@ class StandardTable extends PureComponent {
     this.state = {
       selectedRowKeys: [],
       needTotalList,
-      expandedRow: [],
+      // expandedRow: [],
     };
   }
 
@@ -37,15 +37,12 @@ class StandardTable extends PureComponent {
   }
 
   handleRowSelectChange = (selectedRowKeys, selectedRows) => {
-    let needTotalList = [...this.state.needTotalList];
-    needTotalList = needTotalList.map((item) => {
-      return {
+    const { state } = this;
+    let needTotalList = [...state.needTotalList];
+    needTotalList = needTotalList.map(item => ({
         ...item,
-        total: selectedRows.reduce((sum, val) => {
-          return sum + parseFloat(val[item.dataIndex], 10);
-        }, 0),
-      };
-    });
+        total: selectedRows.reduce((sum, val) => sum + parseFloat(val[item.dataIndex], 10), 0),
+      }));
 
     if (this.props.onSelectRow) {
       this.props.onSelectRow(selectedRows);
@@ -62,13 +59,13 @@ class StandardTable extends PureComponent {
     this.handleRowSelectChange([], []);
   }
 
-  handleOnExpandedRowsChange = (expandedRows) => {
-    const row = expandedRows.slice(-1);
-    this.setState({ expandedRow: row });
-  }
+  // handleOnExpandedRowsChange = expandedRows => {
+  //   const row = expandedRows.slice(-1);
+  //   this.setState({ expandedRow: row });
+  // }
 
   render() {
-    const { selectedRowKeys, needTotalList, expandedRow } = this.state;
+    const { selectedRowKeys, needTotalList } = this.state;
     const { data: { list, pagination }, loading, columns, metaModel } = this.props;
 
     const paginationProps = {

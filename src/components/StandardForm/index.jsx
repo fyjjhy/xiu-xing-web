@@ -100,17 +100,17 @@ class StandardForm extends PureComponent {
     );
   }
 
-  renderHidden(displayFileds) {
-    const { data } = this.props;
-    if (data) {
-      const hiddenFileds = [];
+  renderHidden(displayFields) {
+    const { initialValues } = this.props;
+    if (initialValues) {
+      const hiddenFields = [];
       // eslint-disable-next-line no-restricted-syntax
-      for (const field in data) {
-        if (displayFileds.includes(field)) {
-          hiddenFileds.push(field);
+      for (const field in initialValues) {
+        if (!displayFields.includes(field)) {
+          hiddenFields.push(field);
         }
       }
-      return hiddenFileds.map(filed => (
+      return hiddenFields.map(filed => (
         <FormItem key={filed} name={filed} noStyle>
           <Input key={filed} type="hidden" name={filed}/>
         </FormItem>
@@ -121,14 +121,14 @@ class StandardForm extends PureComponent {
 
   renderFormItem() {
     const { formColumnList, currentModel } = this.props;
-    const displayFields = [];
+    const displayFileds = [];
     return (
       <Fragment>
         {
           formColumnList.filter(column => {
-            const { addField, editField, columnCode, hiddenField } = column;
-            if (hiddenField === 'Y') {
-              displayFields.push(columnCode);
+            const { addField, editField, columnCode } = column;
+            if (editField === 'Y') {
+              displayFileds.push(columnCode);
             }
             return currentModel === 'add' ? addField === 'Y' : editField === 'Y';
           }).map(column => (
@@ -146,7 +146,7 @@ class StandardForm extends PureComponent {
             />
           ))
         }
-        {this.renderHidden(displayFields)}
+        {this.renderHidden(displayFileds)}
         {/* <FormItem name="id" noStyle> */}
           {/* <Input type="hidden" name="id" /> */}
         {/* </FormItem> */}

@@ -584,9 +584,9 @@ export default class AutoFormRow extends PureComponent {
 
   renderFormItemText = column => {
     const {props} = this;
-    const {initialValue, noLabel} = props;
+    const {initialValue} = props;
     return (
-      <FormItem {...props} style={{marginBottom: 0}} label={noLabel ? undefined : column.columnName}>
+      <FormItem {...props} style={{marginBottom: 0}} label={column.columnName} name={column.columnCode}>
         <span>{this.formatValue(column, initialValue)}</span>
       </FormItem>
     );
