@@ -20,6 +20,7 @@ export default {
   'menu.xiuXing.jiGou': '机构管理',
   'menu.xiuXing.jingJie': '境界管理',
   'menu.xiuXing.pinJi': '品级管理',
+  'menu.xiuXing.ziDian': '字典管理',
   'menu.more-blocks': '更多区块',
   'menu.home': '首页',
   'menu.admin': '管理页',
