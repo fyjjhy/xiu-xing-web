@@ -18,28 +18,6 @@ const monthFormat = 'YYYY年MM月';
 
 // const typeMap = { S: 'string', E: 'email', O: 'object', A: 'array', T: 'object' };
 
-const formItemLayout = {
-  labelCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 7,
-    },
-  },
-  wrapperCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 12,
-    },
-    md: {
-      span: 10,
-    },
-  },
-};
-
 export default class AutoFormRow extends PureComponent {
   state = {
     uploadLoading: false,
@@ -598,7 +576,7 @@ export default class AutoFormRow extends PureComponent {
     //   return this.renderCustomFormItem();
     // }
     return (
-      <FormItem {...formItemLayout} label={columnName} name={columnCode}>
+      <FormItem {...this.props} label={columnName} name={columnCode}>
         {this.renderItem(column)}
       </FormItem>
     );

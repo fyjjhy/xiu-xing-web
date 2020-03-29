@@ -9,27 +9,27 @@ import AutoFormRow from '../Auto/AutoFormRow';
 const { Item: FormItem } = Form;
 // const { Option } = Select;
 
-// const formItemLayout = {
-//   labelCol: {
-//     xs: {
-//       span: 24,
-//     },
-//     sm: {
-//       span: 7,
-//     },
-//   },
-//   wrapperCol: {
-//     xs: {
-//       span: 24,
-//     },
-//     sm: {
-//       span: 12,
-//     },
-//     md: {
-//       span: 10,
-//     },
-//   },
-// };
+const formItemLayout = {
+  labelCol: {
+    xs: {
+      span: 24,
+    },
+    sm: {
+      span: 7,
+    },
+  },
+  wrapperCol: {
+    xs: {
+      span: 24,
+    },
+    sm: {
+      span: 12,
+    },
+    md: {
+      span: 10,
+    },
+  },
+};
 
 const submitFormLayout = {
   wrapperCol: {
@@ -134,7 +134,7 @@ class StandardForm extends PureComponent {
           }).map(column => (
             <AutoFormRow
               // {...props}
-              // {...formItemLayout}
+              {...formItemLayout}
               key={column.columnCode}
               column={column}
               form={this.formRef.current}

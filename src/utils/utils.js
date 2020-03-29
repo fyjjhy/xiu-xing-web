@@ -83,9 +83,9 @@ export function pager2pagination(pager = {}) {
         total: pager.totalSize || 0,
       },
     };
-  } else {
+  } 
     return {
       list: pager,
     };
-  }
+  
 }
