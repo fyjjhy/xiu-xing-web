@@ -1,6 +1,7 @@
 export default {
   'menu.welcome': '欢迎',
   'menu.xiuXing': '修行信息',
+  'menu.xiuXing.xiuXingRiZhi': '修行日志管理',
   'menu.xiuXing.fuLu': '符箓管理',
   'menu.xiuXing.faShu': '法术管理',
   'menu.xiuXing.gongFa': '功法管理',

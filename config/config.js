@@ -117,6 +117,7 @@ export default {
               name: 'xiuXing',
               icon: 'table',
               routes: [
+                { name: 'xiuXingRiZhi', path: '/xiuXingRiZhiList', component: './xiuXingRiZhiList/XiuXingRiZhi' },
                 { name: 'fuLu', path: '/fuLuList', component: './fuLuList/FuLu' },
                 { name: 'faShu', path: '/faShuList', component: './faShuList/FaShu' },
                 { name: 'gongFa', path: '/gongFaList', component: './gongFaList/GongFa' },
