@@ -413,7 +413,7 @@ export default class FaShu extends PureComponent {
             >
               {rows.map(col => (
                 <Col key={col.columnCode} md={8} sm={24}>
-                  <AutoFormRow {...formItemLayout} column={col} />
+                  <AutoFormRow formItemLayout={formItemLayout} column={col} />
                 </Col>
               ))}
             </Row>
