@@ -11,7 +11,7 @@ import {
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'dva';
 
-import { Row, Col, Card, Form, Select, Button, Divider, Popconfirm, message, Input } from 'antd';
+import { Row, Col, Card, Form, Button, Divider, Popconfirm, message } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 
 import StandardTable from '../../components/StandardTable';
@@ -22,46 +22,29 @@ import { danWeiConstant, lingWuFenLeiConstant } from '../../utils/constant';
 
 import styles from './CangKu.less';
 
-const { Item: FormItem } = Form;
+// const { Item: FormItem } = Form;
 const { Group: ButtonGroup } = Button;
-const { Option } = Select;
+// const { Option } = Select;
 
 const cangKuColumns = [
-  {columnName: 'id', columnCode: 'id', valueType: 'S', displayType: 'I', hiddenField: 'Y', requiredFlag: 'Y', searchFlag: 'N', profileField: 'N', columnWidth: null, addField: 'N', editField: 'N', listField: 'N', sortField: 'N'},
-  {columnName: '灵物分类', columnCode: 'lingWuFenLei', valueType: 'S', displayType: 'S', valueList: `constant|${JSON.stringify(lingWuFenLeiConstant())}`, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '90px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N'},
-  {columnName: '灵物属性', columnCode: 'lingWuShuXing', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: '90px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N'},
-  {columnName: '灵物状态', columnCode: 'lingWuState', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: '90px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N'},
-  {columnName: '灵物名称', columnCode: 'lingWu', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '200px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N'},
-  {columnName: '灵物数量', columnCode: 'lingWuShuLiang', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'N', profileField: 'Y', columnWidth: '90px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N'},
-  {columnName: '单位', columnCode: 'danWei', valueType: 'S', displayType: 'S', valueList: `constant|${JSON.stringify(danWeiConstant())}`, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: '65px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N'},
-  {columnName: '所属者', columnCode: 'suoShuZhe', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: '105px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N'},
-  {columnName: '小说', columnCode: 'xiaoShuoId', valueType: 'S', displayType: 'S', valueList: 'service|/chenXian/chen/xian/xiaoShuo', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: '175px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N'},
-  {columnName: '境界', columnCode: 'jingJieName', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: '65px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N'},
-  {columnName: '品级', columnCode: 'pinJiName', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: '65px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N'},
-  {columnName: '描述', columnCode: 'miaoShu', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: null, addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N'},
-  {columnName: '更新时间', columnCode: 'updateTime', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: '160px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N'},
+  { columnName: '灵物分类', columnCode: 'lingWuFenLei', valueType: 'S', displayType: 'S', valueList: `constant|${JSON.stringify(lingWuFenLeiConstant())}`, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '90px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
+  { columnName: '灵物属性', columnCode: 'lingWuShuXing', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: '90px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
+  { columnName: '灵物状态', columnCode: 'lingWuState', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: '90px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
+  { columnName: '灵物名称', columnCode: 'lingWu', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '200px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
+  { columnName: '灵物数量', columnCode: 'lingWuShuLiang', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'N', profileField: 'Y', columnWidth: '90px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
+  { columnName: '单位', columnCode: 'danWei', valueType: 'S', displayType: 'S', valueList: `constant|${JSON.stringify(danWeiConstant())}`, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: '65px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
+  { columnName: '所属者', columnCode: 'suoShuZhe', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: '105px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
+  { columnName: '小说', columnCode: 'xiaoShuoId', valueType: 'S', displayType: 'S', valueList: 'service|/chenXian/chen/xian/xiaoShuo', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '175px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
+  { columnName: '境界', columnCode: 'jingJieName', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: '65px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
+  { columnName: '品级', columnCode: 'pinJiName', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: '65px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
+  { columnName: '描述', columnCode: 'miaoShu', valueType: 'S', displayType: 'T', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: null, addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
+  { columnName: '更新时间', columnCode: 'updateTime', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: '160px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
+  { columnName: '操作', columnCode: 'id', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'N', columnWidth: '110px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
 ];
 
 const formItemLayout = {
-  labelCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 4,
-    },
-  },
-  wrapperCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 12,
-    },
-    md: {
-      span: 20,
-    },
-  },
+  labelCol: { xs: { span: 24 }, sm: { span: 4 } },
+  wrapperCol: { xs: { span: 24 }, sm: { span: 12 }, md: { span: 20 } },
 };
 
 
@@ -123,12 +106,6 @@ export default class CangKu extends PureComponent {
       }
       return listColumn;
     });
-    const optColumn = {
-      title: '操作',
-      dataIndex: 'id',
-      width: '110px',
-    };
-    this.listColumns.push(optColumn);
     this.listColumns = this.listColumns.map(col => {
       const colum = {};
       if (col.dataIndex === 'lingWu') {
@@ -241,14 +218,14 @@ export default class CangKu extends PureComponent {
     const { current: { validateFields } } = this.formRef;
     validateFields()
       .then(values => {
-        this.setState({
-          formValues: { ...values },
-        });
         const params = {};
         Object.keys(values).forEach(key => {
           if (values[key]) {
             params[key] = values[key];
           }
+        });
+        this.setState({
+          formValues: { ...params },
         });
         this.handleDisplay();
         this.loadPlatServiceData(params);
@@ -364,33 +341,33 @@ export default class CangKu extends PureComponent {
     return text;
   }
 
-  renderSimpleForm() {
-    const { xiaoShuo: { xiaoShuoList } } = this.props;
-    return (
-      <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
-        <Col md={8} sm={24}>
-          <FormItem label="仓库名称" name="cangKuName">
-            <Input placeholder="请输入仓库名称" />
-          </FormItem>
-        </Col>
-        <Col md={8} sm={24}>
-          <FormItem label="仓库描述" name="cangKuMiaoShu">
-            <Input placeholder="请输入仓库描述" />
-          </FormItem>
-        </Col>
-        <Col md={8} sm={24}>
-          <FormItem label="小说" name="xiaoShuoId">
-            <Select placeholder="请选择小说" allowClear>
-              {xiaoShuoList && xiaoShuoList.length > 0 ? xiaoShuoList.map(xiaoShuo => {
-                const { dataCode, dataName } = xiaoShuo;
-                return <Option key={dataCode} value={dataCode}>{dataName}</Option>
-              }) : ''}
-            </Select>
-          </FormItem>
-        </Col>
-      </Row>
-    );
-  }
+  // renderSimpleForm() {
+  //   const { xiaoShuo: { xiaoShuoList } } = this.props;
+  //   return (
+  //     <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
+  //       <Col md={8} sm={24}>
+  //         <FormItem label="仓库名称" name="cangKuName">
+  //           <Input placeholder="请输入仓库名称" />
+  //         </FormItem>
+  //       </Col>
+  //       <Col md={8} sm={24}>
+  //         <FormItem label="仓库描述" name="cangKuMiaoShu">
+  //           <Input placeholder="请输入仓库描述" />
+  //         </FormItem>
+  //       </Col>
+  //       <Col md={8} sm={24}>
+  //         <FormItem label="小说" name="xiaoShuoId">
+  //           <Select placeholder="请选择小说" allowClear>
+  //             {xiaoShuoList && xiaoShuoList.length > 0 ? xiaoShuoList.map(xiaoShuo => {
+  //               const { dataCode, dataName } = xiaoShuo;
+  //               return <Option key={dataCode} value={dataCode}>{dataName}</Option>
+  //             }) : ''}
+  //           </Select>
+  //         </FormItem>
+  //       </Col>
+  //     </Row>
+  //   );
+  // }
 
   // renderAdvancedForm() {
   //   return (
@@ -414,7 +391,6 @@ export default class CangKu extends PureComponent {
   // }
 
   renderForm() {
-    const { props } = this;
     const { expandForm } = this.state;
     const rowSearchColumns = [];
     let rowColumns;
@@ -441,16 +417,12 @@ export default class CangKu extends PureComponent {
           return (
             <Row
               key={key}
-              gutter={{
-                md: mdVal,
-                lg: 24,
-                xl: 20,
-              }}
+              gutter={{md: mdVal, lg: 24, xl: 20,}}
               style={{ width: '100%' }}
             >
               {rows.map(col => (
                 <Col key={col.columnCode} md={8} sm={24}>
-                  <AutoFormRow {...props} {...formItemLayout} column={col} searchBoxNotChecked />
+                  <AutoFormRow formItemLayout={formItemLayout} column={col} />
                 </Col>
               ))}
             </Row>
