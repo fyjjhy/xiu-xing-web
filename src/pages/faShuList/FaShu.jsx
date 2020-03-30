@@ -382,7 +382,6 @@ export default class FaShu extends PureComponent {
   // }
 
   renderForm() {
-    const { props } = this;
     const { expandForm } = this.state;
     const rowSearchColumns = [];
     let rowColumns;
@@ -414,7 +413,7 @@ export default class FaShu extends PureComponent {
             >
               {rows.map(col => (
                 <Col key={col.columnCode} md={8} sm={24}>
-                  <AutoFormRow {...props} {...formItemLayout} column={col} />
+                  <AutoFormRow {...formItemLayout} column={col} />
                 </Col>
               ))}
             </Row>
