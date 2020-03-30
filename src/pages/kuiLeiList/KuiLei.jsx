@@ -1,94 +1,42 @@
 /* eslint-disable react/jsx-no-bind */
 import {
-  // DownOutlined,
+  DownOutlined,
   PlusOutlined,
   // LockOutlined,
   // UnlockOutlined,
   EditOutlined,
   DeleteOutlined,
-  // UpOutlined,
+  UpOutlined,
 } from '@ant-design/icons';
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'dva';
 
-import { Row, Col, Card, Form, Select, Button, Divider, Popconfirm, message, Input } from 'antd';
+import { Row, Col, Card, Form, Button, Divider, Popconfirm, message } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 
 import StandardTable from '../../components/StandardTable';
 import StandardProfile from '../../components/StandardProfile';
 import StandardForm from '../../components/StandardForm';
+import AutoFormRow from '../../components/Auto/AutoFormRow';
 
 import styles from './KuiLei.less';
 
-const { Item: FormItem } = Form;
 const { Group: ButtonGroup } = Button;
-const { Option } = Select;
 
-let columns = [{
-  title: '傀儡代码',
-  dataIndex: 'kuiLeiCode',
-  width: '90px',
-}, {
-  title: '傀儡名称',
-  dataIndex: 'kuiLeiName',
-  width: '175px',
-}, {
-  title: '小说',
-  dataIndex: 'xiaoShuoId',
-  width: '175px',
-}, {
-  title: '傀儡描述',
-  dataIndex: 'kuiLeiMiaoShu',
-  width: 'auto',
-}, {
-  title: '更新时间',
-  dataIndex: 'updateTime',
-  width: '160px',
-}, {
-  title: '操作',
-  dataIndex: 'id',
-  width: '110px',
-}];
+const kuiLeiColumns = [
+  { columnName: '傀儡代码', columnCode: 'kuiLeiCode', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '90px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
+  { columnName: '傀儡名称', columnCode: 'kuiLeiName', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '110px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
+  // { columnName: '傀儡分类', columnCode: 'kuiLeiFenLei', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: '90px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
+  { columnName: '傀儡描述', columnCode: 'kuiLeiMiaoShu', valueType: 'S', displayType: 'T', valueList: null, hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: null, addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
+  { columnName: '小说', columnCode: 'xiaoShuoId', valueType: 'S', displayType: 'S', valueList: 'service|/chenXian/chen/xian/xiaoShuo', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: '175px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
+  { columnName: '更新时间', columnCode: 'updateTime', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: '160px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
+  { columnName: '操作', columnCode: 'id', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'N', columnWidth: '110px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
+];
 
-const profileColumns = [{
-  columnName: 'id',
-  columnCode: 'id',
-  hiddenField: 'Y',
-  displayType: 'I',
-}, {
-  columnName: '傀儡代码',
-  columnCode: 'kuiLeiCode',
-  profileField: 'Y',
-  addField: 'N',
-  displayType: 'I',
-}, {
-  columnName: '傀儡名称',
-  columnCode: 'kuiLeiName',
-  profileField: 'Y',
-  addField: 'Y',
-  editField: 'Y',
-  displayType: 'I',
-}, {
-  columnName: '小说',
-  columnCode: 'xiaoShuoId',
-  profileField: 'Y',
-  addField: 'Y',
-  editField: 'Y',
-  valueList: 'service|/chenXian/chen/xian/xiaoShuo',
-  displayType: 'S',
-}, {
-  columnName: '更新时间',
-  columnCode: 'updateTime',
-  profileField: 'Y',
-  displayType: 'I',
-}, {
-  columnName: '傀儡描述',
-  columnCode: 'kuiLeiMiaoShu',
-  profileField: 'Y',
-  addField: 'Y',
-  editField: 'Y',
-  displayType: 'T',
-}];
+const formItemLayout = {
+  labelCol: { xs: { span: 24 }, sm: { span: 4 } },
+  wrapperCol: { xs: { span: 24 }, sm: { span: 12 }, md: { span: 20 } },
+};
 
 
 
@@ -97,11 +45,21 @@ const profileColumns = [{
   xiaoShuo,
   loading: loading.models.kuiLei,
 }))
-export default class KuiLei extends PureComponent {
+export default class FaShu extends PureComponent {
   formRef = React.createRef();
 
+  listColumns = [];
+
+  searchColumns = [];
+
+  addColumns = [];
+
+  editColumns = [];
+
+  profileColumns = [];
+
   state = {
-    // expandForm: false,
+    expandForm: false,
     formValues: {},
     selectedRows: [],
     currentModel: 'display',
@@ -110,9 +68,38 @@ export default class KuiLei extends PureComponent {
   };
 
   UNSAFE_componentWillMount() {
-    columns = columns.map(col => {
+    this.listColumns = kuiLeiColumns.filter(column => {
+      if (column.searchFlag === 'Y') {
+        this.searchColumns.push(column);
+      }
+
+      if (column.addField === 'Y') {
+        this.addColumns.push(column);
+      }
+
+      if (column.editField === 'Y') {
+        this.editColumns.push(column);
+      }
+
+      if (column.profileField === 'Y') {
+        this.profileColumns.push(column);
+      }
+      return column.listField === 'Y';
+    }).map(column => {
+      const listColumn = {
+        title: column.columnName,
+        dataIndex: column.columnCode,
+        width: column.columnWidth || 'auto',
+      };
+
+      if (column.sortField === 'Y') {
+        listColumn.sorter = true;
+      }
+      return listColumn;
+    });
+    this.listColumns = this.listColumns.map(col => {
       const colum = {};
-      if (col.dataIndex === 'kuiLeiName') {
+      if (col.dataIndex === 'kuiLeiCode') {
         colum.render = ((text, record) => <a onClick={() => { this.handleProfileClick(record); }}>{text}</a>);
       } else if (col.dataIndex === 'id') {
         colum.render = ((text, record) => this.renderLinkGroup(record));
@@ -184,7 +171,7 @@ export default class KuiLei extends PureComponent {
   async handleEditPlatService(params) {
     this.setState({ loadingModel: 'profile' });
     await this.operatePlatServiceData('update', params);
-    message.success('修改平台服务信息成功');
+    message.success('修改傀儡信息成功');
     // 触发查询点击事件
     document.getElementById('chaXun').click();
     this.handleDisplay();
@@ -207,7 +194,7 @@ export default class KuiLei extends PureComponent {
   async handleDeletePlatService(params, loadingModel = 'list') {
     this.setState({ loadingModel });
     await this.operatePlatServiceData('del', { ...params, state: 'X' });
-    message.success('删除平台服务信息成功');
+    message.success('删除傀儡信息成功');
     this.handleFormReset();
   }
 
@@ -222,14 +209,14 @@ export default class KuiLei extends PureComponent {
     const { current: { validateFields } } = this.formRef;
     validateFields()
       .then(values => {
-        this.setState({
-          formValues: { ...values },
-        });
         const params = {};
         Object.keys(values).forEach(key => {
           if (values[key]) {
             params[key] = values[key];
           }
+        });
+        this.setState({
+          formValues: { ...params },
         });
         this.handleDisplay();
         this.loadPlatServiceData(params);
@@ -267,11 +254,12 @@ export default class KuiLei extends PureComponent {
     this.loadPlatServiceData();
   }
 
-  // toggleForm() {
-  //   this.setState({
-  //     expandForm: !this.state.expandForm,
-  //   });
-  // }
+  toggleForm() {
+    const { expandForm } = this.state;
+    this.setState({
+      expandForm: !expandForm,
+    });
+  }
 
   handleSelectRows(rows) {
     this.setState({
@@ -291,6 +279,14 @@ export default class KuiLei extends PureComponent {
       await this.operatePlatServiceData('get', params);
     }
     this.setState({ currentModel: 'edit' });
+  }
+
+  // 点击列表编辑按钮
+  async handleEditLinkClick(params) {
+    if (params) {
+      await this.operatePlatServiceData('get', params);
+    }
+    this.setState({ currentModel: 'listEdit' });
   }
 
   handleDisplay() {
@@ -336,33 +332,33 @@ export default class KuiLei extends PureComponent {
     return text;
   }
 
-  renderSimpleForm() {
-    const { xiaoShuo: { xiaoShuoList } } = this.props;
-    return (
-      <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
-        <Col md={8} sm={24}>
-          <FormItem label="傀儡名称" name="kuiLeiName">
-            <Input placeholder="请输入傀儡名称" />
-          </FormItem>
-        </Col>
-        <Col md={8} sm={24}>
-          <FormItem label="傀儡描述" name="kuiLeiMiaoShu">
-            <Input placeholder="请输入傀儡描述" />
-          </FormItem>
-        </Col>
-        <Col md={8} sm={24}>
-          <FormItem label="小说" name="xiaoShuoId">
-            <Select placeholder="请选择小说" allowClear>
-              {xiaoShuoList && xiaoShuoList.length > 0 ? xiaoShuoList.map(xiaoShuo => {
-                const { dataCode, dataName } = xiaoShuo;
-                return <Option key={dataCode} value={dataCode}>{dataName}</Option>
-              }) : ''}
-            </Select>
-          </FormItem>
-        </Col>
-      </Row>
-    );
-  }
+  // renderSimpleForm() {
+  //   const { xiaoShuo: { xiaoShuoList } } = this.props;
+  //   return (
+  //     <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
+  //       <Col md={8} sm={24}>
+  //         <FormItem label="仓库名称" name="cangKuName">
+  //           <Input placeholder="请输入仓库名称" />
+  //         </FormItem>
+  //       </Col>
+  //       <Col md={8} sm={24}>
+  //         <FormItem label="仓库描述" name="cangKuMiaoShu">
+  //           <Input placeholder="请输入仓库描述" />
+  //         </FormItem>
+  //       </Col>
+  //       <Col md={8} sm={24}>
+  //         <FormItem label="小说" name="xiaoShuoId">
+  //           <Select placeholder="请选择小说" allowClear>
+  //             {xiaoShuoList && xiaoShuoList.length > 0 ? xiaoShuoList.map(xiaoShuo => {
+  //               const { dataCode, dataName } = xiaoShuo;
+  //               return <Option key={dataCode} value={dataCode}>{dataName}</Option>
+  //             }) : ''}
+  //           </Select>
+  //         </FormItem>
+  //       </Col>
+  //     </Row>
+  //   );
+  // }
 
   // renderAdvancedForm() {
   //   return (
@@ -386,18 +382,57 @@ export default class KuiLei extends PureComponent {
   // }
 
   renderForm() {
+    const { expandForm } = this.state;
+    const rowSearchColumns = [];
+    let rowColumns;
+    this.searchColumns.forEach((column, index) => {
+      if (index % 3 === 0) {
+        rowColumns = [];
+        rowSearchColumns.push(rowColumns);
+      }
+      if (index < 3 || expandForm) {
+        rowColumns.push(column);
+      }
+    });
+
     return (
       <Form layout="inline" ref={this.formRef}>
-        {this.renderSimpleForm()}
-        {/* { this.state.expandForm ? this.renderAdvancedForm() : ''} */}
+        { rowSearchColumns.map((rows, index) => {
+          const key = index + 1;
+          let mdVal = 6;
+          if (rows && rows.length >= 3) {
+            mdVal = 6;
+          } else {
+            mdVal = 8;
+          }
+          return (
+            <Row
+              key={key}
+              gutter={{md: mdVal, lg: 24, xl: 20,}}
+              style={{ width: '100%' }}
+            >
+              {rows.map(col => (
+                <Col key={col.columnCode} md={8} sm={24}>
+                  <AutoFormRow formItemLayout={formItemLayout} column={col} />
+                </Col>
+              ))}
+            </Row>
+          );
+        })}
       </Form>
     );
+    // return (
+    //   <Form layout="inline" ref={this.formRef}>
+    //     {this.renderSimpleForm()}
+    //     {/* { this.state.expandForm ? this.renderAdvancedForm() : ''} */}
+    //   </Form>
+    // );
   }
 
   renderToolbar() {
     const { selectedRows } = this.state;
-    // const up = (<Fragment>收起<UpOutlined /></Fragment>);
-    // const down = (<Fragment>展开<DownOutlined /></Fragment>);
+    const up = (<Fragment>收起<UpOutlined /></Fragment>);
+    const down = (<Fragment>展开<DownOutlined /></Fragment>);
     return (
       <Fragment>
         <Button type="primary" onClick={this.handleAddBtnClick.bind(this)}><PlusOutlined /> 新增</Button>
@@ -413,9 +448,9 @@ export default class KuiLei extends PureComponent {
         <span style={{ float: 'right', marginBottom: 24 }}>
           <Button id="chaXun" type="primary" htmlType="submit" onClick={this.handleSearch.bind(this)}>查询</Button>
           <Button style={{ marginLeft: 8 }} onClick={this.handleFormReset.bind(this)}>重置</Button>
-          {/* <a style={{ marginLeft: 8 }} onClick={this.toggleForm.bind(this)}> */}
-          {/* {this.state.expandForm ? up : down} */}
-          {/* </a> */}
+           <a style={{ marginLeft: 8 }} onClick={this.toggleForm.bind(this)}>
+           {this.state.expandForm ? up : down}
+           </a>
         </span>
       </Fragment>
     );
@@ -452,7 +487,7 @@ export default class KuiLei extends PureComponent {
     if (detailData) {
       return (
         <Fragment>
-          <a onClick={() => { this.handleEditBtnClick(detailData); }}>修改</a>
+          <a onClick={() => { this.handleEditLinkClick(detailData); }}>修改</a>
           <Divider type="vertical" />
           {/* <Popconfirm placement="top" title="确定要锁定吗？" onConfirm={() => { this.handleLockPlatService(detailData); }} okText="确定" cancelText="取消"> */}
           {/* <a disabled={detailData.state === 'A' ? '' : 'disabled'}>锁定</a> */}
@@ -473,22 +508,15 @@ export default class KuiLei extends PureComponent {
 
   renderEditForm() {
     const { currentModel } = this.state;
-    const { kuiLei: { data: selectRecord  } } = this.props;
     if (currentModel === 'edit') {
-      const profile = selectRecord || {};
+      const { kuiLei: { data: selectRecord  } } = this.props;
       return (
         <StandardForm
           title="编辑傀儡"
           currentModel={currentModel}
-          formColumnList={profileColumns}
+          formColumnList={this.editColumns}
           // xiaoShuoList={xiaoShuoList}
-          initialValues={{
-            kuiLeiName: profile.kuiLeiName,
-            kuiLeiCode: profile.kuiLeiCode,
-            xiaoShuoId: profile.xiaoShuoId,
-            kuiLeiMiaoShu: profile.kuiLeiMiaoShu,
-            id: profile.id
-          }}
+          initialValues={selectRecord || {}}
           // showDialog
           // visible
           data={selectRecord}
@@ -501,24 +529,36 @@ export default class KuiLei extends PureComponent {
   }
 
   // 点击打开新增模态框
+  renderEditDialog() {
+    const { currentModel } = this.state;
+    if (currentModel === 'listEdit') {
+      const { kuiLei: { data  } } = this.props;
+      return (
+        <StandardForm
+          formColumnList={this.editColumns}
+          currentModel={currentModel}
+          title="编辑傀儡"
+          initialValues={data || {}}
+          showDialog
+          visible
+          onSubmit={this.handleAddPlatService.bind(this)}
+          onCancel={this.handleDisplay.bind(this)}
+        />
+      );
+    }
+    return '';
+  }
+
+  // 点击打开新增模态框
   renderAddDialog() {
     const { currentModel } = this.state;
     if (currentModel === 'add') {
-      // const { xiaoShuo: { xiaoShuoList }, kuiLei: { data  } } = this.props;
-      // const profile = data || {};
       return (
         <StandardForm
-          formColumnList={profileColumns}
+          formColumnList={this.addColumns}
           currentModel={currentModel}
           title="新增傀儡"
-          // initialValues={{
-          //   fuShuName: profile.fuShuName,
-          //   fuShuCode: profile.fuShuCode,
-          //   xiaoShuoId: profile.xiaoShuoId,
-          //   fuShuMiaoShu: profile.fuShuMiaoShu,
-          //   id: profile.id
-          // }}
-          // xiaoShuoList={xiaoShuoList}
+          initialValues={{}}
           showDialog
           visible
           onSubmit={this.handleAddPlatService.bind(this)}
@@ -536,7 +576,7 @@ export default class KuiLei extends PureComponent {
       if (detailData) {
         return (
           <StandardProfile
-            profileColumns={profileColumns}
+            profileColumns={this.profileColumns}
             data={this.handleData()}
           />
         );
@@ -560,10 +600,11 @@ export default class KuiLei extends PureComponent {
               {this.renderToolbar()}
             </div>
             <StandardTable
+              // scroll={{ x: '150%' }}
               loading={currentModel !== 'add' && loadingModel === 'list' ? loading : false}
               selectedRows={selectedRows}
               data={datas}
-              columns={columns}
+              columns={this.listColumns}
               onChange={this.handleStandardTableChange.bind(this)}
               onSelectRow={this.handleSelectRows.bind(this)}
               rowClassName={this.handleRowClassName}// 表格行的类名
@@ -580,6 +621,7 @@ export default class KuiLei extends PureComponent {
           {this.renderEditForm()}
         </Card>
         {this.renderAddDialog()}
+        {this.renderEditDialog()}
       </PageHeaderWrapper>
     );
   }
