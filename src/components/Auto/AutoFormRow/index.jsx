@@ -575,8 +575,9 @@ export default class AutoFormRow extends PureComponent {
     // if (displayType === 'CF') {
     //   return this.renderCustomFormItem();
     // }
+    const { formItemLayout } = this.props;
     return (
-      <FormItem {...this.props} label={columnName} name={columnCode}>
+      <FormItem {...formItemLayout} label={columnName} name={columnCode}>
         {this.renderItem(column)}
       </FormItem>
     );

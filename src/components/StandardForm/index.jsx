@@ -134,7 +134,7 @@ class StandardForm extends PureComponent {
           }).map(column => (
             <AutoFormRow
               // {...props}
-              {...formItemLayout}
+              formItemLayout={formItemLayout}
               key={column.columnCode}
               column={column}
               form={this.formRef.current}
