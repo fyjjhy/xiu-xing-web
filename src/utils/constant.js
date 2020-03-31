@@ -26,3 +26,11 @@ export function jiaGouFenLeiConstant() {
   ].map(data => ({ dataCode: data, dataName: data }));
   return jiaGouFenLei;
 }
+
+// 宗门分类
+export function zongMenFenLeiConstant() {
+  const zongMenFenLei = [
+    '修仙家族', '修仙门派', '修仙组织',
+  ].map(data => ({ dataCode: data, dataName: data }));
+  return zongMenFenLei;
+}
