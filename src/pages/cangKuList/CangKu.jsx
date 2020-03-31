@@ -18,7 +18,7 @@ import StandardTable from '../../components/StandardTable';
 import StandardProfile from '../../components/StandardProfile';
 import StandardForm from '../../components/StandardForm';
 import AutoFormRow from '../../components/Auto/AutoFormRow';
-import { danWeiConstant, lingWuFenLeiConstant } from '../../utils/constant';
+import { danWeiConstant, lingWuFenLeiConstant, jiaGouFenLeiConstant } from '../../utils/constant';
 
 import styles from './CangKu.less';
 
@@ -27,17 +27,21 @@ const { Group: ButtonGroup } = Button;
 // const { Option } = Select;
 
 const cangKuColumns = [
+  { columnName: '灵物名称', columnCode: 'lingWu', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '200px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
   { columnName: '灵物分类', columnCode: 'lingWuFenLei', valueType: 'S', displayType: 'S', valueList: `constant|${JSON.stringify(lingWuFenLeiConstant())}`, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '90px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
   { columnName: '灵物属性', columnCode: 'lingWuShuXing', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: '90px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
   { columnName: '灵物状态', columnCode: 'lingWuState', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: '90px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  { columnName: '灵物名称', columnCode: 'lingWu', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '200px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  { columnName: '灵物数量', columnCode: 'lingWuShuLiang', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'N', profileField: 'Y', columnWidth: '90px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
+  { columnName: '灵物数量', columnCode: 'lingWuShuLiang', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: '90px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
   { columnName: '单位', columnCode: 'danWei', valueType: 'S', displayType: 'S', valueList: `constant|${JSON.stringify(danWeiConstant())}`, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: '65px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
   { columnName: '所属者', columnCode: 'suoShuZhe', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: '105px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
   { columnName: '小说', columnCode: 'xiaoShuoId', valueType: 'S', displayType: 'S', valueList: 'service|/chenXian/chen/xian/xiaoShuo', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '175px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
   { columnName: '境界', columnCode: 'jingJieName', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: '65px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
   { columnName: '品级', columnCode: 'pinJiName', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: '65px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  { columnName: '描述', columnCode: 'miaoShu', valueType: 'S', displayType: 'T', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: null, addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
+  { columnName: '描述', columnCode: 'miaoShu', valueType: 'S', displayType: 'T', valueList: null, hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: null, addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
+  { columnName: '修行圣地名称', columnCode: 'xiuXingShengDiName', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'N', searchFlag: 'N', profileField: 'N', columnWidth: null, addField: 'Y', editField: 'Y', listField: 'N', sortField: 'N' },
+  { columnName: '架构分类', columnCode: 'jiaGouFenLei', valueType: 'S', displayType: 'S', valueList: `constant|${JSON.stringify(jiaGouFenLeiConstant())}`, hiddenField: 'N', requiredFlag: 'N', searchFlag: 'N', profileField: 'N', columnWidth: null, addField: 'Y', editField: 'Y', listField: 'N', sortField: 'N' },
+  { columnName: '人事分类', columnCode: 'renShiFenLei', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'N', searchFlag: 'N', profileField: 'N', columnWidth: null, addField: 'Y', editField: 'Y', listField: 'N', sortField: 'N' },
+  { columnName: '架构名称', columnCode: 'jiaGouName', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'N', searchFlag: 'N', profileField: 'N', columnWidth: null, addField: 'Y', editField: 'Y', listField: 'N', sortField: 'N' },
   { columnName: '更新时间', columnCode: 'updateTime', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: '160px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
   { columnName: '操作', columnCode: 'id', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'N', columnWidth: '110px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
 ];
@@ -422,7 +426,7 @@ export default class CangKu extends PureComponent {
             >
               {rows.map(col => (
                 <Col key={col.columnCode} md={8} sm={24}>
-                  <AutoFormRow formItemLayout={formItemLayout} column={col} />
+                  <AutoFormRow formItemLayout={formItemLayout} column={col} searchArea />
                 </Col>
               ))}
             </Row>

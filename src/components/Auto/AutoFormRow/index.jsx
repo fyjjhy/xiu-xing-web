@@ -59,31 +59,32 @@ export default class AutoFormRow extends PureComponent {
     }
   }
 
-  // getValidateRules(column, currentModel) {
-  //   let rules = [];
-  //   const errorMessage = column.errorText || '请填写正确的信息';
-  //   if (column.validateRule) {
-  //     rules = column.validateRule.split(';').map((rule) => {
-  //       const rs = rule.split('|');
-  //       if (rs[0] === 'validator') {
-  //         if (rs.length > 1) {
-  //           const { form } = this.props;
-  //           const validator = this.props[rs[1]].bind(null, currentModel, form);
-  //           if (validator) {
-  //             return { validator };
-  //           }
-  //         }
-  //       }
-  //       const r = { message: errorMessage };
-  //       r[rs[0]] = rs.length > 1 ? rs[1] : rs[0];
-  //       return r;
-  //     });
-  //   }
-  //   if (column.requiredFlag === 'Y') {
-  //     rules.push({ required: column.requiredFlag === 'Y', message: errorMessage, type: typeMap[column.valueType] || 'string' });
-  //   }
-  //   return rules;
-  // }
+  // 获取表单域规则
+  getFormItemRules = (column, currentModel) => {
+    const rules = [];
+    const errorMessage = column.errorText || '请填写正确的信息';
+    // if (column.validateRule) {
+    //   rules = column.validateRule.split(';').map((rule) => {
+    //     const rs = rule.split('|');
+    //     if (rs[0] === 'validator') {
+    //       if (rs.length > 1) {
+    //         const { form } = this.props;
+    //         const validator = this.props[rs[1]].bind(null, currentModel, form);
+    //         if (validator) {
+    //           return { validator };
+    //         }
+    //       }
+    //     }
+    //     const r = { message: errorMessage };
+    //     r[rs[0]] = rs.length > 1 ? rs[1] : rs[0];
+    //     return r;
+    //   });
+    // }
+    if ((currentModel === 'add' || currentModel === 'edit' || currentModel === 'listEdit') && column.requiredFlag === 'Y') {
+      rules.push({ required: column.requiredFlag === 'Y', message: errorMessage });
+    }
+    return rules;
+  }
 
   getPlaceHolder = column => {
     const {columnName, columnCode} = column;
@@ -555,13 +556,13 @@ export default class AutoFormRow extends PureComponent {
   }
 
   renderFormItem = column => {
-    // const { currentModel, key } = this.props;
-    // let rules;
-    // if (searchBoxNotChecked) {
-    //   rules = [];
-    // } else {
-    //   rules = this.getValidateRules(column, currentModel);
-    // }
+    const { currentModel, searchArea } = this.props;
+    let rules;
+    if (searchArea) {
+      rules = [];
+    } else {
+      rules = this.getFormItemRules(column, currentModel);
+    }
     const {columnName, columnCode} = column;
     // const options = {};
     // if (displayType === 'U') {
@@ -577,7 +578,7 @@ export default class AutoFormRow extends PureComponent {
     // }
     const { formItemLayout } = this.props;
     return (
-      <FormItem {...formItemLayout} label={columnName} name={columnCode}>
+      <FormItem {...formItemLayout} label={columnName} name={columnCode} rules={rules}>
         {this.renderItem(column)}
       </FormItem>
     );

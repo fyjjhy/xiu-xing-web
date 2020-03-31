@@ -175,7 +175,8 @@ class StandardForm extends PureComponent {
     const { initialValues } = this.props;
     return (
       <Form
-        hideRequiredMark
+        // 隐藏所有表单项的必选标记
+        // hideRequiredMark
         style={{ marginTop: 8 }}
         ref={this.formRef}
         initialValues={initialValues}
@@ -200,7 +201,8 @@ class StandardForm extends PureComponent {
       >
         <Form
           ref={this.formRef}
-          hideRequiredMark
+          // 隐藏所有表单项的必选标记
+          // hideRequiredMark
           style={{ marginTop: 8 }}
           initialValues={initialValues}
         >

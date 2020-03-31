@@ -16,3 +16,13 @@ export function lingWuFenLeiConstant() {
   ].map(data => ({ dataCode: data, dataName: data }));
   return lingWuFenLei;
 }
+
+// 架构分类
+export function jiaGouFenLeiConstant() {
+  const jiaGouFenLei = [
+    '散修', '散修联盟', '散修联盟机构', '修仙家族', '家族弟子', '家族机构',
+    '修仙门派', '门派弟子', '门派机构', '修仙组织', '组织弟子', '组织机构',
+    '修仙机构', '修仙者', '修仙圣地', '圣地修行者', '圣地机构',
+  ].map(data => ({ dataCode: data, dataName: data }));
+  return jiaGouFenLei;
+}
