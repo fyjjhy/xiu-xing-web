@@ -413,7 +413,7 @@ export default class LingDan extends PureComponent {
             >
               {rows.map(col => (
                 <Col key={col.columnCode} md={8} sm={24}>
-                  <AutoFormRow formItemLayout={formItemLayout} column={col} />
+                  <AutoFormRow formItemLayout={formItemLayout} column={col} searchArea />
                 </Col>
               ))}
             </Row>
