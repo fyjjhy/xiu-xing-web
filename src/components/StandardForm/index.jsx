@@ -192,6 +192,7 @@ class StandardForm extends PureComponent {
     const { loading } = this.state;
     return (
       <Modal
+        width={700}
         title={title}
         maskClosable={false}
         visible={visible}

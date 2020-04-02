@@ -34,3 +34,23 @@ export function zongMenFenLeiConstant() {
   ].map(data => ({ dataCode: data, dataName: data }));
   return zongMenFenLei;
 }
+
+// 声调
+export function shengDiaoConstant() {
+  const shengDiao = [
+    { dataCode: 0, dataName: '轻声' },
+    { dataCode: 1, dataName: '第一声' },
+    { dataCode: 2, dataName: '第二声' },
+    { dataCode: 3, dataName: '第三声' },
+    { dataCode: 4, dataName: '第四声' }
+  ];
+  return shengDiao;
+}
+
+// 字级
+export function ziJiConstant() {
+  const ziJi = [
+    '一级字', '二级字', '三级字'
+  ].map(data => ({ dataCode: data, dataName: data }));
+  return ziJi;
+}
