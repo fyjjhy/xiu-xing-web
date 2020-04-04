@@ -118,6 +118,7 @@ export default {
               icon: 'table',
               routes: [
                 { name: 'xiuXingRiZhi', path: '/xiuXingRiZhiList', component: './xiuXingRiZhiList/XiuXingRiZhi' },
+                { name: 'cangKu', path: '/cangKuList', component: './cangKuList/CangKu' },
                 { name: 'fuLu', path: '/fuLuList', component: './fuLuList/FuLu' },
                 { name: 'faShu', path: '/faShuList', component: './faShuList/FaShu' },
                 { name: 'gongFa', path: '/gongFaList', component: './gongFaList/GongFa' },
@@ -127,7 +128,6 @@ export default {
                 { name: 'lingQi', path: '/lingQiList', component: './lingQiList/LingQi' },
                 { name: 'yaoShou', path: '/yaoShouList', component: './yaoShouList/YaoShou' },
                 { name: 'zhenFa', path: '/zhenFaList', component: './zhenFaList/ZhenFa' },
-                { name: 'cangKu', path: '/cangKuList', component: './cangKuList/CangKu' },
                 { name: 'qiTaLingWu', path: '/qiTaLingWuList', component: './qiTaLingWuList/QiTaLingWu' },
                 { name: 'renWu', path: '/renWuList', component: './renWuList/RenWu' },
                 { name: 'diMing', path: '/diMingList', component: './diMingList/DiMing' },

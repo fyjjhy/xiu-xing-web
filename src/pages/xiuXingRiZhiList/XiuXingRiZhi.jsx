@@ -20,10 +20,12 @@ import StandardForm from '../../components/StandardForm';
 import AutoFormRow from '../../components/Auto/AutoFormRow';
 
 import styles from './XiuXingRiZhi.less';
+import { getUrlParameters } from "../../utils/utils";
 
 const { Group: ButtonGroup } = Button;
 
 const xiuXingRiZhiColumns = [
+  { columnName: '仓库灵物', columnCode: 'cangKuLingWu', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '105px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
   { columnName: '修行代码', columnCode: 'xiuXingCode', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '90px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
   { columnName: '日志代码', columnCode: 'riZhiCode', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '90px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
   { columnName: '日志时间', columnCode: 'riZhiTime', valueType: 'S', displayType: 'T', valueList: null, hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: '90px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
@@ -31,7 +33,6 @@ const xiuXingRiZhiColumns = [
   { columnName: '日志人物', columnCode: 'riZhiRenWu', valueType: 'S', displayType: 'T', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: '200px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
   { columnName: '日志事件', columnCode: 'riZhiEvent', valueType: 'S', displayType: 'T', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '200px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
   { columnName: '日志', columnCode: 'riZhi', valueType: 'S', displayType: 'T', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '500px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  { columnName: '仓库灵物', columnCode: 'cangKuLingWu', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '105px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
   { columnName: '仓库灵物', columnCode: 'cangKuId', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'N', columnWidth: null, addField: 'Y', editField: 'Y', listField: 'N', sortField: 'N' },
   { columnName: '灵物全称', columnCode: 'lingWuFullName', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: '105px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
   { columnName: '数量单位', columnCode: 'shuLiangDanWei', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '105px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
@@ -110,6 +111,7 @@ export default class XiuXingRiZhi extends PureComponent {
       if (col.dataIndex === 'xiuXingCode') {
         colum.render = ((text, record) => <a onClick={() => { this.handleProfileClick(record); }}>{text}</a>);
       } else if (col.dataIndex === 'id') {
+        colum.fixed = 'right';
         colum.render = ((text, record) => this.renderLinkGroup(record));
       } else if (col.dataIndex === 'xiaoShuoId') {
         colum.render = (text => this.renderXiaoShuo(text));
@@ -119,10 +121,20 @@ export default class XiuXingRiZhi extends PureComponent {
 
     // 查询小说列表
     this.queryXiaoShuoList();
+
+    const { location: { search } } = this.props;
+    // 获取请求路径上的参数
+    const urlParams = getUrlParameters(search);
+    this.setState({
+      formValues: { ...urlParams },
+    });
   }
 
   componentDidMount() {
-    this.loadPlatServiceData();
+    // 获取请求路径上的参数
+    const { location: { search } } = this.props;
+    const urlParams = getUrlParameters(search);
+    this.loadPlatServiceData(urlParams);
   }
 
   async loadPlatServiceData(params = {}) {
@@ -257,8 +269,9 @@ export default class XiuXingRiZhi extends PureComponent {
   // 列表重置
   handleFormReset() {
     const { current: { resetFields } } = this.formRef;
-    resetFields();
-    this.setState({ formValues: null });
+    this.setState({ formValues: null }, () => {
+      resetFields();
+    });
     this.loadPlatServiceData();
   }
 
@@ -390,7 +403,7 @@ export default class XiuXingRiZhi extends PureComponent {
   // }
 
   renderForm() {
-    const { expandForm } = this.state;
+    const { expandForm, formValues } = this.state;
     const rowSearchColumns = [];
     let rowColumns;
     this.searchColumns.forEach((column, index) => {
@@ -404,7 +417,7 @@ export default class XiuXingRiZhi extends PureComponent {
     });
 
     return (
-      <Form layout="inline" ref={this.formRef}>
+      <Form layout="inline" ref={this.formRef} initialValues={formValues}>
         { rowSearchColumns.map((rows, index) => {
           const key = index + 1;
           let mdVal = 6;

@@ -10,6 +10,7 @@ import {
 } from '@ant-design/icons';
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'dva';
+import { routerRedux } from 'dva/router';
 
 import { Row, Col, Card, Form, Button, Divider, Popconfirm, message } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
@@ -33,7 +34,7 @@ const cangKuColumns = [
   { columnName: '灵物状态', columnCode: 'lingWuState', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: '90px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
   { columnName: '灵物数量', columnCode: 'lingWuShuLiang', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: '90px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
   { columnName: '单位', columnCode: 'danWei', valueType: 'S', displayType: 'S', valueList: `constant|${JSON.stringify(danWeiConstant())}`, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: '65px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  { columnName: '所属者', columnCode: 'suoShuZhe', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: '105px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
+  { columnName: '所属者', columnCode: 'suoShuZhe', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '105px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
   { columnName: '小说', columnCode: 'xiaoShuoId', valueType: 'S', displayType: 'S', valueList: 'service|/chenXian/chen/xian/xiaoShuo', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '175px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
   { columnName: '境界', columnCode: 'jingJieName', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: '65px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
   { columnName: '品级', columnCode: 'pinJiName', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: '65px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
@@ -43,7 +44,7 @@ const cangKuColumns = [
   { columnName: '人事分类', columnCode: 'renShiFenLei', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'N', searchFlag: 'N', profileField: 'N', columnWidth: null, addField: 'Y', editField: 'Y', listField: 'N', sortField: 'N' },
   { columnName: '架构名称', columnCode: 'jiaGouName', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'N', searchFlag: 'N', profileField: 'N', columnWidth: null, addField: 'Y', editField: 'Y', listField: 'N', sortField: 'N' },
   { columnName: '更新时间', columnCode: 'updateTime', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: '160px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
-  { columnName: '操作', columnCode: 'id', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'N', columnWidth: '110px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
+  { columnName: '操作', columnCode: 'id', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'N', columnWidth: '160px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
 ];
 
 const formItemLayout = {
@@ -115,6 +116,7 @@ export default class CangKu extends PureComponent {
       if (col.dataIndex === 'lingWu') {
         colum.render = ((text, record) => <a onClick={() => { this.handleProfileClick(record); }}>{text}</a>);
       } else if (col.dataIndex === 'id') {
+        colum.fixed = 'right';
         colum.render = ((text, record) => this.renderLinkGroup(record));
       } else if (col.dataIndex === 'xiaoShuoId') {
         colum.render = (text => this.renderXiaoShuo(text));
@@ -300,6 +302,14 @@ export default class CangKu extends PureComponent {
       await this.operatePlatServiceData('get', params);
     }
     this.setState({ currentModel: 'listEdit' });
+  }
+
+  // 查看灵物日志
+  async handleRiZhiLinkClick(params) {
+    if (params) {
+      const { dispatch } = this.props;
+      dispatch(routerRedux.push(`/xiuXingRiZhiList?cangKuLingWu=${params.lingWu}`));
+    }
   }
 
   handleDisplay() {
@@ -500,6 +510,8 @@ export default class CangKu extends PureComponent {
     if (detailData) {
       return (
         <Fragment>
+          <a onClick={() => { this.handleRiZhiLinkClick(detailData); }}>日志</a>
+          <Divider type="vertical" />
           <a onClick={() => { this.handleEditLinkClick(detailData); }}>修改</a>
           <Divider type="vertical" />
           {/* <Popconfirm placement="top" title="确定要锁定吗？" onConfirm={() => { this.handleLockPlatService(detailData); }} okText="确定" cancelText="取消"> */}
