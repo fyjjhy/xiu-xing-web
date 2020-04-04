@@ -136,6 +136,7 @@ export default {
                 { name: 'jiGou', path: '/jiGouList', component: './jiGouList/JiGou' },
                 { name: 'jingJie', path: '/jingJieList', component: './jingJieList/JingJie' },
                 { name: 'pinJi', path: '/pinJiList', component: './pinJiList/PinJi' },
+                { name: 'xiaoShuo', path: '/xiaoShuoList', component: './xiaoShuoList/XiaoShuo' },
                 { name: 'ziDian', path: '/ziDianList', component: './ziDianList/ZiDian' },
               ],
             },
