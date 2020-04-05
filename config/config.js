@@ -119,6 +119,7 @@ export default {
               routes: [
                 { name: 'xiuXingRiZhi', path: '/xiuXingRiZhiList', component: './xiuXingRiZhiList/XiuXingRiZhi' },
                 { name: 'cangKu', path: '/cangKuList', component: './cangKuList/CangKu' },
+                { name: 'sheDing', path: '/sheDingList', component: './sheDingList/SheDing' },
                 { name: 'fuLu', path: '/fuLuList', component: './fuLuList/FuLu' },
                 { name: 'faShu', path: '/faShuList', component: './faShuList/FaShu' },
                 { name: 'gongFa', path: '/gongFaList', component: './gongFaList/GongFa' },
@@ -156,12 +157,12 @@ export default {
                 },
               ],
             },
-            {
-              name: 'list.table-list',
-              icon: 'table',
-              path: '/list',
-              component: './ListTableList',
-            },
+            // {
+            //   name: 'list.table-list',
+            //   icon: 'table',
+            //   path: '/list',
+            //   component: './ListTableList',
+            // },
             {
               component: './404',
             },
