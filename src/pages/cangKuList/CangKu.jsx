@@ -39,17 +39,17 @@ const cangKuColumns = [
   { columnName: '境界', columnCode: 'jingJieName', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: '65px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
   { columnName: '品级', columnCode: 'pinJiName', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: '65px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
   { columnName: '描述', columnCode: 'miaoShu', valueType: 'S', displayType: 'T', valueList: null, hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: null, addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  { columnName: '修行圣地名称', columnCode: 'xiuXingShengDiName', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'N', searchFlag: 'N', profileField: 'N', columnWidth: null, addField: 'Y', editField: 'Y', listField: 'N', sortField: 'N' },
-  { columnName: '架构分类', columnCode: 'jiaGouFenLei', valueType: 'S', displayType: 'S', valueList: `constant|${JSON.stringify(jiaGouFenLeiConstant())}`, hiddenField: 'N', requiredFlag: 'N', searchFlag: 'N', profileField: 'N', columnWidth: null, addField: 'Y', editField: 'Y', listField: 'N', sortField: 'N' },
-  { columnName: '人事分类', columnCode: 'renShiFenLei', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'N', searchFlag: 'N', profileField: 'N', columnWidth: null, addField: 'Y', editField: 'Y', listField: 'N', sortField: 'N' },
-  { columnName: '架构名称', columnCode: 'jiaGouName', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'N', searchFlag: 'N', profileField: 'N', columnWidth: null, addField: 'Y', editField: 'Y', listField: 'N', sortField: 'N' },
-  { columnName: '更新时间', columnCode: 'updateTime', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: '160px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
+  { columnName: '修行圣地名称', columnCode: 'xiuXingShengDiName', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'N', searchFlag: 'N', profileField: 'Y', columnWidth: '120px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
+  { columnName: '架构分类', columnCode: 'jiaGouFenLei', valueType: 'S', displayType: 'S', valueList: `constant|${JSON.stringify(jiaGouFenLeiConstant())}`, hiddenField: 'N', requiredFlag: 'N', searchFlag: 'N', profileField: 'Y', columnWidth: '90px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
+  { columnName: '人事分类', columnCode: 'renShiFenLei', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'N', searchFlag: 'N', profileField: 'Y', columnWidth: '90px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
+  { columnName: '架构名称', columnCode: 'jiaGouName', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'N', searchFlag: 'N', profileField: 'Y', columnWidth: '90px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
+  // { columnName: '更新时间', columnCode: 'updateTime', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: '160px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
   { columnName: '操作', columnCode: 'id', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'N', columnWidth: '160px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
 ];
 
 const formItemLayout = {
-  labelCol: { xs: { span: 24 }, sm: { span: 4 } },
-  wrapperCol: { xs: { span: 24 }, sm: { span: 12 }, md: { span: 20 } },
+  labelCol: { xs: { span: 24 }, sm: { span: 5 } },
+  wrapperCol: { xs: { span: 24 }, sm: { span: 12 }, md: { span: 19 } },
 };
 
 
@@ -625,7 +625,7 @@ export default class CangKu extends PureComponent {
               {this.renderToolbar()}
             </div>
             <StandardTable
-              scroll={{ x: '150%' }}
+              scroll={{ x: '180%' }}
               loading={currentModel !== 'add' && loadingModel === 'list' ? loading : false}
               selectedRows={selectedRows}
               data={datas}

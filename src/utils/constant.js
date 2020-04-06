@@ -12,7 +12,7 @@ export function danWeiConstant() {
 // 灵物分类
 export function lingWuFenLeiConstant() {
   const lingWuFenLei = [
-    '妖兽', '符箓', '功法', '灵材', '傀儡', '法术', '法器', '其他灵物', '灵丹', '佛道儒魔妖'
+    '妖兽', '符箓', '功法', '灵材', '傀儡', '法术', '法器', '其他灵物', '灵丹', '武佛道儒魔妖'
   ].map(data => ({ dataCode: data, dataName: data }));
   return lingWuFenLei;
 }
