@@ -54,3 +54,16 @@ export function ziJiConstant() {
   ].map(data => ({ dataCode: data, dataName: data }));
   return ziJi;
 }
+
+// 妖兽分类
+export function yaoShouFenLeiConstant() {
+  const yaoShouFenLei = [
+    '甲壳类'
+  ].map(data => ({ dataCode: data, dataName: data }));
+  return yaoShouFenLei;
+}
+
+// 功法分类
+export function gongFaFenLeiConstant() {
+  return ['剑法', '掌法', '身法', '步法'].map(data => ({ dataCode: data, dataName: data }));
+}

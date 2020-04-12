@@ -462,7 +462,7 @@ export default class BaiJiaXing extends PureComponent {
         return (
           <Fragment>
             <ButtonGroup>
-              <Button disabled={profileBtn} onClick={() => { this.handleEditBtnClick(); }}><EditOutlined /> 修改</Button>
+              <Button disabled={profileBtn} onClick={() => { this.handleEditBtnClick(detailData); }}><EditOutlined /> 修改</Button>
               {/* <Popconfirm placement="top" title="确定要锁定吗？" onConfirm={() => { this.handleLockPlatService(detailData, 'profile'); }} okText="确定" cancelText="取消"> */}
               {/* <Button disabled={detailData.state === 'A' ? '' : 'disabled'}><LockOutlined />锁定</Button> */}
               {/* </Popconfirm> */}

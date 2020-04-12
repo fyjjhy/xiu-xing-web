@@ -22,6 +22,7 @@ import AutoFormRow from '../../components/Auto/AutoFormRow';
 import { danWeiConstant, lingWuFenLeiConstant, jiaGouFenLeiConstant } from '../../utils/constant';
 
 import styles from './CangKu.less';
+import {renderMiaoShu} from "../../utils/utils";
 
 // const { Item: FormItem } = Form;
 const { Group: ButtonGroup } = Button;
@@ -120,6 +121,8 @@ export default class CangKu extends PureComponent {
         colum.render = ((text, record) => this.renderLinkGroup(record));
       } else if (col.dataIndex === 'xiaoShuoId') {
         colum.render = (text => this.renderXiaoShuo(text));
+      } else if (col.dataIndex === 'miaoShu') {
+        colum.render = (text => text ? renderMiaoShu(text) : text);
       }
       return { ...col, ...colum };
     });
@@ -488,7 +491,7 @@ export default class CangKu extends PureComponent {
         return (
           <Fragment>
             <ButtonGroup>
-              <Button disabled={profileBtn} onClick={() => { this.handleEditBtnClick(); }}><EditOutlined /> 修改</Button>
+              <Button disabled={profileBtn} onClick={() => { this.handleEditBtnClick(detailData); }}><EditOutlined /> 修改</Button>
               {/* <Popconfirm placement="top" title="确定要锁定吗？" onConfirm={() => { this.handleLockPlatService(detailData, 'profile'); }} okText="确定" cancelText="取消"> */}
               {/* <Button disabled={detailData.state === 'A' ? '' : 'disabled'}><LockOutlined />锁定</Button> */}
               {/* </Popconfirm> */}

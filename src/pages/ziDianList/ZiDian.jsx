@@ -21,18 +21,19 @@ import AutoFormRow from '../../components/Auto/AutoFormRow';
 
 import styles from './ZiDian.less';
 import { shengDiaoConstant, ziJiConstant } from "../../utils/constant";
+import {renderMiaoShu} from "../../utils/utils";
 
 const { Group: ButtonGroup } = Button;
 
 const ziDianColumns = [
-  { columnName: '字名', columnCode: 'ziName', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '30px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  { columnName: '字级', columnCode: 'ziJi', valueType: 'S', displayType: 'S', valueList: `constant|${JSON.stringify(ziJiConstant())}`, hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: '30px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  { columnName: '拼音', columnCode: 'pinYin', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '30px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  { columnName: '声调', columnCode: 'shengDiao', valueType: 'S', displayType: 'S', valueList: `constant|${JSON.stringify(shengDiaoConstant())}`, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '30px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  { columnName: '字义', columnCode: 'xinHuaZiDian', valueType: 'S', displayType: 'T', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: '90px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  { columnName: '组词词头', columnCode: 'zuCiTou', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: '65px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  { columnName: '组词词中', columnCode: 'zuCiZhong', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: '105px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  { columnName: '组词词尾', columnCode: 'zuCiWei', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: '175px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
+  { columnName: '字名', columnCode: 'ziName', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '60px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
+  { columnName: '字级', columnCode: 'ziJi', valueType: 'S', displayType: 'S', valueList: `constant|${JSON.stringify(ziJiConstant())}`, hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: '80px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
+  { columnName: '拼音', columnCode: 'pinYin', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '65px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
+  { columnName: '声调', columnCode: 'shengDiao', valueType: 'S', displayType: 'S', valueList: `constant|${JSON.stringify(shengDiaoConstant())}`, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '65px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
+  { columnName: '字义', columnCode: 'xinHuaZiDian', valueType: 'S', displayType: 'T', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: null, addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
+  { columnName: '组词词头', columnCode: 'zuCiTou', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: null, addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
+  { columnName: '组词词中', columnCode: 'zuCiZhong', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: null, addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
+  { columnName: '组词词尾', columnCode: 'zuCiWei', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: null, addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
   { columnName: '操作', columnCode: 'id', valueType: 'S', displayType: 'I', hiddenField: 'Y', requiredFlag: 'Y', searchFlag: 'N', profileField: 'N', columnWidth: '110px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
 ];
 
@@ -105,9 +106,12 @@ export default class ZiDian extends PureComponent {
       if (col.dataIndex === 'ziName') {
         colum.render = ((text, record) => <a onClick={() => { this.handleProfileClick(record); }}>{text}</a>);
       } else if (col.dataIndex === 'id') {
+        colum.fixed = 'right';
         colum.render = ((text, record) => this.renderLinkGroup(record));
       } else if (col.dataIndex === 'xiaoShuoId') {
         colum.render = (text => this.renderXiaoShuo(text));
+      } else if (col.dataIndex === 'xinHuaZiDian') {
+        colum.render = (text => text ? renderMiaoShu(text) : text);
       }
       return { ...col, ...colum };
     });
@@ -468,7 +472,7 @@ export default class ZiDian extends PureComponent {
         return (
           <Fragment>
             <ButtonGroup>
-              <Button disabled={profileBtn} onClick={() => { this.handleEditBtnClick(); }}><EditOutlined /> 修改</Button>
+              <Button disabled={profileBtn} onClick={() => { this.handleEditBtnClick(detailData); }}><EditOutlined /> 修改</Button>
               {/* <Popconfirm placement="top" title="确定要锁定吗？" onConfirm={() => { this.handleLockPlatService(detailData, 'profile'); }} okText="确定" cancelText="取消"> */}
               {/* <Button disabled={detailData.state === 'A' ? '' : 'disabled'}><LockOutlined />锁定</Button> */}
               {/* </Popconfirm> */}
@@ -604,7 +608,7 @@ export default class ZiDian extends PureComponent {
               {this.renderToolbar()}
             </div>
             <StandardTable
-              // scroll={{ x: '150%' }}
+              scroll={{ x: '150%' }}
               loading={currentModel !== 'add' && loadingModel === 'list' ? loading : false}
               selectedRows={selectedRows}
               data={datas}

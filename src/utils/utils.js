@@ -1,3 +1,4 @@
+import React from 'react';
 import { parse } from 'querystring';
 import pathRegexp from 'path-to-regexp';
 
@@ -97,10 +98,21 @@ export function getUrlParameters(search) {
   }
   const params = search.substring(search.indexOf('?') + 1).split('&');
   const urlParams = {};
-  params.forEach((record) => {
+  params.forEach(record => {
     const urlParameter = record.split('=');
     const [key, value] = urlParameter;
     urlParams[key] = value;
   });
   return urlParams;
+}
+
+// 处理描述种的换行
+export function renderMiaoShu(text) {
+  const content = text.replace(/\r\n/g, '\n').split('\n');
+  return content.map((tent, index) => {
+    if (index > 0 && index < content.length) {
+      return <span><br/>{tent}</span>;
+    }
+    return <span>{tent}</span>;
+  });
 }

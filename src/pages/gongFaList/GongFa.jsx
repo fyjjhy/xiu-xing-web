@@ -20,13 +20,15 @@ import StandardForm from '../../components/StandardForm';
 import AutoFormRow from '../../components/Auto/AutoFormRow';
 
 import styles from './GongFa.less';
+import {renderMiaoShu} from "../../utils/utils";
+import { gongFaFenLeiConstant } from '../../utils/constant';
 
 const { Group: ButtonGroup } = Button;
 
 const gongFaColumns = [
   { columnName: '功法代码', columnCode: 'gongFaCode', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '90px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
   { columnName: '功法名称', columnCode: 'gongFaName', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '110px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  { columnName: '功法分类', columnCode: 'gongFaFenLei', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: '90px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
+  { columnName: '功法分类', columnCode: 'gongFaFenLei', valueType: 'S', displayType: 'S', valueList: `constant|${JSON.stringify(gongFaFenLeiConstant())}`, hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: '90px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
   { columnName: '功法描述', columnCode: 'gongFaMiaoShu', valueType: 'S', displayType: 'T', valueList: null, hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: null, addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
   { columnName: '小说', columnCode: 'xiaoShuoId', valueType: 'S', displayType: 'S', valueList: 'service|/chenXian/chen/xian/xiaoShuo', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: '175px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
   { columnName: '更新时间', columnCode: 'updateTime', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: '160px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
@@ -34,8 +36,8 @@ const gongFaColumns = [
 ];
 
 const formItemLayout = {
-  labelCol: { xs: { span: 24 }, sm: { span: 4 } },
-  wrapperCol: { xs: { span: 24 }, sm: { span: 12 }, md: { span: 20 } },
+  labelCol: { xs: { span: 24 }, sm: { span: 5 } },
+  wrapperCol: { xs: { span: 24 }, sm: { span: 12 }, md: { span: 19 } },
 };
 
 
@@ -105,6 +107,8 @@ export default class GongFa extends PureComponent {
         colum.render = ((text, record) => this.renderLinkGroup(record));
       } else if (col.dataIndex === 'xiaoShuoId') {
         colum.render = (text => this.renderXiaoShuo(text));
+      } else if (col.dataIndex === 'gongFaMiaoShu') {
+        colum.render = (text => text ? renderMiaoShu(text) : text);
       }
       return { ...col, ...colum };
     });
@@ -465,7 +469,7 @@ export default class GongFa extends PureComponent {
         return (
           <Fragment>
             <ButtonGroup>
-              <Button disabled={profileBtn} onClick={() => { this.handleEditBtnClick(); }}><EditOutlined /> 修改</Button>
+              <Button disabled={profileBtn} onClick={() => { this.handleEditBtnClick(detailData); }}><EditOutlined /> 修改</Button>
               {/* <Popconfirm placement="top" title="确定要锁定吗？" onConfirm={() => { this.handleLockPlatService(detailData, 'profile'); }} okText="确定" cancelText="取消"> */}
               {/* <Button disabled={detailData.state === 'A' ? '' : 'disabled'}><LockOutlined />锁定</Button> */}
               {/* </Popconfirm> */}
@@ -541,7 +545,7 @@ export default class GongFa extends PureComponent {
           initialValues={data || {}}
           showDialog
           visible
-          onSubmit={this.handleAddPlatService.bind(this)}
+          onSubmit={this.handleEditPlatService.bind(this)}
           onCancel={this.handleDisplay.bind(this)}
         />
       );

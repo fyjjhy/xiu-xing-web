@@ -21,6 +21,7 @@ import AutoFormRow from '../../components/Auto/AutoFormRow';
 
 import styles from './ZongMen.less';
 import { zongMenFenLeiConstant } from "../../utils/constant";
+import {renderMiaoShu} from "../../utils/utils";
 
 const { Group: ButtonGroup } = Button;
 
@@ -106,6 +107,8 @@ export default class ZongMen extends PureComponent {
         colum.render = ((text, record) => this.renderLinkGroup(record));
       } else if (col.dataIndex === 'xiaoShuoId') {
         colum.render = (text => this.renderXiaoShuo(text));
+      } else if (col.dataIndex === 'zongMenMiaoShu') {
+        colum.render = (text => text ? renderMiaoShu(text) : text);
       }
       return { ...col, ...colum };
     });
@@ -466,7 +469,7 @@ export default class ZongMen extends PureComponent {
         return (
           <Fragment>
             <ButtonGroup>
-              <Button disabled={profileBtn} onClick={() => { this.handleEditBtnClick(); }}><EditOutlined /> 修改</Button>
+              <Button disabled={profileBtn} onClick={() => { this.handleEditBtnClick(detailData); }}><EditOutlined /> 修改</Button>
               {/* <Popconfirm placement="top" title="确定要锁定吗？" onConfirm={() => { this.handleLockPlatService(detailData, 'profile'); }} okText="确定" cancelText="取消"> */}
               {/* <Button disabled={detailData.state === 'A' ? '' : 'disabled'}><LockOutlined />锁定</Button> */}
               {/* </Popconfirm> */}
