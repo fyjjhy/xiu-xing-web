@@ -108,11 +108,14 @@ export function getUrlParameters(search) {
 
 // 处理描述种的换行
 export function renderMiaoShu(text) {
-  const content = text.replace(/\r\n/g, '\n').split('\n');
-  return content.map((tent, index) => {
-    if (index > 0 && index < content.length) {
-      return <span><br/>{tent}</span>;
-    }
-    return <span>{tent}</span>;
-  });
+  if (text) {
+    const content = text.replace(/\r\n/g, '\n').split('\n');
+    return content.map((tent, index) => {
+      if (index > 0 && index < content.length) {
+        return <span><br/>{tent}</span>;
+      }
+      return <span>{tent}</span>;
+    });
+  }
+  return text;
 }

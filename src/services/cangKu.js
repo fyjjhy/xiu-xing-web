@@ -35,3 +35,8 @@ export async function delCangKu(params) {
     method: 'DELETE',
   });
 }
+
+// 获取仓库列表信息
+export async function getCangKuList(params) {
+  return request(`/chenXian/chen/xian/cangKu/list?${stringify(pagination2Pager(params))}`);
+}

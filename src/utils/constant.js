@@ -67,3 +67,8 @@ export function yaoShouFenLeiConstant() {
 export function gongFaFenLeiConstant() {
   return ['剑法', '掌法', '身法', '步法'].map(data => ({ dataCode: data, dataName: data }));
 }
+
+// 人物状态
+export function renWuStateConstant() {
+  return ['已死亡'].map(data => ({ dataCode: data, dataName: data }));
+}

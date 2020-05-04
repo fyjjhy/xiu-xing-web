@@ -484,14 +484,14 @@ export default class AutoFormRow extends PureComponent {
   renderInput() {
     const {column} = this.props;
     return (
-      <Input placeholder={this.getPlaceHolder(column)}/>
+      <Input disabled={column.addDisplayField === 'Y'} placeholder={this.getPlaceHolder(column)}/>
     );
   }
 
   renderTextArea() {
     const {column} = this.props;
     return (
-      <TextArea placeholder={this.getPlaceHolder(column)} autoSize/>
+      <TextArea disabled={column.addDisplayField === 'Y'} placeholder={this.getPlaceHolder(column)} autoSize/>
     );
   }
 
@@ -499,7 +499,7 @@ export default class AutoFormRow extends PureComponent {
     const {column} = this.props;
     const {valueListData} = this.state;
     return (
-      <Select allowClear placeholder={this.getPlaceHolder(column)}>
+      <Select disabled={column.addDisplayField === 'Y'}  allowClear placeholder={this.getPlaceHolder(column)}>
         {valueListData ? this.renderOption() : ''}
       </Select>
     );
@@ -525,7 +525,7 @@ export default class AutoFormRow extends PureComponent {
 
   renderOption() {
     const {valueListData} = this.state;
-    return valueListData.map(data => <Option key={data.dataCode}>{data.dataName}</Option>);
+    return valueListData.map(data => <Option key={data.dataCode} value={data.dataCode}>{data.dataName}</Option>);
   }
 
   renderTreeSelect() {
@@ -586,9 +586,9 @@ export default class AutoFormRow extends PureComponent {
 
   renderFormItemText = column => {
     const {props} = this;
-    const {initialValue} = props;
+    const {initialValue, formItemLayout} = props;
     return (
-      <FormItem {...props} style={{marginBottom: 0}} label={column.columnName} name={column.columnCode}>
+      <FormItem {...formItemLayout} style={{marginBottom: 0}} label={column.columnName} name={column.columnCode}>
         <span>{this.formatValue(column, initialValue)}</span>
       </FormItem>
     );

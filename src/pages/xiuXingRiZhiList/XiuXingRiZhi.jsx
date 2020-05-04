@@ -21,26 +21,11 @@ import AutoFormRow from '../../components/Auto/AutoFormRow';
 
 import styles from './XiuXingRiZhi.less';
 import {getUrlParameters, renderMiaoShu} from "../../utils/utils";
+import {getXiuXingRiZhiColumns} from "../../utils/columns";
 
 const { Group: ButtonGroup } = Button;
 
-const xiuXingRiZhiColumns = [
-  { columnName: '仓库灵物', columnCode: 'cangKuLingWu', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '105px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
-  { columnName: '修行代码', columnCode: 'xiuXingCode', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '90px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
-  { columnName: '日志代码', columnCode: 'riZhiCode', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '90px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
-  { columnName: '日志时间', columnCode: 'riZhiTime', valueType: 'S', displayType: 'T', valueList: null, hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: '90px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  { columnName: '日志地点', columnCode: 'riZhiDiDian', valueType: 'S', displayType: 'T', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: '90px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  { columnName: '日志人物', columnCode: 'riZhiRenWu', valueType: 'S', displayType: 'T', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: '200px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  { columnName: '日志事件', columnCode: 'riZhiEvent', valueType: 'S', displayType: 'T', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '200px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  { columnName: '日志', columnCode: 'riZhi', valueType: 'S', displayType: 'T', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '500px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  { columnName: '仓库灵物', columnCode: 'cangKuId', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'N', columnWidth: null, addField: 'Y', editField: 'Y', listField: 'N', sortField: 'N' },
-  { columnName: '灵物全称', columnCode: 'lingWuFullName', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: '105px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
-  { columnName: '数量单位', columnCode: 'shuLiangDanWei', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '105px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
-  { columnName: '灵物描述', columnCode: 'lingWuMiaoShu', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '105px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
-  { columnName: '小说', columnCode: 'xiaoShuoId', valueType: 'S', displayType: 'S', valueList: 'service|/chenXian/chen/xian/xiaoShuo', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: '175px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  { columnName: '更新时间', columnCode: 'updateTime', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: '160px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
-  { columnName: '操作', columnCode: 'id', valueType: 'S', displayType: 'I', hiddenField: 'Y', requiredFlag: 'Y', searchFlag: 'N', profileField: 'N', columnWidth: '110px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
-];
+const xiuXingRiZhiColumns = getXiuXingRiZhiColumns();
 
 const formItemLayout = {
   labelCol: { xs: { span: 24 }, sm: { span: 4 } },

@@ -1,4 +1,4 @@
-import { queryCangKu, getCangKu, saveCangKu, updateCangKu, delCangKu } from '../services/cangKu';
+import { queryCangKu, getCangKu, saveCangKu, updateCangKu, delCangKu, getCangKuList } from '../services/cangKu';
 
 const Model = {
   namespace: 'cangKu',
@@ -10,6 +10,7 @@ const Model = {
         pageSize: 10,
       }
     },
+    cangKuList: [],
     data: {},
   },
   effects: {
@@ -24,6 +25,13 @@ const Model = {
       const response = yield call(getCangKu, payload);
       yield put({
         type: 'change',
+        payload: response,
+      });
+    },
+    *getCangKuList({ payload }, { call, put }) {
+      const response = yield call(getCangKuList, payload);
+      yield put({
+        type: 'saveList',
         payload: response,
       });
     },
@@ -49,6 +57,9 @@ const Model = {
     save(state, { payload }) {
       return { ...state, datas: payload };
     },
+    saveList(state, { payload }) {
+      return { ...state, cangKuList: payload };
+    },
     change(state, { payload }) {
       return { ...state, data: payload };
     },
@@ -56,6 +67,12 @@ const Model = {
       return {
         ...state,
         data: {},
+      };
+    },
+    emptyCangKuList(state) {
+      return {
+        ...state,
+        cangKuList: [],
       };
     },
   },

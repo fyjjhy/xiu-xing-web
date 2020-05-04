@@ -423,10 +423,10 @@ export default class YaoShou extends PureComponent {
             <Row
               key={key}
               gutter={{md: mdVal, lg: 24, xl: 20,}}
-              style={{ width: '100%' }}
+              style={{ width: '100%', marginLeft: '0px', marginRight: '0px' }}
             >
               {rows.map(col => (
-                <Col key={col.columnCode} md={8} sm={24}>
+                <Col style={{ paddingLeft: '0px', paddingRight: '0px' }} key={col.columnCode} md={8} sm={24}>
                   <AutoFormRow formItemLayout={formItemLayout} column={col} searchArea />
                 </Col>
               ))}

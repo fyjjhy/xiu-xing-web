@@ -11,39 +11,36 @@ import {
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'dva';
 
-import { Row, Col, Card, Form, Button, Divider, Popconfirm, message } from 'antd';
+import { Row, Col, Card, Form, Button, Divider, Popconfirm, message, Typography, Tooltip } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 
 import StandardTable from '../../components/StandardTable';
 import StandardProfile from '../../components/StandardProfile';
 import StandardForm from '../../components/StandardForm';
 import AutoFormRow from '../../components/Auto/AutoFormRow';
+import AddXiuXingRiZhiModal from "../../components/AddXiuXingRiZhiModal";
+import XiuXingRiZhiModal from "../../components/XiuXingRiZhiModal";
 
 import styles from './RenWu.less';
 import {renderMiaoShu} from "../../utils/utils";
+import HisModal from "../../components/HisModal";
+import {getCangKuColumns, getRenWuColumns, getXiuXingRiZhiColumns, renWuHisColumns} from "../../utils/columns";
 
 const { Group: ButtonGroup } = Button;
+const { Paragraph } = Typography;
 
-const renWuColumns = [
-  { columnName: '人物代码', columnCode: 'renWuCode', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '90px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
-  { columnName: '人物名称', columnCode: 'renWuName', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '110px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  // { columnName: '人物分类', columnCode: 'renWuFenLei', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: '90px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  { columnName: '人物描述', columnCode: 'renWuMiaoShu', valueType: 'S', displayType: 'T', valueList: null, hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: null, addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  { columnName: '小说', columnCode: 'xiaoShuoId', valueType: 'S', displayType: 'S', valueList: 'service|/chenXian/chen/xian/xiaoShuo', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: '175px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  { columnName: '更新时间', columnCode: 'updateTime', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: '160px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
-  { columnName: '操作', columnCode: 'id', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'N', columnWidth: '110px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
-];
+const renWuColumns = getRenWuColumns();
 
 const formItemLayout = {
-  labelCol: { xs: { span: 24 }, sm: { span: 4 } },
-  wrapperCol: { xs: { span: 24 }, sm: { span: 12 }, md: { span: 20 } },
+  labelCol: { xs: { span: 24 }, sm: { span: 5 } },
+  wrapperCol: { xs: { span: 24 }, sm: { span: 12 }, md: { span: 19 } },
 };
 
-
-
-@connect(({ renWu, xiaoShuo, loading }) => ({
+@connect(({ cangKu, renWu, xiaoShuo, xiuXingRiZhi, loading }) => ({
+  cangKu,
   renWu,
   xiaoShuo,
+  xiuXingRiZhi,
   loading: loading.models.renWu,
 }))
 export default class RenWu extends PureComponent {
@@ -66,6 +63,7 @@ export default class RenWu extends PureComponent {
     currentModel: 'display',
     loadingModel: 'list',
     currentRowInfo: {},
+    currentTab: 'cangKu',
   };
 
   UNSAFE_componentWillMount() {
@@ -90,6 +88,7 @@ export default class RenWu extends PureComponent {
       const listColumn = {
         title: column.columnName,
         dataIndex: column.columnCode,
+        key: column.columnCode,
         width: column.columnWidth || 'auto',
       };
 
@@ -103,11 +102,20 @@ export default class RenWu extends PureComponent {
       if (col.dataIndex === 'renWuCode') {
         colum.render = ((text, record) => <a onClick={() => { this.handleProfileClick(record); }}>{text}</a>);
       } else if (col.dataIndex === 'id') {
+        colum.fixed = 'right';
         colum.render = ((text, record) => this.renderLinkGroup(record));
       } else if (col.dataIndex === 'xiaoShuoId') {
         colum.render = (text => this.renderXiaoShuo(text));
       } else if (col.dataIndex === 'renWuMiaoShu') {
-        colum.render = (text => text ? renderMiaoShu(text) : text);
+        colum.render = (text => {
+          const title = renderMiaoShu(text);
+          return text ? <Tooltip title={title}><Paragraph style={{ marginTop: '0px', marginBottom: '0px' }} ellipsis={{ row: 1 }}>{text}</Paragraph></Tooltip> : text
+        });
+      } else if (col.dataIndex === 'renWuShuXing') {
+        colum.render = (text => {
+          const title = renderMiaoShu(text);
+          return text ? <Tooltip title={title}><Paragraph style={{ marginTop: '0px', marginBottom: '0px' }} ellipsis={{ row: 1 }}>{text}</Paragraph></Tooltip> : text
+        });
       }
       return { ...col, ...colum };
     });
@@ -151,6 +159,9 @@ export default class RenWu extends PureComponent {
   async operatePlatServiceData(action, params) {
     if (params) {
       const { dispatch } = this.props;
+      await dispatch({
+        type: 'renWu/emptyProfile',
+      });
       await dispatch({
         type: `renWu/${action}`,
         payload: params,
@@ -284,6 +295,63 @@ export default class RenWu extends PureComponent {
     this.setState({ currentModel: 'edit' });
   }
 
+  // 点击操作记录
+  handleCaoZuoJiLu = async detail => {
+    this.setState({
+      currentModel: 'his',
+    });
+    const { dispatch } = this.props;
+    await dispatch({
+      type: 'renWu/emptyRenWuHis',
+    });
+    dispatch({
+      type: 'renWu/getRenWuHis',
+      payload: { renWuId: detail.id }
+    });
+  }
+
+  // 新增修行日志
+  handleAddXiuXingRiZhi = async detail => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'cangKu/emptyCangKuList',
+    });
+    await dispatch({
+      type: 'cangKu/getCangKuList',
+      payload: { lingWuId: detail.id, lingWuFenLei: '人神妖魔鬼怪', xiaoShuoId: detail.xiaoShuoId },
+    });
+    const { cangKu: { cangKuList } } = this.props;
+    this.setState({
+      currentModel: 'addXiuXingRiZhi',
+      currentRowInfo: detail,
+      currentTab: cangKuList && cangKuList.length > 0 ? 'xiuXingRiZhi' : 'cangKu',
+    });
+  }
+
+  // 查看修行日志
+  handleDetailXiuXingRiZhi = async detail => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'cangKu/emptyCangKuList',
+    });
+    await dispatch({
+      type: 'cangKu/getCangKuList',
+      payload: { lingWuId: detail.id, lingWuFenLei: '人神妖魔鬼怪', xiaoShuoId: detail.xiaoShuoId },
+    });
+    const { cangKu: { cangKuList } } = this.props;
+    dispatch({
+      type: 'xiuXingRiZhi/emptyXiuXingRiZhiList',
+    });
+    await dispatch({
+      type: 'xiuXingRiZhi/getXiuXingRiZhiList',
+      payload: { cangKuId: cangKuList && cangKuList.length > 0 ? cangKuList[0].id : null, xiaoShuoId: detail.xiaoShuoId }
+    });
+    this.setState({
+      currentModel: 'xiuXingRiZhi',
+      currentRowInfo: detail,
+    });
+  }
+
   // 点击列表编辑按钮
   async handleEditLinkClick(params) {
     if (params) {
@@ -320,6 +388,147 @@ export default class RenWu extends PureComponent {
       }
     }
     return data;
+  }
+
+  // 处理历史记录字段
+  handleRenWuHis = () => renWuHisColumns().map(col => {
+    const column = {};
+    if (col.dataIndex === 'renWuHisCode') {
+      // column.render = (text, record) => <a onClick={() => this.handleRenWuHisCode(record)}>{text}</a>;
+    } else if (col.dataIndex === 'renWuMiaoShu') {
+      column.render = (text => {
+        const title = renderMiaoShu(text);
+        return text ? <Tooltip title={title}><Paragraph style={{ width: '200px', marginTop: '0px', marginBottom: '0px' }} ellipsis>{title}</Paragraph></Tooltip> : text
+      });
+    } else if (col.dataIndex === 'renWuShuXing') {
+      column.render = (text => {
+        const title = renderMiaoShu(text);
+        return text ? <Tooltip title={title}><Paragraph style={{ width: '150px', marginTop: '0px', marginBottom: '0px' }} ellipsis>{title}</Paragraph></Tooltip> : text
+      });
+    }
+    return {...col, ...column};
+  })
+
+  // 人物操作记录取消
+  handleHisOnCancel = () => {
+    this.setState({
+      currentModel: 'list',
+      currentRowInfo: {},
+      currentTab: '',
+    });
+  }
+
+  // 处理仓库字段
+  handleCangKuColumns = () => getCangKuColumns().filter(column => column.addField === 'Y');
+
+  // 处理修行日志字段
+  handleXiuXingRiZhiColumns = () => getXiuXingRiZhiColumns().filter(column => column.addField === 'Y');
+
+  // 处理修行日志字段
+  handleXiuXingRiZhiCols = () => getXiuXingRiZhiColumns().filter(column => column.profileField === 'Y').map(column => {
+    const listColumn = {
+      title: column.columnName,
+      dataIndex: column.columnCode,
+      key: column.columnCode,
+      width: column.profileWidth || 'auto',
+    };
+
+    if (column.sortField === 'Y') {
+      listColumn.sorter = true;
+    }
+    return listColumn;
+  }).map(col => {
+    const column = {};
+    if (col.dataIndex === 'lingWuMiaoShu') {
+      column.render = (text => {
+        const title = renderMiaoShu(text);
+        return text ? <Tooltip title={title}><Paragraph style={{ marginTop: '0px', marginBottom: '0px' }} ellipsis>{title}</Paragraph></Tooltip> : text
+      });
+    } else if (col.dataIndex === 'riZhi') {
+      column.render = (text => {
+        const title = renderMiaoShu(text);
+        return text ? <Tooltip title={title}><Paragraph style={{ marginTop: '0px', marginBottom: '0px' }} ellipsis>{title}</Paragraph></Tooltip> : text
+      });
+    } else if (col.dataIndex === 'riZhiEvent') {
+      column.render = (text => {
+        const title = renderMiaoShu(text);
+        return text ? <Tooltip title={title}><Paragraph style={{ marginTop: '0px', marginBottom: '0px' }} ellipsis>{title}</Paragraph></Tooltip> : text
+      });
+    } else if (col.dataIndex === 'riZhiRenWu') {
+      column.render = (text => {
+        const title = renderMiaoShu(text);
+        return text ? <Tooltip title={title}><Paragraph style={{ marginTop: '0px', marginBottom: '0px' }} ellipsis>{title}</Paragraph></Tooltip> : text
+      });
+    } else if (col.dataIndex === 'riZhiDiDian') {
+      column.render = (text => {
+        const title = renderMiaoShu(text);
+        return text ? <Tooltip title={title}><Paragraph style={{ marginTop: '0px', marginBottom: '0px' }} ellipsis>{title}</Paragraph></Tooltip> : text
+      });
+    } else if (col.dataIndex === 'riZhiTime') {
+      column.render = (text => {
+        const title = renderMiaoShu(text);
+        return text ? <Tooltip title={title}><Paragraph style={{ marginTop: '0px', marginBottom: '0px' }} ellipsis>{title}</Paragraph></Tooltip> : text
+      });
+    } else if (col.dataIndex === 'xiaoShuoId') {
+      column.render = (text => this.renderXiaoShuo(text));
+    }
+    return {...col, ...column};
+  });
+
+  // 仓库信息取消
+  handleCangKuOnCancel = () => {
+    this.setState({
+      currentModel: 'list',
+      currentTab: '',
+      currentRowInfo: {},
+    });
+  }
+
+  // 日志信息取消
+  handleXiuXingRiZhiOnCancel = () => {
+    this.setState({
+      currentModel: 'list',
+      currentTab: '',
+      currentRowInfo: {},
+    });
+  }
+
+  // 仓库信息提交
+  handleCangKuOnOk = async params => {
+    const { currentTab } = this.state;
+    if (currentTab === 'cangKu') {
+      const { dispatch } = this.props;
+      dispatch({
+        type: 'cangKu/emptyProfile',
+      });
+      await dispatch({
+        type: 'cangKu/add',
+        payload: params,
+      });
+      const { cangKu: { data } } = this.props;
+      if (data && Object.keys(data).length > 0) {
+        this.setState({
+          currentTab: 'xiuXingRiZhi',
+        });
+      }
+    } else if (currentTab === 'xiuXingRiZhi') {
+      const { dispatch } = this.props;
+      dispatch({
+        type: 'xiuXingRiZhi/emptyProfile',
+      });
+      await dispatch({
+        type: 'xiuXingRiZhi/add',
+        payload: params,
+      });
+      const { xiuXingRiZhi: { data } } = this.props;
+      if (data && Object.keys(data).length > 0) {
+        this.setState({
+          currentTab: '',
+          currentRowInfo: {},
+          currentModel: 'list',
+        });
+      }
+    }
   }
 
   renderXiaoShuo(text) {
@@ -412,10 +621,10 @@ export default class RenWu extends PureComponent {
             <Row
               key={key}
               gutter={{md: mdVal, lg: 24, xl: 20,}}
-              style={{ width: '100%' }}
+              style={{ width: '100%', marginLeft: '0px', marginRight: '0px' }}
             >
               {rows.map(col => (
-                <Col key={col.columnCode} md={8} sm={24}>
+                <Col style={{ paddingLeft: '0px', paddingRight: '0px' }} key={col.columnCode} md={8} sm={24}>
                   <AutoFormRow formItemLayout={formItemLayout} column={col} searchArea />
                 </Col>
               ))}
@@ -490,6 +699,19 @@ export default class RenWu extends PureComponent {
     if (detailData) {
       return (
         <Fragment>
+          <a onClick={() => { this.handleCaoZuoJiLu(detailData); }}>操作记录</a>
+          <Divider type="vertical" />
+          <Popconfirm
+            placement="top"
+            title="选择新增或查看日志"
+            onConfirm={() => { this.handleAddXiuXingRiZhi(detailData); }}
+            onCancel={() => { this.handleDetailXiuXingRiZhi(detailData); }}
+            okText="新增日志"
+            cancelText="查看日志"
+          >
+            <a>修行日志</a>
+          </Popconfirm>
+          <Divider type="vertical" />
           <a onClick={() => { this.handleEditLinkClick(detailData); }}>修改</a>
           <Divider type="vertical" />
           {/* <Popconfirm placement="top" title="确定要锁定吗？" onConfirm={() => { this.handleLockPlatService(detailData); }} okText="确定" cancelText="取消"> */}
@@ -512,7 +734,7 @@ export default class RenWu extends PureComponent {
   renderEditForm() {
     const { currentModel } = this.state;
     if (currentModel === 'edit') {
-      const { renWu: { data: selectRecord  } } = this.props;
+      const { renWu: { renWu: selectRecord  } } = this.props;
       return (
         <StandardForm
           title="编辑人物"
@@ -535,7 +757,7 @@ export default class RenWu extends PureComponent {
   renderEditDialog() {
     const { currentModel } = this.state;
     if (currentModel === 'listEdit') {
-      const { renWu: { data  } } = this.props;
+      const { renWu: { renWu: data  } } = this.props;
       return (
         <StandardForm
           formColumnList={this.editColumns}
@@ -572,6 +794,76 @@ export default class RenWu extends PureComponent {
     return '';
   }
 
+  renderXiuXingRiZhi() {
+    const { currentModel } = this.state;
+    if (currentModel === 'xiuXingRiZhi') {
+      const { xiuXingRiZhi: { xiuXingRiZhiList } } = this.props;
+      return (
+        <XiuXingRiZhiModal
+          scroll={{ x: '200%' }}
+          width={1000}
+          title="日志"
+          columns={this.handleXiuXingRiZhiCols()}
+          dataSource={xiuXingRiZhiList}
+          loading={false}
+          onCancel={this.handleXiuXingRiZhiOnCancel}
+        />
+      );
+    }
+    return '';
+  }
+
+  renderAddXiuXingRiZhi() {
+    const { currentModel, currentRowInfo, currentTab } = this.state;
+    if (currentModel === 'addXiuXingRiZhi') {
+      const { loading, cangKu: { cangKuList } } = this.props;
+      return (
+        <AddXiuXingRiZhiModal
+          currentTab={currentTab}
+          width={700}
+          title="人物修行日志"
+          loading={loading}
+          cangKuColumns={this.handleCangKuColumns()}
+          xiuXingRiZhiColumns={this.handleXiuXingRiZhiColumns()}
+          onOk={this.handleCangKuOnOk}
+          onCancel={this.handleCangKuOnCancel}
+          cangKuInitialValues={currentRowInfo && Object.keys(currentRowInfo).length > 0 ? {
+            lingWu: currentRowInfo.renWuName,
+            lingWuFenLei: '人神妖魔鬼怪',
+            lingWuShuXing: currentRowInfo.renWuShuXing,
+            lingWuState: currentRowInfo.renWuState,
+            miaoShu: currentRowInfo.renWuMiaoShu,
+            xiaoShuoId: currentRowInfo.xiaoShuoId,
+            suoShuZhe: currentRowInfo.renWuName,
+          } : {}}
+          xiuXingRiZhiInitialValues={currentRowInfo && Object.keys(currentRowInfo).length > 0 ? {
+            cangKuId: cangKuList && cangKuList.length > 0 ? cangKuList[0].id : null,
+            xiaoShuoId: currentRowInfo.xiaoShuoId,
+          } : {}}
+        />
+      );
+    }
+    return '';
+  }
+
+  renderHis() {
+    const { currentModel } = this.state;
+    if (currentModel === 'his') {
+      const { renWu: { his }, loading } = this.props;
+      return (
+        <HisModal
+          loading={loading}
+          width={1000}
+          title="人物操作记录"
+          dataSource={his && his.list && his.list.length > 0 ? his.list : []}
+          columns={this.handleRenWuHis()}
+          onCancel={this.handleHisOnCancel}
+        />
+      );
+    }
+    return '';
+  }
+
   renderProfile() {
     const { currentModel } = this.state;
     if (currentModel === 'display') {
@@ -591,7 +883,6 @@ export default class RenWu extends PureComponent {
   render() {
     const { renWu: { datas }, loading } = this.props;
     const { selectedRows, currentModel, loadingModel } = this.state;
-
     return (
       <PageHeaderWrapper>
         <Card bordered={false}>
@@ -603,7 +894,7 @@ export default class RenWu extends PureComponent {
               {this.renderToolbar()}
             </div>
             <StandardTable
-              // scroll={{ x: '150%' }}
+              scroll={{ x: '120%' }}
               loading={currentModel !== 'add' && loadingModel === 'list' ? loading : false}
               selectedRows={selectedRows}
               data={datas}
@@ -625,6 +916,9 @@ export default class RenWu extends PureComponent {
         </Card>
         {this.renderAddDialog()}
         {this.renderEditDialog()}
+        {this.renderHis()}
+        {this.renderAddXiuXingRiZhi()}
+        {this.renderXiuXingRiZhi()}
       </PageHeaderWrapper>
     );
   }

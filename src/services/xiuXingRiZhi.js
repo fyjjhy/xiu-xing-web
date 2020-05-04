@@ -13,6 +13,11 @@ export async function getXiuXingRiZhi(params) {
   return request(`/chenXian/chen/xian/xiuXingRiZhi/${params.id}`);
 }
 
+// 获取修行日志列表信息
+export async function getXiuXingRiZhiList(params) {
+  return request(`/chenXian/chen/xian/xiuXingRiZhi/list?${stringify(pagination2Pager(params))}`);
+}
+
 // 新增修行日志信息
 export async function saveXiuXingRiZhi(params) {
   return request('/chenXian/chen/xian/xiuXingRiZhi', {

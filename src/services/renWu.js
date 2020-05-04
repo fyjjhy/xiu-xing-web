@@ -13,6 +13,12 @@ export async function getRenWu(params) {
   return request(`/chenXian/chen/xian/renWu/${params.id}`);
 }
 
+// 获取人物操作记录列表信息
+export async function getRenWuHis(params) {
+  return request(`/chenXian/chen/xian/renWu/his?${stringify(pagination2Pager(params))}`)
+    .then(data => (pager2pagination(data)));
+}
+
 // 新增人物信息
 export async function saveRenWu(params) {
   return request('/chenXian/chen/xian/renWu', {
