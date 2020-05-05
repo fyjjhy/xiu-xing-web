@@ -21,22 +21,15 @@ import AutoFormRow from '../../components/Auto/AutoFormRow';
 
 import styles from './PinJi.less';
 import {renderMiaoShu} from "../../utils/utils";
+import {getPinJiColumns} from "../../utils/columns";
 
 const { Group: ButtonGroup } = Button;
 
-const pinJiColumns = [
-  // { columnName: '品级代码', columnCode: 'pinJiCode', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '90px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
-  { columnName: '品级名称', columnCode: 'name', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '110px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  // { columnName: '品级分类', columnCode: 'pinJiFenLei', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: '90px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  { columnName: '品级描述', columnCode: 'miaoShu', valueType: 'S', displayType: 'T', valueList: null, hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: null, addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  { columnName: '小说', columnCode: 'xiaoShuoId', valueType: 'S', displayType: 'S', valueList: 'service|/chenXian/chen/xian/xiaoShuo', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: '175px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  // { columnName: '更新时间', columnCode: 'updateTime', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: '160px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
-  { columnName: '操作', columnCode: 'id', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'N', columnWidth: '110px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
-];
+const pinJiColumns = getPinJiColumns();
 
 const formItemLayout = {
-  labelCol: { xs: { span: 24 }, sm: { span: 4 } },
-  wrapperCol: { xs: { span: 24 }, sm: { span: 12 }, md: { span: 20 } },
+  labelCol: { xs: { span: 24 }, sm: { span: 5 } },
+  wrapperCol: { xs: { span: 24 }, sm: { span: 12 }, md: { span: 19 } },
 };
 
 
@@ -412,10 +405,10 @@ export default class FaShu extends PureComponent {
             <Row
               key={key}
               gutter={{md: mdVal, lg: 24, xl: 20,}}
-              style={{ width: '100%' }}
+              style={{ width: '100%', marginLeft: '0px', marginRight: '0px' }}
             >
               {rows.map(col => (
-                <Col key={col.columnCode} md={8} sm={24}>
+                <Col key={col.columnCode} md={8} sm={24} style={{ paddingLeft: '0px', paddingRight: '0px' }}>
                   <AutoFormRow formItemLayout={formItemLayout} column={col} searchArea />
                 </Col>
               ))}

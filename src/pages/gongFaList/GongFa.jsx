@@ -590,7 +590,6 @@ export default class GongFa extends PureComponent {
   }
 
   render() {
-    console.log('gongFa', this.props, this.listColumns);
     const { gongFa: { datas }, loading } = this.props;
     const { selectedRows, currentModel, loadingModel } = this.state;
 

@@ -11,7 +11,6 @@ const Model = {
       }
     },
     data: {},
-    renWu: {},
     his: {
       list: [],
       pagination:{
@@ -31,7 +30,7 @@ const Model = {
     *get({ payload }, { call, put }) {
       const response = yield call(getRenWu, payload);
       yield put({
-        type: 'saveRenWu',
+        type: 'change',
         payload: response,
       });
     },
@@ -66,9 +65,6 @@ const Model = {
     },
     change(state, { payload }) {
       return { ...state, data: payload };
-    },
-    saveRenWu(state, { payload }) {
-      return { ...state, renWu: payload };
     },
     changeHis(state, { payload }) {
       return { ...state, his: {...payload} };

@@ -20,20 +20,15 @@ import StandardForm from '../../components/StandardForm';
 import AutoFormRow from '../../components/Auto/AutoFormRow';
 
 import styles from './XiaoShuo.less';
+import {getXiaoShuoColumns} from "../../utils/columns";
 
 const { Group: ButtonGroup } = Button;
 
-const xiaoShuoColumns = [
-  { columnName: '小说名称', columnCode: 'name', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: null, addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  { columnName: '小说作者', columnCode: 'zuoZhe', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: null, addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  // { columnName: '小说分类', columnCode: 'xiaoShuoFenLei', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: '90px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  // { columnName: '小说描述', columnCode: 'xiaoShuoMiaoShu', valueType: 'S', displayType: 'T', valueList: null, hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: null, addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  { columnName: '操作', columnCode: 'id', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'N', columnWidth: '110px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
-];
+const xiaoShuoColumns = getXiaoShuoColumns();
 
 const formItemLayout = {
-  labelCol: { xs: { span: 24 }, sm: { span: 4 } },
-  wrapperCol: { xs: { span: 24 }, sm: { span: 12 }, md: { span: 20 } },
+  labelCol: { xs: { span: 24 }, sm: { span: 5 } },
+  wrapperCol: { xs: { span: 24 }, sm: { span: 12 }, md: { span: 19 } },
 };
 
 
@@ -407,10 +402,10 @@ export default class XiaoShuo extends PureComponent {
             <Row
               key={key}
               gutter={{md: mdVal, lg: 24, xl: 20,}}
-              style={{ width: '100%' }}
+              style={{ width: '100%', marginLeft: '0px', marginRight: '0px' }}
             >
               {rows.map(col => (
-                <Col key={col.columnCode} md={8} sm={24}>
+                <Col key={col.columnCode} md={8} sm={24} style={{ paddingLeft: '0px', paddingRight: '0px' }}>
                   <AutoFormRow formItemLayout={formItemLayout} column={col} searchArea />
                 </Col>
               ))}

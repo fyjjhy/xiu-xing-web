@@ -109,12 +109,12 @@ export default class RenWu extends PureComponent {
       } else if (col.dataIndex === 'renWuMiaoShu') {
         colum.render = (text => {
           const title = renderMiaoShu(text);
-          return text ? <Tooltip title={title}><Paragraph style={{ marginTop: '0px', marginBottom: '0px' }} ellipsis={{ row: 1 }}>{text}</Paragraph></Tooltip> : text
+          return text && text.length > 20 ? <Tooltip title={title}><Paragraph style={{ marginTop: '0px', marginBottom: '0px' }} ellipsis={{ row: 1 }}>{text}</Paragraph></Tooltip> : text
         });
       } else if (col.dataIndex === 'renWuShuXing') {
         colum.render = (text => {
           const title = renderMiaoShu(text);
-          return text ? <Tooltip title={title}><Paragraph style={{ marginTop: '0px', marginBottom: '0px' }} ellipsis={{ row: 1 }}>{text}</Paragraph></Tooltip> : text
+          return text && text.length > 15 ? <Tooltip title={title}><Paragraph style={{ marginTop: '0px', marginBottom: '0px' }} ellipsis={{ row: 1 }}>{text}</Paragraph></Tooltip> : text
         });
       }
       return { ...col, ...colum };
@@ -292,7 +292,7 @@ export default class RenWu extends PureComponent {
     if (params) {
       await this.operatePlatServiceData('get', params);
     }
-    this.setState({ currentModel: 'edit' });
+    this.setState({ currentModel: 'edit', currentRowInfo: params });
   }
 
   // 点击操作记录
@@ -357,7 +357,7 @@ export default class RenWu extends PureComponent {
     if (params) {
       await this.operatePlatServiceData('get', params);
     }
-    this.setState({ currentModel: 'listEdit' });
+    this.setState({ currentModel: 'listEdit', currentRowInfo: params });
   }
 
   handleDisplay() {
@@ -418,6 +418,15 @@ export default class RenWu extends PureComponent {
     });
   }
 
+  handleXiuXingRiZhi = async () => {
+    const { dispatch } = this.props;
+    const { currentRowInfo } = this.state;
+    await dispatch({
+      type: 'xiuXingRiZhi/getXiuXingRiZhiList',
+      payload: { riZhiRenWu: currentRowInfo.renWuName, xiaoShuoId: currentRowInfo.xiaoShuoId },
+    });
+  }
+
   // 处理仓库字段
   handleCangKuColumns = () => getCangKuColumns().filter(column => column.addField === 'Y');
 
@@ -452,12 +461,12 @@ export default class RenWu extends PureComponent {
     } else if (col.dataIndex === 'riZhiEvent') {
       column.render = (text => {
         const title = renderMiaoShu(text);
-        return text ? <Tooltip title={title}><Paragraph style={{ marginTop: '0px', marginBottom: '0px' }} ellipsis>{title}</Paragraph></Tooltip> : text
+        return text && text.length > 15 ? <Tooltip title={title}><Paragraph style={{ marginTop: '0px', marginBottom: '0px' }} ellipsis>{title}</Paragraph></Tooltip> : text
       });
     } else if (col.dataIndex === 'riZhiRenWu') {
       column.render = (text => {
         const title = renderMiaoShu(text);
-        return text ? <Tooltip title={title}><Paragraph style={{ marginTop: '0px', marginBottom: '0px' }} ellipsis>{title}</Paragraph></Tooltip> : text
+        return text && text.length > 15 ? <Tooltip title={title}><Paragraph style={{ marginTop: '0px', marginBottom: '0px' }} ellipsis>{title}</Paragraph></Tooltip> : text
       });
     } else if (col.dataIndex === 'riZhiDiDian') {
       column.render = (text => {
@@ -732,16 +741,16 @@ export default class RenWu extends PureComponent {
   }
 
   renderEditForm() {
-    const { currentModel } = this.state;
+    const { currentModel, currentRowInfo } = this.state;
     if (currentModel === 'edit') {
-      const { renWu: { renWu: selectRecord  } } = this.props;
+      const { renWu: { data: selectRecord  } } = this.props;
       return (
         <StandardForm
           title="编辑人物"
           currentModel={currentModel}
           formColumnList={this.editColumns}
           // xiaoShuoList={xiaoShuoList}
-          initialValues={selectRecord || {}}
+          initialValues={selectRecord ? {...selectRecord, xiaoShuoId: currentRowInfo.xiaoShuoId} : {}}
           // showDialog
           // visible
           data={selectRecord}
@@ -755,15 +764,15 @@ export default class RenWu extends PureComponent {
 
   // 点击打开新增模态框
   renderEditDialog() {
-    const { currentModel } = this.state;
+    const { currentModel, currentRowInfo } = this.state;
     if (currentModel === 'listEdit') {
-      const { renWu: { renWu: data  } } = this.props;
+      const { renWu: { data  } } = this.props;
       return (
         <StandardForm
           formColumnList={this.editColumns}
           currentModel={currentModel}
           title="编辑人物"
-          initialValues={data || {}}
+          initialValues={data ? {...data, xiaoShuoId: currentRowInfo.xiaoShuoId} : {}}
           showDialog
           visible
           onSubmit={this.handleAddPlatService.bind(this)}
@@ -816,7 +825,7 @@ export default class RenWu extends PureComponent {
   renderAddXiuXingRiZhi() {
     const { currentModel, currentRowInfo, currentTab } = this.state;
     if (currentModel === 'addXiuXingRiZhi') {
-      const { loading, cangKu: { cangKuList } } = this.props;
+      const { loading, cangKu: { cangKuList }, xiuXingRiZhi: { xiuXingRiZhiList } } = this.props;
       return (
         <AddXiuXingRiZhiModal
           currentTab={currentTab}
@@ -827,6 +836,8 @@ export default class RenWu extends PureComponent {
           xiuXingRiZhiColumns={this.handleXiuXingRiZhiColumns()}
           onOk={this.handleCangKuOnOk}
           onCancel={this.handleCangKuOnCancel}
+          xiuXingRiZhi={this.handleXiuXingRiZhi}
+          xiuXingRiZhiList={xiuXingRiZhiList}
           cangKuInitialValues={currentRowInfo && Object.keys(currentRowInfo).length > 0 ? {
             lingWu: currentRowInfo.renWuName,
             lingWuFenLei: '人神妖魔鬼怪',

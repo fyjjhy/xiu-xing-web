@@ -24,6 +24,7 @@ export default class XiuXingRiZhiModal extends PureComponent {
         ]}
       >
         <Table
+          rowKey="xiuXingCode"
           scroll={scroll || {}}
           columns={columns}
           dataSource={dataSource || []}

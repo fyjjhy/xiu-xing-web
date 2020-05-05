@@ -1,18 +1,10 @@
 /* eslint-disable react/jsx-no-bind */
-import {
-  DownOutlined,
-  PlusOutlined,
-  // LockOutlined,
-  // UnlockOutlined,
-  EditOutlined,
-  DeleteOutlined,
-  UpOutlined,
-} from '@ant-design/icons';
-import React, { PureComponent, Fragment } from 'react';
-import { connect } from 'dva';
+import {DeleteOutlined, DownOutlined, EditOutlined, PlusOutlined, UpOutlined,} from '@ant-design/icons';
+import React, {Fragment, PureComponent} from 'react';
+import {connect} from 'dva';
 
-import { Row, Col, Card, Form, Button, Divider, Popconfirm, message } from 'antd';
-import { PageHeaderWrapper } from '@ant-design/pro-layout';
+import {Button, Card, Col, Divider, Form, message, Popconfirm, Row, Typography, Tooltip} from 'antd';
+import {PageHeaderWrapper} from '@ant-design/pro-layout';
 
 import StandardTable from '../../components/StandardTable';
 import StandardProfile from '../../components/StandardProfile';
@@ -20,20 +12,13 @@ import StandardForm from '../../components/StandardForm';
 import AutoFormRow from '../../components/Auto/AutoFormRow';
 
 import styles from './YaoShou.less';
-import { renderMiaoShu } from "../../utils/utils";
-import { yaoShouFenLeiConstant } from "../../utils/constant";
+import {renderMiaoShu} from "../../utils/utils";
+import {getYaoShouColumns} from "../../utils/columns";
 
 const { Group: ButtonGroup } = Button;
+const { Paragraph } = Typography;
 
-const yaoShouColumns = [
-  { columnName: '妖兽代码', columnCode: 'yaoShouCode', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '90px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
-  { columnName: '妖兽名称', columnCode: 'yaoShouName', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '110px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  { columnName: '妖兽分类', columnCode: 'yaoShouFenLei', valueType: 'S', displayType: 'S', valueList: `constant|${JSON.stringify(yaoShouFenLeiConstant())}`, hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: '90px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  { columnName: '妖兽描述', columnCode: 'yaoShouMiaoShu', valueType: 'S', displayType: 'T', valueList: null, hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: null, addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  { columnName: '小说', columnCode: 'xiaoShuoId', valueType: 'S', displayType: 'S', valueList: 'service|/chenXian/chen/xian/xiaoShuo', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: '175px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  { columnName: '更新时间', columnCode: 'updateTime', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: '160px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
-  { columnName: '操作', columnCode: 'id', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'N', columnWidth: '110px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
-];
+const yaoShouColumns = getYaoShouColumns();
 
 const formItemLayout = {
   labelCol: { xs: { span: 24 }, sm: { span: 5 } },
@@ -108,7 +93,10 @@ export default class YaoShou extends PureComponent {
       } else if (col.dataIndex === 'xiaoShuoId') {
         colum.render = (text => this.renderXiaoShuo(text));
       } else if (col.dataIndex === 'yaoShouMiaoShu') {
-        colum.render = (text => text ? renderMiaoShu(text) : text);
+        colum.render = (text => {
+          const title = renderMiaoShu(text);
+          return text && text.length > 20 ? <Tooltip overlayStyle={{ maxWidth: '300px', width: '300px' }} title={title}><Paragraph style={{ width: '200px', marginTop: '0px', marginBottom: '0px' }} ellipsis={{ row: 1 }}>{text}</Paragraph></Tooltip> : text
+        });
       }
       return { ...col, ...colum };
     });
@@ -290,7 +278,7 @@ export default class YaoShou extends PureComponent {
     if (params) {
       await this.operatePlatServiceData('get', params);
     }
-    this.setState({ currentModel: 'listEdit' });
+    this.setState({ currentModel: 'listEdit', currentRowInfo: params });
   }
 
   handleDisplay() {
@@ -544,7 +532,7 @@ export default class YaoShou extends PureComponent {
 
   // 点击打开新增模态框
   renderEditDialog() {
-    const { currentModel } = this.state;
+    const { currentModel, currentRowInfo } = this.state;
     if (currentModel === 'listEdit') {
       const { yaoShou: { data  } } = this.props;
       return (
@@ -552,7 +540,7 @@ export default class YaoShou extends PureComponent {
           formColumnList={this.editColumns}
           currentModel={currentModel}
           title="编辑妖兽"
-          initialValues={data || {}}
+          initialValues={data ? { ...data, xiaoShuoId: currentRowInfo.xiaoShuoId } : {}}
           showDialog
           visible
           onSubmit={this.handleAddPlatService.bind(this)}

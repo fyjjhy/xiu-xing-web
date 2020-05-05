@@ -24,6 +24,7 @@ export default class HisModal extends PureComponent {
         ]}
       >
         <Table
+          rowKey="id"
           columns={columns}
           dataSource={dataSource || []}
         />

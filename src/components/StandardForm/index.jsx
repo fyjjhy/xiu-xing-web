@@ -3,46 +3,15 @@ import React, { PureComponent, Fragment } from 'react';
 import { Form, Button, Modal, Input } from 'antd';
 
 import AutoFormRow from '../Auto/AutoFormRow';
-// import styles from './index.less';
 
-// const { TextArea } = Input;
 const { Item: FormItem } = Form;
-// const { Option } = Select;
 
 const formItemLayout = {
-  labelCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 7,
-    },
-  },
-  wrapperCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 12,
-    },
-    md: {
-      span: 10,
-    },
-  },
+  labelCol: {xs: {span: 24,}, sm: {span: 7,},},
+  wrapperCol: {xs: {span: 24,}, sm: {span: 12,}, md: {span: 10,},},
 };
 
-const submitFormLayout = {
-  wrapperCol: {
-    xs: {
-      span: 24,
-      offset: 0,
-    },
-    sm: {
-      span: 10,
-      offset: 7,
-    },
-  },
-};
+const submitFormLayout = {wrapperCol: {xs: {span: 24, offset: 0,}, sm: {span: 10, offset: 7,},},};
 
 class StandardForm extends PureComponent {
   formRef = React.createRef();
@@ -92,9 +61,16 @@ class StandardForm extends PureComponent {
 
   renderButton() {
     const { loading } = this.state;
+    const { expandButton, submitFormLayout: submitLayout } = this.props;
+    const { current } = this.formRef;
+    let layout = { ...submitFormLayout };
+    if (submitLayout) {
+      layout = { ...layout, ...submitLayout };
+    }
     return (
-      <FormItem {...submitFormLayout} style={{ marginTop: 32 }}>
+      <FormItem {...layout} style={{ marginTop: 32 }}>
         <Button type="primary" htmlType="submit" loading={loading} onClick={e => { this.handleSubmit(e); }}>提交</Button>
+        {expandButton ? expandButton(current) : null}
         <Button loading={loading} style={{ marginLeft: 8 }} onClick={() => { this.handleCancel(); }}>取消</Button>
       </FormItem>
     );
@@ -120,8 +96,12 @@ class StandardForm extends PureComponent {
   }
 
   renderFormItem() {
-    const { formColumnList, currentModel } = this.props;
+    const { formColumnList, currentModel, formItemLayout: itemLayout } = this.props;
     const displayFileds = [];
+    let layout = { ...formItemLayout };
+    if (itemLayout) {
+      layout = { ...layout, ...itemLayout };
+    }
     return (
       <Fragment>
         {
@@ -134,7 +114,7 @@ class StandardForm extends PureComponent {
           }).map(column => (
             <AutoFormRow
               // {...props}
-              formItemLayout={formItemLayout}
+              formItemLayout={layout}
               key={column.columnCode}
               column={column}
               form={this.formRef.current}
