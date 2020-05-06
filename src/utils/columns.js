@@ -1,7 +1,7 @@
 import {
   danWeiConstant, jiaGouFenLeiConstant, lingWuFenLeiConstant, renWuStateConstant, shengDiaoConstant,
   yaoShouFenLeiConstant,
-  ziJiConstant
+  ziJiConstant, zongMenFenLeiConstant
 } from "./constant";
 
 // 人物操作记录
@@ -50,6 +50,34 @@ export function renWuHisColumns() {
       width: '160px',
     }];
   return renWuHis;
+}
+
+// 地名管理字段
+export function getDiMingColumns() {
+  const diMingColumns = [
+    { addField: 'N', editField: 'N', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnName: '地名代码', columnCode: 'diMingCode', columnWidth: '90px' },
+    { addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnName: '地名名称', columnCode: 'diMingName', columnWidth: '110px' },
+    { addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnName: '地名分类', columnCode: 'diMingFenLei', columnWidth: '90px' },
+    { addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'T', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnName: '地名描述', columnCode: 'diMingMiaoShu' },
+    { addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'S', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnName: '小说', columnCode: 'xiaoShuoId', columnWidth: '175px', valueList: 'service|/chenXian/chen/xian/xiaoShuo' },
+    { addField: 'N', editField: 'N', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnName: '更新时间', columnCode: 'updateTime', columnWidth: '160px' },
+    { addField: 'N', editField: 'N', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'N', columnName: '操作', columnCode: 'id', columnWidth: '110px' },
+  ];
+  return diMingColumns;
+}
+
+// 宗门管理字段
+export function getZongMenColumns() {
+  const zongMenColumns = [
+    { addField: 'N', editField: 'N', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnName: '宗门代码', columnCode: 'zongMenCode', columnWidth: '90px' },
+    { addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnName: '宗门名称', columnCode: 'zongMenName', columnWidth: '110px' },
+    { addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'S', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnName: '宗门分类', columnCode: 'zongMenFenLei', columnWidth: '90px', valueList: `constant|${JSON.stringify(zongMenFenLeiConstant())}` },
+    { addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'T', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnName: '宗门描述', columnCode: 'zongMenMiaoShu' },
+    { addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'S', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnName: '小说', columnCode: 'xiaoShuoId', columnWidth: '175px', valueList: 'service|/chenXian/chen/xian/xiaoShuo' },
+    { addField: 'N', editField: 'N', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnName: '更新时间', columnCode: 'updateTime', columnWidth: '160px' },
+    { addField: 'N', editField: 'N', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'N', columnName: '操作', columnCode: 'id', columnWidth: '110px' },
+  ];
+  return zongMenColumns;
 }
 
 // 妖兽管理字段
