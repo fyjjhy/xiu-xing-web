@@ -52,6 +52,34 @@ export function renWuHisColumns() {
   return renWuHis;
 }
 
+// 阵法管理字段
+export function getZhenFaColumns() {
+  const zhenFaColumns = [
+    { addField: 'N', editField: 'N', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnName: '阵法代码', columnCode: 'zhenFaCode', columnWidth: '90px' },
+    { addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnName: '阵法名称', columnCode: 'zhenFaName', columnWidth: '110px' },
+    { addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnName: '阵法分类', columnCode: 'zhenFaFenLei', columnWidth: '90px' },
+    { addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'T', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnName: '阵法描述', columnCode: 'zhenFaMiaoShu' },
+    { addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'S', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnName: '小说', columnCode: 'xiaoShuoId', columnWidth: '175px', valueList: 'service|/chenXian/chen/xian/xiaoShuo' },
+    { addField: 'N', editField: 'N', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnName: '更新时间', columnCode: 'updateTime', columnWidth: '160px' },
+    { addField: 'N', editField: 'N', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'N', columnName: '操作', columnCode: 'id', columnWidth: '110px' },
+  ];
+  return zhenFaColumns;
+}
+
+// 其他灵物管理字段
+export function getQiTaLingWuColumns() {
+  const lingWuColumns = [
+    { addField: 'N', editField: 'N', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnName: '灵物代码', columnCode: 'lingWuCode', columnWidth: '90px' },
+    { addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnName: '灵物名称', columnCode: 'lingWuName', columnWidth: '110px' },
+    { addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnName: '灵物分类', columnCode: 'lingWuFenLei', columnWidth: '90px' },
+    { addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'T', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnName: '灵物描述', columnCode: 'lingWuMiaoShu', columnWidth: null },
+    { addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'S', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnName: '小说', columnCode: 'xiaoShuoId', columnWidth: '175px', valueList: 'service|/chenXian/chen/xian/xiaoShuo' },
+    { addField: 'N', editField: 'N', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnName: '更新时间', columnCode: 'updateTime', columnWidth: '160px' },
+    { addField: 'N', editField: 'N', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'N', columnName: '操作', columnCode: 'id', columnWidth: '110px' },
+  ];
+  return lingWuColumns;
+}
+
 // 地名管理字段
 export function getDiMingColumns() {
   const diMingColumns = [

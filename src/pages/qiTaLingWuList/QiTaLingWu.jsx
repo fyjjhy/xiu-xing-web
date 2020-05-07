@@ -11,7 +11,7 @@ import {
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'dva';
 
-import { Row, Col, Card, Form, Button, Divider, Popconfirm, message } from 'antd';
+import { Row, Col, Card, Form, Button, Divider, Popconfirm, message, Typography, Tooltip } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 
 import StandardTable from '../../components/StandardTable';
@@ -21,22 +21,16 @@ import AutoFormRow from '../../components/Auto/AutoFormRow';
 
 import styles from './QiTaLingWu.less';
 import {renderMiaoShu} from "../../utils/utils";
+import {getQiTaLingWuColumns} from "../../utils/columns";
 
 const { Group: ButtonGroup } = Button;
+const { Paragraph } = Typography;
 
-const lingWuColumns = [
-  { columnName: '灵物代码', columnCode: 'lingWuCode', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '90px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
-  { columnName: '灵物名称', columnCode: 'lingWuName', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnWidth: '110px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  { columnName: '灵物分类', columnCode: 'lingWuFenLei', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: '90px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  { columnName: '灵物描述', columnCode: 'lingWuMiaoShu', valueType: 'S', displayType: 'T', valueList: null, hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: null, addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  { columnName: '小说', columnCode: 'xiaoShuoId', valueType: 'S', displayType: 'S', valueList: 'service|/chenXian/chen/xian/xiaoShuo', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnWidth: '175px', addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N' },
-  { columnName: '更新时间', columnCode: 'updateTime', valueType: 'S', displayType: 'I', valueList: null, hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnWidth: '160px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
-  { columnName: '操作', columnCode: 'id', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'N', columnWidth: '110px', addField: 'N', editField: 'N', listField: 'Y', sortField: 'N' },
-];
+const lingWuColumns = getQiTaLingWuColumns();
 
 const formItemLayout = {
-  labelCol: { xs: { span: 24 }, sm: { span: 4 } },
-  wrapperCol: { xs: { span: 24 }, sm: { span: 12 }, md: { span: 20 } },
+  labelCol: { xs: { span: 24 }, sm: { span: 5 } },
+  wrapperCol: { xs: { span: 24 }, sm: { span: 12 }, md: { span: 19 } },
 };
 
 
@@ -107,7 +101,10 @@ export default class QiTaLingWu extends PureComponent {
       } else if (col.dataIndex === 'xiaoShuoId') {
         colum.render = (text => this.renderXiaoShuo(text));
       } else if (col.dataIndex === 'lingWuMiaoShu') {
-        colum.render = (text => text ? renderMiaoShu(text) : text);
+        colum.render = (text => {
+          const title = renderMiaoShu(text);
+          return text && text.length > 15 ? <Tooltip title={title}><Paragraph style={{ width: '250px', marginTop: '0px', marginBottom: '0px' }} ellipsis={{ row: 1 }}>{text}</Paragraph></Tooltip> : text
+        });
       }
       return { ...col, ...colum };
     });
@@ -412,10 +409,10 @@ export default class QiTaLingWu extends PureComponent {
             <Row
               key={key}
               gutter={{md: mdVal, lg: 24, xl: 20,}}
-              style={{ width: '100%' }}
+              style={{ width: '100%', marginLeft: '0px', marginRight: '0px' }}
             >
               {rows.map(col => (
-                <Col key={col.columnCode} md={8} sm={24}>
+                <Col key={col.columnCode} md={8} sm={24} style={{ paddingLeft: '0px', paddingRight: '0px' }}>
                   <AutoFormRow formItemLayout={formItemLayout} column={col} searchArea />
                 </Col>
               ))}
