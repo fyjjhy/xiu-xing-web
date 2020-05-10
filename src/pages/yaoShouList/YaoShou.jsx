@@ -95,7 +95,7 @@ export default class YaoShou extends PureComponent {
       } else if (col.dataIndex === 'yaoShouMiaoShu') {
         colum.render = (text => {
           const title = renderMiaoShu(text);
-          return text && text.length > 20 ? <Tooltip overlayStyle={{ maxWidth: '300px', width: '300px' }} title={title}><Paragraph style={{ width: '200px', marginTop: '0px', marginBottom: '0px' }} ellipsis={{ row: 1 }}>{text}</Paragraph></Tooltip> : text
+          return text && text.length > 20 ? <Tooltip overlayStyle={{ maxWidth: '300px', width: '300px' }} title={title}><Paragraph style={{ width: '250px', marginTop: '0px', marginBottom: '0px' }} ellipsis={{ row: 1 }}>{text}</Paragraph></Tooltip> : text
         });
       }
       return { ...col, ...colum };

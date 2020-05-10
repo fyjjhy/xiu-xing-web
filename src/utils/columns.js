@@ -53,6 +53,62 @@ export function renWuHisColumns() {
   return renWuHis;
 }
 
+// 机构管理字段
+export function getJiGouColumns() {
+  const jiGouColumns = [
+    { addField: 'N', editField: 'N', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnName: '机构代码', columnCode: 'jiGouCode', columnWidth: '90px' },
+    { addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnName: '机构名称', columnCode: 'jiGouName', columnWidth: '110px'  },
+    { addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnName: '机构分类', columnCode: 'jiGouFenLei', columnWidth: '90px' },
+    { addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'T', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnName: '机构描述', columnCode: 'jiGouMiaoShu' },
+    { addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'S', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnName: '小说', columnCode: 'xiaoShuoId', columnWidth: '175px', valueList: 'service|/chenXian/chen/xian/xiaoShuo' },
+    { addField: 'N', editField: 'N', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnName: '更新时间', columnCode: 'updateTime', columnWidth: '160px' },
+    { addField: 'N', editField: 'N', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'N', columnName: '操作', columnCode: 'id', columnWidth: '110px' },
+  ];
+  return jiGouColumns;
+}
+
+// 设定管理字段
+export function getSheDingColumns() {
+  const sheDingColumns = [
+    // { addField: 'N', editField: 'N', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnName: '设定代码', columnCode: 'sheDingCode', columnWidth: '90px' },
+    { addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnName: '设定名称', columnCode: 'sheDingName', columnWidth: '110px' },
+    // { addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnName: '设定分类', columnCode: 'sheDingFenLei', columnWidth: '90px' },
+    { addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'T', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnName: '设定描述', columnCode: 'sheDingMiaoShu' },
+    { addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'S', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnName: '小说', columnCode: 'xiaoShuoId', columnWidth: '175px', valueList: 'service|/chenXian/chen/xian/xiaoShuo' },
+    { addField: 'N', editField: 'N', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnName: '更新时间', columnCode: 'updateTime', columnWidth: '160px' },
+    { addField: 'N', editField: 'N', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'N', columnName: '操作', columnCode: 'id', columnWidth: '110px' },
+  ];
+  return sheDingColumns;
+}
+
+// 法术管理字段
+export function getFaShuColumns() {
+  const faShuColumns = [
+    { addField: 'N', editField: 'N', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnName: '法术代码', columnCode: 'faShuCode', columnWidth: '90px' },
+    { addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnName: '法术名称', columnCode: 'faShuName', columnWidth: '110px' },
+    { addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnName: '法术分类', columnCode: 'faShuFenLei', columnWidth: '90px' },
+    { addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'T', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnName: '法术描述', columnCode: 'faShuMiaoShu' },
+    { addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'S', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnName: '小说', columnCode: 'xiaoShuoId', valueList: 'service|/chenXian/chen/xian/xiaoShuo', columnWidth: '175px' },
+    { addField: 'N', editField: 'N', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnName: '更新时间', columnCode: 'updateTime', columnWidth: '160px' },
+    { addField: 'N', editField: 'N', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'N', columnName: '操作', columnCode: 'id', columnWidth: '110px' },
+  ];
+  return faShuColumns;
+}
+
+// 符箓管理字段
+export function getFuLuColumns() {
+  const fuLuColumns = [
+    { addField: 'N', editField: 'N', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnName: '符箓代码', columnCode: 'fuLuCode', columnWidth: '90px' },
+    { addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnName: '符箓名称', columnCode: 'fuLuName', columnWidth: '110px' },
+    // { addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnName: '符箓分类', columnCode: 'fuLuFenLei', columnWidth: '90px' },
+    { addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'T', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnName: '符箓描述', columnCode: 'fuLuMiaoShu' },
+    { addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'S', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnName: '小说', columnCode: 'xiaoShuoId', columnWidth: '175px', valueList: 'service|/chenXian/chen/xian/xiaoShuo' },
+    { addField: 'N', editField: 'N', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnName: '更新时间', columnCode: 'updateTime', columnWidth: '160px' },
+    { addField: 'N', editField: 'N', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'N', columnName: '操作', columnCode: 'id', columnWidth: '110px' },
+  ];
+  return fuLuColumns;
+}
+
 // 功法管理字段
 export function getGongFaColumns() {
   const gongFaColumns = [
@@ -294,15 +350,15 @@ export function getXiuXingRiZhiColumns() {
     { addField: 'N', addDisplayField: 'N', editField: 'N', listField: 'Y', templateListField: 'Y', sortField: 'N', profileField: 'Y', searchFlag: 'Y', requiredFlag: 'Y', hiddenField: 'N', displayType: 'I', valueType: 'S', columnName: '仓库灵物', columnCode: 'cangKuLingWu', columnWidth: '105px', profileWidth: '105px' },
     { addField: 'N', addDisplayField: 'N', editField: 'N', listField: 'Y', templateListField: 'Y', sortField: 'N', profileField: 'Y', searchFlag: 'Y', requiredFlag: 'Y', hiddenField: 'N', displayType: 'I', valueType: 'S', columnName: '修行代码', columnCode: 'xiuXingCode', columnWidth: '90px', profileWidth: '90px' },
     { addField: 'N', addDisplayField: 'N', editField: 'N', listField: 'Y', templateListField: 'Y', sortField: 'N', profileField: 'Y', searchFlag: 'Y', requiredFlag: 'Y', hiddenField: 'N', displayType: 'I', valueType: 'S', columnName: '日志代码', columnCode: 'riZhiCode', columnWidth: '90px', profileWidth: '90px' },
-    { addField: 'Y', addDisplayField: 'N', editField: 'Y', listField: 'Y', templateListField: 'Y', sortField: 'N', profileField: 'Y', searchFlag: 'Y', requiredFlag: 'N', hiddenField: 'N', displayType: 'T', valueType: 'S', columnName: '日志时间', columnCode: 'riZhiTime', columnWidth: '90px', profileWidth: '90px' },
-    { addField: 'Y', addDisplayField: 'N', editField: 'Y', listField: 'Y', templateListField: 'Y', sortField: 'N', profileField: 'Y', searchFlag: 'Y', requiredFlag: 'N', hiddenField: 'N', displayType: 'T', valueType: 'S', columnName: '日志地点', columnCode: 'riZhiDiDian', columnWidth: '90px' },
+    { addField: 'Y', addDisplayField: 'N', editField: 'Y', listField: 'Y', templateListField: 'Y', sortField: 'N', profileField: 'Y', searchFlag: 'Y', requiredFlag: 'N', hiddenField: 'N', displayType: 'T', valueType: 'S', columnName: '日志时间', columnCode: 'riZhiTime', columnWidth: '200px', profileWidth: '90px' },
+    { addField: 'Y', addDisplayField: 'N', editField: 'Y', listField: 'Y', templateListField: 'Y', sortField: 'N', profileField: 'Y', searchFlag: 'Y', requiredFlag: 'N', hiddenField: 'N', displayType: 'T', valueType: 'S', columnName: '日志地点', columnCode: 'riZhiDiDian', columnWidth: '200px' },
     { addField: 'Y', addDisplayField: 'N', editField: 'Y', listField: 'Y', templateListField: 'Y', sortField: 'N', profileField: 'Y', searchFlag: 'Y', requiredFlag: 'N', hiddenField: 'N', displayType: 'T', valueType: 'S', columnName: '日志人物', columnCode: 'riZhiRenWu', columnWidth: '200px' },
     { addField: 'Y', addDisplayField: 'N', editField: 'Y', listField: 'Y', templateListField: 'Y', sortField: 'N', profileField: 'Y', searchFlag: 'Y', requiredFlag: 'Y', hiddenField: 'N', displayType: 'T', valueType: 'S', columnName: '日志事件', columnCode: 'riZhiEvent', columnWidth: '200px' },
-    { addField: 'Y', addDisplayField: 'N', editField: 'Y', listField: 'Y', templateListField: 'Y', sortField: 'N', profileField: 'Y', searchFlag: 'Y', requiredFlag: 'Y', hiddenField: 'N', displayType: 'T', valueType: 'S', columnName: '日志', columnCode: 'riZhi', columnWidth: '500px' },
-    { addField: 'Y', addDisplayField: 'Y', editField: 'Y', listField: 'N', templateListField: 'N', sortField: 'N', profileField: 'N', searchFlag: 'N', requiredFlag: 'Y', hiddenField: 'N', displayType: 'I', valueType: 'S', columnName: '仓库灵物', columnCode: 'cangKuId', columnWidth: null },
+    { addField: 'Y', addDisplayField: 'N', editField: 'Y', listField: 'Y', templateListField: 'Y', sortField: 'N', profileField: 'Y', searchFlag: 'Y', requiredFlag: 'Y', hiddenField: 'N', displayType: 'T', valueType: 'S', columnName: '日志', columnCode: 'riZhi', columnWidth: '300px' },
+    { addField: 'Y', addDisplayField: 'Y', editField: 'Y', listField: 'N', templateListField: 'N', sortField: 'N', profileField: 'N', searchFlag: 'N', requiredFlag: 'Y', hiddenField: 'N', displayType: 'I', valueType: 'S', columnName: '仓库灵物', columnCode: 'cangKuId' },
     { addField: 'N', addDisplayField: 'N', editField: 'N', listField: 'Y', templateListField: 'N', sortField: 'N', profileField: 'Y', searchFlag: 'Y', requiredFlag: 'N', hiddenField: 'N', displayType: 'I', valueType: 'S', columnName: '灵物全称', columnCode: 'lingWuFullName', columnWidth: '105px' },
     { addField: 'N', addDisplayField: 'N', editField: 'N', listField: 'Y', templateListField: 'N', sortField: 'N', profileField: 'Y', searchFlag: 'Y', requiredFlag: 'Y', hiddenField: 'N', displayType: 'I', valueType: 'S', columnName: '数量单位', columnCode: 'shuLiangDanWei', columnWidth: '105px', profileWidth: '90px' },
-    { addField: 'N', addDisplayField: 'N', editField: 'N', listField: 'Y', templateListField: 'N', sortField: 'N', profileField: 'Y', searchFlag: 'Y', requiredFlag: 'Y', hiddenField: 'N', displayType: 'I', valueType: 'S', columnName: '灵物描述', columnCode: 'lingWuMiaoShu', columnWidth: '105px' },
+    { addField: 'N', addDisplayField: 'N', editField: 'N', listField: 'Y', templateListField: 'N', sortField: 'N', profileField: 'Y', searchFlag: 'Y', requiredFlag: 'Y', hiddenField: 'N', displayType: 'I', valueType: 'S', columnName: '灵物描述', columnCode: 'lingWuMiaoShu', columnWidth: '300px' },
     { addField: 'Y', addDisplayField: 'Y', editField: 'Y', listField: 'Y', templateListField: 'N', sortField: 'N', profileField: 'Y', searchFlag: 'N', requiredFlag: 'Y', hiddenField: 'N', displayType: 'S', valueType: 'S', columnName: '小说', columnCode: 'xiaoShuoId', columnWidth: '175px', profileWidth: '175px', valueList: 'service|/chenXian/chen/xian/xiaoShuo' },
     { addField: 'N', addDisplayField: 'N', editField: 'N', listField: 'Y', templateListField: 'N', sortField: 'N', profileField: 'Y', searchFlag: 'N', requiredFlag: 'Y', hiddenField: 'N', displayType: 'I', valueType: 'S', columnName: '更新时间', columnCode: 'updateTime', columnWidth: '160px', profileWidth: '160px' },
     { addField: 'N', addDisplayField: 'N', editField: 'N', listField: 'Y', templateListField: 'N', sortField: 'N', profileField: 'N', searchFlag: 'N', requiredFlag: 'Y', hiddenField: 'Y', displayType: 'I', valueType: 'S', columnName: '操作', columnCode: 'id', columnWidth: '110px' },

@@ -58,7 +58,7 @@ export function ziJiConstant() {
 // 妖兽分类
 export function yaoShouFenLeiConstant() {
   const yaoShouFenLei = [
-    '甲壳类', '单孔类', '有袋类', '胎盘类'
+    '甲壳类', '单孔类', '有袋类', '胎盘类', '灵长类', '类人猿'
   ].map(data => ({ dataCode: data, dataName: data }));
   return yaoShouFenLei;
 }

@@ -11,7 +11,7 @@ import {
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'dva';
 
-import { Row, Col, Card, Form, Button, Divider, Popconfirm, message } from 'antd';
+import { Row, Col, Card, Form, Button, Divider, Popconfirm, message, Typography, Tooltip } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 
 import StandardTable from '../../components/StandardTable';
@@ -24,12 +24,13 @@ import {getUrlParameters, renderMiaoShu} from "../../utils/utils";
 import {getXiuXingRiZhiColumns} from "../../utils/columns";
 
 const { Group: ButtonGroup } = Button;
+const { Paragraph } = Typography;
 
 const xiuXingRiZhiColumns = getXiuXingRiZhiColumns();
 
 const formItemLayout = {
-  labelCol: { xs: { span: 24 }, sm: { span: 4 } },
-  wrapperCol: { xs: { span: 24 }, sm: { span: 12 }, md: { span: 20 } },
+  labelCol: { xs: { span: 24 }, sm: { span: 5 } },
+  wrapperCol: { xs: { span: 24 }, sm: { span: 12 }, md: { span: 19 } },
 };
 
 
@@ -92,18 +93,46 @@ export default class XiuXingRiZhi extends PureComponent {
       return listColumn;
     });
     this.listColumns = this.listColumns.map(col => {
-      const colum = {};
+      const column = {};
       if (col.dataIndex === 'xiuXingCode') {
-        colum.render = ((text, record) => <a onClick={() => { this.handleProfileClick(record); }}>{text}</a>);
+        column.render = ((text, record) => <a onClick={() => { this.handleProfileClick(record); }}>{text}</a>);
       } else if (col.dataIndex === 'id') {
-        colum.fixed = 'right';
-        colum.render = ((text, record) => this.renderLinkGroup(record));
+        column.fixed = 'right';
+        column.render = ((text, record) => this.renderLinkGroup(record));
       } else if (col.dataIndex === 'xiaoShuoId') {
-        colum.render = (text => this.renderXiaoShuo(text));
+        column.render = (text => this.renderXiaoShuo(text));
       } else if (col.dataIndex === 'lingWuMiaoShu') {
-        colum.render = (text => text ? renderMiaoShu(text) : text);
+        column.render = (text => {
+          const title = renderMiaoShu(text);
+          return text && text.length > 15 ? <Tooltip title={title}><Paragraph style={{ marginTop: '0px', marginBottom: '0px' }} ellipsis>{title}</Paragraph></Tooltip> : text
+        });
+      } else if (col.dataIndex === 'riZhi') {
+        column.render = (text => {
+          const title = renderMiaoShu(text);
+          return text ? <Tooltip overlayStyle={{ maxWidth: '400px', width: '400px' }} title={title}><Paragraph style={{ marginTop: '0px', marginBottom: '0px' }} ellipsis>{title}</Paragraph></Tooltip> : text
+        });
+      } else if (col.dataIndex === 'riZhiEvent') {
+        column.render = (text => {
+          const title = renderMiaoShu(text);
+          return text && text.length > 15 ? <Tooltip title={title}><Paragraph style={{ marginTop: '0px', marginBottom: '0px' }} ellipsis>{title}</Paragraph></Tooltip> : text
+        });
+      } else if (col.dataIndex === 'riZhiRenWu') {
+        column.render = (text => {
+          const title = renderMiaoShu(text);
+          return text && text.length > 15 ? <Tooltip title={title}><Paragraph style={{ marginTop: '0px', marginBottom: '0px' }} ellipsis>{title}</Paragraph></Tooltip> : text
+        });
+      } else if (col.dataIndex === 'riZhiDiDian') {
+        column.render = (text => {
+          const title = renderMiaoShu(text);
+          return text ? <Tooltip title={title}><Paragraph style={{ marginTop: '0px', marginBottom: '0px' }} ellipsis>{title}</Paragraph></Tooltip> : text
+        });
+      } else if (col.dataIndex === 'riZhiTime') {
+        column.render = (text => {
+          const title = renderMiaoShu(text);
+          return text ? <Tooltip title={title}><Paragraph style={{ marginTop: '0px', marginBottom: '0px' }} ellipsis>{title}</Paragraph></Tooltip> : text
+        });
       }
-      return { ...col, ...colum };
+      return { ...col, ...column };
     });
 
     // 查询小说列表
@@ -417,10 +446,10 @@ export default class XiuXingRiZhi extends PureComponent {
             <Row
               key={key}
               gutter={{md: mdVal, lg: 24, xl: 20,}}
-              style={{ width: '100%' }}
+              style={{ width: '100%', marginLeft: '0px', marginRight: '0px' }}
             >
               {rows.map(col => (
-                <Col key={col.columnCode} md={8} sm={24}>
+                <Col key={col.columnCode} md={8} sm={24} style={{ paddingLeft: '0px', paddingRight: '0px' }}>
                   <AutoFormRow formItemLayout={formItemLayout} column={col} searchArea />
                 </Col>
               ))}
@@ -608,7 +637,7 @@ export default class XiuXingRiZhi extends PureComponent {
               {this.renderToolbar()}
             </div>
             <StandardTable
-              scroll={{ x: '150%' }}
+              scroll={{ x: 'max-content' }}
               loading={currentModel !== 'add' && loadingModel === 'list' ? loading : false}
               selectedRows={selectedRows}
               data={datas}
