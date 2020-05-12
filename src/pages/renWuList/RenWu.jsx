@@ -177,7 +177,8 @@ export default class RenWu extends PureComponent {
   }
 
   async handleAddPlatService(params) {
-    await this.operatePlatServiceData('add', params);
+    const values = { ...params, renWuFenLei: params.renWuFenLei ? params.renWuFenLei.join(',') : null };
+    await this.operatePlatServiceData('add', values);
     message.success('新增人物信息成功');
     this.handleFormReset();
   }
@@ -798,7 +799,7 @@ export default class RenWu extends PureComponent {
           formColumnList={this.editColumns}
           currentModel={currentModel}
           title="编辑人物"
-          initialValues={data ? {...data, xiaoShuoId: currentRowInfo.xiaoShuoId} : {}}
+          initialValues={data ? {...data, xiaoShuoId: currentRowInfo.xiaoShuoId, renWuFenLei: currentRowInfo.renWuFenLei ? currentRowInfo.renWuFenLei.split(',') : []} : {}}
           showDialog
           visible
           onSubmit={this.handleAddPlatService.bind(this)}

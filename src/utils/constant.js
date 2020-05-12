@@ -72,3 +72,8 @@ export function gongFaFenLeiConstant() {
 export function renWuStateConstant() {
   return ['已死亡'].map(data => ({ dataCode: data, dataName: data }));
 }
+
+// 人物分类
+export function renWuFenLeiConstant() {
+  return ['人'].map(data => ({ dataCode: data, dataName: data }));
+}

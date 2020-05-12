@@ -1,5 +1,6 @@
 import {
-  danWeiConstant, gongFaFenLeiConstant, jiaGouFenLeiConstant, lingWuFenLeiConstant, renWuStateConstant,
+  danWeiConstant, gongFaFenLeiConstant, jiaGouFenLeiConstant, lingWuFenLeiConstant, renWuFenLeiConstant,
+  renWuStateConstant,
   shengDiaoConstant,
   yaoShouFenLeiConstant,
   ziJiConstant, zongMenFenLeiConstant
@@ -310,6 +311,7 @@ export function getRenWuColumns() {
   const renWuColumns = [
     { sortField: 'N', listField: 'Y', editField: 'N', addField: 'N', profileField: 'Y', searchFlag: 'Y', requiredFlag: 'Y', hiddenField: 'N', displayType: 'I', valueType: 'S', columnName: '人物代码', columnCode: 'renWuCode', columnWidth: '90px' },
     { sortField: 'N', listField: 'Y', editField: 'Y', addField: 'Y', profileField: 'Y', searchFlag: 'Y', requiredFlag: 'Y', hiddenField: 'N', displayType: 'I', valueType: 'S', columnName: '人物名称', columnCode: 'renWuName', columnWidth: '110px' },
+    { sortField: 'N', listField: 'Y', editField: 'Y', addField: 'Y', profileField: 'Y', searchFlag: 'Y', requiredFlag: 'Y', hiddenField: 'N', displayType: 'MS', valueType: 'S', columnName: '人物分类', columnCode: 'renWuFenLei', columnWidth: '110px', valueList: `constant|${JSON.stringify(renWuFenLeiConstant())}` },
     { sortField: 'N', listField: 'Y', editField: 'Y', addField: 'Y', profileField: 'Y', searchFlag: 'Y', requiredFlag: 'N', hiddenField: 'N', displayType: 'S', valueType: 'S', columnName: '人物状态', columnCode: 'renWuState', columnWidth: '90px', valueList: `constant|${JSON.stringify(renWuStateConstant())}` },
     { sortField: 'N', listField: 'Y', editField: 'Y', addField: 'Y', profileField: 'Y', searchFlag: 'Y', requiredFlag: 'N', hiddenField: 'N', displayType: 'T', valueType: 'S', columnName: '人物属性', columnCode: 'renWuShuXing' },
     { sortField: 'N', listField: 'Y', editField: 'Y', addField: 'Y', profileField: 'Y', searchFlag: 'Y', requiredFlag: 'N', hiddenField: 'N', displayType: 'T', valueType: 'S', columnName: '人物描述', columnCode: 'renWuMiaoShu' },
