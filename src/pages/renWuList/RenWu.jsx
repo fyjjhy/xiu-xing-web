@@ -428,10 +428,36 @@ export default class RenWu extends PureComponent {
   }
 
   // 处理仓库字段
-  handleCangKuColumns = () => getCangKuColumns().filter(column => column.addField === 'Y');
+  handleCangKuColumns = () => getCangKuColumns().filter(column => column.addField === 'Y').map(col => {
+    const column = {};
+    if (col.columnCode === 'lingWu') {
+      column.addDisplayField = 'Y';
+    } else if (col.columnCode === 'lingWuFenLei') {
+      column.addDisplayField = 'Y';
+    } else if (col.columnCode === 'lingWuShuXing') {
+      column.addDisplayField = 'Y';
+    } else if (col.columnCode === 'lingWuState') {
+      column.addDisplayField = 'Y';
+    } else if (col.columnCode === 'suoShuZhe') {
+      column.addDisplayField = 'Y';
+    } else if (col.columnCode === 'xiaoShuoId') {
+      column.addDisplayField = 'Y';
+    } else if (col.columnCode === 'miaoShu') {
+      column.addDisplayField = 'Y';
+    }
+    return { ...col, ...column };
+  });
 
   // 处理修行日志字段
-  handleXiuXingRiZhiColumns = () => getXiuXingRiZhiColumns().filter(column => column.addField === 'Y');
+  handleXiuXingRiZhiColumns = () => getXiuXingRiZhiColumns().filter(column => column.addField === 'Y').map(col => {
+    const column = {};
+    if (col.columnCode === 'cangKuId') {
+      column.addDisplayField = 'Y'
+    } else if (col.columnCode === 'xiaoShuoId') {
+      column.addDisplayField = 'Y'
+    }
+    return { ...col, ...column };
+  });
 
   // 处理修行日志字段
   handleXiuXingRiZhiCols = () => getXiuXingRiZhiColumns().filter(column => column.profileField === 'Y').map(column => {
