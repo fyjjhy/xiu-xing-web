@@ -406,6 +406,8 @@ export default class RenWu extends PureComponent {
         const title = renderMiaoShu(text);
         return text ? <Tooltip title={title}><Paragraph style={{ width: '150px', marginTop: '0px', marginBottom: '0px' }} ellipsis>{title}</Paragraph></Tooltip> : text
       });
+    } else if (col.dataIndex === 'xiaoShuoId') {
+      column.render = text => this.renderXiaoShuo(text);
     }
     return {...col, ...column};
   })
@@ -565,6 +567,7 @@ export default class RenWu extends PureComponent {
         });
       }
     }
+    this.handleFormReset();
   }
 
   renderXiaoShuo(text) {

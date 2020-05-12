@@ -25,6 +25,7 @@ export default class HisModal extends PureComponent {
       >
         <Table
           rowKey="id"
+          scroll={{ x: '110%' }}
           columns={columns}
           dataSource={dataSource || []}
         />

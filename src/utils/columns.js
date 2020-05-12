@@ -10,6 +10,12 @@ import {
 export function renWuHisColumns() {
   const renWuHis = [
     {
+      title: '更新时间',
+      dataIndex: 'updateTime',
+      key: 'updateTime',
+      width: '160px',
+    },
+    {
       title: '操作代码',
       dataIndex: 'renWuHisCode',
       key: 'renWuHisCode',
@@ -19,6 +25,12 @@ export function renWuHisColumns() {
       title: '人物名称',
       dataIndex: 'renWuName',
       key: 'renWuName',
+      width: '90px',
+    },
+    {
+      title: '人物分类',
+      dataIndex: 'renWuFenLei',
+      key: 'renWuFenLei',
       width: '90px',
     },
     {
@@ -44,12 +56,6 @@ export function renWuHisColumns() {
       dataIndex: 'xiaoShuoId',
       key: 'xiaoShuoId',
       width: '110px',
-    },
-    {
-      title: '更新时间',
-      dataIndex: 'updateTime',
-      key: 'updateTime',
-      width: '160px',
     }];
   return renWuHis;
 }
