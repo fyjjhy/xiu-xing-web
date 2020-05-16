@@ -71,7 +71,7 @@ class StandardForm extends PureComponent {
       <FormItem {...layout} style={{ marginTop: 32 }}>
         <Button type="primary" htmlType="submit" loading={loading} onClick={e => { this.handleSubmit(e); }}>提交</Button>
         {expandButton ? expandButton(current) : null}
-        <Button loading={loading} style={{ marginLeft: 8 }} onClick={() => { this.handleCancel(); }}>取消</Button>
+        <Button style={{ marginLeft: 8 }} onClick={() => { this.handleCancel(); }}>取消</Button>
       </FormItem>
     );
   }

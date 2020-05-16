@@ -28,6 +28,11 @@ export function renWuHisColumns() {
       width: '90px',
     },
     {
+      title: '曾用名',
+      dataIndex: 'cengYongMing',
+      key: 'cengYongMing',
+    },
+    {
       title: '人物分类',
       dataIndex: 'renWuFenLei',
       key: 'renWuFenLei',
@@ -153,7 +158,7 @@ export function getLingCaiColumns() {
     { addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'T', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnName: '灵材描述', columnCode: 'lingCaiMiaoShu' },
     { addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'S', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnName: '小说', columnWidth: '175px', columnCode: 'xiaoShuoId', valueList: 'service|/chenXian/chen/xian/xiaoShuo' },
     { addField: 'N', editField: 'N', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnName: '更新时间', columnCode: 'updateTime', columnWidth: '160px' },
-    { addField: 'N', editField: 'N', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'Y', columnName: '操作', columnCode: 'id', columnWidth: '110px' },
+    { addField: 'N', editField: 'N', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'N', profileField: 'N', columnName: '操作', columnCode: 'id', columnWidth: '110px' },
   ];
   return lingCaiColumns;
 }
@@ -317,6 +322,7 @@ export function getRenWuColumns() {
   const renWuColumns = [
     { sortField: 'N', listField: 'Y', editField: 'N', addField: 'N', profileField: 'Y', searchFlag: 'Y', requiredFlag: 'Y', hiddenField: 'N', displayType: 'I', valueType: 'S', columnName: '人物代码', columnCode: 'renWuCode', columnWidth: '90px' },
     { sortField: 'N', listField: 'Y', editField: 'Y', addField: 'Y', profileField: 'Y', searchFlag: 'Y', requiredFlag: 'Y', hiddenField: 'N', displayType: 'I', valueType: 'S', columnName: '人物名称', columnCode: 'renWuName', columnWidth: '110px' },
+    { sortField: 'N', listField: 'Y', editField: 'Y', addField: 'Y', profileField: 'Y', searchFlag: 'Y', requiredFlag: 'Y', hiddenField: 'N', displayType: 'I', valueType: 'S', columnName: '曾用名', columnCode: 'cengYongMing', columnWidth: '110px' },
     { sortField: 'N', listField: 'Y', editField: 'Y', addField: 'Y', profileField: 'Y', searchFlag: 'Y', requiredFlag: 'Y', hiddenField: 'N', displayType: 'MS', valueType: 'S', columnName: '人物分类', columnCode: 'renWuFenLei', columnWidth: '110px', valueList: `constant|${JSON.stringify(renWuFenLeiConstant())}` },
     { sortField: 'N', listField: 'Y', editField: 'Y', addField: 'Y', profileField: 'Y', searchFlag: 'Y', requiredFlag: 'N', hiddenField: 'N', displayType: 'S', valueType: 'S', columnName: '人物状态', columnCode: 'renWuState', columnWidth: '90px', valueList: `constant|${JSON.stringify(renWuStateConstant())}` },
     { sortField: 'N', listField: 'Y', editField: 'Y', addField: 'Y', profileField: 'Y', searchFlag: 'Y', requiredFlag: 'N', hiddenField: 'N', displayType: 'T', valueType: 'S', columnName: '人物属性', columnCode: 'renWuShuXing' },

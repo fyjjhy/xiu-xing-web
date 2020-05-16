@@ -4,11 +4,17 @@ import { Modal, Table } from 'antd';
 export default class TemplateModal extends PureComponent {
   state = {
     selectedRow: {},
+    selectedRowKeys: [],
+  }
+
+  handleSelectRow = (record) => {
+    this.setState({ selectedRow: record, selectedRowKeys: [record.xiuXingCode] });
   }
 
   handleSelectedRows = (selectedRows) => {
     this.setState({
       selectedRow: selectedRows[0],
+      selectedRowKeys: [selectedRows[0].xiuXingCode]
     });
   }
 
@@ -30,7 +36,7 @@ export default class TemplateModal extends PureComponent {
 
   render() {
     const { width, title, templateColumns, templateDataSource, loading, scroll } = this.props;
-    const { selectedRow } = this.state;
+    const { selectedRow, selectedRowKeys } = this.state;
     return (
       <Modal
         width={width}
@@ -45,11 +51,17 @@ export default class TemplateModal extends PureComponent {
         <Table
           rowKey="xiuXingCode"
           rowSelection={{
+            selectedRowKeys,
             type: "radio",
-            onChange: (selectedRowKeys, selectedRows) => {
+            onChange: (rowKeys, selectedRows) => {
               this.handleSelectedRows(selectedRows);
             },
           }}
+          onRow={(record) => ({
+            onClick: () => {
+              this.handleSelectRow(record);
+            },
+          })}
           scroll={scroll || {}}
           columns={templateColumns}
           dataSource={templateDataSource || []}

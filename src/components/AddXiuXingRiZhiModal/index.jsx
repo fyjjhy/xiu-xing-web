@@ -7,7 +7,6 @@ import {renderMiaoShu} from "../../utils/utils";
 
 const { TabPane } = Tabs;
 const { Paragraph } = Typography;
-let templateColumns = getXiuXingRiZhiColumns();
 
 export default class AddXiuXingRiZhiModal extends PureComponent {
   state = {
@@ -15,8 +14,47 @@ export default class AddXiuXingRiZhiModal extends PureComponent {
     currentForm: '',
   }
 
-  UNSAFE_componentWillMount() {
-    templateColumns = templateColumns.filter(column => column.templateListField === 'Y').map(column => {
+  // 仓库信息提交
+  handleCangKuOnSubmit = params => {
+    const { onOk } = this.props;
+    if (onOk) {
+      onOk(params);
+    }
+  }
+
+  // 选择模板
+  handleSelectTemplate = async form => {
+    const { xiuXingRiZhi } = this.props;
+    if (xiuXingRiZhi) {
+      await xiuXingRiZhi();
+    }
+    this.setState({
+      currentModel: 'template',
+      currentForm: form,
+    });
+  }
+
+  handleExpandButton = form => (
+      <Button key="select" style={{ marginLeft: 8 }} onClick={() => { this.handleSelectTemplate(form); }}>选择模板</Button>
+    )
+
+  // 仓库信息取消
+  handleCangKuOnCancel = () => {
+    const { onCancel } = this.props;
+    if (onCancel) {
+      onCancel();
+    }
+  }
+
+  handleCancel = () => {
+    const { onCancel } = this.props;
+    if (onCancel) {
+      onCancel();
+    }
+  }
+
+  // 获取模板字段
+  handleTemplateColumns = () => getXiuXingRiZhiColumns().filter(column => column.templateListField === 'Y').map(column => {
       const listColumn = {
         title: column.columnName,
         dataIndex: column.columnCode,
@@ -53,47 +91,7 @@ export default class AddXiuXingRiZhiModal extends PureComponent {
         });
       }
       return {...col, ...column};
-    });
-  }
-
-  // 仓库信息提交
-  handleCangKuOnSubmit = params => {
-    const { onOk } = this.props;
-    if (onOk) {
-      onOk(params);
-    }
-  }
-
-  // 选择模板
-  handleSelectTemplate = async (form) => {
-    const { xiuXingRiZhi } = this.props;
-    if (xiuXingRiZhi) {
-      await xiuXingRiZhi();
-    }
-    this.setState({
-      currentModel: 'template',
-      currentForm: form,
-    });
-  }
-
-  handleExpandButton = (form) => (
-      <Button key="select" style={{ marginLeft: 8 }} onClick={() => { this.handleSelectTemplate(form); }}>选择模板</Button>
-    )
-
-  // 仓库信息取消
-  handleCangKuOnCancel = () => {
-    const { onCancel } = this.props;
-    if (onCancel) {
-      onCancel();
-    }
-  }
-
-  handleCancel = () => {
-    const { onCancel } = this.props;
-    if (onCancel) {
-      onCancel();
-    }
-  }
+    })
 
   handleTemplateOnCancel = () => {
     this.setState({
@@ -125,7 +123,7 @@ export default class AddXiuXingRiZhiModal extends PureComponent {
           scroll={{ x: '120%' }}
           width={1000}
           title="模板"
-          templateColumns={templateColumns}
+          templateColumns={this.handleTemplateColumns()}
           templateDataSource={xiuXingRiZhiList}
           onCancel={this.handleTemplateOnCancel}
           onSubmit={this.handleTemplateOnSubmit}
@@ -141,8 +139,9 @@ export default class AddXiuXingRiZhiModal extends PureComponent {
       <Modal
         width={width}
         title={title}
-        maskClosable={false}
         visible
+        destroyOnClose
+        maskClosable={false}
         confirmLoading={loading}
         onCancel={() => { this.handleCancel(); }}
         footer={null}
@@ -153,34 +152,38 @@ export default class AddXiuXingRiZhiModal extends PureComponent {
             tab="仓库信息"
             key="cangKu"
           >
-            <StandardForm
-              formColumnList={cangKuColumns}
-              currentModel='add'
-              initialValues={cangKuInitialValues}
-              showDialog={false}
-              onSubmit={this.handleCangKuOnSubmit}
-              onCancel={this.handleCangKuOnCancel}
-            />
+            {currentTab === 'cangKu' ? (
+              <StandardForm
+                formColumnList={cangKuColumns}
+                currentModel='add'
+                initialValues={cangKuInitialValues}
+                showDialog={false}
+                onSubmit={this.handleCangKuOnSubmit}
+                onCancel={this.handleCangKuOnCancel}
+              />
+            ) : ''}
           </TabPane>
           <TabPane
             tab="日志信息"
             disabled={currentTab === 'cangKu'}
             key="xiuXingRiZhi"
           >
-            <StandardForm
-              formItemLayout={{
-                labelCol: { xs: { span: 24 }, sm: { span: 7 } },
-                wrapperCol: { xs: { span: 24 }, sm: { span: 12 }, md: { span: 12 } },
-              }}
-              submitFormLayout={{wrapperCol: { xs: { span: 24, offset: 0 }, sm: { span: 12, offset: 7 } } }}
-              formColumnList={xiuXingRiZhiColumns}
-              currentModel='add'
-              initialValues={xiuXingRiZhiInitialValues}
-              showDialog={false}
-              onSubmit={this.handleCangKuOnSubmit}
-              onCancel={this.handleCangKuOnCancel}
-              expandButton={this.handleExpandButton}
-            />
+            {currentTab === 'xiuXingRiZhi' ? (
+              <StandardForm
+                formItemLayout={{
+                  labelCol: { xs: { span: 24 }, sm: { span: 7 } },
+                  wrapperCol: { xs: { span: 24 }, sm: { span: 12 }, md: { span: 12 } },
+                }}
+                submitFormLayout={{wrapperCol: { xs: { span: 24, offset: 0 }, sm: { span: 12, offset: 7 } } }}
+                formColumnList={xiuXingRiZhiColumns}
+                currentModel='add'
+                initialValues={xiuXingRiZhiInitialValues}
+                showDialog={false}
+                onSubmit={this.handleCangKuOnSubmit}
+                onCancel={this.handleCangKuOnCancel}
+                expandButton={this.handleExpandButton}
+              />
+            ) : ''}
           </TabPane>
         </Tabs>
         {this.renderTemplate()}
