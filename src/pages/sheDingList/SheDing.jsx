@@ -530,7 +530,7 @@ export default class SheDing extends PureComponent {
 
   // 点击打开新增模态框
   renderEditDialog() {
-    const { currentModel } = this.state;
+    const { currentModel, currentRowInfo } = this.state;
     if (currentModel === 'listEdit') {
       const { sheDing: { data  } } = this.props;
       return (
@@ -538,7 +538,7 @@ export default class SheDing extends PureComponent {
           formColumnList={this.editColumns}
           currentModel={currentModel}
           title="编辑设定"
-          initialValues={data || {}}
+          initialValues={data ? { ...data, xiaoShuoId: currentRowInfo.xiaoShuoId } : {}}
           showDialog
           visible
           onSubmit={this.handleAddPlatService.bind(this)}

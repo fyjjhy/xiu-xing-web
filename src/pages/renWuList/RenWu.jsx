@@ -399,7 +399,7 @@ export default class RenWu extends PureComponent {
     } else if (col.dataIndex === 'renWuMiaoShu') {
       column.render = (text => {
         const title = renderMiaoShu(text);
-        return text ? <Tooltip title={title}><Paragraph style={{ width: '200px', marginTop: '0px', marginBottom: '0px' }} ellipsis>{title}</Paragraph></Tooltip> : text
+        return text && text.length > 20 ? <Tooltip title={title}><Paragraph style={{ width: '300px', marginTop: '0px', marginBottom: '0px' }} ellipsis>{title}</Paragraph></Tooltip> : text
       });
     } else if (col.dataIndex === 'renWuShuXing') {
       column.render = (text => {
@@ -544,6 +544,7 @@ export default class RenWu extends PureComponent {
         payload: params,
       });
       const { cangKu: { data } } = this.props;
+      console.log('仓库信息:', data, currentTab, params);
       if (data && Object.keys(data).length > 0) {
         this.setState({
           currentTab: 'xiuXingRiZhi',
@@ -566,8 +567,8 @@ export default class RenWu extends PureComponent {
           currentModel: 'list',
         });
       }
+      this.handleFormReset();
     }
-    this.handleFormReset();
   }
 
   renderXiaoShuo(text) {
@@ -935,7 +936,7 @@ export default class RenWu extends PureComponent {
               {this.renderToolbar()}
             </div>
             <StandardTable
-              scroll={{ x: '120%' }}
+              scroll={{ x: '150%' }}
               loading={currentModel !== 'add' && loadingModel === 'list' ? loading : false}
               selectedRows={selectedRows}
               data={datas}
