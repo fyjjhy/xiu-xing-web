@@ -38,11 +38,11 @@ export function zongMenFenLeiConstant() {
 // 声调
 export function shengDiaoConstant() {
   const shengDiao = [
-    { dataCode: 0, dataName: '轻声' },
-    { dataCode: 1, dataName: '第一声' },
-    { dataCode: 2, dataName: '第二声' },
-    { dataCode: 3, dataName: '第三声' },
-    { dataCode: 4, dataName: '第四声' }
+    { dataCode: '0', dataName: '轻声' },
+    { dataCode: '1', dataName: '第一声' },
+    { dataCode: '2', dataName: '第二声' },
+    { dataCode: '3', dataName: '第三声' },
+    { dataCode: '4', dataName: '第四声' }
   ];
   return shengDiao;
 }
@@ -65,7 +65,7 @@ export function yaoShouFenLeiConstant() {
 
 // 功法分类
 export function gongFaFenLeiConstant() {
-  return ['剑法', '掌法', '身法', '步法'].map(data => ({ dataCode: data, dataName: data }));
+  return ['剑法', '掌法', '身法', '步法', '暗器'].map(data => ({ dataCode: data, dataName: data }));
 }
 
 // 人物状态

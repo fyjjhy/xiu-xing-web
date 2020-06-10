@@ -54,4 +54,18 @@ const request = extend({
   // 默认错误处理
   credentials: 'include', // 默认请求是否带上cookie
 });
+
+request.interceptors.request.use((url, options) => {
+  const headers = {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+  };
+  return (
+    {
+      url,
+      options: { ...options, headers },
+    }
+  );
+});
+
 export default request;

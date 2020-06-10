@@ -130,7 +130,8 @@ export default {
                 { name: 'yaoShou', path: '/yaoShouList', component: './yaoShouList/YaoShou' },
                 { name: 'zhenFa', path: '/zhenFaList', component: './zhenFaList/ZhenFa' },
                 { name: 'qiTaLingWu', path: '/qiTaLingWuList', component: './qiTaLingWuList/QiTaLingWu' },
-                { name: 'renWu', path: '/renWuList', component: './renWuList/RenWu' },
+                // { name: 'renWu', path: '/renWuList', component: './renWuList/RenWu' },
+                { name: 'renWu', path: '/renWu', component: './renWu/RenWu' },
                 { name: 'diMing', path: '/diMingList', component: './diMingList/DiMing' },
                 { name: 'baiJiaXing', path: '/baiJiaXingList', component: './baiJiaXingList/BaiJiaXing' },
                 { name: 'zongMen', path: '/zongMenList', component: './zongMenList/ZongMen' },
@@ -138,7 +139,8 @@ export default {
                 { name: 'jingJie', path: '/jingJieList', component: './jingJieList/JingJie' },
                 { name: 'pinJi', path: '/pinJiList', component: './pinJiList/PinJi' },
                 { name: 'xiaoShuo', path: '/xiaoShuoList', component: './xiaoShuoList/XiaoShuo' },
-                { name: 'ziDian', path: '/ziDianList', component: './ziDianList/ZiDian' },
+                // { name: 'ziDian', path: '/ziDianList', component: './ziDianList/ZiDian' },
+                { name: 'ziDian', path: '/ziDianList', component: './ziDian/ZiDian' },
               ],
             },
             {
@@ -222,11 +224,11 @@ export default {
   },
   // proxy: proxy[REACT_APP_ENV || 'dev'],
   proxy: {
-    '/chenXian': {
-      target: 'http://localhost:8888/chenXian',
+    '/xiuXing': {
+      target: 'http://localhost:8888/xiuXing',
       changeOrigin: true,
       pathRewrite: {
-        '^/chenXian': '',
+        '^/xiuXing': '',
       },
     },
   },

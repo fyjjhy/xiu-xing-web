@@ -127,7 +127,7 @@ export default class ZiDian extends PureComponent {
     });
 
     // 查询小说列表
-    this.queryXiaoShuoList();
+    // this.queryXiaoShuoList();
   }
 
   componentDidMount() {

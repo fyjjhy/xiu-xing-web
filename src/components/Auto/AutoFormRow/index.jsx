@@ -586,22 +586,22 @@ export default class AutoFormRow extends PureComponent {
 
   renderFormItemText = column => {
     const {props} = this;
-    const {initialValue, formItemLayout} = props;
+    const {initialValue} = props;
     return (
-      <FormItem {...formItemLayout} style={{marginBottom: 0}} label={column.columnName} name={column.columnCode}>
+      <FormItem style={{marginBottom: 0}} label={column.columnName} name={column.columnCode}>
         <span>{this.formatValue(column, initialValue)}</span>
       </FormItem>
     );
   }
 
   render() {
-    const {column, currentModel} = this.props;
-    const {editField} = column;
+    const { column, currentModel } = this.props;
+    const { editDisplayFlag, editable } = column;
     if (currentModel === 'add') {
       return this.renderFormItem(column);
     }
     if (currentModel === 'edit') {
-      return editField !== 'Y' ? this.renderFormItemText(column) : this.renderFormItem(column);
+      return (editDisplayFlag === 'Y' && editable !== 'Y') ? (this.renderFormItemText(column)) : (this.renderFormItem(column));
     }
     return this.renderFormItem(column);
   }
