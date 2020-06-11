@@ -6,6 +6,7 @@ import { Typography, Tooltip } from 'antd';
 import StandardPager from "../../template/StandardPager";
 import {ziDianMetaModel} from "../../json/ziDian";
 import {renderMiaoShu} from "../../utils/utils";
+import {getDictDataTransferData} from "../../services/loadData";
 
 const { Paragraph } = Typography;
 
@@ -15,6 +16,11 @@ const { Paragraph } = Typography;
   loading,
 }))
 export default class ZiDian extends PureComponent {
+  constructor(props){
+    super(props);
+    this.state = {...ziDianMetaModel()};
+  }
+
   // 字义
   renderXinHuaZiDian = text => {
     const title = renderMiaoShu(text);
@@ -42,21 +48,29 @@ export default class ZiDian extends PureComponent {
   // 详情字义
   renderProfileXinHuaZiDian = text => renderMiaoShu(text)
 
+  // 声调
+  renderShengDiao = text => {
+    const { dictList } = this.state;
+    const shengDiao = getDictDataTransferData("shengDiao", `${text}`, dictList);
+    return `${text}` ? shengDiao || text : text;
+  }
+
   render() {
-    const { props } = this;
+    const { props, state } = this;
     return (
       <PageHeaderWrapper>
         <StandardPager
           columnWidth="160px"
           fixed="right"
-          searchBtn="search"
+          // searchBtn="search"
+          renderShengDiao={this.renderShengDiao} // 声调
           renderProfileXinHuaZiDian={this.renderProfileXinHuaZiDian} // 详情字义
           renderZuCiWei={this.renderZuCiWei} // 组词尾
           renderZuCiZhong={this.renderZuCiZhong} // 组词中
           renderZuCiTou={this.renderZuCiTou} // 组词头
           renderXinHuaZiDian={this.renderXinHuaZiDian} // 字义
           scroll={{ x: '150%' }}
-          {...ziDianMetaModel()}
+          {...state}
           {...props}
         />
       </PageHeaderWrapper>

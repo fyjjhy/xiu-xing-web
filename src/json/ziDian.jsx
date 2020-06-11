@@ -280,12 +280,12 @@ const ziDian = {
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
+          "renderList": "renderShengDiao",
+          "renderProfile": "renderShengDiao",
           "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": "65px",
+          "columnWidth": "80px",
           "titleFlag": "N"
         },
         {

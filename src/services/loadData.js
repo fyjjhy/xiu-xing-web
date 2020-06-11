@@ -27,11 +27,11 @@ export function getQueryData(url) {
 }
 
 // 获取字典表中的对应值
-export function getDictDataTransferData(column, text, dictList) {
+export function getDictDataTransferData(dictCode, text, dictList) {
   if (!text) {
     return '-';
   }
-  const dictDataList = getDictData(column, dictList);
+  const dictDataList = getDictData(dictCode, dictList);
   if (dictDataList && dictDataList.length > 0) {
     const [currentDictData] = dictDataList.filter(dictData => {
       const { dataCode } = dictData;
