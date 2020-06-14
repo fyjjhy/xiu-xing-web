@@ -124,7 +124,7 @@ export function getFuLuColumns() {
 // 功法管理字段
 export function getGongFaColumns() {
   const gongFaColumns = [
-    { addField: 'N', editField: 'N', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnName: '功法代码', columnCode: 'gongFaCode', columnWidth: '90px' },
+      { addField: 'N', editField: 'N', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnName: '功法代码', columnCode: 'gongFaCode', columnWidth: '90px' },
     { addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'I', hiddenField: 'N', requiredFlag: 'Y', searchFlag: 'Y', profileField: 'Y', columnName: '功法名称', columnCode: 'gongFaName', columnWidth: '110px' },
     { addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'S', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnName: '功法分类', columnCode: 'gongFaFenLei', columnWidth: '90px', valueList: `constant|${JSON.stringify(gongFaFenLeiConstant())}` },
     { addField: 'Y', editField: 'Y', listField: 'Y', sortField: 'N', valueType: 'S', displayType: 'T', hiddenField: 'N', requiredFlag: 'N', searchFlag: 'Y', profileField: 'Y', columnName: '功法描述', columnCode: 'gongFaMiaoShu' },
