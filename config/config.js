@@ -118,7 +118,8 @@ export default {
               icon: 'table',
               routes: [
                 { name: 'xiuXingRiZhi', path: '/xiuXingRiZhiList', component: './xiuXingRiZhiList/XiuXingRiZhi' },
-                { name: 'cangKu', path: '/cangKuList', component: './cangKuList/CangKu' },
+                // { name: 'cangKu', path: '/cangKuList', component: './cangKuList/CangKu' },
+                { name: 'cangKu', path: '/cangKuList', component: './cangKu/CangKu' },
                 // { name: 'renWu', path: '/renWuList', component: './renWuList/RenWu' },
                 { name: 'renWu', path: '/renWu', component: './renWu/RenWu' },
                 // { name: 'diMing', path: '/diMingList', component: './diMingList/DiMing' },
