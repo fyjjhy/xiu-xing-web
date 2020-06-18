@@ -2,13 +2,14 @@ import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 
-import { Tooltip, Typography } from 'antd';
+import { Tooltip, Typography, Select } from 'antd';
 
 import StandardPager from "../../template/StandardPager";
 import {renderMiaoShu} from "../../utils/utils";
 import {cangKuMetaModel} from "../../json/cangKu";
 
 const { Paragraph } = Typography;
+const { Option } = Select;
 
 @connect(({ cangKu, loading }) => ({
   cangKu,
@@ -35,6 +36,30 @@ export default class CangKu extends PureComponent {
 
   }
 
+  renderJingJie = (FormItem, rowProps, rowState) => {
+    const { formItemLayout, column } = rowProps;
+    const { valueListData } = rowState;
+    return (
+      <FormItem {...formItemLayout} label={column.columnName} name={column.columnCode} rules={[]}>
+        <Select disabled={column.addDisplayField === 'Y'}  allowClear placeholder={`请选择${column.columnName}`}>
+          {valueListData ? valueListData.map(data => <Option key={data.dataCode} value={data.dataCode}>{data.dataName}</Option>) : ''}
+        </Select>
+      </FormItem>
+    );
+  }
+
+  renderPinJi = (FormItem, rowProps, rowState) => {
+    const { formItemLayout, column } = rowProps;
+    const { valueListData } = rowState;
+    return (
+      <FormItem {...formItemLayout} label={column.columnName} name={column.columnCode} rules={[]}>
+        <Select disabled={column.addDisplayField === 'Y'}  allowClear placeholder={`请选择${column.columnName}`}>
+          {valueListData ? valueListData.map(data => <Option key={data.dataCode} value={data.dataCode}>{data.dataName}</Option>) : ''}
+        </Select>
+      </FormItem>
+    );
+  }
+
   render() {
     const { props, state } = this;
     return (
@@ -42,6 +67,8 @@ export default class CangKu extends PureComponent {
         <StandardPager
           columnWidth="110px"
           scroll={{ x: '180%' }}
+          fixed="right"
+          customFormItem={{ jingJieId: this.renderJingJie, pinJiId: this.renderPinJi }}
           renderMiaoShu={this.renderMiaoShu}
           showTotal={this.showTotal}
           {...state}

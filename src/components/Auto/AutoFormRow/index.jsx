@@ -338,7 +338,7 @@ export default class AutoFormRow extends PureComponent {
     const {customFormItem, column} = this.props;
     if (customFormItem) {
       if (customFormItem[column.columnCode]) {
-        return customFormItem[column.columnCode](FormItem, this.props);
+        return customFormItem[column.columnCode](FormItem, this.props, this.state);
       }
     }
     return this.renderFormItemText(column);
@@ -563,7 +563,7 @@ export default class AutoFormRow extends PureComponent {
     } else {
       rules = this.getFormItemRules(column, currentModel);
     }
-    const {columnName, columnCode} = column;
+    const {columnName, columnCode, displayType} = column;
     // const options = {};
     // if (displayType === 'U') {
     //   options.getValueFromEvent = this.normFile.bind(null, displayType);
@@ -573,9 +573,9 @@ export default class AutoFormRow extends PureComponent {
     // } else {
     //   options.validateTrigger = 'onBlur';
     // }
-    // if (displayType === 'CF') {
-    //   return this.renderCustomFormItem();
-    // }
+    if (displayType === 'CF') {
+      return this.renderCustomFormItem();
+    }
     const { formItemLayout } = this.props;
     return (
       <FormItem {...formItemLayout} label={columnName} name={columnCode} rules={rules}>
