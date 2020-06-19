@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
@@ -11,14 +12,38 @@ import {cangKuMetaModel} from "../../json/cangKu";
 const { Paragraph } = Typography;
 const { Option } = Select;
 
-@connect(({ cangKu, loading }) => ({
+@connect(({ cangKu, jingJie, pinJi, loading }) => ({
   cangKu,
+  jingJie,
+  pinJi,
   loading,
 }))
 export default class CangKu extends PureComponent {
   constructor(props){
     super(props);
-    this.state = {...cangKuMetaModel()};
+    this.state = {
+      ...cangKuMetaModel(),
+      jingJieList: [],
+      pinJiList: [],
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { jingJie: { datas: { list: afterJingJieList } } } = nextProps;
+    const { jingJie: { datas: { list: beforeJingJieList } } } = this.props;
+    if (afterJingJieList !== beforeJingJieList) {
+      this.setState({
+        jingJieList: [...afterJingJieList],
+      });
+    }
+
+    const { pinJi: { datas: { list: afterPinJiList } } } = nextProps;
+    const { pinJi: { datas: { list: beforePinJiList } } } = this.props;
+    if (afterPinJiList !== beforePinJiList) {
+      this.setState({
+        pinJiList: [...afterPinJiList],
+      });
+    }
   }
 
   renderMiaoShu = text => {
@@ -36,24 +61,67 @@ export default class CangKu extends PureComponent {
 
   }
 
+  handleXiaoShuo = value => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'jingJie/query',
+      payload: { xiaoShuoId: value },
+    });
+
+    dispatch({
+      type: 'pinJi/query',
+      payload: { xiaoShuoId: value },
+    });
+  }
+
   renderJingJie = (FormItem, rowProps, rowState) => {
-    const { formItemLayout, column } = rowProps;
+    const { formItemLayout, column, form } = rowProps;
     const { valueListData } = rowState;
+    const { jingJieList } = this.state;
     return (
       <FormItem {...formItemLayout} label={column.columnName} name={column.columnCode} rules={[]}>
-        <Select disabled={column.addDisplayField === 'Y'}  allowClear placeholder={`请选择${column.columnName}`}>
-          {valueListData ? valueListData.map(data => <Option key={data.dataCode} value={data.dataCode}>{data.dataName}</Option>) : ''}
+        <Select allowClear placeholder={`请选择${column.columnName}`}>
+          {form && form.getFieldValue('xiaoShuoId') ? (
+            jingJieList && jingJieList.length > 0
+              ? (jingJieList.map(data => <Option key={data.dataCode} value={data.dataCode}>{data.dataName}</Option>))
+              : ''
+          ) : (
+            valueListData && valueListData.length > 0
+              ? valueListData.map(data => <Option key={data.dataCode} value={data.dataCode}>{data.dataName}</Option>)
+              : ''
+          )}
         </Select>
       </FormItem>
     );
   }
 
   renderPinJi = (FormItem, rowProps, rowState) => {
+    const { formItemLayout, column, form } = rowProps;
+    const { valueListData } = rowState;
+    const { pinJiList } = this.state;
+    return (
+      <FormItem {...formItemLayout} label={column.columnName} name={column.columnCode} rules={[]}>
+        <Select disabled={column.addDisplayField === 'Y'}  allowClear placeholder={`请选择${column.columnName}`}>
+          {form && form.getFieldValue('xiaoShuoId') ? (
+            pinJiList && pinJiList.length > 0
+              ? (pinJiList.map(data => <Option key={data.dataCode} value={data.dataCode}>{data.dataName}</Option>))
+              : ''
+          ) : (
+            valueListData && valueListData.length > 0
+              ? valueListData.map(data => <Option key={data.dataCode} value={data.dataCode}>{data.dataName}</Option>)
+              : ''
+          )}
+        </Select>
+      </FormItem>
+    );
+  }
+
+  renderXiaoShuo = (FormItem, rowProps, rowState) => {
     const { formItemLayout, column } = rowProps;
     const { valueListData } = rowState;
     return (
       <FormItem {...formItemLayout} label={column.columnName} name={column.columnCode} rules={[]}>
-        <Select disabled={column.addDisplayField === 'Y'}  allowClear placeholder={`请选择${column.columnName}`}>
+        <Select allowClear placeholder={`请选择${column.columnName}`} onChange={this.handleXiaoShuo}>
           {valueListData ? valueListData.map(data => <Option key={data.dataCode} value={data.dataCode}>{data.dataName}</Option>) : ''}
         </Select>
       </FormItem>
@@ -68,7 +136,7 @@ export default class CangKu extends PureComponent {
           columnWidth="110px"
           scroll={{ x: '180%' }}
           fixed="right"
-          customFormItem={{ jingJieId: this.renderJingJie, pinJiId: this.renderPinJi }}
+          customFormItem={{ jingJieId: this.renderJingJie, pinJiId: this.renderPinJi, xiaoShuoId: this.renderXiaoShuo }}
           renderMiaoShu={this.renderMiaoShu}
           showTotal={this.showTotal}
           {...state}
