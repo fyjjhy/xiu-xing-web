@@ -26,7 +26,7 @@ const cangKu = {
           "id": "82",
           "dictId": "10",
           "dataName": "妖兽",
-          "dataCode": "妖兽",
+          "dataCode": "yaoShou",
           "seq": 1,
           "spId": null,
           "version": 0
@@ -35,7 +35,7 @@ const cangKu = {
           "id": "83",
           "dictId": "10",
           "dataName": "符箓",
-          "dataCode": "符箓",
+          "dataCode": "fuLu",
           "seq": 2,
           "spId": null,
           "version": 0
@@ -44,7 +44,7 @@ const cangKu = {
           "id": "84",
           "dictId": "10",
           "dataName": "功法",
-          "dataCode": "功法",
+          "dataCode": "gongFa",
           "seq": 3,
           "spId": null,
           "version": 0
@@ -53,7 +53,7 @@ const cangKu = {
           "id": "85",
           "dictId": "10",
           "dataName": "灵材",
-          "dataCode": "灵材",
+          "dataCode": "lingCai",
           "seq": 4,
           "spId": null,
           "version": 0
@@ -62,7 +62,7 @@ const cangKu = {
           "id": "86",
           "dictId": "10",
           "dataName": "傀儡",
-          "dataCode": "傀儡",
+          "dataCode": "kuiLei",
           "seq": 5,
           "spId": null,
           "version": 0
@@ -71,7 +71,7 @@ const cangKu = {
           "id": "87",
           "dictId": "10",
           "dataName": "法术",
-          "dataCode": "法术",
+          "dataCode": "faShu",
           "seq": 6,
           "spId": null,
           "version": 0
@@ -80,7 +80,7 @@ const cangKu = {
           "id": "88",
           "dictId": "10",
           "dataName": "法器",
-          "dataCode": "法器",
+          "dataCode": "faQi",
           "seq": 7,
           "spId": null,
           "version": 0
@@ -89,7 +89,7 @@ const cangKu = {
           "id": "89",
           "dictId": "10",
           "dataName": "其他灵物",
-          "dataCode": "其他灵物",
+          "dataCode": "qiTaLingWu",
           "seq": 8,
           "spId": null,
           "version": 0
@@ -98,7 +98,7 @@ const cangKu = {
           "id": "90",
           "dictId": "10",
           "dataName": "灵丹",
-          "dataCode": "灵丹",
+          "dataCode": "lingDan",
           "seq": 9,
           "spId": null,
           "version": 0
@@ -118,6 +118,15 @@ const cangKu = {
       "spId": null,
       "version": 0,
       "dictDataList": [
+        {
+          "id": "144",
+          "dictId": "11",
+          "dataName": "组织",
+          "dataCode": "组织",
+          "seq": 5,
+          "spId": null,
+          "version": 0
+        },
         {
           "id": "91",
           "dictId": "11",
@@ -725,9 +734,9 @@ const cangKu = {
           "requiredFlag": "Y",
           "searchFlag": "N",
           "profileDisplayFlag": "Y",
-          "addTable": "N",
+          "addTable": "Y",
           "editDisplayFlag": "N",
-          "editable": "N",
+          "editable": "Y",
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",
