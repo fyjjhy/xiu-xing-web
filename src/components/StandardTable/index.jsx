@@ -44,8 +44,9 @@ class StandardTable extends PureComponent {
         total: selectedRows.reduce((sum, val) => sum + parseFloat(val[item.dataIndex], 10), 0),
       }));
 
-    if (this.props.onSelectRow) {
-      this.props.onSelectRow(selectedRows);
+    const { onSelectRow } = this.props;
+    if (onSelectRow) {
+      onSelectRow(selectedRows);
     }
 
     this.setState({ selectedRowKeys, needTotalList });
@@ -66,7 +67,7 @@ class StandardTable extends PureComponent {
 
   render() {
     const { selectedRowKeys, needTotalList } = this.state;
-    const { data: { list, pagination }, loading, columns, metaModel } = this.props;
+    const { data: { list, pagination }, loading, columns, metaModel, tableSelectType } = this.props;
 
     const paginationProps = {
       showSizeChanger: true,
@@ -76,6 +77,7 @@ class StandardTable extends PureComponent {
     };
 
     const rowSelection = {
+      type: tableSelectType || 'checkbox',
       fixed: true,
       selectedRowKeys,
       onChange: this.handleRowSelectChange,

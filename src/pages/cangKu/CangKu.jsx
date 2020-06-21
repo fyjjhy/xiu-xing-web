@@ -1,21 +1,24 @@
 /* eslint-disable no-nested-ternary */
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'dva';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 
-import { Tooltip, Typography, Select } from 'antd';
+import { Tooltip, Typography, Select, Button, Modal } from 'antd';
 
 import StandardPager from "../../template/StandardPager";
 import {renderMiaoShu} from "../../utils/utils";
 import {cangKuMetaModel} from "../../json/cangKu";
+import {Input} from "../../components/InputArea";
+import {renWuMetaModel} from "../../json/renWu";
 
 const { Paragraph } = Typography;
 const { Option } = Select;
 
-@connect(({ cangKu, jingJie, pinJi, loading }) => ({
+@connect(({ cangKu, jingJie, pinJi, renWu, loading }) => ({
   cangKu,
   jingJie,
   pinJi,
+  renWu,
   loading,
 }))
 export default class CangKu extends PureComponent {
@@ -25,8 +28,14 @@ export default class CangKu extends PureComponent {
       ...cangKuMetaModel(),
       jingJieList: [],
       pinJiList: [],
+      currentModel: null,
+      lingWuInfoVisible: false,
+      lingWuSelectedRow: {},
+      suoShuZheSelectedRow: {},
     };
   }
+
+  rowProps= {};
 
   componentWillReceiveProps(nextProps) {
     const { jingJie: { datas: { list: afterJingJieList } } } = nextProps;
@@ -72,6 +81,87 @@ export default class CangKu extends PureComponent {
       type: 'pinJi/query',
       payload: { xiaoShuoId: value },
     });
+  }
+
+  handleRenWuButton = () => {
+    this.setState({ currentModel: 'renWu', lingWuInfoVisible: true });
+  }
+
+  handleSuoShuZheButton = () => {
+    this.setState({ currentModel: 'renWu', lingWuInfoVisible: true });
+  }
+
+  handleLingWuInfoOnCancel = () => {
+    this.setState({ currentModel: null, lingWuInfoVisible: false });
+  }
+
+  handleLingWuInfoOnOk = () => {
+    console.log('rowProps:', this.rowProps);
+    const {form} = this.rowProps;
+    if (form && form.setFieldsValue) {
+      const { setFieldsValue, getFieldsValue } = form;
+      const { lingWuSelectedRow } = this.state;
+      console.log('cangKuState: ', lingWuSelectedRow, getFieldsValue());
+      setFieldsValue({
+        lingWuName: lingWuSelectedRow.renWuName,
+        lingWuFenLei: lingWuSelectedRow.renWuFenLei,
+        lingWuShuXing: lingWuSelectedRow.renWuShuXing,
+        lingWuState: lingWuSelectedRow.renWuState,
+        lingWuMiaoShu: lingWuSelectedRow.renWuMiaoShu,
+        xiaoShuoId: lingWuSelectedRow.xiaoShuoId,
+      });
+      if (lingWuSelectedRow.xiaoShuoId) {
+        this.handleXiaoShuo(lingWuSelectedRow.xiaoShuoId);
+      }
+    }
+    this.handleLingWuInfoOnCancel();
+  }
+
+
+  handleTableOnSelectRow = (selectedRows) => {
+    this.setState({ lingWuSelectedRow: selectedRows && selectedRows.length > 0 ? selectedRows[0] : {} });
+  }
+
+  renderRenWuShuXing = (text) => {
+    const title = renderMiaoShu(text);
+    return text && text.length > 15 ? <Tooltip title={title}><Paragraph style={{ marginTop: '0px', marginBottom: '0px' }} ellipsis={{ row: 1 }}>{text}</Paragraph></Tooltip> : text
+  }
+
+  renderRenWuMiaoShu = (text) => {
+    const title = renderMiaoShu(text);
+    return text && text.length > 20 ? <Tooltip title={title}><Paragraph style={{ marginTop: '0px', marginBottom: '0px' }} ellipsis={{ row: 1 }}>{text}</Paragraph></Tooltip> : text
+  }
+
+  renderLingWuName = (FormItem, rowProps) => {
+    const { formItemLayout, column } = rowProps;
+    this.rowProps = rowProps;
+    const rules = [{ required: column.requiredFlag === 'Y', message: column.errorText || '请填写正确的信息' }];
+    return (
+      <Fragment>
+        <FormItem {...formItemLayout} label="灵物">
+          <Button onClick={this.handleRenWuButton} type="primary">灵物信息选择</Button>
+        </FormItem>
+        <FormItem {...formItemLayout} label={column.columnName} name={column.columnCode} rules={rules}>
+          <Input placeholder={`请输入${column.columnName}`} />
+        </FormItem>
+      </Fragment>
+    );
+  }
+
+  renderSuoShuZhe = (FormItem, rowProps) => {
+    const { formItemLayout, column } = rowProps;
+    this.rowProps = rowProps;
+    const rules = [{ required: column.requiredFlag === 'Y', message: column.errorText || '请填写正确的信息' }];
+    return (
+      <Fragment>
+        <FormItem {...formItemLayout} label="所属者">
+          <Button onClick={this.handleSuoShuZheButton} type="primary">所属者信息选择</Button>
+        </FormItem>
+        <FormItem {...formItemLayout} label={column.columnName} name={column.columnCode} rules={rules}>
+          <Input placeholder={`请输入${column.columnName}`} />
+        </FormItem>
+      </Fragment>
+    );
   }
 
   renderJingJie = (FormItem, rowProps, rowState) => {
@@ -130,18 +220,48 @@ export default class CangKu extends PureComponent {
 
   render() {
     const { props, state } = this;
+    const { currentModel, lingWuInfoVisible, lingWuSelectedRow } = state;
     return (
       <PageHeaderWrapper>
         <StandardPager
           columnWidth="110px"
           scroll={{ x: '180%' }}
           fixed="right"
-          customFormItem={{ jingJieId: this.renderJingJie, pinJiId: this.renderPinJi, xiaoShuoId: this.renderXiaoShuo }}
+          customFormItem={{
+            jingJieId: this.renderJingJie,
+            pinJiId: this.renderPinJi,
+            xiaoShuoId: this.renderXiaoShuo,
+            lingWuName: this.renderLingWuName,
+            suoShuZhe: this.renderSuoShuZhe,
+          }}
           renderMiaoShu={this.renderMiaoShu}
           showTotal={this.showTotal}
           {...state}
           {...props}
         />
+        {currentModel === 'renWu' ? (
+          <Modal
+            okButtonProps={{ disabled: Object.keys(lingWuSelectedRow).length === 0 }}
+            title="灵物信息"
+            maskClosable={false}
+            visible={lingWuInfoVisible}
+            onOk={this.handleLingWuInfoOnOk}
+            onCancel={this.handleLingWuInfoOnCancel}
+            width={1000}
+          >
+            <StandardPager
+              columnWidth="160px"
+              fixed="right"
+              renderRenWuShuXing={this.renderRenWuShuXing}
+              renderRenWuMiaoShu={this.renderRenWuMiaoShu}
+              scroll={{ x: 'max-content' }}
+              {...renWuMetaModel()}
+              tableSelectType="radio"
+              onSelectRow={this.handleTableOnSelectRow}
+              {...props}
+            />
+          </Modal>
+        ) : ''}
       </PageHeaderWrapper>
     );
   }

@@ -602,7 +602,12 @@ export default class AutoTable extends PureComponent {
   }
 
   handleSelectRow = records => {
-    this.setState({ selectedRows: records });
+    this.setState({ selectedRows: records }, () => {
+      const { onSelectRow } = this.props;
+      if (onSelectRow) {
+        onSelectRow(records);
+      }
+    });
   }
 
   handleOnTableClick = record => {
