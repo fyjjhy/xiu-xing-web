@@ -70,16 +70,16 @@ export default class CangKu extends PureComponent {
 
   }
 
-  handleXiaoShuo = value => {
+  handleLingWuFenLei = value => {
     const { dispatch } = this.props;
     dispatch({
       type: 'jingJie/query',
-      payload: { xiaoShuoId: value },
+      payload: { jingJieFenLei: value },
     });
 
     dispatch({
       type: 'pinJi/query',
-      payload: { xiaoShuoId: value },
+      payload: { pinJiFenLei: value },
     });
   }
 
@@ -96,12 +96,10 @@ export default class CangKu extends PureComponent {
   }
 
   handleLingWuInfoOnOk = () => {
-    console.log('rowProps:', this.rowProps);
     const {form} = this.rowProps;
     if (form && form.setFieldsValue) {
-      const { setFieldsValue, getFieldsValue } = form;
+      const { setFieldsValue } = form;
       const { lingWuSelectedRow } = this.state;
-      console.log('cangKuState: ', lingWuSelectedRow, getFieldsValue());
       setFieldsValue({
         lingWuName: lingWuSelectedRow.renWuName,
         lingWuFenLei: lingWuSelectedRow.renWuFenLei,
@@ -110,8 +108,8 @@ export default class CangKu extends PureComponent {
         lingWuMiaoShu: lingWuSelectedRow.renWuMiaoShu,
         xiaoShuoId: lingWuSelectedRow.xiaoShuoId,
       });
-      if (lingWuSelectedRow.xiaoShuoId) {
-        this.handleXiaoShuo(lingWuSelectedRow.xiaoShuoId);
+      if (lingWuSelectedRow.renWuFenLei) {
+        this.handleLingWuFenLei(lingWuSelectedRow.renWuFenLei);
       }
     }
     this.handleLingWuInfoOnCancel();
@@ -206,12 +204,12 @@ export default class CangKu extends PureComponent {
     );
   }
 
-  renderXiaoShuo = (FormItem, rowProps, rowState) => {
+  renderLingWuFenLei = (FormItem, rowProps, rowState) => {
     const { formItemLayout, column } = rowProps;
     const { valueListData } = rowState;
     return (
       <FormItem {...formItemLayout} label={column.columnName} name={column.columnCode} rules={[]}>
-        <Select allowClear placeholder={`请选择${column.columnName}`} onChange={this.handleXiaoShuo}>
+        <Select allowClear placeholder={`请选择${column.columnName}`} onChange={this.handleLingWuFenLei}>
           {valueListData ? valueListData.map(data => <Option key={data.dataCode} value={data.dataCode}>{data.dataName}</Option>) : ''}
         </Select>
       </FormItem>
@@ -230,7 +228,7 @@ export default class CangKu extends PureComponent {
           customFormItem={{
             jingJieId: this.renderJingJie,
             pinJiId: this.renderPinJi,
-            xiaoShuoId: this.renderXiaoShuo,
+            lingWuFenLei: this.renderLingWuFenLei,
             lingWuName: this.renderLingWuName,
             suoShuZhe: this.renderSuoShuZhe,
           }}
@@ -241,6 +239,7 @@ export default class CangKu extends PureComponent {
         />
         {currentModel === 'renWu' ? (
           <Modal
+            bodyStyle={{ padding: 0 }}
             okButtonProps={{ disabled: Object.keys(lingWuSelectedRow).length === 0 }}
             title="灵物信息"
             maskClosable={false}

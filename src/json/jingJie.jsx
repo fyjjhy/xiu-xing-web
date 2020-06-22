@@ -8,7 +8,32 @@ const jingJie = {
   "stateTime": "2020-06-13 12:16:49",
   "seq": 6,
   "indexUrl": null,
-  "dictList": [],
+  "dictList": [
+    {
+      "id": "14",
+      "funcId": "6",
+      "dictName": "境界分类",
+      "dictCode": "jingJieFenLei",
+      "comments": null,
+      "category": null,
+      "modifyFlag": null,
+      "visiableFlag": null,
+      "seq": 1,
+      "spId": null,
+      "version": 0,
+      "dictDataList": [
+        {
+          "id": "145",
+          "dictId": "14",
+          "dataName": "妖兽",
+          "dataCode": "yaoShou",
+          "seq": 1,
+          "spId": null,
+          "version": 0
+        }
+      ]
+    }
+  ],
   "configList": [],
   "funcComponentList": [
     {
@@ -135,6 +160,37 @@ const jingJie = {
           "valueList": null,
           "seq": 5,
           "requiredFlag": "Y",
+          "searchFlag": "Y",
+          "profileDisplayFlag": "Y",
+          "addTable": "Y",
+          "editDisplayFlag": "N",
+          "editable": "Y",
+          "listDisplayFlag": "Y",
+          "exportDisplayFlag": "N",
+          "sortable": "N",
+          "renderList": null,
+          "renderProfile": null,
+          "renderEdit": null,
+          "primaryFlag": "N",
+          "feignFlag": "N",
+          "columnWidth": null,
+          "titleFlag": "N"
+        },
+        {
+          "id": "175",
+          "modelId": "6",
+          "columnName": "境界分类",
+          "columnCode": "jingJieFenLei",
+          "valueType": "S",
+          "defaultValue": null,
+          "modifyFlag": "N",
+          "displayType": "S",
+          "comments": null,
+          "errorText": null,
+          "validateRule": null,
+          "valueList": "dict|jingJieFenLei",
+          "seq": 6,
+          "requiredFlag": "N",
           "searchFlag": "Y",
           "profileDisplayFlag": "Y",
           "addTable": "Y",
