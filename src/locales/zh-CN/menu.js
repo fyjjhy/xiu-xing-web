@@ -3,6 +3,8 @@ export default {
   'menu.xiuXing': '修行信息',
   'menu.xiuXing.xiuXingRiZhi': '修行日志管理',
   'menu.xiuXing.cangKu': '仓库管理',
+  'menu.xiuXing.suoShu': '所属管理',
+  'menu.xiuXing.lingWu': '灵物管理',
   'menu.xiuXing.sheDing': '设定管理',
   'menu.xiuXing.fuLu': '符箓管理',
   'menu.xiuXing.faShu': '法术管理',

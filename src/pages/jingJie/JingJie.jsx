@@ -22,7 +22,7 @@ export default class JingJie extends PureComponent {
 
   renderMiaoShu = (text) => {
     const title = renderMiaoShu(text);
-    return text ? <Tooltip overlayStyle={{ maxWidth: '500px', width: '500px' }} title={title}><Paragraph style={{ maxWidth: '500px', marginTop: '0px', marginBottom: '0px' }} ellipsis={{ row: 1 }}>{text}</Paragraph></Tooltip> : text
+    return text && text.length > 50 ? <Tooltip overlayStyle={{ maxWidth: '500px', width: '500px' }} title={title}><Paragraph style={{ maxWidth: '500px', marginTop: '0px', marginBottom: '0px' }} ellipsis={{ row: 1 }}>{text}</Paragraph></Tooltip> : text
   }
 
   render() {

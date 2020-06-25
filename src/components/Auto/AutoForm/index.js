@@ -182,9 +182,10 @@ export default class AutoForm extends PureComponent {
   }
 
   renderDialogForm() {
-    const { visible, metaModel, title, addLoading } = this.props;
+    const { visible, metaModel, title, addLoading, autoFormApi } = this.props;
     return (
       <Modal
+        {...(autoFormApi || {})}
         title={title || metaModel.modelName}
         visible={visible}
         maskClosable={false}
