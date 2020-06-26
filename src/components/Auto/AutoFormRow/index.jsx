@@ -238,10 +238,10 @@ export default class AutoFormRow extends PureComponent {
     const [first, ...rest] = params;
     let head = first;
     if (rest.length > 0) {
-      const {rowInfo} = this.props;
+      const { data } = this.props;
       const values = {};
       rest.forEach(key => {
-        const row = rowInfo[key];
+        const row = data[key];
         if (row) {
           values[key] = row;
         }

@@ -270,6 +270,11 @@ export default class StandardPager extends PureComponent {
   handleResetDisplay = () => {
     this.setState({
       currentModel: null,
+    }, () => {
+      const { expandOnCancel } = this.props;
+      if (expandOnCancel) {
+        expandOnCancel();
+      }
     });
   }
 

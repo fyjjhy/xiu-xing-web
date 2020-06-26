@@ -30,6 +30,15 @@ const jingJie = {
           "seq": 1,
           "spId": null,
           "version": 0
+        },
+        {
+          "id": "166",
+          "dictId": "14",
+          "dataName": "地名",
+          "dataCode": "diMing",
+          "seq": 2,
+          "spId": null,
+          "version": 0
         }
       ]
     }
