@@ -240,12 +240,14 @@ export default class AutoFormRow extends PureComponent {
     if (rest.length > 0) {
       const { data } = this.props;
       const values = {};
-      rest.forEach(key => {
-        const row = data[key];
-        if (row) {
-          values[key] = row;
-        }
-      });
+      if (data && Object.keys(data).length > 0) {
+        rest.forEach(key => {
+          const row = data[key];
+          if (row) {
+            values[key] = row;
+          }
+        });
+      }
       head = `${head}?${stringify(values)}`;
     }
     let valueListData;

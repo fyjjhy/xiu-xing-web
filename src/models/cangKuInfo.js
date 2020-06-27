@@ -1,7 +1,7 @@
 import {createModel} from "../utils/metaModel";
 
 const Model = {
-  namespace: 'xiuXingRiZhi',
+  namespace: 'cangKuInfo',
 };
 const metaModel = createModel(Model.namespace);
 Model.state = Object.assign({}, metaModel.state, Model.state);
