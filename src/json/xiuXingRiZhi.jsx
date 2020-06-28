@@ -148,7 +148,7 @@ const xiuXingRiZhi = {
           "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
+          "columnWidth": "90px",
           "titleFlag": "N"
         },
         {
@@ -179,7 +179,7 @@ const xiuXingRiZhi = {
           "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
+          "columnWidth": "90px",
           "titleFlag": "N"
         },
         {
@@ -542,7 +542,7 @@ const xiuXingRiZhi = {
           "profileDisplayFlag": "Y",
           "addTable": "Y",
           "editDisplayFlag": "N",
-          "editable": "Y",
+          "editable": "N",
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",

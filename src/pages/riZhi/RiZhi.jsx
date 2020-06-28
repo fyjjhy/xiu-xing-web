@@ -9,38 +9,102 @@ import {renderMiaoShu} from "../../utils/utils";
 import {cangKuInfoMetaModel} from "../../json/cangKuInfo";
 import {xiuXingRiZhiMetaModel} from "../../json/xiuXingRiZhi";
 import {getFormItemRules, getPlaceHolder} from "../../utils/formItem";
+import {riZhiMuBanMetaModel} from "../../json/riZhiMuBan";
 
 const { Paragraph } = Typography;
 const { TextArea } = Input;
 const { Option } = Select;
 
-@connect(({ xiuXingRiZhi, cangKuInfo, loading }) => ({
+@connect(({ xiuXingRiZhi, cangKuInfo, riZhiMuBan, loading }) => ({
   xiuXingRiZhi,
   cangKuInfo,
+  riZhiMuBan,
   loading,
 }))
 export default class RiZhi extends PureComponent {
   constructor(props){
     super(props);
     this.state = {
-      cangKuModel: null,
+      cangKuRiZhiMuBanModel: null,
       cangKuInfoVisible: false,
       cangKuSelectedRow: {},
+      riZhiMuBanSelectedRow: {},
+      riZhiMuBanInfoVisible: false,
     };
   }
 
   rowProps= {};
+
+  handleRiZhiMuBanTableOnSelectRow = selectedRows => {
+    this.setState({ riZhiMuBanSelectedRow: selectedRows && selectedRows.length > 0 ? selectedRows[0] : {} });
+  }
 
   handleCangKuTableOnSelectRow = selectedRows => {
     this.setState({ cangKuSelectedRow: selectedRows && selectedRows.length > 0 ? selectedRows[0] : {} });
   }
 
   handleCangKuButton = () => {
-    this.setState({ cangKuModel: 'cangKu', cangKuInfoVisible: true });
+    this.setState({ cangKuRiZhiMuBanModel: 'cangKu', cangKuInfoVisible: true });
+  }
+
+  handleRiZhiMuBanButton = () => {
+    this.setState({ cangKuRiZhiMuBanModel: 'riZhiMuBan', riZhiMuBanInfoVisible: true });
+  }
+
+  handleRiZhiMuBanLinkButton = () => {
+    const { form } = this.rowProps;
+    if (form && form.setFieldsValue) {
+      const { setFieldsValue } = form;
+      setFieldsValue({
+        riZhiTime: null,
+        riZhiDiDian: null,
+        riZhiRenWu: null,
+        riZhiEvent: null,
+        riZhi: null,
+      });
+    }
+  }
+
+  handleCangKuLinkButton = () => {
+    const { form } = this.rowProps;
+    if (form && form.setFieldsValue) {
+      const { setFieldsValue } = form;
+      setFieldsValue({
+        cangKuId: null,
+        lingWuName: null,
+        lingWuFullName: null,
+        lingWuMiaoShu: null,
+        suoShuName: null,
+        suoShuFullName: null,
+        suoShuMiaoShu: null,
+        xiaoShuoId: null,
+      });
+    }
   }
 
   handleCangKuInfoOnCancel = () => {
-    this.setState({ cangKuModel: null, cangKuInfoVisible: false });
+    this.setState({ cangKuRiZhiMuBanModel: null, cangKuInfoVisible: false });
+  }
+
+  handleRiZhiMuBanInfoOnCancel = () => {
+    this.setState({ cangKuRiZhiMuBanModel: null, riZhiMuBanInfoVisible: false });
+  }
+
+  handleRiZhiMuBanInfoOnOk = () => {
+    const {form} = this.rowProps;
+    if (form && form.setFieldsValue) {
+      const { setFieldsValue } = form;
+      const { riZhiMuBanSelectedRow } = this.state;
+      setFieldsValue({
+        riZhiTime: riZhiMuBanSelectedRow.riZhiTime,
+        riZhiDiDian: riZhiMuBanSelectedRow.riZhiDiDian,
+        riZhiRenWu: riZhiMuBanSelectedRow.riZhiRenWu,
+        riZhiEvent: riZhiMuBanSelectedRow.riZhiEvent,
+        riZhi: riZhiMuBanSelectedRow.riZhi,
+        // suoShuId: cangKuSelectedRow.suoShuId,
+      });
+    }
+    this.handleRiZhiMuBanInfoOnCancel();
   }
 
   handleCangKuInfoOnOk = () => {
@@ -63,23 +127,6 @@ export default class RiZhi extends PureComponent {
     this.handleCangKuInfoOnCancel();
   }
 
-  handleCangKuLinkButton = () => {
-    const { form } = this.rowProps;
-    if (form && form.setFieldsValue) {
-      const { setFieldsValue } = form;
-      setFieldsValue({
-        cangKuId: null,
-        lingWuName: null,
-        lingWuFullName: null,
-        lingWuMiaoShu: null,
-        suoShuName: null,
-        suoShuFullName: null,
-        suoShuMiaoShu: null,
-        xiaoShuoId: null,
-      });
-    }
-  }
-
   renderMiaoShu = text => {
     const title = renderMiaoShu(text);
     return text && text.length > 15 ? <Tooltip title={title}><Paragraph style={{ width: '250px', marginTop: '0px', marginBottom: '0px' }} ellipsis={{ row: 1 }}>{text}</Paragraph></Tooltip> : text
@@ -98,13 +145,13 @@ export default class RiZhi extends PureComponent {
   // 日志时间
   renderRiZhiTime = (text) => {
     const title = renderMiaoShu(text);
-    return text ? <Tooltip title={title}><Paragraph style={{ marginTop: '0px', marginBottom: '0px' }} ellipsis>{title}</Paragraph></Tooltip> : text
+    return text && text.length > 15 ? <Tooltip title={title}><Paragraph style={{ marginTop: '0px', marginBottom: '0px' }} ellipsis>{title}</Paragraph></Tooltip> : text
   }
 
   // 日志地点
   renderRiZhiDiDian = (text) => {
     const title = renderMiaoShu(text);
-    return text ? <Tooltip title={title}><Paragraph style={{ marginTop: '0px', marginBottom: '0px' }} ellipsis>{title}</Paragraph></Tooltip> : text
+    return text && text.length > 15 ? <Tooltip title={title}><Paragraph style={{ marginTop: '0px', marginBottom: '0px' }} ellipsis>{title}</Paragraph></Tooltip> : text
   }
 
   // 日志人物
@@ -122,7 +169,7 @@ export default class RiZhi extends PureComponent {
   // 日志
   renderRiZhi = (text) => {
     const title = renderMiaoShu(text);
-    return text ? <Tooltip overlayStyle={{ maxWidth: '400px', width: '400px' }} title={title}><Paragraph style={{ marginTop: '0px', marginBottom: '0px' }} ellipsis>{title}</Paragraph></Tooltip> : text
+    return text && text.length > 20 ? <Tooltip overlayStyle={{ maxWidth: '400px', width: '400px' }} title={title}><Paragraph style={{ marginTop: '0px', marginBottom: '0px' }} ellipsis>{title}</Paragraph></Tooltip> : text
   }
 
   // 灵物全名
@@ -156,8 +203,8 @@ export default class RiZhi extends PureComponent {
     return (
       <Fragment>
         <FormItem {...formItemLayout} label={column.columnName}>
-          <Button onClick={this.handleCangKuButton} type="primary">日志模板选择</Button>
-          <Button onClick={this.handleCangKuLinkButton} type="link">清除日志模板</Button>
+          <Button onClick={this.handleRiZhiMuBanButton} type="primary">日志模板选择</Button>
+          <Button onClick={this.handleRiZhiMuBanLinkButton} type="link">清除日志模板</Button>
         </FormItem>
       </Fragment>
     );
@@ -203,7 +250,7 @@ export default class RiZhi extends PureComponent {
         name={column.columnCode}
         rules={searchArea ? [] : getFormItemRules(rowProps, column)}
       >
-        <TextArea disabled={currentModel === 'add'} placeholder={getPlaceHolder(rowProps, column)} />
+        <TextArea autoSize disabled={currentModel === 'add'} placeholder={getPlaceHolder(rowProps, column)} />
       </FormItem>
     );
   }
@@ -231,7 +278,7 @@ export default class RiZhi extends PureComponent {
 
   render() {
     const { props } = this;
-    const { cangKuModel, cangKuSelectedRow, cangKuInfoVisible } = this.state;
+    const { cangKuRiZhiMuBanModel, cangKuSelectedRow, cangKuInfoVisible, riZhiMuBanInfoVisible, riZhiMuBanSelectedRow } = this.state;
     return (
       <PageHeaderWrapper>
         <StandardPager
@@ -239,7 +286,7 @@ export default class RiZhi extends PureComponent {
           renderMiaoShu={this.renderMiaoShu}
           showTotal={this.showTotal}
           fixed="right"
-          scroll={{ x: '180%' }}
+          scroll={{ x: '220%' }}
           autoFormApi={{ width: '650px' }}
           renderRiZhiTime={this.renderRiZhiTime}
           renderRiZhiDiDian={this.renderRiZhiDiDian}
@@ -264,7 +311,36 @@ export default class RiZhi extends PureComponent {
           {...xiuXingRiZhiMetaModel()}
           {...props}
         />
-        {cangKuModel === 'cangKu' ? (
+        {cangKuRiZhiMuBanModel === 'riZhiMuBan' ? (
+          <Modal
+            bodyStyle={{ padding: 0 }}
+            okButtonProps={{ disabled: Object.keys(riZhiMuBanSelectedRow).length === 0 }}
+            title="仓库信息"
+            maskClosable={false}
+            visible={riZhiMuBanInfoVisible}
+            onOk={this.handleRiZhiMuBanInfoOnOk}
+            onCancel={this.handleRiZhiMuBanInfoOnCancel}
+            width={1200}
+          >
+            <StandardPager
+              showTotal={this.showTotal}
+              columnWidth="160px"
+              fixed="right"
+              renderMiaoShu={this.renderMiaoShu}
+              renderRiZhiTime={this.renderRiZhiTime}
+              renderRiZhiDiDian={this.renderRiZhiDiDian}
+              renderRiZhiRenWu={this.renderRiZhiRenWu}
+              renderRiZhiEvent={this.renderRiZhiEvent}
+              renderRiZhi={this.renderRiZhi}
+              scroll={{ x: '200%' }}
+              {...riZhiMuBanMetaModel()}
+              tableSelectType="radio"
+              onSelectRow={this.handleRiZhiMuBanTableOnSelectRow}
+              {...props}
+            />
+          </Modal>
+        ) : ''}
+        {cangKuRiZhiMuBanModel === 'cangKu' ? (
           <Modal
             bodyStyle={{ padding: 0 }}
             okButtonProps={{ disabled: Object.keys(cangKuSelectedRow).length === 0 }}
@@ -276,6 +352,7 @@ export default class RiZhi extends PureComponent {
             width={1200}
           >
             <StandardPager
+              showTotal={this.showTotal}
               columnWidth="160px"
               fixed="right"
               renderMiaoShu={this.renderMiaoShu}
