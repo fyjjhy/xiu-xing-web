@@ -173,7 +173,7 @@ export default class XiuXingRiZhi extends PureComponent {
           renderMiaoShu={this.renderMiaoShu}
           showTotal={this.showTotal}
           fixed="right"
-          scroll={{ x: '180%' }}
+          scroll={{ x: '200%' }}
           autoFormApi={{ width: '650px' }}
           renderRiZhiTime={this.renderRiZhiTime}
           renderRiZhiDiDian={this.renderRiZhiDiDian}

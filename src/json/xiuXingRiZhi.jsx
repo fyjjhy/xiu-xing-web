@@ -458,7 +458,7 @@ const xiuXingRiZhi = {
           "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
+          "columnWidth": "300px",
           "titleFlag": "N"
         },
         {
@@ -551,7 +551,7 @@ const xiuXingRiZhi = {
           "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
+          "columnWidth": "300px",
           "titleFlag": "N"
         },
         {
@@ -664,7 +664,7 @@ const xiuXingRiZhi = {
           "delErrorMsg": null,
           "servCode": null,
           "category": null,
-          "seq": null,
+          "seq": 1,
           "displayType": null,
           "icon": null
         },
@@ -683,7 +683,7 @@ const xiuXingRiZhi = {
           "delErrorMsg": null,
           "servCode": null,
           "category": null,
-          "seq": null,
+          "seq": 2,
           "displayType": null,
           "icon": null
         },
@@ -702,7 +702,7 @@ const xiuXingRiZhi = {
           "delErrorMsg": null,
           "servCode": null,
           "category": null,
-          "seq": null,
+          "seq": 3,
           "displayType": "primary",
           "icon": null
         },
@@ -721,7 +721,7 @@ const xiuXingRiZhi = {
           "delErrorMsg": null,
           "servCode": null,
           "category": null,
-          "seq": null,
+          "seq": 5,
           "displayType": null,
           "icon": null
         },
@@ -740,7 +740,7 @@ const xiuXingRiZhi = {
           "delErrorMsg": null,
           "servCode": null,
           "category": null,
-          "seq": null,
+          "seq": 6,
           "displayType": null,
           "icon": null
         }

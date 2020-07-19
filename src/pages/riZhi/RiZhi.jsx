@@ -169,7 +169,7 @@ export default class RiZhi extends PureComponent {
   // 日志
   renderRiZhi = (text) => {
     const title = renderMiaoShu(text);
-    return text && text.length > 20 ? <Tooltip overlayStyle={{ maxWidth: '400px', width: '400px' }} title={title}><Paragraph style={{ marginTop: '0px', marginBottom: '0px' }} ellipsis>{title}</Paragraph></Tooltip> : text
+    return text && text.length > 15 ? <Tooltip overlayStyle={{ maxWidth: '400px', width: '400px' }} title={title}><Paragraph style={{ marginTop: '0px', marginBottom: '0px' }} ellipsis>{title}</Paragraph></Tooltip> : text
   }
 
   // 灵物全名
@@ -286,7 +286,7 @@ export default class RiZhi extends PureComponent {
           renderMiaoShu={this.renderMiaoShu}
           showTotal={this.showTotal}
           fixed="right"
-          scroll={{ x: '220%' }}
+          scroll={{ x: '250%' }}
           autoFormApi={{ width: '650px' }}
           renderRiZhiTime={this.renderRiZhiTime}
           renderRiZhiDiDian={this.renderRiZhiDiDian}

@@ -501,7 +501,13 @@ export default class AutoFormRow extends PureComponent {
     const {column} = this.props;
     const {valueListData} = this.state;
     return (
-      <Select disabled={column.addDisplayField === 'Y'}  allowClear placeholder={this.getPlaceHolder(column)}>
+      <Select
+        disabled={column.addDisplayField === 'Y'}
+        allowClear
+        showSearch
+        optionFilterProp="title"
+        placeholder={this.getPlaceHolder(column)}
+      >
         {valueListData ? this.renderOption() : ''}
       </Select>
     );
@@ -527,7 +533,7 @@ export default class AutoFormRow extends PureComponent {
 
   renderOption() {
     const {valueListData} = this.state;
-    return valueListData.map(data => <Option key={data.dataCode} value={data.dataCode}>{data.dataName}</Option>);
+    return valueListData.map(data => <Option key={data.dataCode} value={data.dataCode} title={data.dataName}>{data.dataName}</Option>);
   }
 
   renderTreeSelect() {

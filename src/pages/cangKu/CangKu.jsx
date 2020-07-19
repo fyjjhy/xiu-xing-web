@@ -9,16 +9,16 @@ import StandardPager from "../../template/StandardPager";
 import {renderMiaoShu} from "../../utils/utils";
 import {cangKuMetaModel} from "../../json/cangKu";
 import {suoShuMetaModel} from "../../json/suoShu";
-import {lingWuMetaModel} from "../../json/lingWu";
+import {lingWuHisMetaModel} from "../../json/lingWuHis";
 
 const { Paragraph } = Typography;
 const { Option } = Select;
 
-@connect(({ cangKu, jingJie, pinJi, lingWu, suoShu, loading }) => ({
+@connect(({ cangKu, jingJie, pinJi, lingWuHis, suoShu, loading }) => ({
   cangKu,
   jingJie,
   pinJi,
-  lingWu,
+  lingWuHis,
   suoShu,
   loading,
 }))
@@ -196,7 +196,7 @@ export default class CangKu extends PureComponent {
       const { setFieldsValue } = form;
       const { lingWuSelectedRow } = this.state;
       setFieldsValue({
-        lingWuId: lingWuSelectedRow.id,
+        lingWuId: lingWuSelectedRow.lingWuId,
         lingWuName: lingWuSelectedRow.lingWuName,
         lingWuFenLei: lingWuSelectedRow.lingWuFenLei,
         lingWuShuXing: lingWuSelectedRow.lingWuShuXing,
@@ -441,7 +441,7 @@ export default class CangKu extends PureComponent {
       <PageHeaderWrapper>
         <StandardPager
           columnWidth="110px"
-          scroll={{ x: '200%' }}
+          scroll={{ x: '300%' }}
           fixed="right"
           autoFormApi={{ width: '650px' }}
           customFormItem={{
@@ -477,9 +477,9 @@ export default class CangKu extends PureComponent {
               columnWidth="160px"
               fixed="right"
               renderLingWuShuXing={this.renderLingWuShuXing}
-              renderLingWuMiaoShu={this.renderLingWuMiaoShu}
-              scroll={{ x: 'max-content' }}
-              {...lingWuMetaModel()}
+              renderMiaoShu={this.renderLingWuMiaoShu}
+              scroll={{ x: '150%' }}
+              {...lingWuHisMetaModel()}
               tableSelectType="radio"
               onSelectRow={this.handleLingWuTableOnSelectRow}
               {...props}
@@ -500,8 +500,8 @@ export default class CangKu extends PureComponent {
             <StandardPager
               columnWidth="160px"
               fixed="right"
-              renderSuoShuMiaoShu={this.renderSuoShuMiaoShu}
-              scroll={{ x: 'max-content' }}
+              renderMiaoShu={this.renderSuoShuMiaoShu}
+              scroll={{ x: '150%' }}
               {...suoShuMetaModel()}
               tableSelectType="radio"
               onSelectRow={this.handleSuoShuTableOnSelectRow}

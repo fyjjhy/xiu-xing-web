@@ -125,6 +125,7 @@ export default {
                 { name: 'suoShu', path: '/suoShuList', component: './suoShu/SuoShu' },
                 { name: 'lingWu', path: '/lingWuList', component: './lingWu/LingWu' },
                 { name: 'address', path: '/addressList', component: './address/Address' },
+                { name: 'fenLei', path: '/fenLeiList', component: './fenLei/FenLei' },
                 // { name: 'sheDing', path: '/sheDingList', component: './sheDingList/SheDing' },
                 { name: 'sheDing', path: '/sheDingList', component: './sheDing/SheDing' },
                 // { name: 'renWu', path: '/renWuList', component: './renWuList/RenWu' },
