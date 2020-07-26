@@ -8,25 +8,26 @@ import { Tooltip, Typography, Select, Button, Modal, Input } from 'antd';
 import StandardPager from "../../template/StandardPager";
 import {renderMiaoShu} from "../../utils/utils";
 import {cangKuMetaModel} from "../../json/cangKu";
-import {suoShuMetaModel} from "../../json/suoShu";
 import {lingWuHisMetaModel} from "../../json/lingWuHis";
+import {cangKuHisMetaModel} from "../../json/cangKuHis";
+import {suoShuHisMetaModel} from "../../json/suoShuHis";
 
 const { Paragraph } = Typography;
 const { Option } = Select;
 
-@connect(({ cangKu, jingJie, pinJi, lingWuHis, suoShu, loading }) => ({
+@connect(({ cangKu, cangKuHis, jingJie, pinJi, lingWuHis, suoShuHis, loading }) => ({
   cangKu,
+  cangKuHis,
   jingJie,
   pinJi,
   lingWuHis,
-  suoShu,
+  suoShuHis,
   loading,
 }))
 export default class CangKu extends PureComponent {
   constructor(props){
     super(props);
     this.state = {
-      ...cangKuMetaModel(),
       jingJieList: [],
       suoShuJingJieList: [],
       pinJiList: [],
@@ -39,6 +40,9 @@ export default class CangKu extends PureComponent {
       fenLei: null,
       cangKuLingWu: null,
       cangKuSuoShu: null,
+      currentModel: '',
+      currentInfo: {},
+      optVisible: false,
     };
   }
 
@@ -80,13 +84,14 @@ export default class CangKu extends PureComponent {
   }
 
   // 其他灵物管理分页信息
-  showTotal = () => {
-    const { cangKu: { datas: { pagination } } } = this.props;
-    if (pagination && pagination.total) {
-      return { showTotal: () => `共 ${pagination.total} 条记录 第 ${pagination.current} / ${Math.ceil(pagination.total / pagination.pageSize)} 页` };
+  showTotal = (metaModel) => {
+    if (metaModel && metaModel.funcModelCode) {
+      const { [metaModel.funcModelCode]: { datas: { pagination } } } = this.props;
+      if (pagination && pagination.total) {
+        return { showTotal: () => `共 ${pagination.total} 条记录 第 ${pagination.current} / ${Math.ceil(pagination.total / pagination.pageSize)} 页` };
+      }
     }
-      return { showTotal: () => '' };
-
+    return { showTotal: () => '' };
   }
 
   // 获取表单域规则
@@ -217,7 +222,7 @@ export default class CangKu extends PureComponent {
       const { setFieldsValue } = form;
       const { suoShuSelectedRow } = this.state;
       setFieldsValue({
-        suoShuId: suoShuSelectedRow.id,
+        suoShuId: suoShuSelectedRow.suoShuId,
         suoShuName: suoShuSelectedRow.suoShuName,
         suoShuFenLei: suoShuSelectedRow.suoShuFenLei,
         suoShuMiaoShu: suoShuSelectedRow.suoShuMiaoShu,
@@ -255,6 +260,32 @@ export default class CangKu extends PureComponent {
 
   handleSuoShuTableOnSelectRow = selectedRows => {
     this.setState({ suoShuSelectedRow: selectedRows && selectedRows.length > 0 ? selectedRows[0] : {} });
+  }
+
+  handleOpt = (record) => {
+    this.setState({
+      currentModel: 'opt',
+      currentInfo: { cangKuId: record.id },
+      optVisible: true,
+    });
+  }
+
+  handleOptOnCancel = () => {
+    this.setState({
+      currentModel: '',
+      currentInfo: {},
+      optVisible: false,
+    });
+    this.reloadCangKu();
+  }
+
+  // 重新加载coupons
+  reloadCangKu = () => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'cangKu/changeNeedLoad',
+      payload: true,
+    });
   }
 
   renderLingWuShuXing = text => {
@@ -435,12 +466,13 @@ export default class CangKu extends PureComponent {
   }
 
   render() {
-    const { props, state } = this;
-    const { lingWuSuoShuModel, lingWuInfoVisible, lingWuSelectedRow, suoShuSelectedRow, suoShuInfoVisible } = state;
+    const { props } = this;
+    const { lingWuSuoShuModel, lingWuInfoVisible, lingWuSelectedRow, suoShuSelectedRow, suoShuInfoVisible, optVisible, currentModel, currentInfo } = this.state;
     return (
       <PageHeaderWrapper>
         <StandardPager
-          columnWidth="110px"
+          opt={this.handleOpt}
+          columnWidth="200px"
           scroll={{ x: '300%' }}
           fixed="right"
           autoFormApi={{ width: '650px' }}
@@ -459,7 +491,7 @@ export default class CangKu extends PureComponent {
           renderMiaoShu={this.renderMiaoShu}
           showTotal={this.showTotal}
           expandOnCancel={this.handleExpandOnCancel}
-          {...state}
+          {...cangKuMetaModel()}
           {...props}
         />
         {lingWuSuoShuModel === 'lingWu' ? (
@@ -502,9 +534,32 @@ export default class CangKu extends PureComponent {
               fixed="right"
               renderMiaoShu={this.renderSuoShuMiaoShu}
               scroll={{ x: '150%' }}
-              {...suoShuMetaModel()}
+              {...suoShuHisMetaModel()}
               tableSelectType="radio"
               onSelectRow={this.handleSuoShuTableOnSelectRow}
+              {...props}
+            />
+          </Modal>
+        ) : ''}
+        {currentModel === 'opt' ? (
+          <Modal
+            okButtonProps={{ disabled: true }}
+            bodyStyle={{ padding: '0px' }}
+            maskClosable={false}
+            title="操作记录"
+            visible={optVisible}
+            // onOk={this.handleOk}
+            onCancel={this.handleOptOnCancel}
+            width={1000}
+          >
+            <StandardPager
+              fixed="right"
+              scroll={{ x: '300%' }} // 固定前后列，横向滚动查看其它数据
+              showTotal={this.showTotal}
+              renderMiaoShu={this.renderMiaoShu}
+              rowInfo={currentInfo}
+              profile={false}
+              {...cangKuHisMetaModel()}
               {...props}
             />
           </Modal>

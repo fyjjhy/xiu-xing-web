@@ -109,6 +109,15 @@ const suoShu = {
       "comments": null
     },
     {
+      "id": "a985187eb15c2041d3cb4723db885998",
+      "funcId": "22",
+      "name": "仓库",
+      "code": "ck",
+      "icon": null,
+      "displayType": null,
+      "comments": null
+    },
+    {
       "id": "ff90ad64eb0bc10be537937dd1cda0e3",
       "funcId": "22",
       "name": "操作记录",
@@ -535,6 +544,25 @@ const suoShu = {
           "category": null,
           "seq": 3,
           "displayType": "primary",
+          "icon": null
+        },
+        {
+          "id": "15ac5269ed5395cefe65e46840bd8d47",
+          "modelId": "22",
+          "type": "L",
+          "code": "ck",
+          "name": "仓库",
+          "servId": "22",
+          "servAction": "ck",
+          "defaultFlag": "N",
+          "disableRule": null,
+          "propFlag": "N",
+          "propMsg": null,
+          "delErrorMsg": null,
+          "servCode": null,
+          "category": null,
+          "seq": 3,
+          "displayType": null,
           "icon": null
         },
         {

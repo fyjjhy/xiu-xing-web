@@ -8,12 +8,15 @@ import StandardPager from "../../template/StandardPager";
 import {renderMiaoShu} from "../../utils/utils";
 import {suoShuMetaModel} from "../../json/suoShu";
 import {suoShuHisMetaModel} from "../../json/suoShuHis";
+import LingWuCangKu from "../../components/LingWuCangKu";
 
 const { Paragraph } = Typography;
 
-@connect(({ suoShu, suoShuHis, loading }) => ({
+@connect(({ suoShu, suoShuHis, cangKu, cangKuHis, loading }) => ({
   suoShu,
   suoShuHis,
+  cangKu,
+  cangKuHis,
   loading,
 }))
 export default class SuoShu extends PureComponent {
@@ -23,6 +26,7 @@ export default class SuoShu extends PureComponent {
       currentModel: '',
       currentInfo: {},
       optVisible: false,
+      ckVisible: false,
     };
   }
 
@@ -34,11 +38,43 @@ export default class SuoShu extends PureComponent {
     });
   }
 
+  handleCk = (record) => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'cangKu/query',
+      payload: { suoShuId: record.id },
+    });
+    this.setState({
+      currentModel: 'ck',
+      ckVisible: true,
+    });
+  }
+
+  handleCangKuLingWuClick = async (record) => {
+    const { dispatch } = this.props;
+    await dispatch({
+      type: 'cangKuHis/emptyList',
+    });
+    dispatch({
+      type: 'cangKuHis/query',
+      payload: { suoShuId: record.suoShuId, lingWuId: record.lingWuId },
+    });
+  }
+
   handleOptOnCancel = () => {
     this.setState({
       currentModel: '',
       currentInfo: {},
       optVisible: false,
+    });
+    this.reloadSuoShu();
+  }
+
+  handleCkOnCancel = () => {
+    this.setState({
+      currentModel: '',
+      currentInfo: {},
+      ckVisible: false,
     });
     this.reloadSuoShu();
   }
@@ -70,16 +106,17 @@ export default class SuoShu extends PureComponent {
 
   render() {
     const { props } = this;
-    const { currentModel, currentInfo, optVisible } = this.state;
+    const { currentModel, currentInfo, optVisible, ckVisible } = this.state;
     return (
       <PageHeaderWrapper>
         <StandardPager
-          columnWidth="180px"
+          columnWidth="150px"
           scroll={{ x: '150%' }}
           fixed="right"
           renderMiaoShu={this.renderMiaoShu}
           showTotal={this.showTotal}
           opt={this.handleOpt}
+          ck={this.handleCk}
           {...suoShuMetaModel()}
           {...props}
         />
@@ -105,6 +142,14 @@ export default class SuoShu extends PureComponent {
             {...props}
           />
         </Modal>
+        ) : ''}
+        {currentModel === 'ck' ? (
+          <LingWuCangKu
+            visible={ckVisible}
+            ckOnCancel={this.handleCkOnCancel}
+            ckLwRecordClick={this.handleCangKuLingWuClick}
+            {...props}
+          />
         ) : ''}
       </PageHeaderWrapper>
     );
