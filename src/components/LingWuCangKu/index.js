@@ -83,7 +83,7 @@ export default class LingWuCangKu extends PureComponent {
   }
 
   render() {
-    const { visible, cangKu: { datas: { list } } } = this.props;
+    const { visible, cangKuHis: { hisList: list } } = this.props;
     return (
       <Modal
         okButtonProps={{ disabled: true }}
@@ -94,11 +94,12 @@ export default class LingWuCangKu extends PureComponent {
         // onOk={this.handleOk}
         onCancel={this.handleCkOnCancel}
         width={1000}
+        footer={null}
       >
         <List
           style={{ marginLeft: 30, marginRight: 30 }}
           grid={{ gutter: [32, 32], column: 3 }}
-          dataSource={list}
+          dataSource={list || []}
           renderItem={item => (
             <List.Item style={{ marginBottom: 0 }}>
               <Card

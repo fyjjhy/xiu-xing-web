@@ -12,10 +12,9 @@ import LingWuCangKu from "../../components/LingWuCangKu";
 
 const { Paragraph } = Typography;
 
-@connect(({ suoShu, suoShuHis, cangKu, cangKuHis, loading }) => ({
+@connect(({ suoShu, suoShuHis, cangKuHis, loading }) => ({
   suoShu,
   suoShuHis,
-  cangKu,
   cangKuHis,
   loading,
 }))
@@ -41,7 +40,7 @@ export default class SuoShu extends PureComponent {
   handleCk = (record) => {
     const { dispatch } = this.props;
     dispatch({
-      type: 'cangKu/query',
+      type: 'cangKuHis/queryHisList',
       payload: { suoShuId: record.id },
     });
     this.setState({
