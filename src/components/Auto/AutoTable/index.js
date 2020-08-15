@@ -16,7 +16,6 @@ import AutoFormRow from '../AutoFormRow';
 
 import styles from './index.less';
 
-const { Item: FormItem } = Form;
 const dateFormat = 'YYYY-MM-DD';
 const monthFormat = 'YYYY-MM';
 
@@ -588,6 +587,7 @@ export default class AutoTable extends PureComponent {
     const params = {
       ...pagination,
       ...filter,
+      ...formValues,
     };
     // 处理排序字段
     this.handleSorterColumn(sorter, params);

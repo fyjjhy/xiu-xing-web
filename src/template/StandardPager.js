@@ -313,6 +313,10 @@ export default class StandardPager extends PureComponent {
   handleEditClick = async params => {
     this.clearProfile();
     await this.handleGetProfileData(params);
+    const { extraEditClick } = this.props;
+    if (extraEditClick) {
+      await extraEditClick(params);
+    }
     this.setState({
       currentModel: 'edit',
     });

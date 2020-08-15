@@ -198,6 +198,7 @@ export default class AutoForm extends PureComponent {
               }}
       >
         <Form
+          name="control-ref"
           initialValues={this.initForm()}
           ref={this.formRef}
           disabled={addLoading}

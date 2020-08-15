@@ -392,6 +392,15 @@ const cangKuInfo = {
           "version": 0
         },
         {
+          "id": "25b22fccf3ca1d65b0b363c607b9b102",
+          "dictId": "21",
+          "dataName": "级",
+          "dataCode": "级",
+          "seq": 39,
+          "spId": null,
+          "version": 0
+        },
+        {
           "id": "27948850905b41ae878e9a61ff85dd38",
           "dictId": "21",
           "dataName": "打",
@@ -658,6 +667,15 @@ const cangKuInfo = {
           "dataName": "把",
           "dataCode": "把",
           "seq": 24,
+          "spId": null,
+          "version": 0
+        },
+        {
+          "id": "f65ce1159adc4da83c1712ebbb00b721",
+          "dictId": "21",
+          "dataName": "式",
+          "dataCode": "式",
+          "seq": 40,
           "spId": null,
           "version": 0
         },

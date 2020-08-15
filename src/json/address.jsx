@@ -8,7 +8,122 @@ const address = {
   "stateTime": "2020-06-29 15:01:19",
   "seq": 27,
   "indexUrl": null,
-  "dictList": [],
+  "dictList": [
+    {
+      "id": "24",
+      "funcId": "27",
+      "dictName": "地址级别",
+      "dictCode": "addrType",
+      "comments": null,
+      "category": null,
+      "modifyFlag": null,
+      "visiableFlag": null,
+      "seq": 1,
+      "spId": null,
+      "version": 0,
+      "dictDataList": [
+        {
+          "id": "247",
+          "dictId": "24",
+          "dataName": "1",
+          "dataCode": "1",
+          "seq": 1,
+          "spId": null,
+          "version": 0
+        },
+        {
+          "id": "248",
+          "dictId": "24",
+          "dataName": "2",
+          "dataCode": "2",
+          "seq": 2,
+          "spId": null,
+          "version": 0
+        },
+        {
+          "id": "250",
+          "dictId": "24",
+          "dataName": "4",
+          "dataCode": "4",
+          "seq": 4,
+          "spId": null,
+          "version": 0
+        },
+        {
+          "id": "272",
+          "dictId": "24",
+          "dataName": "6",
+          "dataCode": "6",
+          "seq": 6,
+          "spId": null,
+          "version": 0
+        },
+        {
+          "id": "274",
+          "dictId": "24",
+          "dataName": "8",
+          "dataCode": "8",
+          "seq": 8,
+          "spId": null,
+          "version": 0
+        },
+        {
+          "id": "276",
+          "dictId": "24",
+          "dataName": "10",
+          "dataCode": "10",
+          "seq": 10,
+          "spId": null,
+          "version": 0
+        },
+        {
+          "id": "278",
+          "dictId": "24",
+          "dataName": "12",
+          "dataCode": "12",
+          "seq": 12,
+          "spId": null,
+          "version": 0
+        },
+        {
+          "id": "280",
+          "dictId": "24",
+          "dataName": "14",
+          "dataCode": "14",
+          "seq": 14,
+          "spId": null,
+          "version": 0
+        },
+        {
+          "id": "282",
+          "dictId": "24",
+          "dataName": "16",
+          "dataCode": "16",
+          "seq": 16,
+          "spId": null,
+          "version": 0
+        },
+        {
+          "id": "284",
+          "dictId": "24",
+          "dataName": "18",
+          "dataCode": "18",
+          "seq": 18,
+          "spId": null,
+          "version": 0
+        },
+        {
+          "id": "286",
+          "dictId": "24",
+          "dataName": "20",
+          "dataCode": "20",
+          "seq": 20,
+          "spId": null,
+          "version": 0
+        }
+      ]
+    }
+  ],
   "configList": [],
   "funcComponentList": [
     {
@@ -90,6 +205,37 @@ const address = {
           "titleFlag": "N"
         },
         {
+          "id": "04943b7f1d0a717c4010f7fa23677ac6",
+          "modelId": "27",
+          "columnName": "地址级别",
+          "columnCode": "addrType",
+          "valueType": "S",
+          "defaultValue": null,
+          "modifyFlag": "N",
+          "displayType": "CF",
+          "comments": null,
+          "errorText": null,
+          "validateRule": null,
+          "valueList": "dict|addrType",
+          "seq": 2,
+          "requiredFlag": "Y",
+          "searchFlag": "Y",
+          "profileDisplayFlag": "Y",
+          "addTable": "Y",
+          "editDisplayFlag": "N",
+          "editable": "Y",
+          "listDisplayFlag": "Y",
+          "exportDisplayFlag": "N",
+          "sortable": "N",
+          "renderList": null,
+          "renderProfile": null,
+          "renderEdit": null,
+          "primaryFlag": "N",
+          "feignFlag": "N",
+          "columnWidth": null,
+          "titleFlag": "N"
+        },
+        {
           "id": "254",
           "modelId": "27",
           "columnName": "地址编码",
@@ -110,6 +256,37 @@ const address = {
           "editDisplayFlag": "N",
           "editable": "N",
           "listDisplayFlag": "Y",
+          "exportDisplayFlag": "N",
+          "sortable": "N",
+          "renderList": null,
+          "renderProfile": null,
+          "renderEdit": null,
+          "primaryFlag": "N",
+          "feignFlag": "N",
+          "columnWidth": null,
+          "titleFlag": "N"
+        },
+        {
+          "id": "f143ef6f56cea95041547c62b848eb6a",
+          "modelId": "27",
+          "columnName": "父级地址",
+          "columnCode": "pId",
+          "valueType": "S",
+          "defaultValue": null,
+          "modifyFlag": "N",
+          "displayType": "CF",
+          "comments": null,
+          "errorText": null,
+          "validateRule": null,
+          "valueList": "service|/xiuXing/address|addrType",
+          "seq": 4,
+          "requiredFlag": "N",
+          "searchFlag": "Y",
+          "profileDisplayFlag": "N",
+          "addTable": "Y",
+          "editDisplayFlag": "N",
+          "editable": "Y",
+          "listDisplayFlag": "N",
           "exportDisplayFlag": "N",
           "sortable": "N",
           "renderList": null,
@@ -159,7 +336,7 @@ const address = {
           "valueType": "S",
           "defaultValue": null,
           "modifyFlag": "N",
-          "displayType": "I",
+          "displayType": "T",
           "comments": null,
           "errorText": null,
           "validateRule": null,
@@ -210,7 +387,7 @@ const address = {
           "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
+          "columnWidth": "300px",
           "titleFlag": "N"
         },
         {
@@ -323,7 +500,7 @@ const address = {
           "delErrorMsg": null,
           "servCode": null,
           "category": null,
-          "seq": null,
+          "seq": 1,
           "displayType": null,
           "icon": null
         },
@@ -342,7 +519,7 @@ const address = {
           "delErrorMsg": null,
           "servCode": null,
           "category": null,
-          "seq": null,
+          "seq": 2,
           "displayType": null,
           "icon": null
         },
@@ -361,7 +538,7 @@ const address = {
           "delErrorMsg": null,
           "servCode": null,
           "category": null,
-          "seq": null,
+          "seq": 3,
           "displayType": "primary",
           "icon": null
         },
@@ -380,7 +557,7 @@ const address = {
           "delErrorMsg": null,
           "servCode": null,
           "category": null,
-          "seq": null,
+          "seq": 5,
           "displayType": null,
           "icon": null
         },
@@ -399,7 +576,7 @@ const address = {
           "delErrorMsg": null,
           "servCode": null,
           "category": null,
-          "seq": null,
+          "seq": 6,
           "displayType": null,
           "icon": null
         }
