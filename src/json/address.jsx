@@ -232,7 +232,7 @@ const address = {
           "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
+          "columnWidth": "100px",
           "titleFlag": "N"
         },
         {
@@ -263,7 +263,7 @@ const address = {
           "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
+          "columnWidth": "100px",
           "titleFlag": "N"
         },
         {

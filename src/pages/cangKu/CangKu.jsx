@@ -554,7 +554,7 @@ export default class CangKu extends PureComponent {
           >
             <StandardPager
               fixed="right"
-              scroll={{ x: '300%' }} // 固定前后列，横向滚动查看其它数据
+              scroll={{ x: '330%' }} // 固定前后列，横向滚动查看其它数据
               showTotal={this.showTotal}
               renderMiaoShu={this.renderMiaoShu}
               rowInfo={currentInfo}

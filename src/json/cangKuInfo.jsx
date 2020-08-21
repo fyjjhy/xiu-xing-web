@@ -428,6 +428,15 @@ const cangKuInfo = {
           "version": 0
         },
         {
+          "id": "2fbdff5727fb5f28f04d480b800659ff",
+          "dictId": "21",
+          "dataName": "封",
+          "dataCode": "封",
+          "seq": 42,
+          "spId": null,
+          "version": 0
+        },
+        {
           "id": "3deafcc064f843a5830dee516a605a6d",
           "dictId": "21",
           "dataName": "瓶",
@@ -496,6 +505,15 @@ const cangKuInfo = {
           "dataName": "亩",
           "dataCode": "亩",
           "seq": 11,
+          "spId": null,
+          "version": 0
+        },
+        {
+          "id": "59e16077d627fb59a5825cd4fce5da46",
+          "dictId": "21",
+          "dataName": "间",
+          "dataCode": "间",
+          "seq": 41,
           "spId": null,
           "version": 0
         },

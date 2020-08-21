@@ -890,7 +890,7 @@ const cangKuHis = {
           "id": "5c6be45057666d996969a8efb8bce30e",
           "modelId": "31",
           "columnName": "地点",
-          "columnCode": "addrName",
+          "columnCode": "fullName",
           "valueType": "S",
           "defaultValue": null,
           "modifyFlag": "N",
@@ -909,12 +909,12 @@ const cangKuHis = {
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
+          "renderList": "renderMiaoShu",
           "renderProfile": null,
           "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
+          "columnWidth": "300px",
           "titleFlag": "N"
         },
         {

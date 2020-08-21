@@ -1,5 +1,6 @@
+/* eslint-disable no-restricted-syntax,guard-for-in */
 import React, {PureComponent} from 'react';
-import { Modal, Card, List, Tag, Tooltip, Typography, Avatar } from 'antd';
+import { Modal, Card, List, Tag, Tooltip, Typography, Avatar, Divider, Row, Col } from 'antd';
 import CangKuLingWuProfile from "../CangKuLingWuProfile";
 import CangKuLingWuRecord from "../CangKuLingWuRecord";
 import {renderMiaoShu} from "../../utils/utils";
@@ -65,15 +66,22 @@ export default class LingWuCangKu extends PureComponent {
   };
 
   handleDataSource = () => {
-    const { cangKuHis: { hisList: list } } = this.props;
+    const { cangKuHis: { hisList: hisMap } } = this.props;
     const { kuCun } = this.state;
-    if (list && list.length > 0) {
-      return list.filter(data => {
-        if (kuCun === 'qingLing') {
-          return data.lingWuShuLiang !== '0';
-        }
-        return true;
-      });
+    if (hisMap && Object.keys(hisMap).length > 0) {
+      const result = [];
+      for (const key in hisMap) {
+        const his = {};
+        his.lingWuFenLeiName = key;
+        his.lingWu = hisMap[key].filter(data => {
+          if (kuCun === 'qingLing') {
+            return data.lingWuShuLiang !== '0';
+          }
+          return true;
+        });
+        result.push(his);
+      }
+      return result;
     }
     return [];
   };
@@ -111,6 +119,66 @@ export default class LingWuCangKu extends PureComponent {
     return text && text.length > 10 ? <Tooltip title={title}><Paragraph style={{ width: '250px', marginTop: '0px', marginBottom: '0px' }} ellipsis={{ row: 1 }}>{text}</Paragraph></Tooltip> : text
   };
 
+  renderLingWu = item => {
+    const lingWuList = [];
+    let lingWu = [];
+    item.lingWu.forEach((data, index) => {
+      if (index % 3 === 0) {
+        lingWu = [];
+        lingWuList.push(lingWu);
+      }
+      lingWu.push(data);
+    });
+    return(
+      <div>
+        <Divider style={{ border: '2px solid blue' }} type="vertical" /><strong>{item.lingWuFenLeiName}</strong><br/>
+        {lingWuList.map((rows, index) => {
+          const key = index + 1;
+          return (
+            <Row
+              key={key}
+              gutter={[8, 8]}
+              style={{ width: '100%', marginLeft: '0px', marginRight: '0px' }}
+            >
+              {rows.map(data => (
+                <Col key={data.lingWuId} span={8}>
+                  {this.renderLingWuItem(data)}
+                </Col>
+              ))}
+            </Row>
+          );
+        })}
+      </div>
+    );
+  }
+
+  renderLingWuItem(item) {
+    return <List.Item style={{marginBottom: 0}}>
+      <Card
+        actions={[
+          <div onClick={() => this.handleLingWuProfileOnClick(item)}>详情</div>,
+          <div onClick={() => this.handleLingWuRecordOnClick(item)}>记录</div>
+        ]}
+        hoverable
+        style={{ width: '100%' }}
+        bodyStyle={{height: 100}}
+      >
+        <Card.Meta
+          avatar={<Avatar src=""/>}
+          title={<div>
+            <span>{item.lingWuName}</span><br/>
+            {/* {item.lingWuFenLeiName ? (<Tag color="#87d068">{item.lingWuFenLeiName}</Tag>) : ''} */}
+            {item.lingWuShuXing ? (<Tag color="#87d068">{item.lingWuShuXing}</Tag>) : ''}
+            {item.lingWuStateName ? (<Tag color="#87d068">{item.lingWuStateName}</Tag>) : ''}
+            {item.lingWuShuLiang && item.danWei ? (<Tag
+              color={item.lingWuShuLiang === '0' ? 'red' : '#87d068'}>{`${item.lingWuShuLiang} ${item.danWei}`}</Tag>) : ''}
+            {item.jingJieName && item.jingJieName !== '无' ? (<Tag color="#87d068">{item.jingJieName}</Tag>) : ''}
+            {item.pinJiName && item.pinJiName !== '无' ? (<Tag color="#87d068">{item.pinJiName}</Tag>) : ''}
+          </div>} description={this.renderDescription(item.lingWuMiaoShu)}/>
+      </Card>
+    </List.Item>;
+  }
+
   render() {
     const { visible } = this.props;
     const { kuCun } = this.state;
@@ -126,35 +194,7 @@ export default class LingWuCangKu extends PureComponent {
         width={1000}
         footer={null}
       >
-        <List
-          style={{ marginLeft: 30, marginRight: 30 }}
-          grid={{ gutter: [32, 32], column: 3 }}
-          dataSource={this.handleDataSource()}
-          renderItem={item => (
-            <List.Item style={{ marginBottom: 0 }}>
-              <Card
-                actions={[
-                  <div onClick={() => this.handleLingWuProfileOnClick(item)}>详情</div>,
-                  <div onClick={() => this.handleLingWuRecordOnClick(item)}>记录</div>
-                ]}
-                hoverable
-                bodyStyle={{ height: 100 }}
-              >
-                <Card.Meta
-                  avatar={<Avatar src="" />}
-                  title={<div>
-                  <span>{item.lingWuName}</span><br />
-                  {item.lingWuFenLeiName ? (<Tag color="#87d068">{item.lingWuFenLeiName}</Tag>) : ''}
-                  {item.lingWuShuXing ? (<Tag color="#87d068">{item.lingWuShuXing}</Tag>) : ''}
-                  {item.lingWuStateName ? (<Tag color="#87d068">{item.lingWuStateName}</Tag>) : ''}
-                  {item.lingWuShuLiang && item.danWei ? (<Tag color={item.lingWuShuLiang === '0' ? 'red' : '#87d068'}>{`${item.lingWuShuLiang} ${item.danWei}`}</Tag>) : ''}
-                  {item.jingJieName && item.jingJieName !== '无' ? (<Tag color="#87d068">{item.jingJieName}</Tag>) : ''}
-                  {item.pinJiName && item.pinJiName !== '无' ? (<Tag color="#87d068">{item.pinJiName}</Tag>) : ''}
-                </div>} description={this.renderDescription(item.lingWuMiaoShu)} />
-              </Card>
-            </List.Item>
-          )}
-        />
+        <List>{this.handleDataSource().map(item => (this.renderLingWu(item)))}</List>
         {this.renderCangKuLingWuProfile()}
         {this.renderCangKuLingWuRecord()}
       </Modal>

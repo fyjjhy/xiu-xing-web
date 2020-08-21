@@ -680,11 +680,29 @@ const cangKu = {
           "version": 0
         },
         {
+          "id": "812f60ce4be030448ee297ed59dce968",
+          "dictId": "13",
+          "dataName": "间",
+          "dataCode": "间",
+          "seq": 41,
+          "spId": null,
+          "version": 0
+        },
+        {
           "id": "a0f13a345479c96425b459e546ddd2f8",
           "dictId": "13",
           "dataName": "级",
           "dataCode": "级",
           "seq": 39,
+          "spId": null,
+          "version": 0
+        },
+        {
+          "id": "f18b0a608a1e397509841b8465839da4",
+          "dictId": "13",
+          "dataName": "封",
+          "dataCode": "封",
+          "seq": 42,
           "spId": null,
           "version": 0
         }
@@ -1683,7 +1701,7 @@ const cangKu = {
           "id": "2a2e8197de246586781dd3aef6dcdb19",
           "modelId": "21",
           "columnName": "地点",
-          "columnCode": "addrName",
+          "columnCode": "fullName",
           "valueType": "S",
           "defaultValue": null,
           "modifyFlag": "N",
@@ -1702,12 +1720,12 @@ const cangKu = {
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
+          "renderList": "renderMiaoShu",
           "renderProfile": null,
           "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
+          "columnWidth": "300px",
           "titleFlag": "N"
         },
         {

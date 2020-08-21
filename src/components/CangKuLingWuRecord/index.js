@@ -9,6 +9,18 @@ export default class CangKuLingWuRecord extends PureComponent {
     }
   }
 
+  renderLabel = data => (
+    <div>
+      {data.updateTime}<strong>  [更新时间]</strong>
+      <br/>
+      {data.fullName || ''}<strong>  [地址]</strong>
+      <br/>
+     {data.xiuXingSuiYue || ''}<strong>  [修行岁月]</strong>
+      <br/>
+      {data.shiJian || ''}<strong>  [时间]</strong>
+    </div>
+  );
+
   renderLingWu = data => (
     <div>
       <strong>灵物：</strong>{data.lingWuFullName}
@@ -23,6 +35,7 @@ export default class CangKuLingWuRecord extends PureComponent {
     const {visible, cangKuHis: {datas: {list}}} = this.props;
     return (
       <Modal
+        width={1100}
         okButtonProps={{disabled: true}}
         bodyStyle={{padding: '0px'}}
         maskClosable={false}
@@ -35,7 +48,7 @@ export default class CangKuLingWuRecord extends PureComponent {
         <Card bordered={false}>
           <Timeline mode="left">
             {list && list.length > 0 ? list.map(data => <Timeline.Item
-              label={data.updateTime}>{this.renderLingWu(data)}</Timeline.Item>) : ''}
+              label={this.renderLabel(data)}>{this.renderLingWu(data)}</Timeline.Item>) : ''}
           </Timeline>
         </Card>
       </Modal>

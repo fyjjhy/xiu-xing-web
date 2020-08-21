@@ -4,7 +4,7 @@ import {queryHisList} from "../services/cangKuHis";
 const Model = {
   namespace: 'cangKuHis',
   state: {
-    hisList: [],
+    hisList: {},
   },
   effects: {
     *queryHisList({ payload }, { call, put }) {

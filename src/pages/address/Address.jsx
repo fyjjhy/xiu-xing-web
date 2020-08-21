@@ -97,11 +97,10 @@ export default class Address extends PureComponent {
       current = current.parent;
     }
     const { form } = this.rowProps;
-    console.log(this.rowProps);
     if (path && path.length > 0 && form) {
       const { setFieldsValue } = form;
       setFieldsValue({
-        fullName: path.join(''),
+        fullName: path[path.length - 1],
       });
     }
   };
