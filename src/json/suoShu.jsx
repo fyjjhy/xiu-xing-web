@@ -340,7 +340,7 @@ const suoShu = {
           "valueType": "S",
           "defaultValue": null,
           "modifyFlag": "N",
-          "displayType": "S",
+          "displayType": "CF",
           "comments": null,
           "errorText": null,
           "validateRule": null,

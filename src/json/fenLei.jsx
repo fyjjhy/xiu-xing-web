@@ -90,6 +90,15 @@ const fenLei = {
           "seq": 4,
           "spId": null,
           "version": 0
+        },
+        {
+          "id": "ee8bac39c74b3a92477ef00782cff9fc",
+          "dictId": "23",
+          "dataName": "境界分类",
+          "dataCode": "jingJieFenLei",
+          "seq": 5,
+          "spId": null,
+          "version": 0
         }
       ]
     }

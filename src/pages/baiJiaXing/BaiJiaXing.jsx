@@ -10,17 +10,12 @@ import {baiJiaXingMetaModel} from "../../json/baiJiaXing";
   loading,
 }))
 export default class BaiJiaXing extends PureComponent {
-  constructor(props){
-    super(props);
-    this.state = {...baiJiaXingMetaModel()};
-  }
-
   render() {
-    const { props, state } = this;
+    const { props } = this;
     return (
       <PageHeaderWrapper>
         <StandardPager
-          {...state}
+          {...baiJiaXingMetaModel()}
           {...props}
         />
       </PageHeaderWrapper>

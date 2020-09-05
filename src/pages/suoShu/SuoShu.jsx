@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 
-import { Tooltip, Typography, Modal } from 'antd';
+import { Tooltip, Typography, Modal, Select } from 'antd';
 
 import StandardPager from "../../template/StandardPager";
 import {renderMiaoShu} from "../../utils/utils";
@@ -11,6 +11,7 @@ import {suoShuHisMetaModel} from "../../json/suoShuHis";
 import LingWuCangKu from "../../components/LingWuCangKu";
 
 const { Paragraph } = Typography;
+const { Option } = Select;
 
 @connect(({ suoShu, suoShuHis, cangKuHis, loading }) => ({
   suoShu,
@@ -51,12 +52,18 @@ export default class SuoShu extends PureComponent {
 
   handleCangKuLingWuClick = async (record) => {
     const { dispatch } = this.props;
+    const params = {};
+    params.suoShuId = record.suoShuId;
+    params.lingWuId = record.lingWuId;
+    if (record.lingWuShuXing) {
+      params.lingWuShuXing = record.lingWuShuXing;
+    }
     await dispatch({
       type: 'cangKuHis/emptyList',
     });
     dispatch({
       type: 'cangKuHis/query',
-      payload: { suoShuId: record.suoShuId, lingWuId: record.lingWuId },
+      payload: { ...params },
     });
   }
 
@@ -101,6 +108,24 @@ export default class SuoShu extends PureComponent {
       }
     }
     return { showTotal: () => '' };
+  };
+
+  renderAddrId = (FormItem, rowProps, rowState) => {
+    const { formItemLayout, column, searchArea } = rowProps;
+    const { valueListData } = rowState;
+    return (
+      <FormItem {...formItemLayout} label={column.columnName} name={column.columnCode} rules={[]}>
+        <Select
+          allowClear
+          showSearch
+          optionFilterProp="title"
+          dropdownMatchSelectWidth={searchArea || 700}
+          placeholder={`请选择${column.columnName}`}
+        >
+          {valueListData ? valueListData.map(data => <Option key={data.dataCode} value={data.dataCode} title={data.dataName}>{data.dataName}</Option>) : ''}
+        </Select>
+      </FormItem>
+    );
   }
 
   render() {
@@ -109,6 +134,9 @@ export default class SuoShu extends PureComponent {
     return (
       <PageHeaderWrapper>
         <StandardPager
+          customFormItem={{
+            addrId: this.renderAddrId,
+          }}
           columnWidth="150px"
           scroll={{ x: '150%' }}
           fixed="right"

@@ -150,6 +150,7 @@ export default class Address extends PureComponent {
         <TreeSelect
           allowClear
           treeDefaultExpandAll
+          dropdownMatchSelectWidth={700}
           onChange={this.handlePIdOnChange}
           treeData={action === 'opt' ? addrList : (valueListData || [])}
           placeholder={`请选择${column.columnName}`}

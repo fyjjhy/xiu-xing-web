@@ -168,7 +168,7 @@ export default class LingWuCangKu extends PureComponent {
           title={<div>
             <span>{item.lingWuName}</span><br/>
             {/* {item.lingWuFenLeiName ? (<Tag color="#87d068">{item.lingWuFenLeiName}</Tag>) : ''} */}
-            {item.lingWuShuXing ? (<Tag color="#87d068">{item.lingWuShuXing}</Tag>) : ''}
+            {item.lingWuShuXing ? item.lingWuShuXing.split(' ').map(shuXing => <Tag color="#87d068">{shuXing}</Tag>) : ''}
             {item.lingWuStateName ? (<Tag color="#87d068">{item.lingWuStateName}</Tag>) : ''}
             {item.lingWuShuLiang && item.danWei ? (<Tag
               color={item.lingWuShuLiang === '0' ? 'red' : '#87d068'}>{`${item.lingWuShuLiang} ${item.danWei}`}</Tag>) : ''}

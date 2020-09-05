@@ -463,7 +463,25 @@ export default class CangKu extends PureComponent {
         </Select>
       </FormItem>
     );
-  }
+  };
+
+  renderAddrId = (FormItem, rowProps, rowState) => {
+    const { formItemLayout, column, searchArea } = rowProps;
+    const { valueListData } = rowState;
+    return (
+      <FormItem {...formItemLayout} label={column.columnName} name={column.columnCode} rules={[]}>
+        <Select
+          allowClear
+          showSearch
+          optionFilterProp="title"
+          dropdownMatchSelectWidth={searchArea || 700}
+          placeholder={`请选择${column.columnName}`}
+        >
+          {valueListData ? valueListData.map(data => <Option key={data.dataCode} value={data.dataCode} title={data.dataName}>{data.dataName}</Option>) : ''}
+        </Select>
+      </FormItem>
+    );
+  };
 
   render() {
     const { props } = this;
@@ -487,11 +505,14 @@ export default class CangKu extends PureComponent {
             suoShuFenLei: this.renderSuoShuFenLei,
             suoShuJingJieId: this.renderSuoShuJingJie,
             suoShuPinJiId: this.renderSuoShuPinJi,
+            addrId: this.renderAddrId,
           }}
           renderMiaoShu={this.renderMiaoShu}
           showTotal={this.showTotal}
           expandOnCancel={this.handleExpandOnCancel}
           {...cangKuMetaModel()}
+          md={6}
+          searchBtn="search"
           {...props}
         />
         {lingWuSuoShuModel === 'lingWu' ? (
@@ -513,6 +534,7 @@ export default class CangKu extends PureComponent {
               scroll={{ x: '150%' }}
               {...lingWuHisMetaModel()}
               tableSelectType="radio"
+              rowClickTrigger // 点击行触发前面的选择项(多选还是单选)
               onSelectRow={this.handleLingWuTableOnSelectRow}
               {...props}
             />
@@ -536,6 +558,7 @@ export default class CangKu extends PureComponent {
               scroll={{ x: '150%' }}
               {...suoShuHisMetaModel()}
               tableSelectType="radio"
+              rowClickTrigger // 点击行触发前面的选择项(多选还是单选)
               onSelectRow={this.handleSuoShuTableOnSelectRow}
               {...props}
             />

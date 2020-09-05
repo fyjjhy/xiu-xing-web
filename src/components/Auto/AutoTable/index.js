@@ -15,13 +15,14 @@ import StandardTable from '../../StandardTable';
 import AutoFormRow from '../AutoFormRow';
 
 import styles from './index.less';
+import {getSearchAreas} from "../../../utils/searchArea";
 
 const dateFormat = 'YYYY-MM-DD';
 const monthFormat = 'YYYY-MM';
 
 const formItemLayout = {
-  labelCol: { xs: { span: 24 }, sm: { span: 5 } },
-  wrapperCol: { xs: { span: 24 }, sm: { span: 12 }, md: { span: 19 } },
+  labelCol: { xs: { span: 24 }, sm: { span: 7 } },
+  wrapperCol: { xs: { span: 24 }, sm: { span: 12 }, md: { span: 17 } },
 };
 
 export default class AutoTable extends PureComponent {
@@ -611,9 +612,34 @@ export default class AutoTable extends PureComponent {
   }
 
   handleOnTableClick = record => {
-    const { setCurrentRowInfo } = this.props;
+    const { setCurrentRowInfo, tableSelectType, rowClickTrigger, onSelectRow } = this.props;
     setCurrentRowInfo(record);
-  }
+    if (rowClickTrigger) {
+      const { selectedRows } = this.state;
+      const rowIndex = selectedRows.findIndex(row => row.id === record.id);
+      if (rowIndex !== -1) {
+        this.setState({
+          selectedRows: selectedRows.filter((row, index) => index !== rowIndex),
+        }, () => {
+          if (onSelectRow) {
+            onSelectRow(this.state.selectedRows);
+          }
+        });
+      }
+      else {
+        if (tableSelectType !== 'radio') {
+          selectedRows.push(record);
+        }
+        this.setState({
+          selectedRows: tableSelectType === 'radio' ? [record] : selectedRows,
+        }, () => {
+          if (onSelectRow) {
+            onSelectRow(this.state.selectedRows);
+          }
+        });
+      }
+    }
+  };
 
   handleRowClassName = record => {
     const { selectedTableRow } = this.props;
@@ -737,7 +763,34 @@ export default class AutoTable extends PureComponent {
     );
   }
 
-  renderSeachForm() {
+  renderSearchAreaForm() {
+    const { props } = this;
+    const { expandForm } = this.state;
+    const { rowSearchColumns, md } = getSearchAreas(expandForm, this.searchColumns);
+    return (
+      <Form layout="inline" ref={this.formRef}>
+        { rowSearchColumns.map((rows, index) => {
+          const key = index + 1;
+          return (
+            <Row
+              key={key}
+              // gutter={[8, 8]}
+              style={{ width: '100%', marginLeft: '0px', marginRight: '0px', marginBottom: '12px' }}
+            >
+              {rows.map(col => (
+                <Col key={col.columnCode} span={24 / Number(md)}>
+                  <AutoFormRow {...props} formItemLayout={formItemLayout} column={col} searchArea />
+                </Col>
+              ))}
+              {expandForm ? ((key > (rowSearchColumns.length - 1)) ? this.renderSearchBtn() : '') : (key === 1 ? this.renderSearchBtn() : '')}
+            </Row>
+          );
+        })}
+      </Form>
+    );
+  }
+
+  renderSearchForm() {
     const { props } = this;
     const { current: form } = this.formRef;
     const { expandFormItem, md } = props;
@@ -764,15 +817,6 @@ export default class AutoTable extends PureComponent {
             mdVal = 6;
           } else {
             mdVal = 8;
-          }
-          let xlVal = 20;
-          let lgVal = 24;
-          if (searchBtnPosition !== 'search' && md === 6) {
-            lgVal = 16;
-            xlVal = 20;
-          } else {
-            lgVal = 24;
-            xlVal = 48;
           }
           return (
             <Row
@@ -803,11 +847,7 @@ export default class AutoTable extends PureComponent {
       }
 
       return (
-        <span style={{
-            float: 'right',
-            marginBottom: 24,
-          }}
-        >
+        <span style={{ marginBottom: 12, position: 'absolute', right: '24px' }}>
           <Button type="primary" htmlType="submit" onClick={this.handleSearch}>查询</Button>
           <Button
             style={{
@@ -825,8 +865,8 @@ export default class AutoTable extends PureComponent {
   }
 
   // 绘制工具栏
-  renderToolbar() {
-    const { selectedRows, searchBtnPosition } = this.state;
+  renderToolbar(searchLen) {
+    const { selectedRows } = this.state;
     const { current: form  } = this.formRef;
     const { toolBarBtnWithFormValue, toolbarAfterExpand } = this.props;
     return (
@@ -949,7 +989,7 @@ export default class AutoTable extends PureComponent {
             }
           )}
         {toolbarAfterExpand ? toolbarAfterExpand() : ''}
-        {searchBtnPosition === 'toolbar' ? this.renderSearchBtn() : ''}
+        {searchLen % 3 === 0 && searchLen % 4 === 0 ? this.renderSearchBtn() : ''}
       </Fragment>
     );
   }
@@ -1074,13 +1114,16 @@ export default class AutoTable extends PureComponent {
   }
 
   render() {
+    const searchLen = this.searchColumns ? this.searchColumns.length : 0;
     return (
       <div className={styles.tableList}>
-        <div className={styles.tableListForm}>
-          {this.renderSeachForm()}
-        </div>
+        {searchLen > 0 && !(searchLen % 3 === 0 && searchLen % 4 === 0) ? this.renderSearchAreaForm() : (
+          <div className={styles.tableListForm}>
+            {this.renderSearchForm()}
+          </div>
+        )}
         <div style={{ display: (this.toolbars.length === 0 && this.state.searchBtnPosition === 'search') ? 'none' : 'block' }} className={styles.tableListOperator}>
-          {this.renderToolbar()}
+          {this.renderToolbar(searchLen)}
         </div>
         {this.props.radioTable ? this.radioTable() : this.renderStandardTable()}
       </div>

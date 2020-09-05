@@ -34,6 +34,11 @@ class StandardTable extends PureComponent {
         needTotalList,
       });
     }
+    else if (nextProps.selectedRows.length > 0) {
+      this.setState({
+        selectedRowKeys: nextProps.selectedRows.map(row => row.id),
+      });
+    }
   }
 
   handleRowSelectChange = (selectedRowKeys, selectedRows) => {
