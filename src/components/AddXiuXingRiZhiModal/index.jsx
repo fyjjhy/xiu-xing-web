@@ -120,7 +120,7 @@ export default class AddXiuXingRiZhiModal extends PureComponent {
       const { xiuXingRiZhiList } = this.props;
       return (
         <TemplateModal
-          scroll={{ x: '120%' }}
+          scroll={{ x: '100vw' }}
           width={1000}
           title="模板"
           templateColumns={this.handleTemplateColumns()}

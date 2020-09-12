@@ -8,20 +8,22 @@ import { Tooltip, Typography, Select, Button, Modal, Input } from 'antd';
 import StandardPager from "../../template/StandardPager";
 import {renderMiaoShu} from "../../utils/utils";
 import {cangKuMetaModel} from "../../json/cangKu";
-import {lingWuHisMetaModel} from "../../json/lingWuHis";
 import {cangKuHisMetaModel} from "../../json/cangKuHis";
-import {suoShuHisMetaModel} from "../../json/suoShuHis";
+import {henJiMetaModel} from "../../json/henJi";
+import {cangKuLingWuHisMetaModel} from "../../json/cangKuLingWuHis";
+import {cangKuSuoShuHisMetaModel} from "../../json/cangKuSuoShuHis";
 
 const { Paragraph } = Typography;
 const { Option } = Select;
 
-@connect(({ cangKu, cangKuHis, jingJie, pinJi, lingWuHis, suoShuHis, loading }) => ({
+@connect(({ cangKu, cangKuHis, jingJie, pinJi, cangKuLingWuHis, cangKuSuoShuHis, henJi, loading }) => ({
   cangKu,
   cangKuHis,
   jingJie,
   pinJi,
-  lingWuHis,
-  suoShuHis,
+  cangKuLingWuHis,
+  cangKuSuoShuHis,
+  henJi,
   loading,
 }))
 export default class CangKu extends PureComponent {
@@ -35,8 +37,10 @@ export default class CangKu extends PureComponent {
       lingWuSuoShuModel: null,
       lingWuInfoVisible: false,
       suoShuInfoVisible: false,
+      henJiInfoVisible: false,
       lingWuSelectedRow: {},
       suoShuSelectedRow: {},
+      henJiSelectedRow: {},
       fenLei: null,
       cangKuLingWu: null,
       cangKuSuoShu: null,
@@ -144,7 +148,11 @@ export default class CangKu extends PureComponent {
 
   handleLingWuButton = () => {
     this.setState({ lingWuSuoShuModel: 'lingWu', lingWuInfoVisible: true });
-  }
+  };
+
+  handleHenJiButton = () => {
+    this.setState({ lingWuSuoShuModel: 'henJi', henJiInfoVisible: true });
+  };
 
   handleLingWuLinkButton = () => {
     const { form } = this.rowProps;
@@ -163,7 +171,19 @@ export default class CangKu extends PureComponent {
         pinJiId: null,
       });
     }
-  }
+  };
+
+  handleHenJiLinkButton = () => {
+    const { form } = this.rowProps;
+    if (form && form.setFieldsValue) {
+      const { setFieldsValue } = form;
+      setFieldsValue({
+        henJiId: null,
+        shiJian: null,
+        beiZhu: null,
+      });
+    }
+  };
 
   // 清除所属信息
   handleSuoShuLinkButton = () => {
@@ -193,7 +213,11 @@ export default class CangKu extends PureComponent {
 
   handleSuoShuInfoOnCancel = () => {
     this.setState({ lingWuSuoShuModel: null, suoShuInfoVisible: false });
-  }
+  };
+
+  handleHenJiInfoOnCancel = () => {
+    this.setState({ lingWuSuoShuModel: null, henJiInfoVisible: false });
+  };
 
   handleLingWuInfoOnOk = () => {
     const {form} = this.rowProps;
@@ -207,6 +231,12 @@ export default class CangKu extends PureComponent {
         lingWuShuXing: lingWuSelectedRow.lingWuShuXing,
         lingWuState: lingWuSelectedRow.lingWuState,
         lingWuMiaoShu: lingWuSelectedRow.lingWuMiaoShu,
+        lingWuHisId: lingWuSelectedRow.id,
+        lingWuShuLiang: lingWuSelectedRow.lingWuShuLiang,
+        danWei: lingWuSelectedRow.danWei,
+        jingJieId: lingWuSelectedRow.jingJieId,
+        pinJiId: lingWuSelectedRow.pinJiId,
+        xiuXingSuiYue: lingWuSelectedRow.xiuXingSuiYue,
         // xiaoShuoId: lingWuSelectedRow.xiaoShuoId,
       });
       if (lingWuSelectedRow.lingWuFenLei) {
@@ -226,14 +256,31 @@ export default class CangKu extends PureComponent {
         suoShuName: suoShuSelectedRow.suoShuName,
         suoShuFenLei: suoShuSelectedRow.suoShuFenLei,
         suoShuMiaoShu: suoShuSelectedRow.suoShuMiaoShu,
-        // xiaoShuoId: suoShuSelectedRow.xiaoShuoId,
+        xiaoShuoId: suoShuSelectedRow.xiaoShuoId,
+        addrId: suoShuSelectedRow.addrId,
+        suoShuJingJieId: suoShuSelectedRow.suoShuJingJieId,
+        suoShuPinJiId: suoShuSelectedRow.suoShuPinJiId,
       });
       if (suoShuSelectedRow.suoShuFenLei) {
         this.handleFenLei('suoShu', false, suoShuSelectedRow.suoShuFenLei);
       }
     }
     this.handleSuoShuInfoOnCancel();
-  }
+  };
+
+  handleHenJiInfoOnOk = () => {
+    const {form} = this.rowProps;
+    if (form && form.setFieldsValue) {
+      const { setFieldsValue } = form;
+      const { henJiSelectedRow } = this.state;
+      setFieldsValue({
+        henJiId: henJiSelectedRow.id,
+        shiJian: henJiSelectedRow.shiJian,
+        beiZhu: henJiSelectedRow.beiZhu,
+      });
+    }
+    this.handleSuoShuInfoOnCancel();
+  };
 
   // 在关闭新增或编辑操作时，添加的额外的处理操作
   handleExpandOnCancel = () => {
@@ -260,7 +307,11 @@ export default class CangKu extends PureComponent {
 
   handleSuoShuTableOnSelectRow = selectedRows => {
     this.setState({ suoShuSelectedRow: selectedRows && selectedRows.length > 0 ? selectedRows[0] : {} });
-  }
+  };
+
+  handleHenJiTableOnSelectRow = selectedRows => {
+    this.setState({ henJiSelectedRow: selectedRows && selectedRows.length > 0 ? selectedRows[0] : {} });
+  };
 
   handleOpt = (record) => {
     this.setState({
@@ -303,7 +354,13 @@ export default class CangKu extends PureComponent {
   renderSuoShuMiaoShu = text => {
     const title = renderMiaoShu(text);
     return text && text.length > 20 ? <Tooltip title={title}><Paragraph style={{ marginTop: '0px', marginBottom: '0px' }} ellipsis={{ row: 1 }}>{text}</Paragraph></Tooltip> : text
-  }
+  };
+
+  // 痕迹描述
+  renderHenJiMiaoShu = text => {
+    const title = renderMiaoShu(text);
+    return text && text.length > 20 ? <Tooltip title={title}><Paragraph style={{ width: '250px', marginTop: '0px', marginBottom: '0px' }} ellipsis={{ row: 1 }}>{text}</Paragraph></Tooltip> : text
+  };
 
   // 重新渲染灵物信息
   renderLingWuInfo = (FormItem, rowProps) => {
@@ -317,13 +374,39 @@ export default class CangKu extends PureComponent {
         </FormItem>
       </Fragment>
     );
-  }
+  };
+
+  // 重新渲染痕迹信息
+  renderHenJiInfo = (FormItem, rowProps) => {
+    const { formItemLayout, column } = rowProps;
+    this.rowProps = rowProps;
+    return (
+      <Fragment>
+        <FormItem {...formItemLayout} label={column.columnName}>
+          <Button onClick={this.handleHenJiButton} type="primary">痕迹信息选择</Button>
+          <Button onClick={this.handleHenJiLinkButton} type="link">清除痕迹信息</Button>
+        </FormItem>
+      </Fragment>
+    );
+  };
+
+  renderHenJiId = FormItem => (
+    <FormItem key="henJiId" name="henJiId" noStyle>
+      <Input key="henJiId" type="hidden" name="henJiId"/>
+    </FormItem>
+  );
 
   renderLingWuId = FormItem => (
     <FormItem key="lingWuId" name="lingWuId" noStyle>
       <Input key="lingWuId" type="hidden" name="lingWuId"/>
     </FormItem>
-  )
+  );
+
+  renderLingWuHisId = FormItem => (
+    <FormItem key="lingWuHisId" name="lingWuHisId" noStyle>
+      <Input key="lingWuHisId" type="hidden" name="lingWuHisId"/>
+    </FormItem>
+  );
 
   // 重新渲染所属信息
   renderSuoShuInfo = (FormItem, rowProps) => {
@@ -343,7 +426,13 @@ export default class CangKu extends PureComponent {
     <FormItem key="suoShuId" name="suoShuId" noStyle>
       <Input key="suoShuId" type="hidden" name="suoShuId"/>
     </FormItem>
-  )
+  );
+
+  renderSuoShuHisId = FormItem => (
+    <FormItem key="suoShuHisId" name="suoShuHisId" noStyle>
+      <Input key="suoShuHisId" type="hidden" name="suoShuHisId"/>
+    </FormItem>
+  );
 
   renderJingJie = (FormItem, rowProps, rowState) => {
     const { formItemLayout, column } = rowProps;
@@ -485,34 +574,40 @@ export default class CangKu extends PureComponent {
 
   render() {
     const { props } = this;
-    const { lingWuSuoShuModel, lingWuInfoVisible, lingWuSelectedRow, suoShuSelectedRow, suoShuInfoVisible, optVisible, currentModel, currentInfo } = this.state;
+    const {
+      lingWuSuoShuModel, lingWuInfoVisible, lingWuSelectedRow, suoShuSelectedRow,
+      suoShuInfoVisible, optVisible, currentModel, currentInfo, henJiInfoVisible,
+      henJiSelectedRow
+    } = this.state;
     return (
       <PageHeaderWrapper>
         <StandardPager
           opt={this.handleOpt}
           columnWidth="200px"
-          scroll={{ x: '300%' }}
+          scroll={{ x: '300vw' }}
           fixed="right"
           autoFormApi={{ width: '650px' }}
           customFormItem={{
             lingWuInfo: this.renderLingWuInfo,
             lingWuId: this.renderLingWuId,
+            lingWuHisId: this.renderLingWuHisId,
             lingWuFenLei: this.renderLingWuFenLei,
             jingJieId: this.renderJingJie,
             pinJiId: this.renderPinJi,
             suoShuInfo: this.renderSuoShuInfo,
             suoShuId: this.renderSuoShuId,
+            suoShuHisId: this.renderSuoShuHisId,
             suoShuFenLei: this.renderSuoShuFenLei,
             suoShuJingJieId: this.renderSuoShuJingJie,
             suoShuPinJiId: this.renderSuoShuPinJi,
             addrId: this.renderAddrId,
+            henJiInfo: this.renderHenJiInfo,
+            henJiId: this.renderHenJiId,
           }}
           renderMiaoShu={this.renderMiaoShu}
           showTotal={this.showTotal}
           expandOnCancel={this.handleExpandOnCancel}
           {...cangKuMetaModel()}
-          md={6}
-          searchBtn="search"
           {...props}
         />
         {lingWuSuoShuModel === 'lingWu' ? (
@@ -527,12 +622,15 @@ export default class CangKu extends PureComponent {
             width={1000}
           >
             <StandardPager
-              columnWidth="160px"
+              columnWidth="110px"
               fixed="right"
+              searchBtn="search"
+              profile={false}
+              showTotal={this.showTotal}
               renderLingWuShuXing={this.renderLingWuShuXing}
               renderMiaoShu={this.renderLingWuMiaoShu}
-              scroll={{ x: '150%' }}
-              {...lingWuHisMetaModel()}
+              scroll={{ x: '60vw' }}
+              {...cangKuLingWuHisMetaModel()}
               tableSelectType="radio"
               rowClickTrigger // 点击行触发前面的选择项(多选还是单选)
               onSelectRow={this.handleLingWuTableOnSelectRow}
@@ -552,14 +650,42 @@ export default class CangKu extends PureComponent {
             width={1000}
           >
             <StandardPager
-              columnWidth="160px"
+              columnWidth="110px"
               fixed="right"
+              searchBtn="search"
+              profile={false}
+              showTotal={this.showTotal}
               renderMiaoShu={this.renderSuoShuMiaoShu}
-              scroll={{ x: '150%' }}
-              {...suoShuHisMetaModel()}
+              scroll={{ x: '90vw' }}
+              {...cangKuSuoShuHisMetaModel()}
               tableSelectType="radio"
               rowClickTrigger // 点击行触发前面的选择项(多选还是单选)
               onSelectRow={this.handleSuoShuTableOnSelectRow}
+              {...props}
+            />
+          </Modal>
+        ) : ''}
+        {lingWuSuoShuModel === 'henJi' ? (
+          <Modal
+            bodyStyle={{ padding: 0 }}
+            okButtonProps={{ disabled: Object.keys(henJiSelectedRow).length === 0 }}
+            title="痕迹信息"
+            maskClosable={false}
+            visible={henJiInfoVisible}
+            onOk={this.handleHenJiInfoOnOk}
+            onCancel={this.handleHenJiInfoOnCancel}
+            width={1000}
+          >
+            <StandardPager
+              showTotal={this.showTotal}
+              columnWidth="110px"
+              // fixed="right"
+              renderMiaoShu={this.renderHenJiMiaoShu}
+              // scroll={{ x: '100vw' }}
+              {...henJiMetaModel()}
+              tableSelectType="radio"
+              rowClickTrigger // 点击行触发前面的选择项(多选还是单选)
+              onSelectRow={this.handleHenJiTableOnSelectRow}
               {...props}
             />
           </Modal>
@@ -577,11 +703,13 @@ export default class CangKu extends PureComponent {
           >
             <StandardPager
               fixed="right"
-              scroll={{ x: '330%' }} // 固定前后列，横向滚动查看其它数据
+              columnWidth="110px"
+              scroll={{ x: '300vw' }} // 固定前后列，横向滚动查看其它数据
               showTotal={this.showTotal}
               renderMiaoShu={this.renderMiaoShu}
               rowInfo={currentInfo}
               profile={false}
+              searchBtn="search"
               {...cangKuHisMetaModel()}
               {...props}
             />

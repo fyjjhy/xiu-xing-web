@@ -19,6 +19,12 @@ const Model = {
     saveHisList(state, { payload }) {
       return { ...state, hisList: payload };
     },
+    emptyHisList(state) {
+      return {
+        ...state,
+        hisList: {},
+      };
+    },
   }
 };
 const metaModel = createModel(Model.namespace);

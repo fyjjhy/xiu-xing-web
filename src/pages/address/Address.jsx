@@ -166,7 +166,7 @@ export default class Address extends PureComponent {
       <PageHeaderWrapper>
         <StandardPager
           columnWidth="110px"
-          scroll={{ x: '140%' }}
+          scroll={{ x: '100vw' }}
           fixed="right"
           renderMiaoShu={this.renderMiaoShu}
           showTotal={this.showTotal}

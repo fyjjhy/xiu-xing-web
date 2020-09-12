@@ -38,7 +38,7 @@ export default class RenWu extends PureComponent {
           fixed="right"
           renderRenWuShuXing={this.renderRenWuShuXing}
           renderRenWuMiaoShu={this.renderRenWuMiaoShu}
-          scroll={{ x: 'max-content' }}
+          scroll={{ x: '100vw' }}
           {...renWuMetaModel()}
           {...props}
         />

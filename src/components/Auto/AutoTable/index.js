@@ -775,7 +775,7 @@ export default class AutoTable extends PureComponent {
             <Row
               key={key}
               // gutter={[8, 8]}
-              style={{ width: '100%', marginLeft: '0px', marginRight: '0px', marginBottom: '12px' }}
+              style={{ width: '100%', marginLeft: '0px', marginRight: '0px' }}
             >
               {rows.map(col => (
                 <Col key={col.columnCode} span={24 / Number(md)}>
@@ -1117,11 +1117,9 @@ export default class AutoTable extends PureComponent {
     const searchLen = this.searchColumns ? this.searchColumns.length : 0;
     return (
       <div className={styles.tableList}>
-        {searchLen > 0 && !(searchLen % 3 === 0 && searchLen % 4 === 0) ? this.renderSearchAreaForm() : (
-          <div className={styles.tableListForm}>
-            {this.renderSearchForm()}
-          </div>
-        )}
+        <div className={styles.tableListForm}>
+          {searchLen > 0 && !(searchLen % 3 === 0 && searchLen % 4 === 0) ? this.renderSearchAreaForm() : this.renderSearchForm()}
+        </div>
         <div style={{ display: (this.toolbars.length === 0 && this.state.searchBtnPosition === 'search') ? 'none' : 'block' }} className={styles.tableListOperator}>
           {this.renderToolbar(searchLen)}
         </div>

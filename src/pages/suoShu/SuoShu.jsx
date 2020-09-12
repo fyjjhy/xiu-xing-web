@@ -38,8 +38,11 @@ export default class SuoShu extends PureComponent {
     });
   }
 
-  handleCk = (record) => {
+  handleCk = async (record) => {
     const { dispatch } = this.props;
+    await dispatch({
+      type: 'cangKuHis/emptyHisList',
+    });
     dispatch({
       type: 'cangKuHis/queryHisList',
       payload: { suoShuId: record.id },
@@ -138,7 +141,7 @@ export default class SuoShu extends PureComponent {
             addrId: this.renderAddrId,
           }}
           columnWidth="150px"
-          scroll={{ x: '150%' }}
+          // scroll={{ x: '100vw' }}
           fixed="right"
           renderMiaoShu={this.renderMiaoShu}
           showTotal={this.showTotal}
@@ -159,8 +162,9 @@ export default class SuoShu extends PureComponent {
           width={1000}
         >
           <StandardPager
-            scroll={{ x: '150%' }} // 固定前后列，横向滚动查看其它数据
+            scroll={{ x: '100vw' }} // 固定前后列，横向滚动查看其它数据
             fixed="right"
+            searchBtn='search'
             showTotal={this.showTotal}
             renderMiaoShu={this.renderMiaoShu}
             rowInfo={currentInfo}

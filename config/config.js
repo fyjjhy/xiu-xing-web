@@ -120,7 +120,7 @@ export default {
                 // { name: 'xiuXingRiZhi', path: '/xiuXingRiZhiList', component: './xiuXingRiZhiList/XiuXingRiZhi' },
                 // { name: 'xiuXingRiZhi', path: '/xiuXingRiZhiList', component: './xiuXingRiZhi/XiuXingRiZhi' },
                 // { name: 'cangKu', path: '/cangKuList', component: './cangKuList/CangKu' },
-                { name: 'riZhi', path: '/riZhiList', component: './riZhi/RiZhi' },
+                // { name: 'riZhi', path: '/riZhiList', component: './riZhi/RiZhi' },
                 { name: 'cangKu', path: '/cangKuList', component: './cangKu/CangKu' },
                 { name: 'suoShu', path: '/suoShuList', component: './suoShu/SuoShu' },
                 { name: 'lingWu', path: '/lingWuList', component: './lingWu/LingWu' },

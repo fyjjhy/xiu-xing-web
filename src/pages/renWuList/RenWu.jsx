@@ -840,7 +840,7 @@ export default class RenWu extends PureComponent {
       const { xiuXingRiZhi: { xiuXingRiZhiList } } = this.props;
       return (
         <XiuXingRiZhiModal
-          scroll={{ x: '200%' }}
+          scroll={{ x: '100vw' }}
           width={1000}
           title="日志"
           columns={this.handleXiuXingRiZhiCols()}
@@ -936,7 +936,7 @@ export default class RenWu extends PureComponent {
               {this.renderToolbar()}
             </div>
             <StandardTable
-              scroll={{ x: '150%' }}
+              scroll={{ x: '100vw' }}
               loading={currentModel !== 'add' && loadingModel === 'list' ? loading : false}
               selectedRows={selectedRows}
               data={datas}

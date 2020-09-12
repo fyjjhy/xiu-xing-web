@@ -93,7 +93,10 @@ export default class LingWu extends PureComponent {
             width={1000}
           >
             <StandardPager
-              scroll={{ x: 'max-content' }} // 固定前后列，横向滚动查看其它数据
+              scroll={{ x: '100vw' }} // 固定前后列，横向滚动查看其它数据
+              fixed="right"
+              columnWidth="110px"
+              searchBtn='search'
               showTotal={this.showTotal}
               renderMiaoShu={this.renderMiaoShu}
               rowInfo={currentInfo}

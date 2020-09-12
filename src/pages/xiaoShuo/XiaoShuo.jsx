@@ -10,17 +10,24 @@ import {xiaoShuoMetaModel} from "../../json/xiaoShuo";
   loading,
 }))
 export default class XiaoShuo extends PureComponent {
-  constructor(props){
-    super(props);
-    this.state = {...xiaoShuoMetaModel()};
-  }
+  // 分页信息
+  showTotal = (metaModel) => {
+    if (metaModel && metaModel.funcModelCode) {
+      const { [metaModel.funcModelCode]: { datas: { pagination } } } = this.props;
+      if (pagination && pagination.total) {
+        return { showTotal: () => `共 ${pagination.total} 条记录 第 ${pagination.current} / ${Math.ceil(pagination.total / pagination.pageSize)} 页` };
+      }
+    }
+    return { showTotal: () => '' };
+  };
 
   render() {
-    const { props, state } = this;
+    const { props } = this;
     return (
       <PageHeaderWrapper>
         <StandardPager
-          {...state}
+          showTotal={this.showTotal}
+          {...xiaoShuoMetaModel()}
           {...props}
         />
       </PageHeaderWrapper>

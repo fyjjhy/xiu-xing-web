@@ -600,7 +600,7 @@ export default class QiTaLingWu extends PureComponent {
               {this.renderToolbar()}
             </div>
             <StandardTable
-              // scroll={{ x: '150%' }}
+              // scroll={{ x: '100vw' }}
               loading={currentModel !== 'add' && loadingModel === 'list' ? loading : false}
               selectedRows={selectedRows}
               data={datas}

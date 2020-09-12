@@ -133,18 +133,22 @@ export default class LingWuCangKu extends PureComponent {
       <div>
         <Divider style={{ border: '2px solid blue' }} type="vertical" /><strong>{item.lingWuFenLeiName}</strong><br/>
         {lingWuList.map((rows, index) => {
-          const key = index + 1;
+          const key1 = index + 1;
           return (
             <Row
-              key={key}
+              key={key1}
               gutter={[8, 8]}
               style={{ width: '100%', marginLeft: '0px', marginRight: '0px' }}
             >
-              {rows.map(data => (
-                <Col key={data.lingWuId} span={8}>
-                  {this.renderLingWuItem(data)}
-                </Col>
-              ))}
+              {rows.map((data, rowIndex) => {
+                const key = rowIndex + 1;
+                const key2 = `${key1}${key}`;
+                return(
+                  <Col key={key2} span={8}>
+                    {this.renderLingWuItem(data)}
+                  </Col>
+                )}
+              )}
             </Row>
           );
         })}

@@ -69,7 +69,7 @@ export default class ZiDian extends PureComponent {
           renderZuCiZhong={this.renderZuCiZhong} // 组词中
           renderZuCiTou={this.renderZuCiTou} // 组词头
           renderXinHuaZiDian={this.renderXinHuaZiDian} // 字义
-          scroll={{ x: '150%' }}
+          scroll={{ x: '100vw' }}
           {...state}
           {...props}
         />

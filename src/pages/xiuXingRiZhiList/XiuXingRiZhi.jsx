@@ -637,7 +637,7 @@ export default class XiuXingRiZhi extends PureComponent {
               {this.renderToolbar()}
             </div>
             <StandardTable
-              scroll={{ x: 'max-content' }}
+              scroll={{ x: '100vw' }}
               loading={currentModel !== 'add' && loadingModel === 'list' ? loading : false}
               selectedRows={selectedRows}
               data={datas}

@@ -173,7 +173,7 @@ export default class XiuXingRiZhi extends PureComponent {
           renderMiaoShu={this.renderMiaoShu}
           showTotal={this.showTotal}
           fixed="right"
-          scroll={{ x: '200%' }}
+          scroll={{ x: '100vw' }}
           autoFormApi={{ width: '650px' }}
           renderRiZhiTime={this.renderRiZhiTime}
           renderRiZhiDiDian={this.renderRiZhiDiDian}
@@ -203,7 +203,7 @@ export default class XiuXingRiZhi extends PureComponent {
               columnWidth="160px"
               fixed="right"
               renderMiaoShu={this.renderMiaoShu}
-              scroll={{ x: '200%' }}
+              scroll={{ x: '100vw' }}
               {...cangKuInfoMetaModel()}
               tableSelectType="radio"
               onSelectRow={this.handleCangKuTableOnSelectRow}
