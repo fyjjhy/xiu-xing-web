@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-syntax,guard-for-in */
 import React, {PureComponent} from 'react';
-import { Modal, Card, List, Tag, Tooltip, Typography, Avatar, Divider, Row, Col } from 'antd';
+import { Modal, Card, List, Tag, Tooltip, Typography, Avatar, Divider, Row, Col, Badge } from 'antd';
 import CangKuLingWuProfile from "../CangKuLingWuProfile";
 import CangKuLingWuRecord from "../CangKuLingWuRecord";
 import {renderMiaoShu} from "../../utils/utils";
@@ -70,7 +70,8 @@ export default class LingWuCangKu extends PureComponent {
     const { kuCun } = this.state;
     if (hisMap && Object.keys(hisMap).length > 0) {
       const result = [];
-      for (const key in hisMap) {
+      // 对值进行排序
+      Object.keys(hisMap).sort().forEach(key => {
         const his = {};
         his.lingWuFenLeiName = key;
         his.lingWu = hisMap[key].filter(data => {
@@ -80,7 +81,7 @@ export default class LingWuCangKu extends PureComponent {
           return true;
         });
         result.push(his);
-      }
+      });
       return result;
     }
     return [];
@@ -131,7 +132,15 @@ export default class LingWuCangKu extends PureComponent {
     });
     return(
       <div>
-        <Divider style={{ border: '2px solid blue' }} type="vertical" /><strong>{item.lingWuFenLeiName}</strong><br/>
+        <Divider style={{ border: '2px solid blue' }} type="vertical" />
+        <Badge
+          count={item.lingWu ? item.lingWu.length : 0}
+          offset={[16, 8]}
+          size="small"
+          // style={{ backgroundColor: '#52c41a' }}
+        >
+          <strong>{item.lingWuFenLeiName}</strong>
+        </Badge><br/>
         {lingWuList.map((rows, index) => {
           const key1 = index + 1;
           return (
@@ -154,7 +163,7 @@ export default class LingWuCangKu extends PureComponent {
         })}
       </div>
     );
-  }
+  };
 
   renderLingWuItem(item) {
     return <List.Item style={{marginBottom: 0}}>

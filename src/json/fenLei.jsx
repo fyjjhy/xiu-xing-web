@@ -1,25 +1,17 @@
 const fenLei = {
   "id": "28",
-  "icon": null,
   "funcCode": "fenLei",
   "funcName": "分类",
   "state": "A",
-  "comments": null,
   "stateTime": "2020-07-05 03:10:46",
   "seq": 28,
-  "indexUrl": null,
   "dictList": [
     {
       "id": "22",
       "funcId": "28",
       "dictName": "分类类型",
       "dictCode": "type",
-      "comments": null,
-      "category": null,
-      "modifyFlag": null,
-      "visiableFlag": null,
       "seq": 1,
-      "spId": null,
       "version": 0,
       "dictDataList": [
         {
@@ -28,7 +20,6 @@ const fenLei = {
           "dataName": "状态",
           "dataCode": "state",
           "seq": 1,
-          "spId": null,
           "version": 0
         },
         {
@@ -37,7 +28,6 @@ const fenLei = {
           "dataName": "分类",
           "dataCode": "fenLei",
           "seq": 2,
-          "spId": null,
           "version": 0
         }
       ]
@@ -47,12 +37,7 @@ const fenLei = {
       "funcId": "28",
       "dictName": "分类",
       "dictCode": "fenLei",
-      "comments": null,
-      "category": null,
-      "modifyFlag": null,
-      "visiableFlag": null,
       "seq": 2,
-      "spId": null,
       "version": 0,
       "dictDataList": [
         {
@@ -61,7 +46,6 @@ const fenLei = {
           "dataName": "灵物状态",
           "dataCode": "lingWuState",
           "seq": 1,
-          "spId": null,
           "version": 0
         },
         {
@@ -70,7 +54,6 @@ const fenLei = {
           "dataName": "所属状态",
           "dataCode": "suoShuState",
           "seq": 2,
-          "spId": null,
           "version": 0
         },
         {
@@ -79,7 +62,6 @@ const fenLei = {
           "dataName": "灵物分类",
           "dataCode": "lingWuFenLei",
           "seq": 3,
-          "spId": null,
           "version": 0
         },
         {
@@ -88,7 +70,6 @@ const fenLei = {
           "dataName": "所属分类",
           "dataCode": "suoShuFenLei",
           "seq": 4,
-          "spId": null,
           "version": 0
         },
         {
@@ -97,7 +78,6 @@ const fenLei = {
           "dataName": "境界分类",
           "dataCode": "jingJieFenLei",
           "seq": 5,
-          "spId": null,
           "version": 0
         }
       ]
@@ -110,47 +90,32 @@ const fenLei = {
       "funcId": "28",
       "name": "新增",
       "code": "add",
-      "icon": null,
-      "displayType": "primary",
-      "comments": null
+      "displayType": "primary"
     },
     {
       "id": "68",
       "funcId": "28",
       "name": "编辑",
-      "code": "update",
-      "icon": null,
-      "displayType": null,
-      "comments": null
+      "code": "update"
     },
     {
       "id": "69",
       "funcId": "28",
       "name": "删除",
-      "code": "delete",
-      "icon": null,
-      "displayType": null,
-      "comments": null
+      "code": "delete"
     }
   ],
   "metaModelList": [
     {
       "id": "28",
-      "parentModelId": null,
-      "relationship": null,
       "modelName": "分类",
       "modelCode": "fenLei",
       "funcModelCode": "fenLei",
       "searchFlag": "Y",
       "multChooseFlag": "Y",
-      "title": null,
       "masterFlag": "Y",
       "treeTableFlag": "N",
-      "childColumnCode": null,
-      "parentColumnCode": null,
       "position": "1",
-      "state": null,
-      "stateTime": null,
       "columnList": [
         {
           "id": "264",
@@ -158,13 +123,8 @@ const fenLei = {
           "columnName": "id",
           "columnCode": "id",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "I",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 1,
           "requiredFlag": "Y",
           "searchFlag": "N",
@@ -175,27 +135,19 @@ const fenLei = {
           "listDisplayFlag": "N",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "Y",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "267",
           "modelId": "28",
-          "columnName": "名称",
+          "columnName": "分类名称",
           "columnCode": "fenLeiName",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "I",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 3,
           "requiredFlag": "Y",
           "searchFlag": "Y",
@@ -206,27 +158,19 @@ const fenLei = {
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "266",
           "modelId": "28",
-          "columnName": "编码",
+          "columnName": "分类编码",
           "columnCode": "fenLeiCode",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "I",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 5,
           "requiredFlag": "Y",
           "searchFlag": "N",
@@ -237,26 +181,19 @@ const fenLei = {
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "265",
           "modelId": "28",
-          "columnName": "类型",
+          "columnName": "分类类型",
           "columnCode": "type",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "S",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
           "valueList": "dict|type",
           "seq": 7,
           "requiredFlag": "Y",
@@ -268,13 +205,10 @@ const fenLei = {
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "269",
@@ -282,12 +216,8 @@ const fenLei = {
           "columnName": "分类",
           "columnCode": "fenLei",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "S",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
           "valueList": "dict|fenLei",
           "seq": 8,
           "requiredFlag": "Y",
@@ -299,27 +229,19 @@ const fenLei = {
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "268",
           "modelId": "28",
-          "columnName": "描述",
+          "columnName": "分类描述",
           "columnCode": "fenLeiMiaoShu",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "T",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 9,
           "requiredFlag": "N",
           "searchFlag": "Y",
@@ -331,12 +253,11 @@ const fenLei = {
           "exportDisplayFlag": "N",
           "sortable": "N",
           "renderList": "renderMiaoShu",
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A",
+          "extStr01": "Y"
         },
         {
           "id": "ec4bde0c6510f69dc64604a1faedcc8f",
@@ -344,12 +265,8 @@ const fenLei = {
           "columnName": "小说",
           "columnCode": "xiaoShuoId",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "S",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
           "valueList": "service|/xiuXing/common/xiu-xing/xiaoShuo",
           "seq": 11,
           "requiredFlag": "N",
@@ -361,13 +278,10 @@ const fenLei = {
           "listDisplayFlag": "N",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "cb46401ac366fff7e8335b83c3aea390",
@@ -375,13 +289,8 @@ const fenLei = {
           "columnName": "小说",
           "columnCode": "xiaoShuoName",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "I",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 13,
           "requiredFlag": "N",
           "searchFlag": "N",
@@ -392,13 +301,34 @@ const fenLei = {
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
+        },
+        {
+          "id": "32177e6d7b871c324a70bb3aae7d0f4b",
+          "modelId": "28",
+          "columnName": "更新时间",
+          "columnCode": "updateTime",
+          "valueType": "S",
+          "modifyFlag": "N",
+          "displayType": "I",
+          "seq": 15,
+          "requiredFlag": "N",
+          "searchFlag": "N",
+          "profileDisplayFlag": "Y",
+          "addTable": "N",
+          "editDisplayFlag": "N",
+          "editable": "N",
+          "listDisplayFlag": "Y",
+          "exportDisplayFlag": "N",
+          "sortable": "N",
+          "primaryFlag": "N",
+          "feignFlag": "N",
+          "columnWidth": "160px",
+          "titleFlag": "N",
+          "state": "A"
         }
       ],
       "actionList": [
@@ -407,38 +337,22 @@ const fenLei = {
           "modelId": "28",
           "type": "N",
           "code": "query",
-          "name": null,
           "servId": "28",
           "servAction": "query",
           "defaultFlag": "Y",
-          "disableRule": null,
           "propFlag": "N",
-          "propMsg": null,
-          "delErrorMsg": null,
-          "servCode": null,
-          "category": null,
-          "seq": 1,
-          "displayType": null,
-          "icon": null
+          "seq": 1
         },
         {
           "id": "123",
           "modelId": "28",
           "type": "N",
           "code": "get",
-          "name": null,
           "servId": "28",
           "servAction": "get",
           "defaultFlag": "Y",
-          "disableRule": null,
           "propFlag": "N",
-          "propMsg": null,
-          "delErrorMsg": null,
-          "servCode": null,
-          "category": null,
-          "seq": 2,
-          "displayType": null,
-          "icon": null
+          "seq": 2
         },
         {
           "id": "124",
@@ -449,15 +363,9 @@ const fenLei = {
           "servId": "28",
           "servAction": "add",
           "defaultFlag": "Y",
-          "disableRule": null,
           "propFlag": "N",
-          "propMsg": null,
-          "delErrorMsg": null,
-          "servCode": null,
-          "category": null,
           "seq": 3,
-          "displayType": "primary",
-          "icon": null
+          "displayType": "primary"
         },
         {
           "id": "125",
@@ -468,15 +376,8 @@ const fenLei = {
           "servId": "28",
           "servAction": "update",
           "defaultFlag": "Y",
-          "disableRule": null,
           "propFlag": "N",
-          "propMsg": null,
-          "delErrorMsg": null,
-          "servCode": null,
-          "category": null,
-          "seq": 5,
-          "displayType": null,
-          "icon": null
+          "seq": 5
         },
         {
           "id": "126",
@@ -487,15 +388,8 @@ const fenLei = {
           "servId": "28",
           "servAction": "delete",
           "defaultFlag": "Y",
-          "disableRule": null,
           "propFlag": "Y",
-          "propMsg": null,
-          "delErrorMsg": null,
-          "servCode": null,
-          "category": null,
-          "seq": 6,
-          "displayType": null,
-          "icon": null
+          "seq": 6
         }
       ]
     }

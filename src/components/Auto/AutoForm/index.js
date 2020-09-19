@@ -196,6 +196,8 @@ export default class AutoForm extends PureComponent {
         onOk={e => {
                   this.handleSubmit(e);
               }}
+        cancelText="取消"
+        okText="确定"
       >
         <Form
           name="control-ref"

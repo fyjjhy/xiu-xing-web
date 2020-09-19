@@ -1,25 +1,17 @@
 const cangKu = {
   "id": "21",
-  "icon": null,
   "funcCode": "cangKu",
   "funcName": "仓库",
   "state": "A",
-  "comments": null,
   "stateTime": "2020-06-16 14:20:13",
   "seq": 21,
-  "indexUrl": null,
   "dictList": [
     {
       "id": "10",
       "funcId": "21",
       "dictName": "灵物分类",
       "dictCode": "lingWuFenLei",
-      "comments": null,
-      "category": null,
-      "modifyFlag": null,
-      "visiableFlag": null,
       "seq": 1,
-      "spId": null,
       "version": 0,
       "dictDataList": [
         {
@@ -28,7 +20,6 @@ const cangKu = {
           "dataName": "阵法",
           "dataCode": "zhenFa",
           "seq": 10,
-          "spId": null,
           "version": 0
         },
         {
@@ -37,7 +28,6 @@ const cangKu = {
           "dataName": "人物",
           "dataCode": "renWu",
           "seq": 11,
-          "spId": null,
           "version": 0
         },
         {
@@ -46,7 +36,6 @@ const cangKu = {
           "dataName": "妖兽",
           "dataCode": "yaoShou",
           "seq": 1,
-          "spId": null,
           "version": 0
         },
         {
@@ -55,7 +44,6 @@ const cangKu = {
           "dataName": "符箓",
           "dataCode": "fuLu",
           "seq": 2,
-          "spId": null,
           "version": 0
         },
         {
@@ -64,7 +52,6 @@ const cangKu = {
           "dataName": "功法",
           "dataCode": "gongFa",
           "seq": 3,
-          "spId": null,
           "version": 0
         },
         {
@@ -73,7 +60,6 @@ const cangKu = {
           "dataName": "灵材",
           "dataCode": "lingCai",
           "seq": 4,
-          "spId": null,
           "version": 0
         },
         {
@@ -82,7 +68,6 @@ const cangKu = {
           "dataName": "傀儡",
           "dataCode": "kuiLei",
           "seq": 5,
-          "spId": null,
           "version": 0
         },
         {
@@ -91,7 +76,6 @@ const cangKu = {
           "dataName": "法术",
           "dataCode": "faShu",
           "seq": 6,
-          "spId": null,
           "version": 0
         },
         {
@@ -100,7 +84,6 @@ const cangKu = {
           "dataName": "法器",
           "dataCode": "faQi",
           "seq": 7,
-          "spId": null,
           "version": 0
         },
         {
@@ -109,7 +92,6 @@ const cangKu = {
           "dataName": "其他灵物",
           "dataCode": "qiTaLingWu",
           "seq": 8,
-          "spId": null,
           "version": 0
         },
         {
@@ -118,7 +100,6 @@ const cangKu = {
           "dataName": "灵丹",
           "dataCode": "lingDan",
           "seq": 9,
-          "spId": null,
           "version": 0
         }
       ]
@@ -128,12 +109,7 @@ const cangKu = {
       "funcId": "21",
       "dictName": "所属分类",
       "dictCode": "suoShuFenLei",
-      "comments": null,
-      "category": null,
-      "modifyFlag": null,
-      "visiableFlag": null,
       "seq": 2,
-      "spId": null,
       "version": 0,
       "dictDataList": [
         {
@@ -142,7 +118,6 @@ const cangKu = {
           "dataName": "组织",
           "dataCode": "zuZhi",
           "seq": 5,
-          "spId": null,
           "version": 0
         },
         {
@@ -151,7 +126,6 @@ const cangKu = {
           "dataName": "地名",
           "dataCode": "diMing",
           "seq": 1,
-          "spId": null,
           "version": 0
         },
         {
@@ -160,7 +134,6 @@ const cangKu = {
           "dataName": "机构",
           "dataCode": "jiGou",
           "seq": 2,
-          "spId": null,
           "version": 0
         },
         {
@@ -169,7 +142,6 @@ const cangKu = {
           "dataName": "宗门",
           "dataCode": "zongMen",
           "seq": 3,
-          "spId": null,
           "version": 0
         },
         {
@@ -178,7 +150,6 @@ const cangKu = {
           "dataName": "家族",
           "dataCode": "jiaZu",
           "seq": 4,
-          "spId": null,
           "version": 0
         },
         {
@@ -187,7 +158,6 @@ const cangKu = {
           "dataName": "修行者",
           "dataCode": "xiuXingZhe",
           "seq": 6,
-          "spId": null,
           "version": 0
         }
       ]
@@ -197,12 +167,7 @@ const cangKu = {
       "funcId": "21",
       "dictName": "灵物状态",
       "dictCode": "lingWuState",
-      "comments": null,
-      "category": null,
-      "modifyFlag": null,
-      "visiableFlag": null,
       "seq": 3,
-      "spId": null,
       "version": 0,
       "dictDataList": [
         {
@@ -211,7 +176,6 @@ const cangKu = {
           "dataName": "已服用",
           "dataCode": "已服用",
           "seq": 6,
-          "spId": null,
           "version": 0
         },
         {
@@ -220,7 +184,6 @@ const cangKu = {
           "dataName": "已损坏",
           "dataCode": "已损坏",
           "seq": 7,
-          "spId": null,
           "version": 0
         },
         {
@@ -229,7 +192,6 @@ const cangKu = {
           "dataName": "已发完",
           "dataCode": "已发完",
           "seq": 8,
-          "spId": null,
           "version": 0
         },
         {
@@ -238,7 +200,6 @@ const cangKu = {
           "dataName": "已死亡",
           "dataCode": "已死亡",
           "seq": 9,
-          "spId": null,
           "version": 0
         },
         {
@@ -247,7 +208,6 @@ const cangKu = {
           "dataName": "已毁灭",
           "dataCode": "已毁灭",
           "seq": 10,
-          "spId": null,
           "version": 0
         },
         {
@@ -256,7 +216,6 @@ const cangKu = {
           "dataName": "已粉碎",
           "dataCode": "已粉碎",
           "seq": 11,
-          "spId": null,
           "version": 0
         },
         {
@@ -265,7 +224,6 @@ const cangKu = {
           "dataName": "已掉落",
           "dataCode": "已掉落",
           "seq": 12,
-          "spId": null,
           "version": 0
         },
         {
@@ -274,7 +232,6 @@ const cangKu = {
           "dataName": "已使用",
           "dataCode": "已使用",
           "seq": 1,
-          "spId": null,
           "version": 0
         },
         {
@@ -283,7 +240,6 @@ const cangKu = {
           "dataName": "已残缺",
           "dataCode": "已残缺",
           "seq": 2,
-          "spId": null,
           "version": 0
         },
         {
@@ -292,7 +248,6 @@ const cangKu = {
           "dataName": "已腐蚀",
           "dataCode": "已腐蚀",
           "seq": 3,
-          "spId": null,
           "version": 0
         },
         {
@@ -301,7 +256,6 @@ const cangKu = {
           "dataName": "已消耗",
           "dataCode": "已消耗",
           "seq": 4,
-          "spId": null,
           "version": 0
         },
         {
@@ -310,7 +264,6 @@ const cangKu = {
           "dataName": "已耗尽",
           "dataCode": "已耗尽",
           "seq": 5,
-          "spId": null,
           "version": 0
         }
       ]
@@ -320,12 +273,7 @@ const cangKu = {
       "funcId": "21",
       "dictName": "单位",
       "dictCode": "danWei",
-      "comments": null,
-      "category": null,
-      "modifyFlag": null,
-      "visiableFlag": null,
       "seq": 4,
-      "spId": null,
       "version": 0,
       "dictDataList": [
         {
@@ -334,7 +282,6 @@ const cangKu = {
           "dataName": "只",
           "dataCode": "只",
           "seq": 1,
-          "spId": null,
           "version": 0
         },
         {
@@ -343,7 +290,6 @@ const cangKu = {
           "dataName": "打",
           "dataCode": "打",
           "seq": 2,
-          "spId": null,
           "version": 0
         },
         {
@@ -352,7 +298,6 @@ const cangKu = {
           "dataName": "张",
           "dataCode": "张",
           "seq": 3,
-          "spId": null,
           "version": 0
         },
         {
@@ -361,7 +306,6 @@ const cangKu = {
           "dataName": "本",
           "dataCode": "本",
           "seq": 4,
-          "spId": null,
           "version": 0
         },
         {
@@ -370,7 +314,6 @@ const cangKu = {
           "dataName": "块",
           "dataCode": "块",
           "seq": 5,
-          "spId": null,
           "version": 0
         },
         {
@@ -379,7 +322,6 @@ const cangKu = {
           "dataName": "瓶",
           "dataCode": "瓶",
           "seq": 6,
-          "spId": null,
           "version": 0
         },
         {
@@ -388,7 +330,6 @@ const cangKu = {
           "dataName": "束",
           "dataCode": "束",
           "seq": 7,
-          "spId": null,
           "version": 0
         },
         {
@@ -397,7 +338,6 @@ const cangKu = {
           "dataName": "位",
           "dataCode": "位",
           "seq": 8,
-          "spId": null,
           "version": 0
         },
         {
@@ -406,7 +346,6 @@ const cangKu = {
           "dataName": "道",
           "dataCode": "道",
           "seq": 9,
-          "spId": null,
           "version": 0
         },
         {
@@ -415,7 +354,6 @@ const cangKu = {
           "dataName": "株",
           "dataCode": "株",
           "seq": 10,
-          "spId": null,
           "version": 0
         },
         {
@@ -424,7 +362,6 @@ const cangKu = {
           "dataName": "亩",
           "dataCode": "亩",
           "seq": 11,
-          "spId": null,
           "version": 0
         },
         {
@@ -433,7 +370,6 @@ const cangKu = {
           "dataName": "片",
           "dataCode": "片",
           "seq": 12,
-          "spId": null,
           "version": 0
         },
         {
@@ -442,7 +378,6 @@ const cangKu = {
           "dataName": "个",
           "dataCode": "个",
           "seq": 13,
-          "spId": null,
           "version": 0
         },
         {
@@ -451,7 +386,6 @@ const cangKu = {
           "dataName": "枚",
           "dataCode": "枚",
           "seq": 14,
-          "spId": null,
           "version": 0
         },
         {
@@ -460,7 +394,6 @@ const cangKu = {
           "dataName": "杆",
           "dataCode": "杆",
           "seq": 15,
-          "spId": null,
           "version": 0
         },
         {
@@ -469,7 +402,6 @@ const cangKu = {
           "dataName": "件",
           "dataCode": "件",
           "seq": 16,
-          "spId": null,
           "version": 0
         },
         {
@@ -478,7 +410,6 @@ const cangKu = {
           "dataName": "套",
           "dataCode": "套",
           "seq": 17,
-          "spId": null,
           "version": 0
         },
         {
@@ -487,7 +418,6 @@ const cangKu = {
           "dataName": "面",
           "dataCode": "面",
           "seq": 18,
-          "spId": null,
           "version": 0
         },
         {
@@ -496,7 +426,6 @@ const cangKu = {
           "dataName": "部",
           "dataCode": "部",
           "seq": 19,
-          "spId": null,
           "version": 0
         },
         {
@@ -505,7 +434,6 @@ const cangKu = {
           "dataName": "粒",
           "dataCode": "粒",
           "seq": 20,
-          "spId": null,
           "version": 0
         },
         {
@@ -514,7 +442,6 @@ const cangKu = {
           "dataName": "服",
           "dataCode": "服",
           "seq": 21,
-          "spId": null,
           "version": 0
         },
         {
@@ -523,7 +450,6 @@ const cangKu = {
           "dataName": "根",
           "dataCode": "根",
           "seq": 22,
-          "spId": null,
           "version": 0
         },
         {
@@ -532,7 +458,6 @@ const cangKu = {
           "dataName": "条",
           "dataCode": "条",
           "seq": 23,
-          "spId": null,
           "version": 0
         },
         {
@@ -541,7 +466,6 @@ const cangKu = {
           "dataName": "把",
           "dataCode": "把",
           "seq": 24,
-          "spId": null,
           "version": 0
         },
         {
@@ -550,7 +474,6 @@ const cangKu = {
           "dataName": "颗",
           "dataCode": "颗",
           "seq": 25,
-          "spId": null,
           "version": 0
         },
         {
@@ -559,7 +482,6 @@ const cangKu = {
           "dataName": "艘",
           "dataCode": "艘",
           "seq": 26,
-          "spId": null,
           "version": 0
         },
         {
@@ -568,7 +490,6 @@ const cangKu = {
           "dataName": "柄",
           "dataCode": "柄",
           "seq": 27,
-          "spId": null,
           "version": 0
         },
         {
@@ -577,7 +498,6 @@ const cangKu = {
           "dataName": "份",
           "dataCode": "份",
           "seq": 28,
-          "spId": null,
           "version": 0
         },
         {
@@ -586,7 +506,6 @@ const cangKu = {
           "dataName": "群",
           "dataCode": "群",
           "seq": 29,
-          "spId": null,
           "version": 0
         },
         {
@@ -595,7 +514,6 @@ const cangKu = {
           "dataName": "双",
           "dataCode": "双",
           "seq": 30,
-          "spId": null,
           "version": 0
         },
         {
@@ -604,7 +522,6 @@ const cangKu = {
           "dataName": "些",
           "dataCode": "些",
           "seq": 31,
-          "spId": null,
           "version": 0
         },
         {
@@ -613,7 +530,6 @@ const cangKu = {
           "dataName": "头",
           "dataCode": "头",
           "seq": 32,
-          "spId": null,
           "version": 0
         },
         {
@@ -622,7 +538,6 @@ const cangKu = {
           "dataName": "条",
           "dataCode": "条",
           "seq": 33,
-          "spId": null,
           "version": 0
         },
         {
@@ -631,7 +546,6 @@ const cangKu = {
           "dataName": "口",
           "dataCode": "口",
           "seq": 34,
-          "spId": null,
           "version": 0
         },
         {
@@ -640,7 +554,6 @@ const cangKu = {
           "dataName": "种",
           "dataCode": "种",
           "seq": 35,
-          "spId": null,
           "version": 0
         },
         {
@@ -649,7 +562,6 @@ const cangKu = {
           "dataName": "尊",
           "dataCode": "尊",
           "seq": 36,
-          "spId": null,
           "version": 0
         },
         {
@@ -658,7 +570,6 @@ const cangKu = {
           "dataName": "壶",
           "dataCode": "壶",
           "seq": 37,
-          "spId": null,
           "version": 0
         },
         {
@@ -667,7 +578,22 @@ const cangKu = {
           "dataName": "朵",
           "dataCode": "朵",
           "seq": 38,
-          "spId": null,
+          "version": 0
+        },
+        {
+          "id": "6cbb3a4ba5fa4d0b4ab52dbf2c82535c",
+          "dictId": "13",
+          "dataName": "处",
+          "dataCode": "处",
+          "seq": 45,
+          "version": 0
+        },
+        {
+          "id": "71e6ebea74a191a68937372134ec58db",
+          "dictId": "13",
+          "dataName": "卷",
+          "dataCode": "卷",
+          "seq": 47,
           "version": 0
         },
         {
@@ -676,7 +602,6 @@ const cangKu = {
           "dataName": "式",
           "dataCode": "式",
           "seq": 40,
-          "spId": null,
           "version": 0
         },
         {
@@ -685,7 +610,6 @@ const cangKu = {
           "dataName": "间",
           "dataCode": "间",
           "seq": 41,
-          "spId": null,
           "version": 0
         },
         {
@@ -694,7 +618,30 @@ const cangKu = {
           "dataName": "级",
           "dataCode": "级",
           "seq": 39,
-          "spId": null,
+          "version": 0
+        },
+        {
+          "id": "a51176c4e8187b77dcf33fc0e2ce41ed",
+          "dictId": "13",
+          "dataName": "批",
+          "dataCode": "批",
+          "seq": 43,
+          "version": 0
+        },
+        {
+          "id": "a70ba29d2708128d663e251b83cea9c1",
+          "dictId": "13",
+          "dataName": "对",
+          "dataCode": "对",
+          "seq": 44,
+          "version": 0
+        },
+        {
+          "id": "de9b1e93ee38a352025fb9862dea72e2",
+          "dictId": "13",
+          "dataName": "丛",
+          "dataCode": "丛",
+          "seq": 46,
           "version": 0
         },
         {
@@ -703,7 +650,6 @@ const cangKu = {
           "dataName": "封",
           "dataCode": "封",
           "seq": 42,
-          "spId": null,
           "version": 0
         }
       ]
@@ -716,56 +662,38 @@ const cangKu = {
       "funcId": "21",
       "name": "新增",
       "code": "add",
-      "icon": null,
-      "displayType": "primary",
-      "comments": null
+      "displayType": "primary"
     },
     {
       "id": "53",
       "funcId": "21",
       "name": "编辑",
-      "code": "update",
-      "icon": null,
-      "displayType": null,
-      "comments": null
+      "code": "update"
     },
     {
       "id": "54",
       "funcId": "21",
       "name": "删除",
-      "code": "delete",
-      "icon": null,
-      "displayType": null,
-      "comments": null
+      "code": "delete"
     },
     {
       "id": "e36a2e94b41224718b4b3908f73c9028",
       "funcId": "21",
       "name": "操作记录",
-      "code": "opt",
-      "icon": null,
-      "displayType": null,
-      "comments": null
+      "code": "opt"
     }
   ],
   "metaModelList": [
     {
       "id": "21",
-      "parentModelId": null,
-      "relationship": null,
       "modelName": "仓库",
       "modelCode": "cangKu",
       "funcModelCode": "cangKu",
       "searchFlag": "Y",
       "multChooseFlag": "Y",
-      "title": null,
       "masterFlag": "Y",
       "treeTableFlag": "N",
-      "childColumnCode": null,
-      "parentColumnCode": null,
       "position": "1",
-      "state": null,
-      "stateTime": null,
       "columnList": [
         {
           "id": "158",
@@ -773,13 +701,8 @@ const cangKu = {
           "columnName": "id",
           "columnCode": "id",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "I",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 1,
           "requiredFlag": "Y",
           "searchFlag": "N",
@@ -790,13 +713,10 @@ const cangKu = {
           "listDisplayFlag": "N",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "Y",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "188",
@@ -804,13 +724,8 @@ const cangKu = {
           "columnName": "灵物信息",
           "columnCode": "lingWuInfo",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "CF",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 2,
           "requiredFlag": "N",
           "searchFlag": "N",
@@ -821,13 +736,10 @@ const cangKu = {
           "listDisplayFlag": "N",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "198",
@@ -835,13 +747,8 @@ const cangKu = {
           "columnName": "灵物标识",
           "columnCode": "lingWuId",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "CF",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 3,
           "requiredFlag": "N",
           "searchFlag": "N",
@@ -852,13 +759,10 @@ const cangKu = {
           "listDisplayFlag": "N",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "09cf8e658ef130efa51189fcca28db16",
@@ -866,13 +770,8 @@ const cangKu = {
           "columnName": "灵物标识",
           "columnCode": "lingWuHisId",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "CF",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 3,
           "requiredFlag": "N",
           "searchFlag": "N",
@@ -883,13 +782,10 @@ const cangKu = {
           "listDisplayFlag": "N",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "159",
@@ -897,13 +793,8 @@ const cangKu = {
           "columnName": "灵物名称",
           "columnCode": "lingWuName",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "I",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 4,
           "requiredFlag": "Y",
           "searchFlag": "Y",
@@ -914,13 +805,10 @@ const cangKu = {
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "160",
@@ -928,12 +816,8 @@ const cangKu = {
           "columnName": "灵物分类",
           "columnCode": "lingWuFenLei",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "S",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
           "valueList": "service|/xiuXing/common/xiu-xing/fenLei?type=fenLei&fenLei=lingWuFenLei",
           "seq": 5,
           "requiredFlag": "Y",
@@ -945,13 +829,10 @@ const cangKu = {
           "listDisplayFlag": "N",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "d952690d48798de8b23bbc059e5f3e9b",
@@ -959,13 +840,8 @@ const cangKu = {
           "columnName": "灵物分类",
           "columnCode": "lingWuFenLeiName",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "I",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 5,
           "requiredFlag": "N",
           "searchFlag": "N",
@@ -976,13 +852,10 @@ const cangKu = {
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "161",
@@ -990,13 +863,8 @@ const cangKu = {
           "columnName": "灵物属性",
           "columnCode": "lingWuShuXing",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "I",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 7,
           "requiredFlag": "N",
           "searchFlag": "Y",
@@ -1007,13 +875,10 @@ const cangKu = {
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "162",
@@ -1021,12 +886,8 @@ const cangKu = {
           "columnName": "灵物状态",
           "columnCode": "lingWuState",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "S",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
           "valueList": "service|/xiuXing/common/xiu-xing/fenLei?type=state&fenLei=lingWuState",
           "seq": 9,
           "requiredFlag": "N",
@@ -1038,13 +899,10 @@ const cangKu = {
           "listDisplayFlag": "N",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "86d7174f5f9a8bac6613093c6912148b",
@@ -1052,13 +910,8 @@ const cangKu = {
           "columnName": "灵物状态",
           "columnCode": "lingWuStateName",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "I",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 9,
           "requiredFlag": "N",
           "searchFlag": "N",
@@ -1069,13 +922,10 @@ const cangKu = {
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "163",
@@ -1083,13 +933,8 @@ const cangKu = {
           "columnName": "灵物数量",
           "columnCode": "lingWuShuLiang",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "I",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 11,
           "requiredFlag": "N",
           "searchFlag": "Y",
@@ -1100,13 +945,10 @@ const cangKu = {
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "164",
@@ -1114,12 +956,8 @@ const cangKu = {
           "columnName": "单位",
           "columnCode": "danWei",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "S",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
           "valueList": "dict|danWei",
           "seq": 13,
           "requiredFlag": "N",
@@ -1131,13 +969,10 @@ const cangKu = {
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "173",
@@ -1145,12 +980,8 @@ const cangKu = {
           "columnName": "灵物境界",
           "columnCode": "jingJieId",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "S",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
           "valueList": "service|/xiuXing/common/xiu-xing/jingJie",
           "seq": 15,
           "requiredFlag": "N",
@@ -1162,13 +993,10 @@ const cangKu = {
           "listDisplayFlag": "N",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "167",
@@ -1176,13 +1004,8 @@ const cangKu = {
           "columnName": "灵物境界",
           "columnCode": "jingJieName",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "I",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 17,
           "requiredFlag": "N",
           "searchFlag": "N",
@@ -1193,13 +1016,10 @@ const cangKu = {
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "174",
@@ -1207,12 +1027,8 @@ const cangKu = {
           "columnName": "灵物品级",
           "columnCode": "pinJiId",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "S",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
           "valueList": "service|/xiuXing/common/xiu-xing/pinJi",
           "seq": 19,
           "requiredFlag": "N",
@@ -1224,13 +1040,10 @@ const cangKu = {
           "listDisplayFlag": "N",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "168",
@@ -1238,13 +1051,8 @@ const cangKu = {
           "columnName": "灵物品级",
           "columnCode": "pinJiName",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "I",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 21,
           "requiredFlag": "N",
           "searchFlag": "N",
@@ -1255,13 +1063,10 @@ const cangKu = {
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "169",
@@ -1269,13 +1074,8 @@ const cangKu = {
           "columnName": "灵物描述",
           "columnCode": "lingWuMiaoShu",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "T",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 22,
           "requiredFlag": "N",
           "searchFlag": "Y",
@@ -1287,12 +1087,11 @@ const cangKu = {
           "exportDisplayFlag": "N",
           "sortable": "N",
           "renderList": "renderMiaoShu",
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": "300px",
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A",
+          "extStr01": "Y"
         },
         {
           "id": "4da0ea11640d8ae4c67b9a5a94462731",
@@ -1300,13 +1099,8 @@ const cangKu = {
           "columnName": "修行岁月",
           "columnCode": "xiuXingSuiYue",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "I",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 23,
           "requiredFlag": "N",
           "searchFlag": "Y",
@@ -1317,13 +1111,10 @@ const cangKu = {
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "189",
@@ -1331,13 +1122,8 @@ const cangKu = {
           "columnName": "所属信息",
           "columnCode": "suoShuInfo",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "CF",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 24,
           "requiredFlag": "N",
           "searchFlag": "N",
@@ -1348,13 +1134,10 @@ const cangKu = {
           "listDisplayFlag": "N",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "199",
@@ -1362,13 +1145,8 @@ const cangKu = {
           "columnName": "所属标识",
           "columnCode": "suoShuId",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "CF",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 25,
           "requiredFlag": "N",
           "searchFlag": "N",
@@ -1379,13 +1157,10 @@ const cangKu = {
           "listDisplayFlag": "N",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "22ef3f1fc0d24e15dd08d414006c028b",
@@ -1393,13 +1168,8 @@ const cangKu = {
           "columnName": "所属标识",
           "columnCode": "suoShuHisId",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "CF",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 25,
           "requiredFlag": "N",
           "searchFlag": "N",
@@ -1410,13 +1180,10 @@ const cangKu = {
           "listDisplayFlag": "N",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "166",
@@ -1424,13 +1191,8 @@ const cangKu = {
           "columnName": "所属名称",
           "columnCode": "suoShuName",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "I",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 26,
           "requiredFlag": "N",
           "searchFlag": "Y",
@@ -1441,13 +1203,10 @@ const cangKu = {
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "165",
@@ -1455,12 +1214,8 @@ const cangKu = {
           "columnName": "所属分类",
           "columnCode": "suoShuFenLei",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "S",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
           "valueList": "service|/xiuXing/common/xiu-xing/fenLei?type=fenLei&fenLei=suoShuFenLei",
           "seq": 27,
           "requiredFlag": "Y",
@@ -1472,13 +1227,10 @@ const cangKu = {
           "listDisplayFlag": "N",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "26b6a82284f653b0bb43d5f09b61cca1",
@@ -1486,13 +1238,8 @@ const cangKu = {
           "columnName": "所属分类",
           "columnCode": "suoShuFenLeiName",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "I",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 27,
           "requiredFlag": "N",
           "searchFlag": "N",
@@ -1503,13 +1250,10 @@ const cangKu = {
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "176",
@@ -1517,12 +1261,8 @@ const cangKu = {
           "columnName": "所属境界",
           "columnCode": "suoShuJingJieId",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "S",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
           "valueList": "service|/xiuXing/common/xiu-xing/jingJie",
           "seq": 29,
           "requiredFlag": "N",
@@ -1534,13 +1274,10 @@ const cangKu = {
           "listDisplayFlag": "N",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "177",
@@ -1548,13 +1285,8 @@ const cangKu = {
           "columnName": "所属境界",
           "columnCode": "suoShuJingJieName",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "I",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 31,
           "requiredFlag": "N",
           "searchFlag": "N",
@@ -1565,13 +1297,10 @@ const cangKu = {
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "178",
@@ -1579,12 +1308,8 @@ const cangKu = {
           "columnName": "所属品级",
           "columnCode": "suoShuPinJiId",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "S",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
           "valueList": "service|/xiuXing/common/xiu-xing/pinJi",
           "seq": 33,
           "requiredFlag": "N",
@@ -1596,13 +1321,10 @@ const cangKu = {
           "listDisplayFlag": "N",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "179",
@@ -1610,13 +1332,8 @@ const cangKu = {
           "columnName": "所属品级",
           "columnCode": "suoShuPinJiName",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "I",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 35,
           "requiredFlag": "N",
           "searchFlag": "N",
@@ -1627,13 +1344,10 @@ const cangKu = {
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "181",
@@ -1641,13 +1355,8 @@ const cangKu = {
           "columnName": "所属描述",
           "columnCode": "suoShuMiaoShu",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "T",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 37,
           "requiredFlag": "N",
           "searchFlag": "N",
@@ -1659,12 +1368,11 @@ const cangKu = {
           "exportDisplayFlag": "N",
           "sortable": "N",
           "renderList": "renderMiaoShu",
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": "300px",
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A",
+          "extStr01": "Y"
         },
         {
           "id": "170",
@@ -1672,12 +1380,8 @@ const cangKu = {
           "columnName": "小说",
           "columnCode": "xiaoShuoId",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "S",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
           "valueList": "service|/xiuXing/common/xiu-xing/xiaoShuo",
           "seq": 39,
           "requiredFlag": "Y",
@@ -1689,13 +1393,10 @@ const cangKu = {
           "listDisplayFlag": "N",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "171",
@@ -1703,13 +1404,8 @@ const cangKu = {
           "columnName": "小说",
           "columnCode": "xiaoShuoName",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "I",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 41,
           "requiredFlag": "Y",
           "searchFlag": "N",
@@ -1720,13 +1416,10 @@ const cangKu = {
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "2a2e8197de246586781dd3aef6dcdb19",
@@ -1734,13 +1427,8 @@ const cangKu = {
           "columnName": "地点",
           "columnCode": "fullName",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "I",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 42,
           "requiredFlag": "N",
           "searchFlag": "N",
@@ -1752,12 +1440,11 @@ const cangKu = {
           "exportDisplayFlag": "N",
           "sortable": "N",
           "renderList": "renderMiaoShu",
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": "300px",
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A",
+          "extStr01": "Y"
         },
         {
           "id": "6334551e50b9fa0cb17dc29bef400e81",
@@ -1765,12 +1452,8 @@ const cangKu = {
           "columnName": "地点",
           "columnCode": "addrId",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "CF",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
           "valueList": "service|/xiuXing/common/xiu-xing/address",
           "seq": 42,
           "requiredFlag": "N",
@@ -1782,13 +1465,10 @@ const cangKu = {
           "listDisplayFlag": "N",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "4edd12a296013268d44f61ae517c2c85",
@@ -1796,13 +1476,8 @@ const cangKu = {
           "columnName": "痕迹信息",
           "columnCode": "henJiInfo",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "CF",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 43,
           "requiredFlag": "N",
           "searchFlag": "N",
@@ -1813,13 +1488,10 @@ const cangKu = {
           "listDisplayFlag": "N",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "f13a1191da731635aa9e0f2747924d22",
@@ -1827,13 +1499,8 @@ const cangKu = {
           "columnName": "痕迹信息",
           "columnCode": "henJiId",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "CF",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 43,
           "requiredFlag": "N",
           "searchFlag": "N",
@@ -1844,13 +1511,10 @@ const cangKu = {
           "listDisplayFlag": "N",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "24c58ea7b26a0e9b5ad273e3feb09bfa",
@@ -1858,13 +1522,8 @@ const cangKu = {
           "columnName": "时间",
           "columnCode": "shiJian",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "I",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 45,
           "requiredFlag": "N",
           "searchFlag": "Y",
@@ -1875,13 +1534,10 @@ const cangKu = {
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "7e064d18439f9ca8c9ae681d79d8b9a4",
@@ -1889,13 +1545,8 @@ const cangKu = {
           "columnName": "备注",
           "columnCode": "beiZhu",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "T",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 47,
           "requiredFlag": "N",
           "searchFlag": "Y",
@@ -1907,12 +1558,11 @@ const cangKu = {
           "exportDisplayFlag": "N",
           "sortable": "N",
           "renderList": "renderMiaoShu",
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": "300px",
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A",
+          "extStr01": "Y"
         },
         {
           "id": "172",
@@ -1920,13 +1570,8 @@ const cangKu = {
           "columnName": "更新时间",
           "columnCode": "updateTime",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "I",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 49,
           "requiredFlag": "N",
           "searchFlag": "N",
@@ -1937,13 +1582,11 @@ const cangKu = {
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
           "columnWidth": "160px",
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         }
       ],
       "actionList": [
@@ -1952,38 +1595,22 @@ const cangKu = {
           "modelId": "21",
           "type": "N",
           "code": "query",
-          "name": null,
           "servId": "21",
           "servAction": "query",
           "defaultFlag": "Y",
-          "disableRule": null,
           "propFlag": "N",
-          "propMsg": null,
-          "delErrorMsg": null,
-          "servCode": null,
-          "category": null,
-          "seq": 1,
-          "displayType": null,
-          "icon": null
+          "seq": 1
         },
         {
           "id": "94",
           "modelId": "21",
           "type": "N",
           "code": "get",
-          "name": null,
           "servId": "21",
           "servAction": "get",
           "defaultFlag": "Y",
-          "disableRule": null,
           "propFlag": "N",
-          "propMsg": null,
-          "delErrorMsg": null,
-          "servCode": null,
-          "category": null,
-          "seq": 2,
-          "displayType": null,
-          "icon": null
+          "seq": 2
         },
         {
           "id": "95",
@@ -1994,15 +1621,9 @@ const cangKu = {
           "servId": "21",
           "servAction": "add",
           "defaultFlag": "Y",
-          "disableRule": null,
           "propFlag": "N",
-          "propMsg": null,
-          "delErrorMsg": null,
-          "servCode": null,
-          "category": null,
           "seq": 3,
-          "displayType": "primary",
-          "icon": null
+          "displayType": "primary"
         },
         {
           "id": "a3f3db2ce04af1501d9bf1f66a3c247f",
@@ -2013,15 +1634,8 @@ const cangKu = {
           "servId": "21",
           "servAction": "opt",
           "defaultFlag": "N",
-          "disableRule": null,
           "propFlag": "N",
-          "propMsg": null,
-          "delErrorMsg": null,
-          "servCode": null,
-          "category": null,
-          "seq": 4,
-          "displayType": null,
-          "icon": null
+          "seq": 4
         },
         {
           "id": "96",
@@ -2032,15 +1646,8 @@ const cangKu = {
           "servId": "21",
           "servAction": "update",
           "defaultFlag": "Y",
-          "disableRule": null,
           "propFlag": "N",
-          "propMsg": null,
-          "delErrorMsg": null,
-          "servCode": null,
-          "category": null,
-          "seq": 5,
-          "displayType": null,
-          "icon": null
+          "seq": 5
         },
         {
           "id": "97",
@@ -2053,13 +1660,7 @@ const cangKu = {
           "defaultFlag": "Y",
           "disableRule": "(data, column) => data.cangKuHisCount > 0",
           "propFlag": "Y",
-          "propMsg": null,
-          "delErrorMsg": null,
-          "servCode": null,
-          "category": null,
-          "seq": 6,
-          "displayType": null,
-          "icon": null
+          "seq": 6
         }
       ]
     }

@@ -1,25 +1,17 @@
 const lingWu = {
   "id": "23",
-  "icon": null,
   "funcCode": "lingWu",
   "funcName": "灵物",
   "state": "A",
-  "comments": null,
   "stateTime": "2020-06-25 11:29:35",
   "seq": 23,
-  "indexUrl": null,
   "dictList": [
     {
       "id": "17",
       "funcId": "23",
       "dictName": "灵物分类",
       "dictCode": "lingWuFenLei",
-      "comments": null,
-      "category": null,
-      "modifyFlag": null,
-      "visiableFlag": null,
       "seq": 1,
-      "spId": null,
       "version": 0,
       "dictDataList": [
         {
@@ -28,7 +20,6 @@ const lingWu = {
           "dataName": "妖兽",
           "dataCode": "yaoShou",
           "seq": 1,
-          "spId": null,
           "version": 0
         },
         {
@@ -37,7 +28,6 @@ const lingWu = {
           "dataName": "符箓",
           "dataCode": "fuLu",
           "seq": 2,
-          "spId": null,
           "version": 0
         },
         {
@@ -46,7 +36,6 @@ const lingWu = {
           "dataName": "功法",
           "dataCode": "gongFa",
           "seq": 3,
-          "spId": null,
           "version": 0
         },
         {
@@ -55,7 +44,6 @@ const lingWu = {
           "dataName": "灵材",
           "dataCode": "lingCai",
           "seq": 4,
-          "spId": null,
           "version": 0
         },
         {
@@ -64,7 +52,6 @@ const lingWu = {
           "dataName": "傀儡",
           "dataCode": "kuiLei",
           "seq": 5,
-          "spId": null,
           "version": 0
         },
         {
@@ -73,7 +60,6 @@ const lingWu = {
           "dataName": "法术",
           "dataCode": "faShu",
           "seq": 6,
-          "spId": null,
           "version": 0
         },
         {
@@ -82,7 +68,6 @@ const lingWu = {
           "dataName": "法器",
           "dataCode": "faQi",
           "seq": 7,
-          "spId": null,
           "version": 0
         },
         {
@@ -91,7 +76,6 @@ const lingWu = {
           "dataName": "其他灵物",
           "dataCode": "qiTaLingWu",
           "seq": 8,
-          "spId": null,
           "version": 0
         },
         {
@@ -100,7 +84,6 @@ const lingWu = {
           "dataName": "灵丹",
           "dataCode": "lingDan",
           "seq": 9,
-          "spId": null,
           "version": 0
         },
         {
@@ -109,7 +92,6 @@ const lingWu = {
           "dataName": "阵法",
           "dataCode": "zhenFa",
           "seq": 10,
-          "spId": null,
           "version": 0
         },
         {
@@ -118,7 +100,6 @@ const lingWu = {
           "dataName": "人物",
           "dataCode": "renWu",
           "seq": 11,
-          "spId": null,
           "version": 0
         }
       ]
@@ -130,57 +111,39 @@ const lingWu = {
       "id": "50975e7401234139eaf24745d89dd9ea",
       "funcId": "23",
       "name": "操作记录",
-      "code": "opt",
-      "icon": null,
-      "displayType": null,
-      "comments": null
+      "code": "opt"
     },
     {
       "id": "58",
       "funcId": "23",
       "name": "新增",
       "code": "add",
-      "icon": null,
-      "displayType": "primary",
-      "comments": null
+      "displayType": "primary"
     },
     {
       "id": "59",
       "funcId": "23",
       "name": "编辑",
-      "code": "update",
-      "icon": null,
-      "displayType": null,
-      "comments": null
+      "code": "update"
     },
     {
       "id": "60",
       "funcId": "23",
       "name": "删除",
-      "code": "delete",
-      "icon": null,
-      "displayType": null,
-      "comments": null
+      "code": "delete"
     }
   ],
   "metaModelList": [
     {
       "id": "23",
-      "parentModelId": null,
-      "relationship": null,
       "modelName": "灵物",
       "modelCode": "lingWu",
       "funcModelCode": "lingWu",
       "searchFlag": "Y",
       "multChooseFlag": "Y",
-      "title": null,
       "masterFlag": "Y",
       "treeTableFlag": "N",
-      "childColumnCode": null,
-      "parentColumnCode": null,
       "position": "1",
-      "state": null,
-      "stateTime": null,
       "columnList": [
         {
           "id": "190",
@@ -188,13 +151,8 @@ const lingWu = {
           "columnName": "id",
           "columnCode": "id",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "I",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 1,
           "requiredFlag": "Y",
           "searchFlag": "N",
@@ -205,13 +163,10 @@ const lingWu = {
           "listDisplayFlag": "N",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "Y",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "191",
@@ -219,13 +174,8 @@ const lingWu = {
           "columnName": "灵物代码",
           "columnCode": "lingWuCode",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "I",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 3,
           "requiredFlag": "Y",
           "searchFlag": "N",
@@ -236,13 +186,10 @@ const lingWu = {
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "192",
@@ -250,13 +197,8 @@ const lingWu = {
           "columnName": "灵物名称",
           "columnCode": "lingWuName",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "I",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 5,
           "requiredFlag": "Y",
           "searchFlag": "Y",
@@ -267,13 +209,10 @@ const lingWu = {
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "193",
@@ -281,12 +220,8 @@ const lingWu = {
           "columnName": "灵物分类",
           "columnCode": "lingWuFenLei",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "S",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
           "valueList": "service|/xiuXing/common/xiu-xing/fenLei?type=fenLei&fenLei=lingWuFenLei",
           "seq": 7,
           "requiredFlag": "Y",
@@ -298,13 +233,10 @@ const lingWu = {
           "listDisplayFlag": "N",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "29ac9079dbf061a7d7f1e2e9ad08254a",
@@ -312,13 +244,8 @@ const lingWu = {
           "columnName": "灵物分类",
           "columnCode": "lingWuFenLeiName",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "I",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 7,
           "requiredFlag": "N",
           "searchFlag": "N",
@@ -329,13 +256,10 @@ const lingWu = {
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "0a0daf7905d2b0b61d427a6ea684229c",
@@ -343,13 +267,8 @@ const lingWu = {
           "columnName": "修行岁月",
           "columnCode": "xiuXingSuiYue",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "I",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 9,
           "requiredFlag": "N",
           "searchFlag": "Y",
@@ -360,13 +279,10 @@ const lingWu = {
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "195",
@@ -374,13 +290,8 @@ const lingWu = {
           "columnName": "灵物描述",
           "columnCode": "lingWuMiaoShu",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "T",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 11,
           "requiredFlag": "N",
           "searchFlag": "N",
@@ -392,12 +303,11 @@ const lingWu = {
           "exportDisplayFlag": "N",
           "sortable": "N",
           "renderList": "renderMiaoShu",
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": "300px",
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A",
+          "extStr01": "Y"
         },
         {
           "id": "196",
@@ -405,12 +315,8 @@ const lingWu = {
           "columnName": "小说",
           "columnCode": "xiaoShuoId",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "S",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
           "valueList": "service|/xiuXing/common/xiu-xing/xiaoShuo",
           "seq": 13,
           "requiredFlag": "N",
@@ -422,13 +328,10 @@ const lingWu = {
           "listDisplayFlag": "N",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "197",
@@ -436,13 +339,8 @@ const lingWu = {
           "columnName": "小说",
           "columnCode": "xiaoShuoName",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "I",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 15,
           "requiredFlag": "N",
           "searchFlag": "N",
@@ -453,13 +351,11 @@ const lingWu = {
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
           "columnWidth": "110px",
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         }
       ],
       "actionList": [
@@ -468,38 +364,22 @@ const lingWu = {
           "modelId": "23",
           "type": "N",
           "code": "query",
-          "name": null,
           "servId": "23",
           "servAction": "query",
           "defaultFlag": "Y",
-          "disableRule": null,
           "propFlag": "N",
-          "propMsg": null,
-          "delErrorMsg": null,
-          "servCode": null,
-          "category": null,
-          "seq": 1,
-          "displayType": null,
-          "icon": null
+          "seq": 1
         },
         {
           "id": "101",
           "modelId": "23",
           "type": "N",
           "code": "get",
-          "name": null,
           "servId": "23",
           "servAction": "get",
           "defaultFlag": "Y",
-          "disableRule": null,
           "propFlag": "N",
-          "propMsg": null,
-          "delErrorMsg": null,
-          "servCode": null,
-          "category": null,
-          "seq": 2,
-          "displayType": null,
-          "icon": null
+          "seq": 2
         },
         {
           "id": "102",
@@ -510,15 +390,9 @@ const lingWu = {
           "servId": "23",
           "servAction": "add",
           "defaultFlag": "Y",
-          "disableRule": null,
           "propFlag": "N",
-          "propMsg": null,
-          "delErrorMsg": null,
-          "servCode": null,
-          "category": null,
           "seq": 3,
-          "displayType": "primary",
-          "icon": null
+          "displayType": "primary"
         },
         {
           "id": "a8332b271c8fec908bf977fa92daf212",
@@ -529,15 +403,8 @@ const lingWu = {
           "servId": "23",
           "servAction": "opt",
           "defaultFlag": "N",
-          "disableRule": null,
           "propFlag": "N",
-          "propMsg": null,
-          "delErrorMsg": null,
-          "servCode": null,
-          "category": null,
-          "seq": 5,
-          "displayType": null,
-          "icon": null
+          "seq": 5
         },
         {
           "id": "103",
@@ -548,15 +415,8 @@ const lingWu = {
           "servId": "23",
           "servAction": "update",
           "defaultFlag": "Y",
-          "disableRule": null,
           "propFlag": "N",
-          "propMsg": null,
-          "delErrorMsg": null,
-          "servCode": null,
-          "category": null,
-          "seq": 7,
-          "displayType": null,
-          "icon": null
+          "seq": 7
         },
         {
           "id": "104",
@@ -569,13 +429,7 @@ const lingWu = {
           "defaultFlag": "Y",
           "disableRule": "(data,column) => data.lingWuHisCount > 0",
           "propFlag": "Y",
-          "propMsg": null,
-          "delErrorMsg": null,
-          "servCode": null,
-          "category": null,
-          "seq": 9,
-          "displayType": null,
-          "icon": null
+          "seq": 9
         }
       ]
     }

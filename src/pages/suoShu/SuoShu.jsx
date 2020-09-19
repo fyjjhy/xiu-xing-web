@@ -100,7 +100,17 @@ export default class SuoShu extends PureComponent {
   renderMiaoShu = text => {
     const title = renderMiaoShu(text);
     return text && text.length > 20 ? <Tooltip title={title}><Paragraph style={{ width: '250px', marginTop: '0px', marginBottom: '0px' }} ellipsis={{ row: 1 }}>{text}</Paragraph></Tooltip> : text
-  }
+  };
+
+  renderSuoShuMiaoShu = text => {
+    const title = renderMiaoShu(text);
+    return (<Tooltip placement="topLeft" title={title}>{text}</Tooltip>);
+  };
+
+  renderOptMiaoShu = text => {
+    const title = renderMiaoShu(text);
+    return (<Tooltip placement="topLeft" title={title}>{text}</Tooltip>);
+  };
 
   // 分页信息
   showTotal = (metaModel) => {
@@ -143,7 +153,7 @@ export default class SuoShu extends PureComponent {
           columnWidth="150px"
           // scroll={{ x: '100vw' }}
           fixed="right"
-          renderMiaoShu={this.renderMiaoShu}
+          renderMiaoShu={this.renderSuoShuMiaoShu}
           showTotal={this.showTotal}
           opt={this.handleOpt}
           ck={this.handleCk}
@@ -162,11 +172,12 @@ export default class SuoShu extends PureComponent {
           width={1000}
         >
           <StandardPager
-            scroll={{ x: '100vw' }} // 固定前后列，横向滚动查看其它数据
+            // scroll={{ x: '100vw' }} // 固定前后列，横向滚动查看其它数据
             fixed="right"
             searchBtn='search'
+            columnWidth="60px"
             showTotal={this.showTotal}
-            renderMiaoShu={this.renderMiaoShu}
+            renderMiaoShu={this.renderOptMiaoShu}
             rowInfo={currentInfo}
             profile={false}
             {...suoShuHisMetaModel()}

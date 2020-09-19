@@ -1,4 +1,4 @@
-/* eslint-disable no-prototype-builtins */
+/* eslint-disable no-prototype-builtins,react/no-access-state-in-setstate,no-nested-ternary */
 import React, { PureComponent, Fragment } from 'react';
 import { UpOutlined, DownOutlined } from '@ant-design/icons';
 import { Row, Col, Form, Divider, message, Upload, Button, Popconfirm, Table, Pagination } from 'antd';
@@ -53,6 +53,7 @@ export default class AutoTable extends PureComponent {
         dataIndex: column.columnCode,
         width: column.columnWidth || 'auto',
         fixed: (fixedColumn && fixedColumn === column.columnCode) || false,
+        ellipsis: column.extStr01 === 'Y' ? (column.renderList && props[column.renderList] ? { showTitle: false } : true) : false,
       };
       // 处理默认值
       if (column.defaultValue) {
@@ -309,7 +310,7 @@ export default class AutoTable extends PureComponent {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { metaModel } = this.props;
     const { datas: { list: afterDatas } } = nextProps[metaModel.funcModelCode];
     const { datas: { list: beforeDatas }, pagination: beforePagination } = this.props[metaModel.funcModelCode];

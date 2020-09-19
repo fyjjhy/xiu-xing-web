@@ -46,7 +46,17 @@ export default class LingWu extends PureComponent {
   renderMiaoShu = text => {
     const title = renderMiaoShu(text);
     return text && text.length > 15 ? <Tooltip title={title}><Paragraph style={{ width: '250px', marginTop: '0px', marginBottom: '0px' }} ellipsis={{ row: 1 }}>{text}</Paragraph></Tooltip> : text
-  }
+  };
+
+  renderLingWuMiaoShu = text => {
+    const title = renderMiaoShu(text);
+    return (<Tooltip placement="topLeft" title={title}>{text}</Tooltip>);
+  };
+
+  renderOptMiaoShu = text => {
+    const title = renderMiaoShu(text);
+    return (<Tooltip placement="topLeft" title={title}>{text}</Tooltip>);
+  };
 
   // 重新加载coupons
   reloadLingWu = () => {
@@ -66,7 +76,7 @@ export default class LingWu extends PureComponent {
       }
     }
     return { showTotal: () => '' };
-  }
+  };
 
   render() {
     const { props } = this;
@@ -75,7 +85,7 @@ export default class LingWu extends PureComponent {
       <PageHeaderWrapper>
         <StandardPager
           columnWidth="180px"
-          renderMiaoShu={this.renderMiaoShu}
+          renderMiaoShu={this.renderLingWuMiaoShu}
           showTotal={this.showTotal}
           opt={this.handleOpt}
           {...lingWuMetaModel()}
@@ -93,12 +103,12 @@ export default class LingWu extends PureComponent {
             width={1000}
           >
             <StandardPager
-              scroll={{ x: '100vw' }} // 固定前后列，横向滚动查看其它数据
+              // scroll={{ x: '100vw' }} // 固定前后列，横向滚动查看其它数据
               fixed="right"
-              columnWidth="110px"
+              columnWidth="60px"
               searchBtn='search'
               showTotal={this.showTotal}
-              renderMiaoShu={this.renderMiaoShu}
+              renderMiaoShu={this.renderOptMiaoShu}
               rowInfo={currentInfo}
               profile={false}
               {...lingWuHisMetaModel()}

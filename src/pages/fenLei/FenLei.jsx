@@ -15,35 +15,36 @@ const { Paragraph } = Typography;
   loading,
 }))
 export default class FenLei extends PureComponent {
-  constructor(props){
-    super(props);
-    this.state = {...fenLeiMetaModel()};
-  }
+  // renderMiaoShu = text => {
+  //   const title = renderMiaoShu(text);
+  //   return text && text.length > 15 ? <Tooltip title={title}><Paragraph style={{ width: '250px', marginTop: '0px', marginBottom: '0px' }} ellipsis={{ row: 1 }}>{text}</Paragraph></Tooltip> : text
+  // }
 
   renderMiaoShu = text => {
     const title = renderMiaoShu(text);
-    return text && text.length > 15 ? <Tooltip title={title}><Paragraph style={{ width: '250px', marginTop: '0px', marginBottom: '0px' }} ellipsis={{ row: 1 }}>{text}</Paragraph></Tooltip> : text
-  }
+    return (<Tooltip placement="topLeft" title={title}>{text}</Tooltip>);
+  };
 
   // 其他灵物管理分页信息
-  showTotal = () => {
-    const { fenLei: { datas: { pagination } } } = this.props;
-    if (pagination && pagination.total) {
-      return { showTotal: () => `共 ${pagination.total} 条记录 第 ${pagination.current} / ${Math.ceil(pagination.total / pagination.pageSize)} 页` };
+  showTotal = metaModel => {
+    if (metaModel && metaModel.funcModelCode) {
+      const { [metaModel.funcModelCode]: { datas: { pagination } } } = this.props;
+      if (pagination && pagination.total) {
+        return { showTotal: () => `共 ${pagination.total} 条记录 第 ${pagination.current} / ${Math.ceil(pagination.total / pagination.pageSize)} 页` };
+      }
     }
-      return { showTotal: () => '' };
-
-  }
+    return { showTotal: () => '' };
+  };
 
   render() {
-    const { props, state } = this;
+    const { props } = this;
     return (
       <PageHeaderWrapper>
         <StandardPager
           columnWidth="110px"
           renderMiaoShu={this.renderMiaoShu}
           showTotal={this.showTotal}
-          {...state}
+          {...fenLeiMetaModel()}
           {...props}
         />
       </PageHeaderWrapper>

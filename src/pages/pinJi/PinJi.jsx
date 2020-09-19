@@ -2,18 +2,21 @@ import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 
+import { Tooltip/* , Typography */ } from 'antd';
+
 import StandardPager from "../../template/StandardPager";
 import {pinJiMetaModel} from "../../json/pinJi";
+import {renderMiaoShu} from "../../utils/utils";
 
 @connect(({ pinJi, loading }) => ({
   pinJi,
   loading,
 }))
 export default class PinJi extends PureComponent {
-  constructor(props){
-    super(props);
-    this.state = {...pinJiMetaModel()};
-  }
+  renderMiaoShu = text => {
+    const title = renderMiaoShu(text);
+    return (<Tooltip placement="topLeft" title={title}>{text}</Tooltip>);
+  };
 
   // 品级管理分页信息
   showTotal = (metaModel) => {
@@ -27,13 +30,14 @@ export default class PinJi extends PureComponent {
   }
 
   render() {
-    const { props, state } = this;
+    const { props } = this;
     return (
       <PageHeaderWrapper>
         <StandardPager
           columnWidth="110px"
+          renderMiaoShu={this.renderMiaoShu}
           showTotal={this.showTotal}
-          {...state}
+          {...pinJiMetaModel()}
           {...props}
         />
       </PageHeaderWrapper>

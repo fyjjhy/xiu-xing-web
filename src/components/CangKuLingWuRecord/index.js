@@ -15,19 +15,19 @@ export default class CangKuLingWuRecord extends PureComponent {
       <br/>
       {data.fullName || ''}<strong>  [地址]</strong>
       <br/>
-     {data.xiuXingSuiYue || ''}<strong>  [修行岁月]</strong>
-      <br/>
       {data.shiJian || ''}<strong>  [时间]</strong>
     </div>
   );
 
   renderLingWu = data => (
     <div>
-      <strong>灵物：</strong>{data.lingWuFullName}
+      <strong>灵物名称：</strong>{data.lingWuFullName}
       <br/>
-      <strong>描述：</strong>{data.lingWuMiaoShu || ''}
+      <strong>修行岁月：</strong>{data.xiuXingSuiYue || ''}
       <br/>
-      <strong>备注：</strong>{data.beiZhu || ''}
+      <strong>灵物描述：</strong>{data.lingWuMiaoShu || ''}
+      <br/>
+      <strong>灵物备注：</strong>{data.beiZhu || ''}
     </div>
   );
 
@@ -47,8 +47,11 @@ export default class CangKuLingWuRecord extends PureComponent {
       >
         <Card bordered={false}>
           <Timeline mode="left">
-            {list && list.length > 0 ? list.map(data => <Timeline.Item
-              label={this.renderLabel(data)}>{this.renderLingWu(data)}</Timeline.Item>) : ''}
+            {list && list.length > 0 ? list.map(data =>
+              <Timeline.Item
+                label={this.renderLabel(data)}>
+                {this.renderLingWu(data)}
+              </Timeline.Item>) : ''}
           </Timeline>
         </Card>
       </Modal>

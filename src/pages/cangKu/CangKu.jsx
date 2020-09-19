@@ -52,7 +52,7 @@ export default class CangKu extends PureComponent {
 
   rowProps= {};
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { jingJie: { datas: { list: afterJingJieList } } } = nextProps;
     const { jingJie: { datas: { list: beforeJingJieList } } } = this.props;
     if (afterJingJieList !== beforeJingJieList) {
@@ -82,10 +82,10 @@ export default class CangKu extends PureComponent {
     }
   }
 
-  renderMiaoShu = text => {
+  renderOptMiaoShu = text => {
     const title = renderMiaoShu(text);
-    return text && text.length > 15 ? <Tooltip title={title}><Paragraph style={{ width: '250px', marginTop: '0px', marginBottom: '0px' }} ellipsis={{ row: 1 }}>{text}</Paragraph></Tooltip> : text
-  }
+    return (<Tooltip placement="topLeft" title={title}>{text}</Tooltip>);
+  };
 
   // 其他灵物管理分页信息
   showTotal = (metaModel) => {
@@ -347,19 +347,24 @@ export default class CangKu extends PureComponent {
   //
   renderLingWuMiaoShu = text => {
     const title = renderMiaoShu(text);
-    return text && text.length > 20 ? <Tooltip title={title}><Paragraph style={{ marginTop: '0px', marginBottom: '0px' }} ellipsis={{ row: 1 }}>{text}</Paragraph></Tooltip> : text
-  }
+    return (<Tooltip placement="topLeft" title={title}>{text}</Tooltip>);
+  };
 
   // 所属描述
   renderSuoShuMiaoShu = text => {
     const title = renderMiaoShu(text);
-    return text && text.length > 20 ? <Tooltip title={title}><Paragraph style={{ marginTop: '0px', marginBottom: '0px' }} ellipsis={{ row: 1 }}>{text}</Paragraph></Tooltip> : text
+    return (<Tooltip placement="topLeft" title={title}>{text}</Tooltip>);
   };
 
   // 痕迹描述
   renderHenJiMiaoShu = text => {
     const title = renderMiaoShu(text);
     return text && text.length > 20 ? <Tooltip title={title}><Paragraph style={{ width: '250px', marginTop: '0px', marginBottom: '0px' }} ellipsis={{ row: 1 }}>{text}</Paragraph></Tooltip> : text
+  };
+
+  renderCangKuMiaoShu = text => {
+    const title = renderMiaoShu(text);
+    return (<Tooltip placement="topLeft" title={title}>{text}</Tooltip>);
   };
 
   // 重新渲染灵物信息
@@ -584,7 +589,7 @@ export default class CangKu extends PureComponent {
         <StandardPager
           opt={this.handleOpt}
           columnWidth="200px"
-          scroll={{ x: '300vw' }}
+          scroll={{ x: '230vw' }}
           fixed="right"
           autoFormApi={{ width: '650px' }}
           customFormItem={{
@@ -604,7 +609,7 @@ export default class CangKu extends PureComponent {
             henJiInfo: this.renderHenJiInfo,
             henJiId: this.renderHenJiId,
           }}
-          renderMiaoShu={this.renderMiaoShu}
+          renderMiaoShu={this.renderCangKuMiaoShu}
           showTotal={this.showTotal}
           expandOnCancel={this.handleExpandOnCancel}
           {...cangKuMetaModel()}
@@ -620,6 +625,8 @@ export default class CangKu extends PureComponent {
             onOk={this.handleLingWuInfoOnOk}
             onCancel={this.handleLingWuInfoOnCancel}
             width={1000}
+            cancelText="取消"
+            okText="确定"
           >
             <StandardPager
               columnWidth="110px"
@@ -629,7 +636,7 @@ export default class CangKu extends PureComponent {
               showTotal={this.showTotal}
               renderLingWuShuXing={this.renderLingWuShuXing}
               renderMiaoShu={this.renderLingWuMiaoShu}
-              scroll={{ x: '60vw' }}
+              // scroll={{ x: '60vw' }}
               {...cangKuLingWuHisMetaModel()}
               tableSelectType="radio"
               rowClickTrigger // 点击行触发前面的选择项(多选还是单选)
@@ -648,6 +655,8 @@ export default class CangKu extends PureComponent {
             onOk={this.handleSuoShuInfoOnOk}
             onCancel={this.handleSuoShuInfoOnCancel}
             width={1000}
+            cancelText="取消"
+            okText="确定"
           >
             <StandardPager
               columnWidth="110px"
@@ -656,7 +665,7 @@ export default class CangKu extends PureComponent {
               profile={false}
               showTotal={this.showTotal}
               renderMiaoShu={this.renderSuoShuMiaoShu}
-              scroll={{ x: '90vw' }}
+              // scroll={{ x: '90vw' }}
               {...cangKuSuoShuHisMetaModel()}
               tableSelectType="radio"
               rowClickTrigger // 点击行触发前面的选择项(多选还是单选)
@@ -675,6 +684,8 @@ export default class CangKu extends PureComponent {
             onOk={this.handleHenJiInfoOnOk}
             onCancel={this.handleHenJiInfoOnCancel}
             width={1000}
+            cancelText="取消"
+            okText="确定"
           >
             <StandardPager
               showTotal={this.showTotal}
@@ -700,13 +711,15 @@ export default class CangKu extends PureComponent {
             // onOk={this.handleOk}
             onCancel={this.handleOptOnCancel}
             width={1000}
+            cancelText="取消"
+            okText="确定"
           >
             <StandardPager
               fixed="right"
-              columnWidth="110px"
-              scroll={{ x: '300vw' }} // 固定前后列，横向滚动查看其它数据
+              columnWidth="60px"
+              scroll={{ x: '220vw' }} // 固定前后列，横向滚动查看其它数据
               showTotal={this.showTotal}
-              renderMiaoShu={this.renderMiaoShu}
+              renderMiaoShu={this.renderOptMiaoShu}
               rowInfo={currentInfo}
               profile={false}
               searchBtn="search"

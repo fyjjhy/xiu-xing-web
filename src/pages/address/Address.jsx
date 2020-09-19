@@ -105,10 +105,15 @@ export default class Address extends PureComponent {
     }
   };
 
+  // renderMiaoShu = text => {
+  //   const title = renderMiaoShu(text);
+  //   return text && text.length > 15 ? <Tooltip title={title}><Paragraph style={{ width: '250px', marginTop: '0px', marginBottom: '0px' }} ellipsis={{ row: 1 }}>{text}</Paragraph></Tooltip> : text
+  // }
+
   renderMiaoShu = text => {
     const title = renderMiaoShu(text);
-    return text && text.length > 15 ? <Tooltip title={title}><Paragraph style={{ width: '250px', marginTop: '0px', marginBottom: '0px' }} ellipsis={{ row: 1 }}>{text}</Paragraph></Tooltip> : text
-  }
+    return (<Tooltip placement="topLeft" title={title}>{text}</Tooltip>);
+  };
 
   // 地址管理分页信息
   showTotal = metaModel => {
@@ -149,6 +154,8 @@ export default class Address extends PureComponent {
       <FormItem {...formItemLayout} label={column.columnName} name={column.columnCode} rules={[]}>
         <TreeSelect
           allowClear
+          showSearch
+          treeNodeFilterProp="title"
           treeDefaultExpandAll
           dropdownMatchSelectWidth={700}
           onChange={this.handlePIdOnChange}
@@ -166,7 +173,7 @@ export default class Address extends PureComponent {
       <PageHeaderWrapper>
         <StandardPager
           columnWidth="110px"
-          scroll={{ x: '100vw' }}
+          // scroll={{ x: '120vw' }}
           fixed="right"
           renderMiaoShu={this.renderMiaoShu}
           showTotal={this.showTotal}

@@ -1,25 +1,17 @@
 const pinJi = {
   "id": "5",
-  "icon": null,
   "funcCode": "pinJi",
   "funcName": "品级",
   "state": "A",
-  "comments": null,
   "stateTime": "2020-06-12 15:07:52",
   "seq": 5,
-  "indexUrl": null,
   "dictList": [
     {
       "id": "15",
       "funcId": "5",
       "dictName": "品级分类",
       "dictCode": "pinJiFenLei",
-      "comments": null,
-      "category": null,
-      "modifyFlag": null,
-      "visiableFlag": null,
       "seq": 1,
-      "spId": null,
       "version": 0,
       "dictDataList": [
         {
@@ -28,7 +20,6 @@ const pinJi = {
           "dataName": "妖兽",
           "dataCode": "yaoShou",
           "seq": 1,
-          "spId": null,
           "version": 0
         },
         {
@@ -37,7 +28,6 @@ const pinJi = {
           "dataName": "地名",
           "dataCode": "diMing",
           "seq": 2,
-          "spId": null,
           "version": 0
         }
       ]
@@ -50,47 +40,32 @@ const pinJi = {
       "funcId": "5",
       "name": "新增",
       "code": "add",
-      "icon": null,
-      "displayType": "primary",
-      "comments": null
+      "displayType": "primary"
     },
     {
       "id": "5",
       "funcId": "5",
       "name": "编辑",
-      "code": "update",
-      "icon": null,
-      "displayType": null,
-      "comments": null
+      "code": "update"
     },
     {
       "id": "6",
       "funcId": "5",
       "name": "删除",
-      "code": "delete",
-      "icon": null,
-      "displayType": null,
-      "comments": null
+      "code": "delete"
     }
   ],
   "metaModelList": [
     {
       "id": "5",
-      "parentModelId": null,
-      "relationship": null,
       "modelName": "品级",
       "modelCode": "pinJi",
       "funcModelCode": "pinJi",
       "searchFlag": "Y",
       "multChooseFlag": "Y",
-      "title": null,
       "masterFlag": "Y",
       "treeTableFlag": "N",
-      "childColumnCode": null,
-      "parentColumnCode": null,
       "position": "1",
-      "state": null,
-      "stateTime": null,
       "columnList": [
         {
           "id": "27",
@@ -98,13 +73,8 @@ const pinJi = {
           "columnName": "id",
           "columnCode": "id",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "I",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 1,
           "requiredFlag": "Y",
           "searchFlag": "N",
@@ -115,13 +85,10 @@ const pinJi = {
           "listDisplayFlag": "N",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "Y",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "fdb9f6f05999bba407fc75468f544734",
@@ -129,13 +96,8 @@ const pinJi = {
           "columnName": "品级编码",
           "columnCode": "pinJiCode",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "I",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 2,
           "requiredFlag": "Y",
           "searchFlag": "N",
@@ -146,13 +108,10 @@ const pinJi = {
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "28",
@@ -160,13 +119,8 @@ const pinJi = {
           "columnName": "品级名称",
           "columnCode": "pinJiName",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "I",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 3,
           "requiredFlag": "Y",
           "searchFlag": "Y",
@@ -177,13 +131,10 @@ const pinJi = {
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "30",
@@ -191,13 +142,8 @@ const pinJi = {
           "columnName": "品级描述",
           "columnCode": "pinJiMiaoShu",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "T",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 7,
           "requiredFlag": "N",
           "searchFlag": "Y",
@@ -208,13 +154,12 @@ const pinJi = {
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
+          "renderList": "renderMiaoShu",
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A",
+          "extStr01": "Y"
         },
         {
           "id": "29",
@@ -222,12 +167,8 @@ const pinJi = {
           "columnName": "小说",
           "columnCode": "xiaoShuoId",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "S",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
           "valueList": "service|/xiuXing/common/xiu-xing/xiaoShuo",
           "seq": 9,
           "requiredFlag": "Y",
@@ -239,13 +180,10 @@ const pinJi = {
           "listDisplayFlag": "N",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "31",
@@ -253,13 +191,8 @@ const pinJi = {
           "columnName": "小说",
           "columnCode": "xiaoShuoName",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "I",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 11,
           "requiredFlag": "Y",
           "searchFlag": "N",
@@ -270,13 +203,10 @@ const pinJi = {
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         }
       ],
       "actionList": [
@@ -285,38 +215,22 @@ const pinJi = {
           "modelId": "5",
           "type": "N",
           "code": "query",
-          "name": null,
           "servId": "5",
           "servAction": "query",
           "defaultFlag": "Y",
-          "disableRule": null,
           "propFlag": "N",
-          "propMsg": null,
-          "delErrorMsg": null,
-          "servCode": null,
-          "category": null,
-          "seq": 1,
-          "displayType": null,
-          "icon": null
+          "seq": 1
         },
         {
           "id": "14",
           "modelId": "5",
           "type": "N",
           "code": "get",
-          "name": null,
           "servId": "5",
           "servAction": "get",
           "defaultFlag": "Y",
-          "disableRule": null,
           "propFlag": "N",
-          "propMsg": null,
-          "delErrorMsg": null,
-          "servCode": null,
-          "category": null,
-          "seq": 2,
-          "displayType": null,
-          "icon": null
+          "seq": 2
         },
         {
           "id": "15",
@@ -327,15 +241,9 @@ const pinJi = {
           "servId": "5",
           "servAction": "add",
           "defaultFlag": "Y",
-          "disableRule": null,
           "propFlag": "N",
-          "propMsg": null,
-          "delErrorMsg": null,
-          "servCode": null,
-          "category": null,
           "seq": 3,
-          "displayType": "primary",
-          "icon": null
+          "displayType": "primary"
         },
         {
           "id": "16",
@@ -346,15 +254,8 @@ const pinJi = {
           "servId": "5",
           "servAction": "update",
           "defaultFlag": "Y",
-          "disableRule": null,
           "propFlag": "N",
-          "propMsg": null,
-          "delErrorMsg": null,
-          "servCode": null,
-          "category": null,
-          "seq": 5,
-          "displayType": null,
-          "icon": null
+          "seq": 5
         },
         {
           "id": "17",
@@ -365,15 +266,8 @@ const pinJi = {
           "servId": "5",
           "servAction": "delete",
           "defaultFlag": "Y",
-          "disableRule": null,
           "propFlag": "Y",
-          "propMsg": null,
-          "delErrorMsg": null,
-          "servCode": null,
-          "category": null,
-          "seq": 6,
-          "displayType": null,
-          "icon": null
+          "seq": 6
         }
       ]
     }
