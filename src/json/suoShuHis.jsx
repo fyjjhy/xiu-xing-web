@@ -188,7 +188,7 @@ const suoShuHis = {
           "columnCode": "addrId",
           "valueType": "S",
           "modifyFlag": "N",
-          "displayType": "S",
+          "displayType": "CF",
           "valueList": "service|/xiuXing/common/xiu-xing/address",
           "seq": 11,
           "requiredFlag": "N",
@@ -276,30 +276,6 @@ const suoShuHis = {
           "feignFlag": "N",
           "titleFlag": "N",
           "state": "A"
-        },
-        {
-          "id": "296",
-          "modelId": "30",
-          "columnName": "更新时间",
-          "columnCode": "updateTime",
-          "valueType": "S",
-          "modifyFlag": "N",
-          "displayType": "I",
-          "seq": 19,
-          "requiredFlag": "N",
-          "searchFlag": "N",
-          "profileDisplayFlag": "Y",
-          "addTable": "N",
-          "editDisplayFlag": "N",
-          "editable": "N",
-          "listDisplayFlag": "Y",
-          "exportDisplayFlag": "N",
-          "sortable": "N",
-          "primaryFlag": "N",
-          "feignFlag": "N",
-          "columnWidth": "160px",
-          "titleFlag": "N",
-          "state": "A"
         }
       ],
       "actionList": [
@@ -324,6 +300,19 @@ const suoShuHis = {
           "defaultFlag": "Y",
           "propFlag": "N",
           "seq": 2
+        },
+        {
+          "id": "135",
+          "modelId": "30",
+          "type": "L",
+          "code": "update",
+          "name": "编辑",
+          "servId": "30",
+          "servAction": "update",
+          "defaultFlag": "Y",
+          "propFlag": "Y",
+          "propMsg": "编辑属性值：\r\n1、从无值到有值；\r\n2、从有值到有值。",
+          "seq": 5
         },
         {
           "id": "136",

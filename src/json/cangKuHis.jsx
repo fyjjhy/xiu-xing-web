@@ -19,6 +19,12 @@ const cangKuHis = {
       "funcId": "31",
       "name": "删除",
       "code": "delete"
+    },
+    {
+      "id": "9ae5abede0b241aca911ab909c572bb3",
+      "funcId": "31",
+      "name": "翻转",
+      "code": "fanZhuan"
     }
   ],
   "metaModelList": [
@@ -716,30 +722,6 @@ const cangKuHis = {
           "titleFlag": "N",
           "state": "A",
           "extStr01": "Y"
-        },
-        {
-          "id": "360",
-          "modelId": "31",
-          "columnName": "更新时间",
-          "columnCode": "updateTime",
-          "valueType": "S",
-          "modifyFlag": "N",
-          "displayType": "I",
-          "seq": 49,
-          "requiredFlag": "N",
-          "searchFlag": "N",
-          "profileDisplayFlag": "Y",
-          "addTable": "N",
-          "editDisplayFlag": "N",
-          "editable": "N",
-          "listDisplayFlag": "Y",
-          "exportDisplayFlag": "N",
-          "sortable": "N",
-          "primaryFlag": "N",
-          "feignFlag": "N",
-          "columnWidth": "160px",
-          "titleFlag": "N",
-          "state": "A"
         }
       ],
       "actionList": [
@@ -764,6 +746,19 @@ const cangKuHis = {
           "defaultFlag": "Y",
           "propFlag": "N",
           "seq": 2
+        },
+        {
+          "id": "eb71c25fcc2548cfb5d20d31fcc6c74c",
+          "modelId": "31",
+          "type": "L",
+          "code": "fanZhuan",
+          "name": "翻转",
+          "servId": "31",
+          "servAction": "fanZhuan",
+          "defaultFlag": "N",
+          "disableRule": "(data, column) => data.fanZhuanFlag === 'Y'",
+          "propFlag": "N",
+          "seq": 4
         },
         {
           "id": "142",

@@ -277,6 +277,19 @@ const lingWuHis = {
           "seq": 2
         },
         {
+          "id": "130",
+          "modelId": "29",
+          "type": "L",
+          "code": "update",
+          "name": "编辑",
+          "servId": "29",
+          "servAction": "update",
+          "defaultFlag": "Y",
+          "propFlag": "Y",
+          "propMsg": "编辑属性值：\r\n1、从无值到有值；\r\n2、从有值到有值。",
+          "seq": 5
+        },
+        {
           "id": "131",
           "modelId": "29",
           "type": "L",

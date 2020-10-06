@@ -1,13 +1,15 @@
 /* eslint-disable no-restricted-syntax,guard-for-in */
 import React, {PureComponent} from 'react';
-import { Modal, Card, List, Tag, Tooltip, Typography, Avatar, Divider, Row, Col, Badge } from 'antd';
+import { Modal, Card, List, Tag, Tooltip, Typography, Avatar, Divider, Row, Col, Badge, Switch, Form, Select, Input, Button } from 'antd';
 import CangKuLingWuProfile from "../CangKuLingWuProfile";
 import CangKuLingWuRecord from "../CangKuLingWuRecord";
 import {renderMiaoShu} from "../../utils/utils";
 
 const { Paragraph } = Typography;
+const { Option } = Select;
 
 export default class LingWuCangKu extends PureComponent {
+  formRef = React.createRef();
 
   state = {
     currentModel: '',
@@ -34,7 +36,7 @@ export default class LingWuCangKu extends PureComponent {
     if (ckLwRecordClick) {
       ckLwRecordClick(item);
     }
-  }
+  };
 
   handleCangKuLingWuProfileOnCancel = () => {
     this.setState({
@@ -85,6 +87,28 @@ export default class LingWuCangKu extends PureComponent {
       return result;
     }
     return [];
+  };
+
+  handleFormOnFinish = (values) => {
+    const { ckSearch } = this.props;
+    if (ckSearch) {
+      ckSearch(values);
+    }
+  };
+
+  handleFormReset = (e) => {
+    e.preventDefault();
+    const { current } = this.formRef;
+    if (current) {
+      const { resetFields } = current;
+      if (resetFields) {
+        resetFields();
+      }
+      const { ckSearch } = this.props;
+      if (ckSearch) {
+        ckSearch({});
+      }
+    }
   };
 
   renderCangKuLingWuProfile() {
@@ -181,8 +205,8 @@ export default class LingWuCangKu extends PureComponent {
           title={<div>
             <span>{item.lingWuName}</span><br/>
             {/* {item.lingWuFenLeiName ? (<Tag color="#87d068">{item.lingWuFenLeiName}</Tag>) : ''} */}
+            {item.lingWuStateName ? (<Tag color="#91d5ff">{item.lingWuStateName}</Tag>) : ''}
             {item.lingWuShuXing ? item.lingWuShuXing.split(' ').map(shuXing => <Tag color="#87d068">{shuXing}</Tag>) : ''}
-            {item.lingWuStateName ? (<Tag color="#87d068">{item.lingWuStateName}</Tag>) : ''}
             {item.lingWuShuLiang && item.danWei ? (<Tag
               color={item.lingWuShuLiang === '0' ? 'red' : '#87d068'}>{`${item.lingWuShuLiang} ${item.danWei}`}</Tag>) : ''}
             {item.jingJieName && item.jingJieName !== '无' ? (<Tag color="#87d068">{item.jingJieName}</Tag>) : ''}
@@ -192,21 +216,72 @@ export default class LingWuCangKu extends PureComponent {
     </List.Item>;
   }
 
+  renderCongFenLeiSelectOption() {
+    const { cangKuHis: { his: hisMap } } = this.props;
+    if (hisMap && Object.keys(hisMap).length > 0) {
+      // 对值进行排序
+      return Object.keys(hisMap).sort().map((data, index) => {
+        const key = index + 1;
+        return(
+          <Option key={key} value={data} title={data}>{data}</Option>
+        );
+      });
+    }
+    return '';
+  }
+
+  renderForm() {
+    return(
+      <Form ref={this.formRef} name="horizontal_login" layout="inline" onFinish={this.handleFormOnFinish}>
+        <Row style={{ width: '100%', marginTop: '12px', marginBottom: '12px' }}>
+          <Col span={8} style={{ paddingLeft: '8px' }}>
+            <Form.Item name="congFenLei" label="从分类">
+              <Select allowClear showSearch optionFilterProp="title" placeholder="请选择从分类">
+                {this.renderCongFenLeiSelectOption()}
+              </Select>
+            </Form.Item>
+          </Col>
+          <Col span={8}>
+            <Form.Item name="congName" label="从名称">
+              <Input placeholder="请输入从名称" />
+            </Form.Item>
+          </Col>
+          <Col span={8}>
+            <Form.Item>
+              <Button type="primary" htmlType="submit">查询</Button>
+              <Button style={{ marginLeft: '8px' }} onClick={this.handleFormReset}>重置</Button>
+            </Form.Item>
+          </Col>
+        </Row>
+      </Form>
+    );
+  }
+
   render() {
-    const { visible } = this.props;
+    const { visible, cangKuHis: { his: hisMap } } = this.props;
     const { kuCun } = this.state;
     return (
       <Modal
         okButtonProps={{ disabled: true }}
         bodyStyle={{ padding: '0px' }}
         maskClosable={false}
-        title={<div>灵物仓库(<a onClick={() => this.handleLingWuQingLing(kuCun === 'qingLing' ? 'suoYou' : 'qingLing')}>{kuCun === 'qingLing' ? '所有' : '清零'}</a>)</div>}
+        title={
+          <div>
+            <span>灵物仓库</span>
+            <Switch
+              checkedChildren="清零"
+              unCheckedChildren="所有"
+              onClick={() => this.handleLingWuQingLing(kuCun === 'qingLing' ? 'suoYou' : 'qingLing')}
+            />
+          </div>
+        }
         visible={visible}
         // onOk={this.handleOk}
         onCancel={this.handleCkOnCancel}
         width={1000}
         footer={null}
       >
+        {hisMap && Object.keys(hisMap).length > 0 ? this.renderForm() : ''}
         <List>{this.handleDataSource().map(item => (this.renderLingWu(item)))}</List>
         {this.renderCangKuLingWuProfile()}
         {this.renderCangKuLingWuRecord()}

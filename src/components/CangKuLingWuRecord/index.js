@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {Modal, Card, Timeline} from 'antd';
+import { Modal, Card, Timeline, Badge } from 'antd';
 
 export default class CangKuLingWuRecord extends PureComponent {
   handleCkLwRecordOnCancel = () => {
@@ -39,7 +39,16 @@ export default class CangKuLingWuRecord extends PureComponent {
         okButtonProps={{disabled: true}}
         bodyStyle={{padding: '0px'}}
         maskClosable={false}
-        title="灵物记录"
+        title={
+          <Badge
+            count={list && list.length > 0 ? list.length : 0}
+            offset={[16, 8]}
+            size="small"
+            // style={{ backgroundColor: '#52c41a' }}
+          >
+            <strong>灵物记录</strong>
+          </Badge>
+        }
         visible={visible}
         // onOk={this.handleOk}
         onCancel={this.handleCkLwRecordOnCancel}

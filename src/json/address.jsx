@@ -183,7 +183,6 @@ const address = {
           "sortable": "N",
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": "100px",
           "titleFlag": "N",
           "state": "A"
         },
@@ -207,7 +206,6 @@ const address = {
           "sortable": "N",
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": "100px",
           "titleFlag": "N",
           "state": "A"
         },
@@ -352,30 +350,6 @@ const address = {
           "sortable": "N",
           "primaryFlag": "N",
           "feignFlag": "N",
-          "titleFlag": "N",
-          "state": "A"
-        },
-        {
-          "id": "258",
-          "modelId": "27",
-          "columnName": "更新时间",
-          "columnCode": "updateTime",
-          "valueType": "S",
-          "modifyFlag": "N",
-          "displayType": "I",
-          "seq": 15,
-          "requiredFlag": "N",
-          "searchFlag": "N",
-          "profileDisplayFlag": "Y",
-          "addTable": "N",
-          "editDisplayFlag": "N",
-          "editable": "N",
-          "listDisplayFlag": "Y",
-          "exportDisplayFlag": "N",
-          "sortable": "N",
-          "primaryFlag": "N",
-          "feignFlag": "N",
-          "columnWidth": "160px",
           "titleFlag": "N",
           "state": "A"
         }

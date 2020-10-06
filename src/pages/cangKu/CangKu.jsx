@@ -96,7 +96,51 @@ export default class CangKu extends PureComponent {
       }
     }
     return { showTotal: () => '' };
-  }
+  };
+
+  // 灵物操作记录分页信息
+  showLingWuTotal = (metaModel) => {
+    if (metaModel && metaModel.funcModelCode) {
+      const { [metaModel.funcModelCode]: { datas: { pagination } } } = this.props;
+      if (pagination && pagination.total) {
+        return { showTotal: () => `共 ${pagination.total} 条记录 第 ${pagination.current} / ${Math.ceil(pagination.total / pagination.pageSize)} 页` };
+      }
+    }
+    return { showTotal: () => '' };
+  };
+
+  // 所属操作记录分页信息
+  showSuoShuTotal = (metaModel) => {
+    if (metaModel && metaModel.funcModelCode) {
+      const { [metaModel.funcModelCode]: { datas: { pagination } } } = this.props;
+      if (pagination && pagination.total) {
+        return { showTotal: () => `共 ${pagination.total} 条记录 第 ${pagination.current} / ${Math.ceil(pagination.total / pagination.pageSize)} 页` };
+      }
+    }
+    return { showTotal: () => '' };
+  };
+
+  // 痕迹分页信息
+  showHenJiTotal = (metaModel) => {
+    if (metaModel && metaModel.funcModelCode) {
+      const { [metaModel.funcModelCode]: { datas: { pagination } } } = this.props;
+      if (pagination && pagination.total) {
+        return { showTotal: () => `共 ${pagination.total} 条记录 第 ${pagination.current} / ${Math.ceil(pagination.total / pagination.pageSize)} 页` };
+      }
+    }
+    return { showTotal: () => '' };
+  };
+
+  // 仓库历史记录分页信息
+  showOptTotal = (metaModel) => {
+    if (metaModel && metaModel.funcModelCode) {
+      const { [metaModel.funcModelCode]: { datas: { pagination } } } = this.props;
+      if (pagination && pagination.total) {
+        return { showTotal: () => `共 ${pagination.total} 条记录 第 ${pagination.current} / ${Math.ceil(pagination.total / pagination.pageSize)} 页` };
+      }
+    }
+    return { showTotal: () => '' };
+  };
 
   // 获取表单域规则
   getFormItemRules = column => {
@@ -230,7 +274,7 @@ export default class CangKu extends PureComponent {
         lingWuFenLei: lingWuSelectedRow.lingWuFenLei,
         lingWuShuXing: lingWuSelectedRow.lingWuShuXing,
         lingWuState: lingWuSelectedRow.lingWuState,
-        lingWuMiaoShu: lingWuSelectedRow.lingWuMiaoShu,
+        lingWuMiaoShu: lingWuSelectedRow.lingWuMiaoShu || null,
         lingWuHisId: lingWuSelectedRow.id,
         lingWuShuLiang: lingWuSelectedRow.lingWuShuLiang,
         danWei: lingWuSelectedRow.danWei,
@@ -244,7 +288,7 @@ export default class CangKu extends PureComponent {
       }
     }
     this.handleLingWuInfoOnCancel();
-  }
+  };
 
   handleSuoShuInfoOnOk = () => {
     const {form} = this.rowProps;
@@ -255,7 +299,7 @@ export default class CangKu extends PureComponent {
         suoShuId: suoShuSelectedRow.suoShuId,
         suoShuName: suoShuSelectedRow.suoShuName,
         suoShuFenLei: suoShuSelectedRow.suoShuFenLei,
-        suoShuMiaoShu: suoShuSelectedRow.suoShuMiaoShu,
+        suoShuMiaoShu: suoShuSelectedRow.suoShuMiaoShu || null,
         xiaoShuoId: suoShuSelectedRow.xiaoShuoId,
         addrId: suoShuSelectedRow.addrId,
         suoShuJingJieId: suoShuSelectedRow.suoShuJingJieId,
@@ -328,7 +372,15 @@ export default class CangKu extends PureComponent {
       optVisible: false,
     });
     this.reloadCangKu();
-  }
+  };
+
+  handleFanZhuan = (record) => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'cangKuHis/fanZhuan',
+      payload: record,
+    });
+  };
 
   // 重新加载coupons
   reloadCangKu = () => {
@@ -560,7 +612,7 @@ export default class CangKu extends PureComponent {
   };
 
   renderAddrId = (FormItem, rowProps, rowState) => {
-    const { formItemLayout, column, searchArea } = rowProps;
+    const { formItemLayout, column/* , searchArea */ } = rowProps;
     const { valueListData } = rowState;
     return (
       <FormItem {...formItemLayout} label={column.columnName} name={column.columnCode} rules={[]}>
@@ -568,7 +620,7 @@ export default class CangKu extends PureComponent {
           allowClear
           showSearch
           optionFilterProp="title"
-          dropdownMatchSelectWidth={searchArea || 700}
+          dropdownMatchSelectWidth={/* searchArea || */700}
           placeholder={`请选择${column.columnName}`}
         >
           {valueListData ? valueListData.map(data => <Option key={data.dataCode} value={data.dataCode} title={data.dataName}>{data.dataName}</Option>) : ''}
@@ -633,7 +685,7 @@ export default class CangKu extends PureComponent {
               fixed="right"
               searchBtn="search"
               profile={false}
-              showTotal={this.showTotal}
+              showTotal={this.showLingWuTotal}
               renderLingWuShuXing={this.renderLingWuShuXing}
               renderMiaoShu={this.renderLingWuMiaoShu}
               // scroll={{ x: '60vw' }}
@@ -663,11 +715,14 @@ export default class CangKu extends PureComponent {
               fixed="right"
               searchBtn="search"
               profile={false}
-              showTotal={this.showTotal}
+              showTotal={this.showSuoShuTotal}
               renderMiaoShu={this.renderSuoShuMiaoShu}
               // scroll={{ x: '90vw' }}
               {...cangKuSuoShuHisMetaModel()}
               tableSelectType="radio"
+              customFormItem={{
+                addrId: this.renderAddrId,
+              }}
               rowClickTrigger // 点击行触发前面的选择项(多选还是单选)
               onSelectRow={this.handleSuoShuTableOnSelectRow}
               {...props}
@@ -688,7 +743,7 @@ export default class CangKu extends PureComponent {
             okText="确定"
           >
             <StandardPager
-              showTotal={this.showTotal}
+              showTotal={this.showHenJiTotal}
               columnWidth="110px"
               // fixed="right"
               renderMiaoShu={this.renderHenJiMiaoShu}
@@ -716,9 +771,10 @@ export default class CangKu extends PureComponent {
           >
             <StandardPager
               fixed="right"
-              columnWidth="60px"
+              fanZhuan={this.handleFanZhuan} // 翻转
+              columnWidth="110px"
               scroll={{ x: '220vw' }} // 固定前后列，横向滚动查看其它数据
-              showTotal={this.showTotal}
+              showTotal={this.showOptTotal}
               renderMiaoShu={this.renderOptMiaoShu}
               rowInfo={currentInfo}
               profile={false}

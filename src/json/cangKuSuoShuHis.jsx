@@ -251,7 +251,7 @@ const cangKuSuoShuHis = {
           "columnCode": "addrId",
           "valueType": "S",
           "modifyFlag": "N",
-          "displayType": "S",
+          "displayType": "CF",
           "valueList": "service|/xiuXing/common/xiu-xing/address",
           "seq": 9,
           "requiredFlag": "N",

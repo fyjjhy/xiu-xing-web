@@ -305,30 +305,6 @@ const fenLei = {
           "feignFlag": "N",
           "titleFlag": "N",
           "state": "A"
-        },
-        {
-          "id": "32177e6d7b871c324a70bb3aae7d0f4b",
-          "modelId": "28",
-          "columnName": "更新时间",
-          "columnCode": "updateTime",
-          "valueType": "S",
-          "modifyFlag": "N",
-          "displayType": "I",
-          "seq": 15,
-          "requiredFlag": "N",
-          "searchFlag": "N",
-          "profileDisplayFlag": "Y",
-          "addTable": "N",
-          "editDisplayFlag": "N",
-          "editable": "N",
-          "listDisplayFlag": "Y",
-          "exportDisplayFlag": "N",
-          "sortable": "N",
-          "primaryFlag": "N",
-          "feignFlag": "N",
-          "columnWidth": "160px",
-          "titleFlag": "N",
-          "state": "A"
         }
       ],
       "actionList": [

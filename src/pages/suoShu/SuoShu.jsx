@@ -56,8 +56,10 @@ export default class SuoShu extends PureComponent {
   handleCangKuLingWuClick = async (record) => {
     const { dispatch } = this.props;
     const params = {};
+    // 查询同一仓库，同一所属的灵物信息（灵物相同，也可以不相同）
     params.suoShuId = record.suoShuId;
-    params.lingWuId = record.lingWuId;
+    // params.lingWuId = record.lingWuId;
+    params.cangKuId = record.cangKuId;
     if (record.lingWuShuXing) {
       params.lingWuShuXing = record.lingWuShuXing;
     }
@@ -86,7 +88,15 @@ export default class SuoShu extends PureComponent {
       ckVisible: false,
     });
     this.reloadSuoShu();
-  }
+  };
+
+  handleCkSearch = (values) => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'cangKuHis/searchHisList',
+      payload: values,
+    });
+  };
 
   // 重新加载coupons
   reloadSuoShu = () => {
@@ -124,7 +134,7 @@ export default class SuoShu extends PureComponent {
   };
 
   renderAddrId = (FormItem, rowProps, rowState) => {
-    const { formItemLayout, column, searchArea } = rowProps;
+    const { formItemLayout, column/* , searchArea */ } = rowProps;
     const { valueListData } = rowState;
     return (
       <FormItem {...formItemLayout} label={column.columnName} name={column.columnCode} rules={[]}>
@@ -132,7 +142,7 @@ export default class SuoShu extends PureComponent {
           allowClear
           showSearch
           optionFilterProp="title"
-          dropdownMatchSelectWidth={searchArea || 700}
+          dropdownMatchSelectWidth={/* searchArea || */700}
           placeholder={`请选择${column.columnName}`}
         >
           {valueListData ? valueListData.map(data => <Option key={data.dataCode} value={data.dataCode} title={data.dataName}>{data.dataName}</Option>) : ''}
@@ -175,8 +185,11 @@ export default class SuoShu extends PureComponent {
             // scroll={{ x: '100vw' }} // 固定前后列，横向滚动查看其它数据
             fixed="right"
             searchBtn='search'
-            columnWidth="60px"
+            // columnWidth="60px"
             showTotal={this.showTotal}
+            customFormItem={{
+              addrId: this.renderAddrId,
+            }}
             renderMiaoShu={this.renderOptMiaoShu}
             rowInfo={currentInfo}
             profile={false}
@@ -190,6 +203,7 @@ export default class SuoShu extends PureComponent {
             visible={ckVisible}
             ckOnCancel={this.handleCkOnCancel}
             ckLwRecordClick={this.handleCangKuLingWuClick}
+            ckSearch={this.handleCkSearch}
             {...props}
           />
         ) : ''}

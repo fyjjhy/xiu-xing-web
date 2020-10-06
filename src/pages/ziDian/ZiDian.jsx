@@ -55,6 +55,17 @@ export default class ZiDian extends PureComponent {
     return `${text}` ? shengDiao || text : text;
   }
 
+  // 字典管理分页信息
+  showTotal = (metaModel) => {
+    if (metaModel && metaModel.funcModelCode) {
+      const { [metaModel.funcModelCode]: { datas: { pagination } } } = this.props;
+      if (pagination && pagination.total) {
+        return { showTotal: () => `共 ${pagination.total} 条记录 第 ${pagination.current} / ${Math.ceil(pagination.total / pagination.pageSize)} 页` };
+      }
+    }
+    return { showTotal: () => '' };
+  };
+
   render() {
     const { props, state } = this;
     return (
@@ -70,6 +81,7 @@ export default class ZiDian extends PureComponent {
           renderZuCiTou={this.renderZuCiTou} // 组词头
           renderXinHuaZiDian={this.renderXinHuaZiDian} // 字义
           scroll={{ x: '100vw' }}
+          showTotal={this.showTotal}
           {...state}
           {...props}
         />
