@@ -312,6 +312,7 @@ export default class AutoFormRow extends PureComponent {
       C: this.renderCheckbox,
       CA: this.renderCascader,
       D: this.renderDatePicker,
+      DTP: this.renderDatePickerShowTime,
       // DP: this.renderDateTimePicker,
       N: this.renderInputNumber,
       M: this.renderMention,
@@ -442,6 +443,11 @@ export default class AutoFormRow extends PureComponent {
       format={dateFormat}
     />
   );
+
+  // 年月日时分秒
+  renderDatePickerShowTime = () => {
+    return(<DatePicker showTime format="YYYY-MM-DD HH:mm:ss" />);
+  };
 
   // renderDateTimePicker = () => {
   //   const { column: { columnCode }, form: { getFieldsValue } } = this.props;

@@ -6,20 +6,21 @@ import { Tooltip, Typography, Modal, Select } from 'antd';
 
 import StandardPager from "../../template/StandardPager";
 import {renderMiaoShu} from "../../utils/utils";
-import {suoShuMetaModel} from "../../json/suoShu";
-import {suoShuHisMetaModel} from "../../json/suoShuHis";
-import LingWuCangKu from "../../components/LingWuCangKu";
+import HeBing from "../../components/HeBing";
+import {congShuMetaModel} from "../../json/congShu";
+import {congShuHisMetaModel} from "../../json/congShuHis";
+import CongShuCangKu from "../../components/CongShuCangKu";
 
 const { Paragraph } = Typography;
 const { Option } = Select;
 
-@connect(({ suoShu, suoShuHis, cangKuHis, loading }) => ({
-  suoShu,
-  suoShuHis,
+@connect(({ congShu, congShuHis, cangKuHis, loading }) => ({
+  congShu,
+  congShuHis,
   cangKuHis,
   loading,
 }))
-export default class SuoShu extends PureComponent {
+export default class CongShu extends PureComponent {
   constructor(props){
     super(props);
     this.state = {
@@ -27,16 +28,17 @@ export default class SuoShu extends PureComponent {
       currentInfo: {},
       optVisible: false,
       ckVisible: false,
+      heBingVisible: false,
     };
   }
 
   handleOpt = (record) => {
     this.setState({
       currentModel: 'opt',
-      currentInfo: { suoShuId: record.id },
+      currentInfo: { congShuId: record.id },
       optVisible: true,
     });
-  }
+  };
 
   handleCk = async (record) => {
     const { dispatch } = this.props;
@@ -44,25 +46,38 @@ export default class SuoShu extends PureComponent {
       type: 'cangKuHis/emptyHisList',
     });
     dispatch({
-      type: 'cangKuHis/queryHisList',
-      payload: { suoShuId: record.id },
+      type: 'cangKuHis/cangKuCongShuList',
+      payload: { congShuId: record.id },
     });
     this.setState({
       currentModel: 'ck',
       ckVisible: true,
     });
-  }
+  };
 
-  handleCangKuLingWuClick = async (record) => {
+  // 打开合并对话框
+  handleHeBing = () => {
+    this.setState({
+      currentModel: 'heBing',
+      heBingVisible: true,
+    });
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'congShu/query',
+      payload: {},
+    });
+  };
+
+  handleCangKuCongClick = async (record) => {
     const { dispatch } = this.props;
     const params = {};
     // 查询同一仓库，同一所属的灵物信息（灵物相同，也可以不相同）
-    params.suoShuId = record.suoShuId;
+    params.shuId = record.shuId;
     // params.lingWuId = record.lingWuId;
     params.cangKuId = record.cangKuId;
-    if (record.lingWuShuXing) {
-      params.lingWuShuXing = record.lingWuShuXing;
-    }
+    // if (record.lingWuShuXing) {
+    //   params.lingWuShuXing = record.lingWuShuXing;
+    // }
     await dispatch({
       type: 'cangKuHis/emptyList',
     });
@@ -70,7 +85,7 @@ export default class SuoShu extends PureComponent {
       type: 'cangKuHis/query',
       payload: { ...params },
     });
-  }
+  };
 
   handleOptOnCancel = () => {
     this.setState({
@@ -78,8 +93,8 @@ export default class SuoShu extends PureComponent {
       currentInfo: {},
       optVisible: false,
     });
-    this.reloadSuoShu();
-  }
+    this.reloadCongShu();
+  };
 
   handleCkOnCancel = () => {
     this.setState({
@@ -87,7 +102,24 @@ export default class SuoShu extends PureComponent {
       currentInfo: {},
       ckVisible: false,
     });
-    this.reloadSuoShu();
+    this.reloadCongShu();
+  };
+
+  handleHeBingOnCancel = () => {
+    this.setState({
+      currentModel: '',
+      heBingVisible: false,
+    });
+    this.reloadCongShu();
+  };
+
+  // 合并
+  handleHeBingOnOk = (params) => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'congShu/heBing',
+      payload: params,
+    });
   };
 
   handleCkSearch = (values) => {
@@ -99,20 +131,20 @@ export default class SuoShu extends PureComponent {
   };
 
   // 重新加载coupons
-  reloadSuoShu = () => {
+  reloadCongShu = () => {
     const { dispatch } = this.props;
     dispatch({
-      type: 'suoShu/changeNeedLoad',
+      type: 'congShu/changeNeedLoad',
       payload: true,
     });
-  }
+  };
 
   renderMiaoShu = text => {
     const title = renderMiaoShu(text);
     return text && text.length > 20 ? <Tooltip title={title}><Paragraph style={{ width: '250px', marginTop: '0px', marginBottom: '0px' }} ellipsis={{ row: 1 }}>{text}</Paragraph></Tooltip> : text
   };
 
-  renderSuoShuMiaoShu = text => {
+  renderCongShuMiaoShu = text => {
     const title = renderMiaoShu(text);
     return (<Tooltip placement="topLeft" title={title}>{text}</Tooltip>);
   };
@@ -149,11 +181,11 @@ export default class SuoShu extends PureComponent {
         </Select>
       </FormItem>
     );
-  }
+  };
 
   render() {
     const { props } = this;
-    const { currentModel, currentInfo, optVisible, ckVisible } = this.state;
+    const { currentModel, currentInfo, optVisible, ckVisible, heBingVisible } = this.state;
     return (
       <PageHeaderWrapper>
         <StandardPager
@@ -163,11 +195,12 @@ export default class SuoShu extends PureComponent {
           columnWidth="150px"
           // scroll={{ x: '100vw' }}
           fixed="right"
-          renderMiaoShu={this.renderSuoShuMiaoShu}
+          renderMiaoShu={this.renderCongShuMiaoShu}
           showTotal={this.showTotal}
           opt={this.handleOpt}
           ck={this.handleCk}
-          {...suoShuMetaModel()}
+          heBing={this.handleHeBing}
+          {...congShuMetaModel()}
           {...props}
         />
         {currentModel === 'opt' ? (
@@ -193,17 +226,26 @@ export default class SuoShu extends PureComponent {
             renderMiaoShu={this.renderOptMiaoShu}
             rowInfo={currentInfo}
             profile={false}
-            {...suoShuHisMetaModel()}
+            {...congShuHisMetaModel()}
             {...props}
           />
         </Modal>
         ) : ''}
         {currentModel === 'ck' ? (
-          <LingWuCangKu
+          <CongShuCangKu
             visible={ckVisible}
             ckOnCancel={this.handleCkOnCancel}
-            ckLwRecordClick={this.handleCangKuLingWuClick}
+            ckLwRecordClick={this.handleCangKuCongClick}
             ckSearch={this.handleCkSearch}
+            {...props}
+          />
+        ) : ''}
+        {currentModel === 'heBing' ? (
+          <HeBing
+            ns="congShu" // ns:namespace
+            visible={heBingVisible}
+            heBingOnCancel={this.handleHeBingOnCancel}
+            heBingOnOk={this.handleHeBingOnOk}
             {...props}
           />
         ) : ''}

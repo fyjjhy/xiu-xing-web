@@ -1,4 +1,4 @@
-/* eslint-disable guard-for-in,no-restricted-syntax,no-restricted-syntax */
+/* eslint-disable guard-for-in,no-restricted-syntax,no-restricted-syntax,no-nested-ternary */
 import React, { PureComponent, Fragment } from 'react';
 import { Form, Modal } from 'antd';
 import moment from 'moment';
@@ -49,6 +49,11 @@ export default class AutoForm extends PureComponent {
             if (dp) {
               resultValues[column.columnCode] = dp.format(dateTimeFormat);
             }
+          } else if (column.displayType === 'DTP') { // 年月日时分秒
+            const dtp = values[column.columnCode];
+            if (dtp) {
+              resultValues[column.columnCode] = dtp.format(dateTimeFormat);
+            }
           } else if (column.displayType === 'MS') {
             const ms = values[column.columnCode];
             if (ms && ms.length > 0) {
@@ -59,10 +64,10 @@ export default class AutoForm extends PureComponent {
           }
         });
         if (currentModel === 'add' && addOnSubmit) {
-          addOnSubmit(resultValues);
+          addOnSubmit(resultValues, currentModel);
         }
         if (currentModel === 'edit' && editOnSubmit) {
-          editOnSubmit(resultValues);
+          editOnSubmit(resultValues, currentModel);
         }
       }).catch(errorInfo => {
         console.log(errorInfo);
@@ -104,6 +109,9 @@ export default class AutoForm extends PureComponent {
               const initValue = initForm[columnCode];
               initForm[columnCode] = initValue ? initValue.split(',') : [];
             } else if (displayType === 'DP') {
+              const initValue = initForm[columnCode];
+              initForm[columnCode] = initValue ? moment(new Date(initValue), dateTimeFormat) : null;
+            } else if (displayType === 'DTP') { // 年月日时分秒
               const initValue = initForm[columnCode];
               initForm[columnCode] = initValue ? moment(new Date(initValue), dateTimeFormat) : null;
             } else if (displayType === 'S') {
@@ -164,7 +172,6 @@ export default class AutoForm extends PureComponent {
             }).map(column => (
               <AutoFormRow
                 {...props}
-                formItemLayout={formItemLayout}
                 key={column.columnCode}
                 column={column}
                 form={this.formRef.current}
@@ -182,11 +189,11 @@ export default class AutoForm extends PureComponent {
   }
 
   renderDialogForm() {
-    const { visible, metaModel, title, addLoading, autoFormApi } = this.props;
+    const { visible, metaModel, title, addLoading, autoApi, currentModel } = this.props;
     return (
       <Modal
-        {...(autoFormApi || {})}
-        title={title || metaModel.modelName}
+        {...(autoApi && autoApi.modal ? autoApi.modal : {})}
+        title={`${title || metaModel.modelName}${currentModel === 'add' ? '新增' : currentModel === 'edit' ? '编辑' : ''}`}
         visible={visible}
         maskClosable={false}
         confirmLoading={addLoading}
@@ -201,10 +208,12 @@ export default class AutoForm extends PureComponent {
       >
         <Form
           name="control-ref"
+          {...formItemLayout}
           initialValues={this.initForm()}
           ref={this.formRef}
           disabled={addLoading}
           style={ { marginTop: 8 } }
+          {...(autoApi && autoApi.form ? autoApi.form : {})}
         >
           {this.renderFormItem()}
         </Form>

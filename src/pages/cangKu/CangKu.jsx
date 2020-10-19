@@ -10,19 +10,19 @@ import {renderMiaoShu} from "../../utils/utils";
 import {cangKuMetaModel} from "../../json/cangKu";
 import {cangKuHisMetaModel} from "../../json/cangKuHis";
 import {henJiMetaModel} from "../../json/henJi";
-import {cangKuLingWuHisMetaModel} from "../../json/cangKuLingWuHis";
-import {cangKuSuoShuHisMetaModel} from "../../json/cangKuSuoShuHis";
+import {cangKuCongHisMetaModel} from "../../json/cangKuCongHis";
+import {cangKuShuHisMetaModel} from "../../json/cangKuShuHis";
 
 const { Paragraph } = Typography;
 const { Option } = Select;
 
-@connect(({ cangKu, cangKuHis, jingJie, pinJi, cangKuLingWuHis, cangKuSuoShuHis, henJi, loading }) => ({
+@connect(({ cangKu, cangKuHis, jingJie, pinJi, cangKuCongHis, cangKuShuHis, henJi, loading }) => ({
   cangKu,
   cangKuHis,
   jingJie,
   pinJi,
-  cangKuLingWuHis,
-  cangKuSuoShuHis,
+  cangKuCongHis,
+  cangKuShuHis,
   henJi,
   loading,
 }))
@@ -31,19 +31,19 @@ export default class CangKu extends PureComponent {
     super(props);
     this.state = {
       jingJieList: [],
-      suoShuJingJieList: [],
+      shuJingJieList: [],
       pinJiList: [],
-      suoShuPinJiList: [],
-      lingWuSuoShuModel: null,
-      lingWuInfoVisible: false,
-      suoShuInfoVisible: false,
+      shuPinJiList: [],
+      congShuModel: null,
+      congInfoVisible: false,
+      shuInfoVisible: false,
       henJiInfoVisible: false,
-      lingWuSelectedRow: {},
-      suoShuSelectedRow: {},
+      congSelectedRow: {},
+      shuSelectedRow: {},
       henJiSelectedRow: {},
       fenLei: null,
-      cangKuLingWu: null,
-      cangKuSuoShu: null,
+      cangKuCong: null,
+      cangKuShu: null,
       currentModel: '',
       currentInfo: {},
       optVisible: false,
@@ -56,13 +56,13 @@ export default class CangKu extends PureComponent {
     const { jingJie: { datas: { list: afterJingJieList } } } = nextProps;
     const { jingJie: { datas: { list: beforeJingJieList } } } = this.props;
     if (afterJingJieList !== beforeJingJieList) {
-      if (this.state.fenLei === 'lingWu') {
+      if (this.state.fenLei === 'cong') {
         this.setState({
           jingJieList: [...afterJingJieList],
         });
-      } else if (this.state.fenLei === 'suoShu') {
+      } else if (this.state.fenLei === 'shu') {
         this.setState({
-          suoShuJingJieList: [...afterJingJieList],
+          shuJingJieList: [...afterJingJieList],
         });
       }
     }
@@ -70,13 +70,13 @@ export default class CangKu extends PureComponent {
     const { pinJi: { datas: { list: afterPinJiList } } } = nextProps;
     const { pinJi: { datas: { list: beforePinJiList } } } = this.props;
     if (afterPinJiList !== beforePinJiList) {
-      if (this.state.fenLei === 'lingWu') {
+      if (this.state.fenLei === 'cong') {
         this.setState({
           pinJiList: [...afterPinJiList],
         });
-      } else if (this.state.fenLei === 'suoShu') {
+      } else if (this.state.fenLei === 'shu') {
         this.setState({
-          suoShuPinJiList: [...afterPinJiList],
+          shuPinJiList: [...afterPinJiList],
         });
       }
     }
@@ -98,8 +98,8 @@ export default class CangKu extends PureComponent {
     return { showTotal: () => '' };
   };
 
-  // 灵物操作记录分页信息
-  showLingWuTotal = (metaModel) => {
+  // 从操作记录分页信息
+  showCongTotal = (metaModel) => {
     if (metaModel && metaModel.funcModelCode) {
       const { [metaModel.funcModelCode]: { datas: { pagination } } } = this.props;
       if (pagination && pagination.total) {
@@ -110,7 +110,7 @@ export default class CangKu extends PureComponent {
   };
 
   // 所属操作记录分页信息
-  showSuoShuTotal = (metaModel) => {
+  showShuTotal = (metaModel) => {
     if (metaModel && metaModel.funcModelCode) {
       const { [metaModel.funcModelCode]: { datas: { pagination } } } = this.props;
       if (pagination && pagination.total) {
@@ -152,7 +152,7 @@ export default class CangKu extends PureComponent {
     //     if (rs[0] === 'validator') {
     //       if (rs.length > 1) {
     //         const { form } = this.props;
-    //         const validator = this.props[rs[1]].bind(null, lingWuSuoShuModel, form);
+    //         const validator = this.props[rs[1]].bind(null, congShuModel, form);
     //         if (validator) {
     //           return { validator };
     //         }
@@ -181,34 +181,34 @@ export default class CangKu extends PureComponent {
         type: 'pinJi/query',
         payload: { pinJiFenLei: value },
       });
-      const { cangKuSuoShu, cangKuLingWu } = this.state;
+      const { cangKuShu, cangKuCong } = this.state;
       this.setState({
         fenLei,
-        cangKuLingWu: fenLei === 'lingWu' ? 'lingWu' : cangKuLingWu,
-        cangKuSuoShu: fenLei === 'suoShu' ? 'suoShu' : cangKuSuoShu,
+        cangKuCong: fenLei === 'cong' ? 'cong' : cangKuCong,
+        cangKuShu: fenLei === 'shu' ? 'shu' : cangKuShu,
       });
     }
   }
 
-  handleLingWuButton = () => {
-    this.setState({ lingWuSuoShuModel: 'lingWu', lingWuInfoVisible: true });
+  handleCongButton = () => {
+    this.setState({ congShuModel: 'cong', congInfoVisible: true });
   };
 
   handleHenJiButton = () => {
-    this.setState({ lingWuSuoShuModel: 'henJi', henJiInfoVisible: true });
+    this.setState({ congShuModel: 'henJi', henJiInfoVisible: true });
   };
 
-  handleLingWuLinkButton = () => {
+  handleCongLinkButton = () => {
     const { form } = this.rowProps;
     if (form && form.setFieldsValue) {
       const { setFieldsValue } = form;
       setFieldsValue({
-        lingWuId: null,
-        lingWuName: null,
-        lingWuFenLei: null,
-        lingWuShuXing: null,
-        lingWuState: null,
-        lingWuMiaoShu: null,
+        congId: null,
+        congName: null,
+        congFenLei: null,
+        congShuXing: null,
+        congState: null,
+        congMiaoShu: null,
         // xiaoShuoId: null,
         danWei: null,
         jingJieId: null,
@@ -230,86 +230,86 @@ export default class CangKu extends PureComponent {
   };
 
   // 清除所属信息
-  handleSuoShuLinkButton = () => {
+  handleShuLinkButton = () => {
     const { form } = this.rowProps;
     if (form && form.setFieldsValue) {
       const { setFieldsValue } = form;
       setFieldsValue({
-        suoShuId: null,
-        suoShuName: null,
-        suoShuFenLei: null,
-        suoShuMiaoShu: null,
-        suoShuJingJieId: null,
-        suoShuPinJiId: null,
+        shuId: null,
+        shuName: null,
+        shuFenLei: null,
+        shuMiaoShu: null,
+        shuJingJieId: null,
+        shuPinJiId: null,
         // xiaoShuoId: null,
       });
     }
   }
 
   // 所属信息选择
-  handleSuoShuButton = () => {
-    this.setState({ lingWuSuoShuModel: 'suoShu', suoShuInfoVisible: true });
+  handleShuButton = () => {
+    this.setState({ congShuModel: 'shu', shuInfoVisible: true });
   }
 
-  handleLingWuInfoOnCancel = () => {
-    this.setState({ lingWuSuoShuModel: null, lingWuInfoVisible: false });
-  }
+  handleCongInfoOnCancel = () => {
+    this.setState({ congShuModel: null, congInfoVisible: false });
+  };
 
-  handleSuoShuInfoOnCancel = () => {
-    this.setState({ lingWuSuoShuModel: null, suoShuInfoVisible: false });
+  handleShuInfoOnCancel = () => {
+    this.setState({ congShuModel: null, shuInfoVisible: false });
   };
 
   handleHenJiInfoOnCancel = () => {
-    this.setState({ lingWuSuoShuModel: null, henJiInfoVisible: false });
+    this.setState({ congShuModel: null, henJiInfoVisible: false });
   };
 
-  handleLingWuInfoOnOk = () => {
+  handleCongInfoOnOk = () => {
     const {form} = this.rowProps;
     if (form && form.setFieldsValue) {
       const { setFieldsValue } = form;
-      const { lingWuSelectedRow } = this.state;
+      const { congSelectedRow } = this.state;
       setFieldsValue({
-        lingWuId: lingWuSelectedRow.lingWuId,
-        lingWuName: lingWuSelectedRow.lingWuName,
-        lingWuFenLei: lingWuSelectedRow.lingWuFenLei,
-        lingWuShuXing: lingWuSelectedRow.lingWuShuXing,
-        lingWuState: lingWuSelectedRow.lingWuState,
-        lingWuMiaoShu: lingWuSelectedRow.lingWuMiaoShu || null,
-        lingWuHisId: lingWuSelectedRow.id,
-        lingWuShuLiang: lingWuSelectedRow.lingWuShuLiang,
-        danWei: lingWuSelectedRow.danWei,
-        jingJieId: lingWuSelectedRow.jingJieId,
-        pinJiId: lingWuSelectedRow.pinJiId,
-        xiuXingSuiYue: lingWuSelectedRow.xiuXingSuiYue,
-        // xiaoShuoId: lingWuSelectedRow.xiaoShuoId,
+        congId: congSelectedRow.congId,
+        congName: congSelectedRow.congName,
+        congFenLei: congSelectedRow.congFenLei,
+        congShuXing: congSelectedRow.congShuXing,
+        congState: congSelectedRow.congState,
+        congMiaoShu: congSelectedRow.congMiaoShu || null,
+        congHisId: congSelectedRow.id,
+        congShuLiang: congSelectedRow.congShuLiang,
+        danWei: congSelectedRow.danWei,
+        jingJieId: congSelectedRow.jingJieId,
+        pinJiId: congSelectedRow.pinJiId,
+        // xiuXingSuiYue: congSelectedRow.xiuXingSuiYue,
+        // xiaoShuoId: congSelectedRow.xiaoShuoId,
       });
-      if (lingWuSelectedRow.lingWuFenLei) {
-        this.handleFenLei('lingWu', false, lingWuSelectedRow.lingWuFenLei);
-      }
+      // if (congSelectedRow.congFenLei) {
+      //   this.handleFenLei('cong', false, congSelectedRow.congFenLei);
+      // }
     }
-    this.handleLingWuInfoOnCancel();
+    this.handleCongInfoOnCancel();
   };
 
-  handleSuoShuInfoOnOk = () => {
+  handleShuInfoOnOk = () => {
     const {form} = this.rowProps;
     if (form && form.setFieldsValue) {
       const { setFieldsValue } = form;
-      const { suoShuSelectedRow } = this.state;
+      const { shuSelectedRow } = this.state;
       setFieldsValue({
-        suoShuId: suoShuSelectedRow.suoShuId,
-        suoShuName: suoShuSelectedRow.suoShuName,
-        suoShuFenLei: suoShuSelectedRow.suoShuFenLei,
-        suoShuMiaoShu: suoShuSelectedRow.suoShuMiaoShu || null,
-        xiaoShuoId: suoShuSelectedRow.xiaoShuoId,
-        addrId: suoShuSelectedRow.addrId,
-        suoShuJingJieId: suoShuSelectedRow.suoShuJingJieId,
-        suoShuPinJiId: suoShuSelectedRow.suoShuPinJiId,
+        shuId: shuSelectedRow.shuId,
+        shuName: shuSelectedRow.shuName,
+        shuFenLei: shuSelectedRow.shuFenLei,
+        shuMiaoShu: shuSelectedRow.shuMiaoShu || null,
+        xiaoShuoId: shuSelectedRow.xiaoShuoId,
+        addrId: shuSelectedRow.addrId,
+        shuJingJieId: shuSelectedRow.shuJingJieId,
+        shuPinJiId: shuSelectedRow.shuPinJiId,
       });
-      if (suoShuSelectedRow.suoShuFenLei) {
-        this.handleFenLei('suoShu', false, suoShuSelectedRow.suoShuFenLei);
-      }
+      // if (shuSelectedRow.shuFenLei) {
+      //   this.handleFenLei('shu', false, shuSelectedRow.shuFenLei);
+      // }
     }
-    this.handleSuoShuInfoOnCancel();
+    this.handleShuInfoOnCancel();
   };
 
   handleHenJiInfoOnOk = () => {
@@ -319,38 +319,38 @@ export default class CangKu extends PureComponent {
       const { henJiSelectedRow } = this.state;
       setFieldsValue({
         henJiId: henJiSelectedRow.id,
-        shiJian: henJiSelectedRow.shiJian,
+        xiuXingShiJian: henJiSelectedRow.xiuXingShiJian,
         beiZhu: henJiSelectedRow.beiZhu,
       });
     }
-    this.handleSuoShuInfoOnCancel();
+    this.handleShuInfoOnCancel();
   };
 
   // 在关闭新增或编辑操作时，添加的额外的处理操作
   handleExpandOnCancel = () => {
     this.setState({
       jingJieList: [],
-      suoShuJingJieList: [],
+      shuJingJieList: [],
       pinJiList: [],
-      suoShuPinJiList: [],
-      lingWuSuoShuModel: null,
-      lingWuInfoVisible: false,
-      suoShuInfoVisible: false,
-      lingWuSelectedRow: {},
-      suoShuSelectedRow: {},
+      shuPinJiList: [],
+      congShuModel: null,
+      congInfoVisible: false,
+      shuInfoVisible: false,
+      congSelectedRow: {},
+      shuSelectedRow: {},
       fenLei: null,
-      cangKuLingWu: null,
-      cangKuSuoShu: null,
+      cangKuCong: null,
+      cangKuShu: null,
     });
   }
 
 
-  handleLingWuTableOnSelectRow = selectedRows => {
-    this.setState({ lingWuSelectedRow: selectedRows && selectedRows.length > 0 ? selectedRows[0] : {} });
+  handleCongTableOnSelectRow = selectedRows => {
+    this.setState({ congSelectedRow: selectedRows && selectedRows.length > 0 ? selectedRows[0] : {} });
   }
 
-  handleSuoShuTableOnSelectRow = selectedRows => {
-    this.setState({ suoShuSelectedRow: selectedRows && selectedRows.length > 0 ? selectedRows[0] : {} });
+  handleShuTableOnSelectRow = selectedRows => {
+    this.setState({ shuSelectedRow: selectedRows && selectedRows.length > 0 ? selectedRows[0] : {} });
   };
 
   handleHenJiTableOnSelectRow = selectedRows => {
@@ -391,19 +391,19 @@ export default class CangKu extends PureComponent {
     });
   }
 
-  renderLingWuShuXing = text => {
+  renderCongShuXing = text => {
     const title = renderMiaoShu(text);
     return text && text.length > 15 ? <Tooltip title={title}><Paragraph style={{ marginTop: '0px', marginBottom: '0px' }} ellipsis={{ row: 1 }}>{text}</Paragraph></Tooltip> : text
   }
 
   //
-  renderLingWuMiaoShu = text => {
+  renderCongMiaoShu = text => {
     const title = renderMiaoShu(text);
     return (<Tooltip placement="topLeft" title={title}>{text}</Tooltip>);
   };
 
   // 所属描述
-  renderSuoShuMiaoShu = text => {
+  renderShuMiaoShu = text => {
     const title = renderMiaoShu(text);
     return (<Tooltip placement="topLeft" title={title}>{text}</Tooltip>);
   };
@@ -419,15 +419,15 @@ export default class CangKu extends PureComponent {
     return (<Tooltip placement="topLeft" title={title}>{text}</Tooltip>);
   };
 
-  // 重新渲染灵物信息
-  renderLingWuInfo = (FormItem, rowProps) => {
+  // 重新渲染从信息
+  renderCongInfo = (FormItem, rowProps) => {
     const { formItemLayout, column } = rowProps;
     this.rowProps = rowProps;
     return (
       <Fragment>
         <FormItem {...formItemLayout} label={column.columnName}>
-          <Button onClick={this.handleLingWuButton} type="primary">灵物信息选择</Button>
-          <Button onClick={this.handleLingWuLinkButton} type="link">清除灵物信息</Button>
+          <Button onClick={this.handleCongButton} type="primary">从信息选择</Button>
+          <Button onClick={this.handleCongLinkButton} type="link">清除从信息</Button>
         </FormItem>
       </Fragment>
     );
@@ -453,52 +453,52 @@ export default class CangKu extends PureComponent {
     </FormItem>
   );
 
-  renderLingWuId = FormItem => (
-    <FormItem key="lingWuId" name="lingWuId" noStyle>
-      <Input key="lingWuId" type="hidden" name="lingWuId"/>
+  renderCongId = FormItem => (
+    <FormItem key="congId" name="congId" noStyle>
+      <Input key="congId" type="hidden" name="congId"/>
     </FormItem>
   );
 
-  renderLingWuHisId = FormItem => (
-    <FormItem key="lingWuHisId" name="lingWuHisId" noStyle>
-      <Input key="lingWuHisId" type="hidden" name="lingWuHisId"/>
+  renderCongHisId = FormItem => (
+    <FormItem key="congHisId" name="congHisId" noStyle>
+      <Input key="congHisId" type="hidden" name="congHisId"/>
     </FormItem>
   );
 
-  // 重新渲染所属信息
-  renderSuoShuInfo = (FormItem, rowProps) => {
+  // 重新渲染属信息
+  renderShuInfo = (FormItem, rowProps) => {
     const { formItemLayout, column } = rowProps;
     this.rowProps = rowProps;
     return (
       <Fragment>
         <FormItem {...formItemLayout} label={column.columnName}>
-          <Button onClick={this.handleSuoShuButton} type="primary">所属信息选择</Button>
-          <Button onClick={this.handleSuoShuLinkButton} type="link">清除所属信息</Button>
+          <Button onClick={this.handleShuButton} type="primary">属信息选择</Button>
+          <Button onClick={this.handleShuLinkButton} type="link">清除属信息</Button>
         </FormItem>
       </Fragment>
     );
-  }
+  };
 
-  renderSuoShuId = FormItem => (
-    <FormItem key="suoShuId" name="suoShuId" noStyle>
-      <Input key="suoShuId" type="hidden" name="suoShuId"/>
+  renderShuId = FormItem => (
+    <FormItem key="shuId" name="shuId" noStyle>
+      <Input key="shuId" type="hidden" name="shuId"/>
     </FormItem>
   );
 
-  renderSuoShuHisId = FormItem => (
-    <FormItem key="suoShuHisId" name="suoShuHisId" noStyle>
-      <Input key="suoShuHisId" type="hidden" name="suoShuHisId"/>
+  renderShuHisId = FormItem => (
+    <FormItem key="shuHisId" name="shuHisId" noStyle>
+      <Input key="shuHisId" type="hidden" name="shuHisId"/>
     </FormItem>
   );
 
   renderJingJie = (FormItem, rowProps, rowState) => {
     const { formItemLayout, column } = rowProps;
     const { valueListData } = rowState;
-    const { jingJieList, cangKuLingWu } = this.state;
+    const { jingJieList, cangKuCong } = this.state;
     return (
       <FormItem {...formItemLayout} label={column.columnName} name={column.columnCode} rules={[]}>
         <Select allowClear placeholder={`请选择${column.columnName}`}>
-          {cangKuLingWu === 'lingWu' ? (
+          {cangKuCong === 'cong' ? (
             jingJieList && jingJieList.length > 0
               ? (jingJieList.map(data => <Option key={data.dataCode} value={data.dataCode}>{data.dataName}</Option>))
               : ''
@@ -512,16 +512,16 @@ export default class CangKu extends PureComponent {
     );
   }
 
-  renderSuoShuJingJie = (FormItem, rowProps, rowState) => {
+  renderShuJingJie = (FormItem, rowProps, rowState) => {
     const { formItemLayout, column } = rowProps;
     const { valueListData } = rowState;
-    const { suoShuJingJieList, cangKuSuoShu } = this.state;
+    const { shuJingJieList, cangKuShu } = this.state;
     return (
       <FormItem {...formItemLayout} label={column.columnName} name={column.columnCode} rules={[]}>
         <Select allowClear placeholder={`请选择${column.columnName}`}>
-          {cangKuSuoShu === 'suoShu' ? (
-            suoShuJingJieList && suoShuJingJieList.length > 0
-              ? (suoShuJingJieList.map(data => <Option key={data.dataCode} value={data.dataCode}>{data.dataName}</Option>))
+          {cangKuShu === 'shu' ? (
+            shuJingJieList && shuJingJieList.length > 0
+              ? (shuJingJieList.map(data => <Option key={data.dataCode} value={data.dataCode}>{data.dataName}</Option>))
               : ''
           ) : (
             valueListData && valueListData.length > 0
@@ -536,11 +536,11 @@ export default class CangKu extends PureComponent {
   renderPinJi = (FormItem, rowProps, rowState) => {
     const { formItemLayout, column } = rowProps;
     const { valueListData } = rowState;
-    const { pinJiList, cangKuLingWu } = this.state;
+    const { pinJiList, cangKuCong } = this.state;
     return (
       <FormItem {...formItemLayout} label={column.columnName} name={column.columnCode} rules={[]}>
         <Select disabled={column.addDisplayField === 'Y'}  allowClear placeholder={`请选择${column.columnName}`}>
-          {cangKuLingWu === 'lingWu' ? (
+          {cangKuCong === 'cong' ? (
             pinJiList && pinJiList.length > 0
               ? (pinJiList.map(data => <Option key={data.dataCode} value={data.dataCode}>{data.dataName}</Option>))
               : ''
@@ -554,16 +554,16 @@ export default class CangKu extends PureComponent {
     );
   }
 
-  renderSuoShuPinJi = (FormItem, rowProps, rowState) => {
+  renderShuPinJi = (FormItem, rowProps, rowState) => {
     const { formItemLayout, column } = rowProps;
     const { valueListData } = rowState;
-    const { suoShuPinJiList, cangKuSuoShu } = this.state;
+    const { shuPinJiList, cangKuShu } = this.state;
     return (
       <FormItem {...formItemLayout} label={column.columnName} name={column.columnCode} rules={[]}>
         <Select disabled={column.addDisplayField === 'Y'}  allowClear placeholder={`请选择${column.columnName}`}>
-          {cangKuSuoShu === 'suoShu' ? (
-            suoShuPinJiList && suoShuPinJiList.length > 0
-              ? (suoShuPinJiList.map(data => <Option key={data.dataCode} value={data.dataCode}>{data.dataName}</Option>))
+          {cangKuShu === 'shu' ? (
+            shuPinJiList && shuPinJiList.length > 0
+              ? (shuPinJiList.map(data => <Option key={data.dataCode} value={data.dataCode}>{data.dataName}</Option>))
               : ''
           ) : (
             valueListData && valueListData.length > 0
@@ -575,7 +575,7 @@ export default class CangKu extends PureComponent {
     );
   }
 
-  renderLingWuFenLei = (FormItem, rowProps, rowState) => {
+  renderCongFenLei = (FormItem, rowProps, rowState) => {
     const { formItemLayout, column, searchArea } = rowProps;
     const { valueListData } = rowState;
     let rules;
@@ -586,14 +586,14 @@ export default class CangKu extends PureComponent {
     }
     return (
       <FormItem {...formItemLayout} label={column.columnName} name={column.columnCode} rules={rules}>
-        <Select allowClear placeholder={`请选择${column.columnName}`} onChange={this.handleFenLei.bind(this, 'lingWu', searchArea)}>
+        <Select allowClear placeholder={`请选择${column.columnName}`} onChange={this.handleFenLei.bind(this, 'cong', searchArea)}>
           {valueListData ? valueListData.map(data => <Option key={data.dataCode} value={data.dataCode}>{data.dataName}</Option>) : ''}
         </Select>
       </FormItem>
     );
   }
 
-  renderSuoShuFenLei = (FormItem, rowProps, rowState) => {
+  renderShuFenLei = (FormItem, rowProps, rowState) => {
     const { formItemLayout, column, searchArea } = rowProps;
     const { valueListData } = rowState;
     let rules;
@@ -604,7 +604,7 @@ export default class CangKu extends PureComponent {
     }
     return (
       <FormItem {...formItemLayout} label={column.columnName} name={column.columnCode} rules={rules}>
-        <Select allowClear placeholder={`请选择${column.columnName}`} onChange={this.handleFenLei.bind(this, 'suoShu', searchArea)}>
+        <Select allowClear placeholder={`请选择${column.columnName}`} onChange={this.handleFenLei.bind(this, 'shu', searchArea)}>
           {valueListData ? valueListData.map(data => <Option key={data.dataCode} value={data.dataCode}>{data.dataName}</Option>) : ''}
         </Select>
       </FormItem>
@@ -629,11 +629,29 @@ export default class CangKu extends PureComponent {
     );
   };
 
+  renderZhangJieId = (FormItem, rowProps, rowState) => {
+    const { formItemLayout, column/* , searchArea */ } = rowProps;
+    const { valueListData } = rowState;
+    return (
+      <FormItem {...formItemLayout} label={column.columnName} name={column.columnCode} rules={[]}>
+        <Select
+          allowClear
+          showSearch
+          optionFilterProp="title"
+          dropdownMatchSelectWidth={/* searchArea || */700}
+          placeholder={`请选择${column.columnName}`}
+        >
+          {valueListData ? valueListData.map(data => <Option key={data.dataCode} value={data.dataCode} title={data.dataName}>{data.dataName}</Option>) : ''}
+        </Select>
+      </FormItem>
+    );
+  };
+
   render() {
     const { props } = this;
     const {
-      lingWuSuoShuModel, lingWuInfoVisible, lingWuSelectedRow, suoShuSelectedRow,
-      suoShuInfoVisible, optVisible, currentModel, currentInfo, henJiInfoVisible,
+      congShuModel, congInfoVisible, congSelectedRow, shuSelectedRow,
+      shuInfoVisible, optVisible, currentModel, currentInfo, henJiInfoVisible,
       henJiSelectedRow
     } = this.state;
     return (
@@ -643,23 +661,18 @@ export default class CangKu extends PureComponent {
           columnWidth="200px"
           scroll={{ x: '230vw' }}
           fixed="right"
-          autoFormApi={{ width: '650px' }}
+          autoApi={{ modal: { width: '650px' } }}
           customFormItem={{
-            lingWuInfo: this.renderLingWuInfo,
-            lingWuId: this.renderLingWuId,
-            lingWuHisId: this.renderLingWuHisId,
-            lingWuFenLei: this.renderLingWuFenLei,
-            jingJieId: this.renderJingJie,
-            pinJiId: this.renderPinJi,
-            suoShuInfo: this.renderSuoShuInfo,
-            suoShuId: this.renderSuoShuId,
-            suoShuHisId: this.renderSuoShuHisId,
-            suoShuFenLei: this.renderSuoShuFenLei,
-            suoShuJingJieId: this.renderSuoShuJingJie,
-            suoShuPinJiId: this.renderSuoShuPinJi,
+            congInfo: this.renderCongInfo,
+            congId: this.renderCongId, // 从标识
+            congHisId: this.renderCongHisId, // 从历史标识
+            shuInfo: this.renderShuInfo,
+            shuId: this.renderShuId, // 属标识
+            shuHisId: this.renderShuHisId, // 属历史标识
             addrId: this.renderAddrId,
             henJiInfo: this.renderHenJiInfo,
             henJiId: this.renderHenJiId,
+            zhangJieId: this.renderZhangJieId,
           }}
           renderMiaoShu={this.renderCangKuMiaoShu}
           showTotal={this.showTotal}
@@ -667,15 +680,15 @@ export default class CangKu extends PureComponent {
           {...cangKuMetaModel()}
           {...props}
         />
-        {lingWuSuoShuModel === 'lingWu' ? (
+        {congShuModel === 'cong' ? (
           <Modal
             bodyStyle={{ padding: 0 }}
-            okButtonProps={{ disabled: Object.keys(lingWuSelectedRow).length === 0 }}
-            title="灵物信息"
+            okButtonProps={{ disabled: Object.keys(congSelectedRow).length === 0 }}
+            title="从信息"
             maskClosable={false}
-            visible={lingWuInfoVisible}
-            onOk={this.handleLingWuInfoOnOk}
-            onCancel={this.handleLingWuInfoOnCancel}
+            visible={congInfoVisible}
+            onOk={this.handleCongInfoOnOk}
+            onCancel={this.handleCongInfoOnCancel}
             width={1000}
             cancelText="取消"
             okText="确定"
@@ -685,28 +698,28 @@ export default class CangKu extends PureComponent {
               fixed="right"
               searchBtn="search"
               profile={false}
-              showTotal={this.showLingWuTotal}
-              renderLingWuShuXing={this.renderLingWuShuXing}
-              renderMiaoShu={this.renderLingWuMiaoShu}
+              showTotal={this.showCongTotal}
+              renderCongShuXing={this.renderCongShuXing}
+              renderMiaoShu={this.renderCongMiaoShu}
               // scroll={{ x: '60vw' }}
-              {...cangKuLingWuHisMetaModel()}
+              {...cangKuCongHisMetaModel()}
               tableSelectType="radio"
               rowClickTrigger // 点击行触发前面的选择项(多选还是单选)
-              onSelectRow={this.handleLingWuTableOnSelectRow}
+              onSelectRow={this.handleCongTableOnSelectRow}
               {...props}
             />
           </Modal>
         ) : ''}
-        {lingWuSuoShuModel === 'suoShu' ? (
+        {congShuModel === 'shu' ? (
           <Modal
             bodyStyle={{ padding: 0 }}
-            okButtonProps={{ disabled: Object.keys(suoShuSelectedRow).length === 0 }}
-            title="所属信息"
+            okButtonProps={{ disabled: Object.keys(shuSelectedRow).length === 0 }}
+            title="属信息"
             maskClosable={false}
-            visible={suoShuInfoVisible}
-            onOk={this.handleSuoShuInfoOnOk}
-            onCancel={this.handleSuoShuInfoOnCancel}
-            width={1000}
+            visible={shuInfoVisible}
+            onOk={this.handleShuInfoOnOk}
+            onCancel={this.handleShuInfoOnCancel}
+            width={1300}
             cancelText="取消"
             okText="确定"
           >
@@ -715,21 +728,21 @@ export default class CangKu extends PureComponent {
               fixed="right"
               searchBtn="search"
               profile={false}
-              showTotal={this.showSuoShuTotal}
-              renderMiaoShu={this.renderSuoShuMiaoShu}
+              showTotal={this.showShuTotal}
+              renderMiaoShu={this.renderShuMiaoShu}
               // scroll={{ x: '90vw' }}
-              {...cangKuSuoShuHisMetaModel()}
+              {...cangKuShuHisMetaModel()}
               tableSelectType="radio"
               customFormItem={{
                 addrId: this.renderAddrId,
               }}
               rowClickTrigger // 点击行触发前面的选择项(多选还是单选)
-              onSelectRow={this.handleSuoShuTableOnSelectRow}
+              onSelectRow={this.handleShuTableOnSelectRow}
               {...props}
             />
           </Modal>
         ) : ''}
-        {lingWuSuoShuModel === 'henJi' ? (
+        {congShuModel === 'henJi' ? (
           <Modal
             bodyStyle={{ padding: 0 }}
             okButtonProps={{ disabled: Object.keys(henJiSelectedRow).length === 0 }}
@@ -761,11 +774,11 @@ export default class CangKu extends PureComponent {
             okButtonProps={{ disabled: true }}
             bodyStyle={{ padding: '0px' }}
             maskClosable={false}
-            title="操作记录"
+            title="仓库操作记录"
             visible={optVisible}
             // onOk={this.handleOk}
             onCancel={this.handleOptOnCancel}
-            width={1000}
+            width={1300}
             cancelText="取消"
             okText="确定"
           >
@@ -776,6 +789,7 @@ export default class CangKu extends PureComponent {
               scroll={{ x: '220vw' }} // 固定前后列，横向滚动查看其它数据
               showTotal={this.showOptTotal}
               renderMiaoShu={this.renderOptMiaoShu}
+              customFormItem={{ addrId: this.renderAddrId }}
               rowInfo={currentInfo}
               profile={false}
               searchBtn="search"

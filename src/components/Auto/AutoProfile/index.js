@@ -122,7 +122,7 @@ export default class AutoProfile extends PureComponent {
       <Modal
         {...this.props}
         maskClosable={false}
-        title={metaModel.modelName}
+        title={`${metaModel.modelName}详情`}
         visible={visible}
         confirmLoading={loading}
         onCancel={handleCancel}

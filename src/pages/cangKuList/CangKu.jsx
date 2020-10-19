@@ -297,7 +297,12 @@ export default class CangKu extends PureComponent {
   async handleRiZhiLinkClick(params) {
     if (params) {
       const { dispatch } = this.props;
-      dispatch(routerRedux.push(`/xiuXingRiZhiList?cangKuLingWu=${params.lingWu}`));
+      // const routeData = routerRedux.resolve({ path: '/congList', query: {  cangKuLingWu: params.lingWu } });
+      // window.open(routeData.href, '_blank');
+      // dispatch(window.open(encodeURI(`/congList?congName=魂骨`)));
+      window.open(`/congList?congName=魂骨`);
+      // dispatch(routerRedux.push(`/xiuXingRiZhiList?cangKuLingWu=${params.lingWu}`));
+      // window.open(dispatch(routerRedux.resolve(`congList?cangKuLingWu=${params.lingWu}`).href, '_blank'));
     }
   }
 

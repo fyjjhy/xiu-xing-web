@@ -3,13 +3,13 @@ import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 
-import { Tooltip, Typography, Select, TreeSelect } from 'antd';
+import { Tooltip, /* Typography, */ Select, TreeSelect } from 'antd';
 
 import StandardPager from "../../template/StandardPager";
 import {renderMiaoShu} from "../../utils/utils";
 import {addressMetaModel} from "../../json/address";
 
-const { Paragraph } = Typography;
+// const { Paragraph } = Typography;
 const { Option } = Select;
 
 const valueMap = {};

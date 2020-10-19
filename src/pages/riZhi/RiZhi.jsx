@@ -287,7 +287,7 @@ export default class RiZhi extends PureComponent {
           showTotal={this.showTotal}
           fixed="right"
           scroll={{ x: '100vw' }}
-          autoFormApi={{ width: '650px' }}
+          autoApi={{ modal: { width: '650px' } }}
           renderRiZhiTime={this.renderRiZhiTime}
           renderRiZhiDiDian={this.renderRiZhiDiDian}
           renderRiZhiRenWu={this.renderRiZhiRenWu}

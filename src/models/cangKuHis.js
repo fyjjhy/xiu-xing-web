@@ -1,5 +1,6 @@
 import {createModel} from "../utils/metaModel";
-import { queryHisList, action } from "../services/cangKuHis";
+import { queryHisList, cangKuCongShuList } from "../services/cangKuHis";
+import { action } from "../services/action";
 
 const Model = {
   namespace: 'cangKuHis',
@@ -10,6 +11,13 @@ const Model = {
   effects: {
     *queryHisList({ payload }, { call, put }) {
       const response = yield call(queryHisList, payload);
+      yield put({
+        type: 'saveHisList',
+        payload: response,
+      });
+    },
+    *cangKuCongShuList({ payload }, { call, put }) {
+      const response = yield call(cangKuCongShuList, payload);
       yield put({
         type: 'saveHisList',
         payload: response,
@@ -36,7 +44,7 @@ const Model = {
             const congInfoList = his[congFenLei];
             if (congInfoList && congInfoList.length > 0) {
               if (congName) {
-                const congInfos = congInfoList.filter(congInfo => congInfo.lingWuName.indexOf(congName) !== -1);
+                const congInfos = congInfoList.filter(congInfo => congInfo.congName.indexOf(congName) !== -1);
                 if (congInfos && congInfos.length > 0) {
                   return { ...state, hisList: { [congFenLei]: congInfos } };
                 }
@@ -50,7 +58,7 @@ const Model = {
           if (congName) {
             const info = {};
             Object.keys(his).forEach((data) => {
-              const congInfos = his[data].filter(congInfo => congInfo.lingWuName.indexOf(congName) !== -1);
+              const congInfos = his[data].filter(congInfo => congInfo.congName.indexOf(congName) !== -1);
               if (congInfos && congInfos.length > 0) {
                 info[data] = congInfos;
               }

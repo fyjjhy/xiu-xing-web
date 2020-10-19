@@ -1,144 +1,45 @@
-const lingWu = {
-  "id": "23",
-  "funcCode": "lingWu",
-  "funcName": "灵物",
+const congHis = {
+  "id": "29",
+  "funcCode": "congHis",
+  "funcName": "从操作记录",
   "state": "A",
-  "stateTime": "2020-06-25 11:29:35",
-  "seq": 23,
-  "dictList": [
-    {
-      "id": "17",
-      "funcId": "23",
-      "dictName": "灵物分类",
-      "dictCode": "lingWuFenLei",
-      "seq": 1,
-      "version": 0,
-      "dictDataList": [
-        {
-          "id": "152",
-          "dictId": "17",
-          "dataName": "妖兽",
-          "dataCode": "yaoShou",
-          "seq": 1,
-          "version": 0
-        },
-        {
-          "id": "153",
-          "dictId": "17",
-          "dataName": "符箓",
-          "dataCode": "fuLu",
-          "seq": 2,
-          "version": 0
-        },
-        {
-          "id": "154",
-          "dictId": "17",
-          "dataName": "功法",
-          "dataCode": "gongFa",
-          "seq": 3,
-          "version": 0
-        },
-        {
-          "id": "155",
-          "dictId": "17",
-          "dataName": "灵材",
-          "dataCode": "lingCai",
-          "seq": 4,
-          "version": 0
-        },
-        {
-          "id": "156",
-          "dictId": "17",
-          "dataName": "傀儡",
-          "dataCode": "kuiLei",
-          "seq": 5,
-          "version": 0
-        },
-        {
-          "id": "157",
-          "dictId": "17",
-          "dataName": "法术",
-          "dataCode": "faShu",
-          "seq": 6,
-          "version": 0
-        },
-        {
-          "id": "158",
-          "dictId": "17",
-          "dataName": "法器",
-          "dataCode": "faQi",
-          "seq": 7,
-          "version": 0
-        },
-        {
-          "id": "159",
-          "dictId": "17",
-          "dataName": "其他灵物",
-          "dataCode": "qiTaLingWu",
-          "seq": 8,
-          "version": 0
-        },
-        {
-          "id": "160",
-          "dictId": "17",
-          "dataName": "灵丹",
-          "dataCode": "lingDan",
-          "seq": 9,
-          "version": 0
-        },
-        {
-          "id": "161",
-          "dictId": "17",
-          "dataName": "阵法",
-          "dataCode": "zhenFa",
-          "seq": 10,
-          "version": 0
-        },
-        {
-          "id": "162",
-          "dictId": "17",
-          "dataName": "人物",
-          "dataCode": "renWu",
-          "seq": 11,
-          "version": 0
-        }
-      ]
-    }
-  ],
+  "stateTime": "2020-07-18 06:54:04",
+  "seq": 29,
+  "dictList": [],
   "configList": [],
   "funcComponentList": [
     {
-      "id": "50975e7401234139eaf24745d89dd9ea",
-      "funcId": "23",
-      "name": "操作记录",
-      "code": "opt"
-    },
-    {
-      "id": "58",
-      "funcId": "23",
+      "id": "71",
+      "funcId": "29",
       "name": "新增",
       "code": "add",
       "displayType": "primary"
     },
     {
-      "id": "59",
-      "funcId": "23",
+      "id": "72",
+      "funcId": "29",
       "name": "编辑",
       "code": "update"
     },
     {
-      "id": "60",
-      "funcId": "23",
+      "id": "73",
+      "funcId": "29",
       "name": "删除",
       "code": "delete"
+    },
+    {
+      "id": "bbb015879bb042359818138a6a205862",
+      "funcId": "29",
+      "name": "创新",
+      "code": "chuangXin"
     }
   ],
   "metaModelList": [
     {
-      "id": "23",
-      "modelName": "灵物",
-      "modelCode": "lingWu",
-      "funcModelCode": "lingWu",
+      "id": "29",
+      "modelName": "从操作记录",
+      "modelCode": "congHis",
+      "funcModelCode": "congHis",
       "searchFlag": "Y",
       "multChooseFlag": "Y",
       "masterFlag": "Y",
@@ -146,8 +47,8 @@ const lingWu = {
       "position": "1",
       "columnList": [
         {
-          "id": "190",
-          "modelId": "23",
+          "id": "277",
+          "modelId": "29",
           "columnName": "id",
           "columnCode": "id",
           "valueType": "S",
@@ -169,10 +70,10 @@ const lingWu = {
           "state": "A"
         },
         {
-          "id": "191",
-          "modelId": "23",
-          "columnName": "灵物代码",
-          "columnCode": "lingWuCode",
+          "id": "278",
+          "modelId": "29",
+          "columnName": "从代码",
+          "columnCode": "congCode",
           "valueType": "S",
           "modifyFlag": "N",
           "displayType": "I",
@@ -192,10 +93,10 @@ const lingWu = {
           "state": "A"
         },
         {
-          "id": "192",
-          "modelId": "23",
-          "columnName": "灵物名称",
-          "columnCode": "lingWuName",
+          "id": "279",
+          "modelId": "29",
+          "columnName": "从名称",
+          "columnCode": "congName",
           "valueType": "S",
           "modifyFlag": "N",
           "displayType": "I",
@@ -215,14 +116,14 @@ const lingWu = {
           "state": "A"
         },
         {
-          "id": "193",
-          "modelId": "23",
-          "columnName": "灵物分类",
-          "columnCode": "lingWuFenLei",
+          "id": "280",
+          "modelId": "29",
+          "columnName": "从分类",
+          "columnCode": "congFenLei",
           "valueType": "S",
           "modifyFlag": "N",
           "displayType": "S",
-          "valueList": "service|/xiuXing/common/xiu-xing/fenLei?type=fenLei&fenLei=lingWuFenLei",
+          "valueList": "service|/xiuXing/common/xiu-xing/fenLei?type=fenLei&fenLei=congShuFenLei",
           "seq": 7,
           "requiredFlag": "Y",
           "searchFlag": "Y",
@@ -239,10 +140,10 @@ const lingWu = {
           "state": "A"
         },
         {
-          "id": "29ac9079dbf061a7d7f1e2e9ad08254a",
-          "modelId": "23",
-          "columnName": "灵物分类",
-          "columnCode": "lingWuFenLeiName",
+          "id": "d0f3e5f3980fb0285d0eef67074aa7b7",
+          "modelId": "29",
+          "columnName": "从分类",
+          "columnCode": "congFenLeiName",
           "valueType": "S",
           "modifyFlag": "N",
           "displayType": "I",
@@ -262,37 +163,14 @@ const lingWu = {
           "state": "A"
         },
         {
-          "id": "0a0daf7905d2b0b61d427a6ea684229c",
-          "modelId": "23",
-          "columnName": "修行岁月",
-          "columnCode": "xiuXingSuiYue",
-          "valueType": "S",
-          "modifyFlag": "N",
-          "displayType": "I",
-          "seq": 9,
-          "requiredFlag": "N",
-          "searchFlag": "Y",
-          "profileDisplayFlag": "Y",
-          "addTable": "Y",
-          "editDisplayFlag": "N",
-          "editable": "Y",
-          "listDisplayFlag": "Y",
-          "exportDisplayFlag": "N",
-          "sortable": "N",
-          "primaryFlag": "N",
-          "feignFlag": "N",
-          "titleFlag": "N",
-          "state": "A"
-        },
-        {
-          "id": "195",
-          "modelId": "23",
-          "columnName": "灵物描述",
-          "columnCode": "lingWuMiaoShu",
+          "id": "282",
+          "modelId": "29",
+          "columnName": "从描述",
+          "columnCode": "congMiaoShu",
           "valueType": "S",
           "modifyFlag": "N",
           "displayType": "T",
-          "seq": 11,
+          "seq": 9,
           "requiredFlag": "N",
           "searchFlag": "N",
           "profileDisplayFlag": "Y",
@@ -310,9 +188,32 @@ const lingWu = {
           "extStr01": "Y"
         },
         {
-          "id": "196",
-          "modelId": "23",
-          "columnName": "小说",
+          "id": "232543c278d640b6a2f694397437aa3e",
+          "modelId": "29",
+          "columnName": "更新时间",
+          "columnCode": "updateTime",
+          "valueType": "S",
+          "modifyFlag": "N",
+          "displayType": "DTP",
+          "seq": 11,
+          "requiredFlag": "N",
+          "searchFlag": "N",
+          "profileDisplayFlag": "Y",
+          "addTable": "Y",
+          "editDisplayFlag": "N",
+          "editable": "Y",
+          "listDisplayFlag": "N",
+          "exportDisplayFlag": "N",
+          "sortable": "N",
+          "primaryFlag": "N",
+          "feignFlag": "N",
+          "titleFlag": "N",
+          "state": "A"
+        },
+        {
+          "id": "283",
+          "modelId": "29",
+          "columnName": "从小说",
           "columnCode": "xiaoShuoId",
           "valueType": "S",
           "modifyFlag": "N",
@@ -334,14 +235,14 @@ const lingWu = {
           "state": "A"
         },
         {
-          "id": "197",
-          "modelId": "23",
-          "columnName": "小说",
+          "id": "284",
+          "modelId": "29",
+          "columnName": "从小说",
           "columnCode": "xiaoShuoName",
           "valueType": "S",
           "modifyFlag": "N",
           "displayType": "I",
-          "seq": 15,
+          "seq": 13,
           "requiredFlag": "N",
           "searchFlag": "N",
           "profileDisplayFlag": "Y",
@@ -356,86 +257,99 @@ const lingWu = {
           "columnWidth": "110px",
           "titleFlag": "N",
           "state": "A"
+        },
+        {
+          "id": "fca01a9a8dfb4b04bbd942f5ce0d338d",
+          "modelId": "29",
+          "columnName": "从章节",
+          "columnCode": "zhangJieId",
+          "valueType": "S",
+          "modifyFlag": "N",
+          "displayType": "CF",
+          "valueList": "service|/xiuXing/common/xiu-xing/zhangJie",
+          "seq": 15,
+          "requiredFlag": "N",
+          "searchFlag": "N",
+          "profileDisplayFlag": "N",
+          "addTable": "Y",
+          "editDisplayFlag": "N",
+          "editable": "Y",
+          "listDisplayFlag": "N",
+          "exportDisplayFlag": "N",
+          "sortable": "N",
+          "primaryFlag": "N",
+          "feignFlag": "N",
+          "titleFlag": "N",
+          "state": "A"
         }
       ],
       "actionList": [
         {
-          "id": "100",
-          "modelId": "23",
+          "id": "127",
+          "modelId": "29",
           "type": "N",
           "code": "query",
-          "servId": "23",
+          "servId": "29",
           "servAction": "query",
           "defaultFlag": "Y",
           "propFlag": "N",
           "seq": 1
         },
         {
-          "id": "101",
-          "modelId": "23",
+          "id": "128",
+          "modelId": "29",
           "type": "N",
           "code": "get",
-          "servId": "23",
+          "servId": "29",
           "servAction": "get",
           "defaultFlag": "Y",
           "propFlag": "N",
           "seq": 2
         },
         {
-          "id": "102",
-          "modelId": "23",
-          "type": "T",
-          "code": "add",
-          "name": "新增",
-          "servId": "23",
-          "servAction": "add",
-          "defaultFlag": "Y",
-          "propFlag": "N",
-          "seq": 3,
-          "displayType": "primary"
-        },
-        {
-          "id": "a8332b271c8fec908bf977fa92daf212",
-          "modelId": "23",
+          "id": "c9da280778fe40a3a95ab54a23d8dd99",
+          "modelId": "29",
           "type": "L",
-          "code": "opt",
-          "name": "操作记录",
-          "servId": "23",
-          "servAction": "opt",
+          "code": "chuangXin",
+          "name": "创新",
+          "servId": "29",
+          "servAction": "chuangXin",
           "defaultFlag": "N",
-          "propFlag": "N",
-          "seq": 5
+          "propFlag": "Y",
+          "propMsg": "创新：创建新的从信息，并移除该信息。",
+          "seq": 4
         },
         {
-          "id": "103",
-          "modelId": "23",
+          "id": "130",
+          "modelId": "29",
           "type": "L",
           "code": "update",
           "name": "编辑",
-          "servId": "23",
+          "servId": "29",
           "servAction": "update",
           "defaultFlag": "Y",
-          "propFlag": "N",
-          "seq": 7
+          "propFlag": "Y",
+          "propMsg": "编辑属性值：\r\n1、从无值到有值；\r\n2、从有值到有值。",
+          "seq": 5
         },
         {
-          "id": "104",
-          "modelId": "23",
+          "id": "131",
+          "modelId": "29",
           "type": "L",
           "code": "delete",
           "name": "删除",
-          "servId": "23",
+          "servId": "29",
           "servAction": "delete",
           "defaultFlag": "Y",
-          "disableRule": "(data,column) => data.lingWuHisCount > 0",
+          "disableRule": "(data,column) => data.congHisCount>0",
           "propFlag": "Y",
-          "seq": 9
+          "seq": 6
         }
       ]
     }
   ]
 };
 
-export function lingWuMetaModel() {
-  return lingWu;
+export function congHisMetaModel() {
+  return congHis;
 }

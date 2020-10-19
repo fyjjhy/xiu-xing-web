@@ -1,7 +1,7 @@
 import {createModel} from "../utils/metaModel";
 
 const Model = {
-  namespace: 'suoShuHis',
+  namespace: 'cangKuCongHis',
 };
 const metaModel = createModel(Model.namespace);
 Model.state = { ...metaModel.state, ...Model.state};

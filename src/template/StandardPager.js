@@ -161,9 +161,9 @@ export default class StandardPager extends PureComponent {
       return;
     }
     const queryAction = this.queryActions[0];
-    const { dispatch, location: { search }, rowInfo } = this.props;
+    const { dispatch, location: { search }, rowInfo, extraInfo={} } = this.props;
     const { listMetaModel } = this;
-    let finalParam = { ...params };
+    let finalParam = { ...params, ...extraInfo };
     // left right template need, right
     if (this.relateParamCodes.length > 0) {
       finalParam = this.addDefaultParam(finalParam, rowInfo);
@@ -276,7 +276,7 @@ export default class StandardPager extends PureComponent {
         expandOnCancel();
       }
     });
-  }
+  };
 
   // 点击事件
   handleProfileClick = async params => {
@@ -373,7 +373,7 @@ export default class StandardPager extends PureComponent {
       });
       this.handleResetDisplay();
     }
-  }
+  };
 
   // 导出
   handleExportClick = async params => {

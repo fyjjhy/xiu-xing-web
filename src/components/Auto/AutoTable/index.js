@@ -275,7 +275,7 @@ export default class AutoTable extends PureComponent {
       const { search } = location;
       if (search) {
         // url上带的请求参数，设置到form中， 15596
-        const urlParam = getUrlParameters(search);
+        const urlParam = getUrlParameters(decodeURI(search));
         if (urlParam && Object.keys(urlParam).length > 0) {
           if (this.searchColumns && this.searchColumns.length > 0) {
             // 如果url参数的code在搜索列表中，则把值设置到form中
@@ -361,6 +361,9 @@ export default class AutoTable extends PureComponent {
       this.props.resetNeedLoad();
       // 刷新需要加上搜索栏的搜索条件，包括默认的搜索条件
       const param = this.handleGetAndHandleSearchColumn();
+      // 添加排序字段
+      const { sorter } = this.state;
+      this.handleSorterColumn(sorter, param);
       this.setState({ selectedRows: [] });
       const { subsComponent, closeSubsComponent, tableSearchFlag: searchFlag } = this.props;
       const { currentRowInfo } = this.state;

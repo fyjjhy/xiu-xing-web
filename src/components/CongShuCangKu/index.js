@@ -1,14 +1,14 @@
 /* eslint-disable no-restricted-syntax,guard-for-in */
 import React, {PureComponent} from 'react';
 import { Modal, Card, List, Tag, Tooltip, Typography, Avatar, Divider, Row, Col, Badge, Switch, Form, Select, Input, Button, Skeleton } from 'antd';
-import CangKuLingWuProfile from "../CangKuLingWuProfile";
-import CangKuLingWuRecord from "../CangKuLingWuRecord";
+import CangKuCongProfile from "../CangKuCongProfile";
+import CangKuCongRecord from "../CangKuCongRecord";
 import {renderMiaoShu} from "../../utils/utils";
 
 const { Paragraph } = Typography;
 const { Option } = Select;
 
-export default class LingWuCangKu extends PureComponent {
+export default class CongShuCangKu extends PureComponent {
   formRef = React.createRef();
 
   state = {
@@ -19,7 +19,7 @@ export default class LingWuCangKu extends PureComponent {
     kuCun: '',
   };
 
-  handleLingWuProfileOnClick = item => {
+  handleCongProfileOnClick = item => {
     this.setState({
       currentModel: 'ckLw',
       currentInfo: item,
@@ -27,7 +27,7 @@ export default class LingWuCangKu extends PureComponent {
     });
   }
 
-  handleLingWuRecordOnClick = item => {
+  handleCongRecordOnClick = item => {
     this.setState({
       currentModel: 'ckLwRecord',
       ckLwRecordVisible: true,
@@ -38,7 +38,11 @@ export default class LingWuCangKu extends PureComponent {
     }
   };
 
-  handleCangKuLingWuProfileOnCancel = () => {
+  handleCongLinkOnClick = (item) => {
+    window.open(`/shuList?shuName=${item.congName}`);
+  };
+
+  handleCangKuCongProfileOnCancel = () => {
     this.setState({
       currentModel: '',
       currentInfo: {},
@@ -46,7 +50,7 @@ export default class LingWuCangKu extends PureComponent {
     });
   }
 
-  handleCangKuLingWuRecordOnCancel = () => {
+  handleCangKuCongRecordOnCancel = () => {
     this.setState({
       currentModel: '',
       currentInfo: {},
@@ -61,7 +65,7 @@ export default class LingWuCangKu extends PureComponent {
     }
   }
 
-  handleLingWuQingLing = kuCun => {
+  handleCongQingLing = kuCun => {
     this.setState({
       kuCun,
     });
@@ -75,10 +79,10 @@ export default class LingWuCangKu extends PureComponent {
       // 对值进行排序
       Object.keys(hisMap).sort().forEach(key => {
         const his = {};
-        his.lingWuFenLeiName = key;
-        his.lingWu = hisMap[key].filter(data => {
+        his.congFenLeiName = key;
+        his.cong = hisMap[key].filter(data => {
           if (kuCun === 'qingLing') {
-            return data.lingWuShuLiang !== '0';
+            return data.congShuLiang !== '0';
           }
           return true;
         });
@@ -111,28 +115,112 @@ export default class LingWuCangKu extends PureComponent {
     }
   };
 
-  renderCangKuLingWuProfile() {
+  handleTab = (item) => {
+    const tabList = [];
+    const tabs = [];
+    const options = [];
+    if (item.congStateName) {
+      tabList.push({
+        len: item.congStateName.length,
+        key: item.congStateName,
+        value: item.congStateName,
+        label: <Tag color="#91d5ff">{item.congStateName}</Tag>,
+      });
+    }
+
+    if (item.congShuXing) {
+      item.congShuXing.split(' ').forEach(shuXing => {
+        tabList.push({
+          len: shuXing.length,
+          key: shuXing,
+          value: shuXing,
+          label: <Tag color="#87d068">{shuXing}</Tag>,
+        });
+      });
+    }
+
+    if (item.congShuLiang && item.danWei) {
+      tabList.push({
+        len: `${item.congShuLiang}${item.danWei}`.length,
+        key: `${item.congShuLiang}${item.danWei}`,
+        value: `${item.congShuLiang}${item.danWei}`,
+        label: <Tag color={item.congShuLiang === '0' ? 'red' : '#87d068'}>{`${item.congShuLiang} ${item.danWei}`}</Tag>,
+      });
+    }
+
+    if (item.congJingJieName && item.congJingJieName !== '无') {
+      tabList.push({
+        len: item.congJingJieName.length,
+        key: item.congJingJieName,
+        value: item.congJingJieName,
+        label: <Tag color="#87d068">{item.congJingJieName}</Tag>,
+      });
+    }
+
+    if (item.congPinJiName && item.congPinJiName !== '无') {
+      tabList.push({
+        len: item.congPinJiName.length,
+        key: item.congPinJiName,
+        value: item.congPinJiName,
+        label: <Tag color="#87d068">{item.congPinJiName}</Tag>,
+      });
+    }
+    if (tabList && tabList.length > 0) {
+      tabList.sort((tab1, tab2) => tab1.len - tab2.len);
+      let length = 0;
+      if (tabList.length === 1) {
+        tabs.push(tabList[0].label);
+      } else {
+        tabList.forEach(tabInfo => {
+          const { len, label, key, value } = tabInfo;
+          if (length + len > 12) {
+            options.push(<Option disabled key={key} value={value}>{label}</Option>);
+          } else {
+            tabs.push(label);
+          }
+          length += len;
+        });
+      }
+    }
+    return(
+      <span>
+        {tabs.map(tab => tab)}
+        {options.length > 0 ? (
+          <Select
+            style={{ width: 24 }}
+            // defaultOpen
+            defaultActiveFirstOption
+            dropdownMatchSelectWidth={150}
+            bordered={false}>
+            {options.map(option => option)}
+          </Select>
+        ) : ''}
+      </span>
+    );
+  };
+
+  renderCangKuCongProfile() {
     const {currentModel, ckLwVisible, currentInfo } = this.state;
     if (currentModel === 'ckLw') {
       return (
-        <CangKuLingWuProfile
+        <CangKuCongProfile
           visible={ckLwVisible}
           profile={currentInfo}
-          ckLwOnCancel={this.handleCangKuLingWuProfileOnCancel}
+          ckLwOnCancel={this.handleCangKuCongProfileOnCancel}
         />
       );
     }
     return '';
   }
 
-  renderCangKuLingWuRecord() {
+  renderCangKuCongRecord() {
     const {currentModel, ckLwRecordVisible } = this.state;
     if (currentModel === 'ckLwRecord') {
       return (
-        <CangKuLingWuRecord
+        <CangKuCongRecord
           {...this.props}
           visible={ckLwRecordVisible}
-          ckLwRecordOnCancel={this.handleCangKuLingWuRecordOnCancel}
+          ckLwRecordOnCancel={this.handleCangKuCongRecordOnCancel}
         />
       );
     }
@@ -144,28 +232,28 @@ export default class LingWuCangKu extends PureComponent {
     return text && text.length > 10 ? <Tooltip title={title}><Paragraph style={{ width: '250px', marginTop: '0px', marginBottom: '0px' }} ellipsis={{ row: 1 }}>{text}</Paragraph></Tooltip> : text
   };
 
-  renderLingWu = item => {
-    const lingWuList = [];
-    let lingWu = [];
-    item.lingWu.forEach((data, index) => {
+  renderCong = item => {
+    const congList = [];
+    let cong = [];
+    item.cong.forEach((data, index) => {
       if (index % 3 === 0) {
-        lingWu = [];
-        lingWuList.push(lingWu);
+        cong = [];
+        congList.push(cong);
       }
-      lingWu.push(data);
+      cong.push(data);
     });
     return(
       <div>
         <Divider style={{ border: '2px solid blue' }} type="vertical" />
         <Badge
-          count={item.lingWu ? item.lingWu.length : 0}
+          count={item.cong ? item.cong.length : 0}
           offset={[16, 8]}
           size="small"
           // style={{ backgroundColor: '#52c41a' }}
         >
-          <strong>{item.lingWuFenLeiName}</strong>
+          <strong>{item.congFenLeiName}</strong>
         </Badge><br/>
-        {lingWuList.map((rows, index) => {
+        {congList.map((rows, index) => {
           const key1 = index + 1;
           return (
             <Row
@@ -178,7 +266,7 @@ export default class LingWuCangKu extends PureComponent {
                 const key2 = `${key1}${key}`;
                 return(
                   <Col key={key2} span={8}>
-                    {this.renderLingWuItem(data)}
+                    {this.renderCongItem(data)}
                   </Col>
                 )}
               )}
@@ -189,13 +277,10 @@ export default class LingWuCangKu extends PureComponent {
     );
   };
 
-  renderLingWuItem(item) {
+  renderCongItem(item) {
     return <List.Item style={{marginBottom: 0}}>
       <Card
-        actions={[
-          <div onClick={() => this.handleLingWuProfileOnClick(item)}>详情</div>,
-          <div onClick={() => this.handleLingWuRecordOnClick(item)}>记录</div>
-        ]}
+        actions={this.renderActions(item)}
         hoverable
         style={{ width: '100%' }}
         bodyStyle={{height: 100}}
@@ -203,17 +288,29 @@ export default class LingWuCangKu extends PureComponent {
         <Card.Meta
           avatar={<Avatar src=""/>}
           title={<div>
-            <span>{item.lingWuName}</span><br/>
-            {/* {item.lingWuFenLeiName ? (<Tag color="#87d068">{item.lingWuFenLeiName}</Tag>) : ''} */}
-            {item.lingWuStateName ? (<Tag color="#91d5ff">{item.lingWuStateName}</Tag>) : ''}
-            {item.lingWuShuXing ? item.lingWuShuXing.split(' ').map(shuXing => <Tag color="#87d068">{shuXing}</Tag>) : ''}
-            {item.lingWuShuLiang && item.danWei ? (<Tag
-              color={item.lingWuShuLiang === '0' ? 'red' : '#87d068'}>{`${item.lingWuShuLiang} ${item.danWei}`}</Tag>) : ''}
-            {item.jingJieName && item.jingJieName !== '无' ? (<Tag color="#87d068">{item.jingJieName}</Tag>) : ''}
-            {item.pinJiName && item.pinJiName !== '无' ? (<Tag color="#87d068">{item.pinJiName}</Tag>) : ''}
-          </div>} description={this.renderDescription(item.lingWuMiaoShu)}/>
+            <span>{item.congName}</span><br/>
+            {this.handleTab(item)}
+            {/* {item.congFenLeiName ? (<Tag color="#87d068">{item.congFenLeiName}</Tag>) : ''} */}
+            {/*{item.congStateName ? (<Tag color="#91d5ff">{item.congStateName}</Tag>) : ''}*/}
+            {/*{item.congShuXing ? item.congShuXing.split(' ').map(shuXing => <Tag color="#87d068">{shuXing}</Tag>) : ''}*/}
+            {/*{item.congShuLiang && item.danWei ? (<Tag*/}
+              {/*color={item.congShuLiang === '0' ? 'red' : '#87d068'}>{`${item.congShuLiang} ${item.danWei}`}</Tag>) : ''}*/}
+            {/*{item.congJingJieName && item.congJingJieName !== '无' ? (<Tag color="#87d068">{item.congJingJieName}</Tag>) : ''}*/}
+            {/*{item.congPinJiName && item.congPinJiName !== '无' ? (<Tag color="#87d068">{item.congPinJiName}</Tag>) : ''}*/}
+          </div>} description={this.renderDescription(item.congMiaoShu)}/>
       </Card>
     </List.Item>;
+  }
+
+  renderActions(item) {
+    const actions = [
+      <div onClick={() => this.handleCongProfileOnClick(item)}>详情</div>,
+      <div onClick={() => this.handleCongRecordOnClick(item)}>记录</div>,
+    ];
+    if (item.type === '从属') {
+      actions.push(<div onClick={() => this.handleCongLinkOnClick(item)}>链接</div>);
+    }
+    return actions;
   }
 
   renderCongFenLeiSelectOption() {
@@ -271,11 +368,11 @@ export default class LingWuCangKu extends PureComponent {
         maskClosable={false}
         title={
           <div>
-            <span>灵物仓库</span>
+            <span>从仓库</span>
             <Switch
               checkedChildren="清零"
               unCheckedChildren="所有"
-              onClick={() => this.handleLingWuQingLing(kuCun === 'qingLing' ? 'suoYou' : 'qingLing')}
+              onClick={() => this.handleCongQingLing(kuCun === 'qingLing' ? 'suoYou' : 'qingLing')}
             />
           </div>
         }
@@ -287,10 +384,10 @@ export default class LingWuCangKu extends PureComponent {
       >
         <Skeleton loading={loading || congShuLoading}>
           {hisMap && Object.keys(hisMap).length > 0 ? this.renderForm() : ''}
-          <List>{this.handleDataSource().map(item => (this.renderLingWu(item)))}</List>
+          <List>{this.handleDataSource().map(item => (this.renderCong(item)))}</List>
         </Skeleton>
-        {this.renderCangKuLingWuProfile()}
-        {this.renderCangKuLingWuRecord()}
+        {this.renderCangKuCongProfile()}
+        {this.renderCangKuCongRecord()}
       </Modal>
     );
   }

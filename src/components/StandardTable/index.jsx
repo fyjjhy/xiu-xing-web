@@ -55,7 +55,7 @@ class StandardTable extends PureComponent {
     }
 
     this.setState({ selectedRowKeys, needTotalList });
-  }
+  };
 
   handleTableChange = (pagination, filters, sorter) => {
     this.props.onChange(pagination, filters, sorter);

@@ -1,13 +1,10 @@
 const henJi = {
   "id": "32",
-  "icon": null,
   "funcCode": "henJi",
   "funcName": "痕迹",
   "state": "A",
-  "comments": null,
   "stateTime": "2020-09-06 10:29:35",
   "seq": 32,
-  "indexUrl": null,
   "dictList": [],
   "configList": [],
   "funcComponentList": [
@@ -16,47 +13,32 @@ const henJi = {
       "funcId": "32",
       "name": "新增",
       "code": "add",
-      "icon": null,
-      "displayType": "primary",
-      "comments": null
+      "displayType": "primary"
     },
     {
       "id": "83",
       "funcId": "32",
       "name": "编辑",
-      "code": "update",
-      "icon": null,
-      "displayType": null,
-      "comments": null
+      "code": "update"
     },
     {
       "id": "84",
       "funcId": "32",
       "name": "删除",
-      "code": "delete",
-      "icon": null,
-      "displayType": null,
-      "comments": null
+      "code": "delete"
     }
   ],
   "metaModelList": [
     {
       "id": "32",
-      "parentModelId": null,
-      "relationship": null,
       "modelName": "痕迹",
       "modelCode": "henJi",
       "funcModelCode": "henJi",
       "searchFlag": "Y",
       "multChooseFlag": "Y",
-      "title": null,
       "masterFlag": "Y",
       "treeTableFlag": "N",
-      "childColumnCode": null,
-      "parentColumnCode": null,
       "position": "1",
-      "state": null,
-      "stateTime": null,
       "columnList": [
         {
           "id": "1dca40883415b525c40c202c80df78f7",
@@ -64,13 +46,8 @@ const henJi = {
           "columnName": "id",
           "columnCode": "id",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "I",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 1,
           "requiredFlag": "Y",
           "searchFlag": "N",
@@ -81,27 +58,19 @@ const henJi = {
           "listDisplayFlag": "N",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "Y",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "7133469e26b65ffedf461b91c08c25f2",
           "modelId": "32",
-          "columnName": "痕迹编码",
+          "columnName": "编码",
           "columnCode": "henJiCode",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "I",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 3,
           "requiredFlag": "Y",
           "searchFlag": "N",
@@ -112,27 +81,19 @@ const henJi = {
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "dd923ba735f08fe3323006922bb4e3b4",
           "modelId": "32",
-          "columnName": "时间",
-          "columnCode": "shiJian",
+          "columnName": "修行时间",
+          "columnCode": "xiuXingShiJian",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "I",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 5,
           "requiredFlag": "N",
           "searchFlag": "Y",
@@ -143,13 +104,10 @@ const henJi = {
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "7783d96861eb498a97f14e72728fab05",
@@ -157,13 +115,8 @@ const henJi = {
           "columnName": "备注",
           "columnCode": "beiZhu",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "T",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 7,
           "requiredFlag": "N",
           "searchFlag": "Y",
@@ -175,12 +128,11 @@ const henJi = {
           "exportDisplayFlag": "N",
           "sortable": "N",
           "renderList": "renderMiaoShu",
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
           "columnWidth": "300px",
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "8069f31288c75521610e8de9ece4f258",
@@ -188,12 +140,8 @@ const henJi = {
           "columnName": "小说",
           "columnCode": "xiaoShuoId",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "S",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
           "valueList": "service|/xiuXing/common/xiu-xing/xiaoShuo",
           "seq": 9,
           "requiredFlag": "Y",
@@ -205,13 +153,10 @@ const henJi = {
           "listDisplayFlag": "N",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         },
         {
           "id": "c374300fac78d99e7b8e1fd92ef9f9e5",
@@ -219,13 +164,8 @@ const henJi = {
           "columnName": "小说",
           "columnCode": "xiaoShuoName",
           "valueType": "S",
-          "defaultValue": null,
           "modifyFlag": "N",
           "displayType": "I",
-          "comments": null,
-          "errorText": null,
-          "validateRule": null,
-          "valueList": null,
           "seq": 9,
           "requiredFlag": "Y",
           "searchFlag": "N",
@@ -236,13 +176,10 @@ const henJi = {
           "listDisplayFlag": "Y",
           "exportDisplayFlag": "N",
           "sortable": "N",
-          "renderList": null,
-          "renderProfile": null,
-          "renderEdit": null,
           "primaryFlag": "N",
           "feignFlag": "N",
-          "columnWidth": null,
-          "titleFlag": "N"
+          "titleFlag": "N",
+          "state": "A"
         }
       ],
       "actionList": [
@@ -251,38 +188,22 @@ const henJi = {
           "modelId": "32",
           "type": "N",
           "code": "query",
-          "name": null,
           "servId": "32",
           "servAction": "query",
           "defaultFlag": "Y",
-          "disableRule": null,
           "propFlag": "N",
-          "propMsg": null,
-          "delErrorMsg": null,
-          "servCode": null,
-          "category": null,
-          "seq": 1,
-          "displayType": null,
-          "icon": null
+          "seq": 1
         },
         {
           "id": "145",
           "modelId": "32",
           "type": "N",
           "code": "get",
-          "name": null,
           "servId": "32",
           "servAction": "get",
           "defaultFlag": "Y",
-          "disableRule": null,
           "propFlag": "N",
-          "propMsg": null,
-          "delErrorMsg": null,
-          "servCode": null,
-          "category": null,
-          "seq": 2,
-          "displayType": null,
-          "icon": null
+          "seq": 2
         },
         {
           "id": "146",
@@ -293,15 +214,9 @@ const henJi = {
           "servId": "32",
           "servAction": "add",
           "defaultFlag": "Y",
-          "disableRule": null,
           "propFlag": "N",
-          "propMsg": null,
-          "delErrorMsg": null,
-          "servCode": null,
-          "category": null,
           "seq": 3,
-          "displayType": "primary",
-          "icon": null
+          "displayType": "primary"
         },
         {
           "id": "147",
@@ -312,15 +227,8 @@ const henJi = {
           "servId": "32",
           "servAction": "update",
           "defaultFlag": "Y",
-          "disableRule": null,
           "propFlag": "N",
-          "propMsg": null,
-          "delErrorMsg": null,
-          "servCode": null,
-          "category": null,
-          "seq": 5,
-          "displayType": null,
-          "icon": null
+          "seq": 5
         },
         {
           "id": "148",
@@ -331,15 +239,8 @@ const henJi = {
           "servId": "32",
           "servAction": "delete",
           "defaultFlag": "Y",
-          "disableRule": null,
           "propFlag": "Y",
-          "propMsg": null,
-          "delErrorMsg": null,
-          "servCode": null,
-          "category": null,
-          "seq": 6,
-          "displayType": null,
-          "icon": null
+          "seq": 6
         }
       ]
     }
