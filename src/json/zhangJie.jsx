@@ -337,6 +337,7 @@ const zhangJie = {
           "servId": "37",
           "servAction": "delete",
           "defaultFlag": "Y",
+          "disableRule": "(data, column) => data.zhangJieCongShuInfoCount > 1",
           "propFlag": "Y",
           "seq": 6
         }

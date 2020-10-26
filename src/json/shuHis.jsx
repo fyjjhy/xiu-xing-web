@@ -107,7 +107,8 @@ const shuHis = {
           "primaryFlag": "N",
           "feignFlag": "N",
           "titleFlag": "N",
-          "state": "A"
+          "state": "A",
+          "extStr02": "12"
         },
         {
           "id": "c7de648aa05641aeb4813f9be9ca782c",
@@ -141,7 +142,7 @@ const shuHis = {
           "modifyFlag": "N",
           "displayType": "S",
           "valueList": "service|xiuXing/common/xiu-xing/fenLei?type=state&fenLei=congShuState",
-          "seq": 7,
+          "seq": 9,
           "requiredFlag": "N",
           "searchFlag": "Y",
           "profileDisplayFlag": "N",
@@ -154,7 +155,8 @@ const shuHis = {
           "primaryFlag": "N",
           "feignFlag": "N",
           "titleFlag": "N",
-          "state": "A"
+          "state": "A",
+          "extStr02": "12"
         },
         {
           "id": "289",
@@ -165,7 +167,7 @@ const shuHis = {
           "modifyFlag": "N",
           "displayType": "S",
           "valueList": "service|xiuXing/common/xiu-xing/fenLei?type=fenLei&fenLei=congShuFenLei",
-          "seq": 9,
+          "seq": 11,
           "requiredFlag": "N",
           "searchFlag": "Y",
           "profileDisplayFlag": "N",
@@ -178,7 +180,8 @@ const shuHis = {
           "primaryFlag": "N",
           "feignFlag": "N",
           "titleFlag": "N",
-          "state": "A"
+          "state": "A",
+          "extStr02": "12"
         },
         {
           "id": "290",
@@ -188,7 +191,7 @@ const shuHis = {
           "valueType": "S",
           "modifyFlag": "N",
           "displayType": "I",
-          "seq": 9,
+          "seq": 13,
           "requiredFlag": "N",
           "searchFlag": "N",
           "profileDisplayFlag": "Y",
@@ -211,7 +214,7 @@ const shuHis = {
           "valueType": "S",
           "modifyFlag": "N",
           "displayType": "I",
-          "seq": 11,
+          "seq": 15,
           "requiredFlag": "N",
           "searchFlag": "N",
           "profileDisplayFlag": "Y",
@@ -235,7 +238,7 @@ const shuHis = {
           "modifyFlag": "N",
           "displayType": "S",
           "valueList": "service|xiuXing/common/xiu-xing/jingJie",
-          "seq": 11,
+          "seq": 17,
           "requiredFlag": "N",
           "searchFlag": "Y",
           "profileDisplayFlag": "N",
@@ -248,7 +251,8 @@ const shuHis = {
           "primaryFlag": "N",
           "feignFlag": "N",
           "titleFlag": "N",
-          "state": "A"
+          "state": "A",
+          "extStr02": "12"
         },
         {
           "id": "329bd02cf9f6c69f211e5693828dfced",
@@ -258,7 +262,7 @@ const shuHis = {
           "valueType": "S",
           "modifyFlag": "N",
           "displayType": "I",
-          "seq": 13,
+          "seq": 19,
           "requiredFlag": "N",
           "searchFlag": "N",
           "profileDisplayFlag": "Y",
@@ -282,7 +286,7 @@ const shuHis = {
           "modifyFlag": "N",
           "displayType": "S",
           "valueList": "service|xiuXing/common/xiu-xing/pinJi",
-          "seq": 13,
+          "seq": 21,
           "requiredFlag": "N",
           "searchFlag": "Y",
           "profileDisplayFlag": "N",
@@ -295,32 +299,8 @@ const shuHis = {
           "primaryFlag": "N",
           "feignFlag": "N",
           "titleFlag": "N",
-          "state": "A"
-        },
-        {
-          "id": "291",
-          "modelId": "30",
-          "columnName": "属描述",
-          "columnCode": "shuMiaoShu",
-          "valueType": "S",
-          "modifyFlag": "N",
-          "displayType": "T",
-          "seq": 15,
-          "requiredFlag": "N",
-          "searchFlag": "N",
-          "profileDisplayFlag": "Y",
-          "addTable": "Y",
-          "editDisplayFlag": "N",
-          "editable": "Y",
-          "listDisplayFlag": "Y",
-          "exportDisplayFlag": "N",
-          "sortable": "N",
-          "renderList": "renderMiaoShu",
-          "primaryFlag": "N",
-          "feignFlag": "N",
-          "titleFlag": "N",
           "state": "A",
-          "extStr01": "Y"
+          "extStr02": "12"
         },
         {
           "id": "292",
@@ -331,7 +311,7 @@ const shuHis = {
           "modifyFlag": "N",
           "displayType": "CF",
           "valueList": "service|/xiuXing/common/xiu-xing/address",
-          "seq": 17,
+          "seq": 23,
           "requiredFlag": "N",
           "searchFlag": "Y",
           "profileDisplayFlag": "N",
@@ -344,7 +324,8 @@ const shuHis = {
           "primaryFlag": "N",
           "feignFlag": "N",
           "titleFlag": "N",
-          "state": "A"
+          "state": "A",
+          "extStr02": "12"
         },
         {
           "id": "293",
@@ -354,7 +335,7 @@ const shuHis = {
           "valueType": "S",
           "modifyFlag": "N",
           "displayType": "I",
-          "seq": 17,
+          "seq": 25,
           "requiredFlag": "N",
           "searchFlag": "N",
           "profileDisplayFlag": "Y",
@@ -372,6 +353,30 @@ const shuHis = {
           "extStr01": "Y"
         },
         {
+          "id": "c688cfd9b5a348a48a6201be615c2763",
+          "modelId": "30",
+          "columnName": "属修行",
+          "columnCode": "shuXiuXing",
+          "valueType": "S",
+          "modifyFlag": "N",
+          "displayType": "I",
+          "seq": 27,
+          "requiredFlag": "N",
+          "searchFlag": "Y",
+          "profileDisplayFlag": "Y",
+          "addTable": "Y",
+          "editDisplayFlag": "N",
+          "editable": "Y",
+          "listDisplayFlag": "Y",
+          "exportDisplayFlag": "N",
+          "sortable": "N",
+          "primaryFlag": "N",
+          "feignFlag": "N",
+          "titleFlag": "N",
+          "state": "A",
+          "extStr02": "12"
+        },
+        {
           "id": "296",
           "modelId": "30",
           "columnName": "更新时间",
@@ -379,7 +384,7 @@ const shuHis = {
           "valueType": "S",
           "modifyFlag": "N",
           "displayType": "DTP",
-          "seq": 18,
+          "seq": 29,
           "requiredFlag": "N",
           "searchFlag": "N",
           "profileDisplayFlag": "Y",
@@ -392,7 +397,8 @@ const shuHis = {
           "primaryFlag": "N",
           "feignFlag": "N",
           "titleFlag": "N",
-          "state": "A"
+          "state": "A",
+          "extStr02": "12"
         },
         {
           "id": "294",
@@ -403,7 +409,7 @@ const shuHis = {
           "modifyFlag": "N",
           "displayType": "S",
           "valueList": "service|/xiuXing/common/xiu-xing/xiaoShuo",
-          "seq": 19,
+          "seq": 31,
           "requiredFlag": "N",
           "searchFlag": "Y",
           "profileDisplayFlag": "N",
@@ -416,7 +422,8 @@ const shuHis = {
           "primaryFlag": "N",
           "feignFlag": "N",
           "titleFlag": "N",
-          "state": "A"
+          "state": "A",
+          "extStr02": "12"
         },
         {
           "id": "295",
@@ -426,7 +433,7 @@ const shuHis = {
           "valueType": "S",
           "modifyFlag": "N",
           "displayType": "I",
-          "seq": 19,
+          "seq": 33,
           "requiredFlag": "N",
           "searchFlag": "N",
           "profileDisplayFlag": "Y",
@@ -450,7 +457,7 @@ const shuHis = {
           "modifyFlag": "N",
           "displayType": "CF",
           "valueList": "service|/xiuXing/common/xiu-xing/zhangJie",
-          "seq": 21,
+          "seq": 35,
           "requiredFlag": "N",
           "searchFlag": "N",
           "profileDisplayFlag": "N",
@@ -463,7 +470,34 @@ const shuHis = {
           "primaryFlag": "N",
           "feignFlag": "N",
           "titleFlag": "N",
-          "state": "A"
+          "state": "A",
+          "extStr02": "12"
+        },
+        {
+          "id": "291",
+          "modelId": "30",
+          "columnName": "属描述",
+          "columnCode": "shuMiaoShu",
+          "valueType": "S",
+          "modifyFlag": "N",
+          "displayType": "T",
+          "seq": 37,
+          "requiredFlag": "N",
+          "searchFlag": "N",
+          "profileDisplayFlag": "Y",
+          "addTable": "Y",
+          "editDisplayFlag": "N",
+          "editable": "Y",
+          "listDisplayFlag": "Y",
+          "exportDisplayFlag": "N",
+          "sortable": "N",
+          "renderList": "renderMiaoShu",
+          "primaryFlag": "N",
+          "feignFlag": "N",
+          "titleFlag": "N",
+          "state": "A",
+          "extStr01": "Y",
+          "extStr02": "24"
         }
       ],
       "actionList": [

@@ -280,6 +280,7 @@ export default class CangKu extends PureComponent {
         danWei: congSelectedRow.danWei,
         jingJieId: congSelectedRow.jingJieId,
         pinJiId: congSelectedRow.pinJiId,
+        congXiuXing: congSelectedRow.congXiuXing,
         // xiuXingSuiYue: congSelectedRow.xiuXingSuiYue,
         // xiaoShuoId: congSelectedRow.xiaoShuoId,
       });
@@ -298,12 +299,14 @@ export default class CangKu extends PureComponent {
       setFieldsValue({
         shuId: shuSelectedRow.shuId,
         shuName: shuSelectedRow.shuName,
+        shuState: shuSelectedRow.shuState,
         shuFenLei: shuSelectedRow.shuFenLei,
         shuMiaoShu: shuSelectedRow.shuMiaoShu || null,
         xiaoShuoId: shuSelectedRow.xiaoShuoId,
         addrId: shuSelectedRow.addrId,
         shuJingJieId: shuSelectedRow.shuJingJieId,
         shuPinJiId: shuSelectedRow.shuPinJiId,
+        shuXiuXing: shuSelectedRow.shuXiuXing,
       });
       // if (shuSelectedRow.shuFenLei) {
       //   this.handleFenLei('shu', false, shuSelectedRow.shuFenLei);
@@ -661,7 +664,7 @@ export default class CangKu extends PureComponent {
           columnWidth="200px"
           scroll={{ x: '230vw' }}
           fixed="right"
-          autoApi={{ modal: { width: '650px' } }}
+          autoApi={{ modal: { width: '700px' } }}
           customFormItem={{
             congInfo: this.renderCongInfo,
             congId: this.renderCongId, // 从标识
@@ -670,8 +673,8 @@ export default class CangKu extends PureComponent {
             shuId: this.renderShuId, // 属标识
             shuHisId: this.renderShuHisId, // 属历史标识
             addrId: this.renderAddrId,
-            henJiInfo: this.renderHenJiInfo,
-            henJiId: this.renderHenJiId,
+            // henJiInfo: this.renderHenJiInfo,
+            // henJiId: this.renderHenJiId,
             zhangJieId: this.renderZhangJieId,
           }}
           renderMiaoShu={this.renderCangKuMiaoShu}
@@ -784,12 +787,24 @@ export default class CangKu extends PureComponent {
           >
             <StandardPager
               fixed="right"
+              autoApi={{ modal: { width: '700px' } }}
               fanZhuan={this.handleFanZhuan} // 翻转
-              columnWidth="110px"
-              scroll={{ x: '220vw' }} // 固定前后列，横向滚动查看其它数据
+              customFormItem={{
+                congInfo: this.renderCongInfo,
+                congId: this.renderCongId, // 从标识
+                congHisId: this.renderCongHisId, // 从历史标识
+                shuInfo: this.renderShuInfo,
+                shuId: this.renderShuId, // 属标识
+                shuHisId: this.renderShuHisId, // 属历史标识
+                addrId: this.renderAddrId,
+                // henJiInfo: this.renderHenJiInfo,
+                // henJiId: this.renderHenJiId,
+                zhangJieId: this.renderZhangJieId,
+              }}
+              // columnWidth="110px"
+              scroll={{ x: '230vw' }} // 固定前后列，横向滚动查看其它数据
               showTotal={this.showOptTotal}
               renderMiaoShu={this.renderOptMiaoShu}
-              customFormItem={{ addrId: this.renderAddrId }}
               rowInfo={currentInfo}
               profile={false}
               searchBtn="search"

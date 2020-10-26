@@ -1,12 +1,13 @@
+/* eslint-disable no-nested-ternary */
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'dva';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { SearchOutlined } from '@ant-design/icons';
 
-import { Tooltip, Select, Button, List, Avatar, Modal, Tag, notification, Descriptions /* , Typography */ } from 'antd';
+import { Tooltip, Select, Button, List, Avatar, Modal, Tag, notification, Descriptions, Badge /* , Typography */ } from 'antd';
 
 import StandardPager from "../../template/StandardPager";
-import {renderMiaoShu} from "../../utils/utils";
+import { renderMiaoShu, renderBadgeMiaoShu } from "../../utils/utils";
 import {zhangJieMetaModel} from "../../json/zhangJie";
 import {cangKuShuHisMetaModel} from "../../json/cangKuShuHis";
 import {cangKuCongHisMetaModel} from "../../json/cangKuCongHis";
@@ -223,13 +224,32 @@ export default class ZhangJie extends PureComponent {
     this.handleReloadList();
   };
 
+  handleCongShuTitle = () => {
+    const { info, congSelectedRows, shuSelectedRows } = this.state;
+    return (
+      <Badge
+        size="small"
+        offset={[16, 8]}
+        count={info === 'congInfo' ? congSelectedRows.length : info === 'shuInfo' ? shuSelectedRows.length : 0}
+      >
+        <h4>从属信息</h4>
+      </Badge>
+    );
+  };
+
   handleInfoDataSource = () => {
     const { info, congSelectedRows, shuSelectedRows } = this.state;
     if (info === 'congInfo') {
-      return congSelectedRows;
+      return congSelectedRows.map((congRow, index) => {
+        const key = index + 1;
+        return { ...congRow, index: key };
+      });
     }
     if (info === 'shuInfo') {
-      return shuSelectedRows;
+      return shuSelectedRows.map((shuRow, index) => {
+        const key = index + 1;
+        return { ...shuRow, index: key };
+      });
     }
     return [];
   };
@@ -281,12 +301,12 @@ export default class ZhangJie extends PureComponent {
   };
 
   renderCongInfoName = (text, record) => {
-    const title = renderMiaoShu(text);
+    const title = renderBadgeMiaoShu(text);
     return (<Tooltip placement="topLeft" title={title}><a onClick={() => this.handleCongInfoNameOnClick(record)}>{text}</a></Tooltip>);
   };
 
   renderShuInfoName = (text, record) => {
-    const title = renderMiaoShu(text);
+    const title = renderBadgeMiaoShu(text);
     return (<Tooltip placement="topLeft" title={title}><a onClick={() => this.handleShuInfoNameOnClick(record)}>{text}</a></Tooltip>);
   };
 
@@ -475,7 +495,7 @@ export default class ZhangJie extends PureComponent {
             avatar={<Avatar/* src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" */ />}
             title={
               <span>
-                {item.congName}
+                <Badge style={{ marginBottom: '3px', marginRight: '3px' }} size="small" count={item.index} />{item.congName}
                 {item.congFenLeiName ? (
                   <Tag style={{marginLeft: '8px'}} color="#87d068">{item.congFenLeiName}</Tag>) : ''}
                     </span>
@@ -492,7 +512,7 @@ export default class ZhangJie extends PureComponent {
             avatar={<Avatar/* src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" */ />}
             title={
               <span>
-                {item.shuName}
+                <Badge style={{ marginBottom: '3px', marginRight: '3px' }} size="small" count={item.index} />{item.shuName}
                 {item.shuFenLeiName ? (
                   <Tag style={{marginLeft: '8px'}} color="#87d068">{item.shuFenLeiName}</Tag>) : ''}
                 {item.shuJingJieName ? (<Tag color="#87d068">{item.shuJingJieName}</Tag>) : ''}
@@ -601,7 +621,7 @@ export default class ZhangJie extends PureComponent {
           <Modal
             bodyStyle={{ padding: 0 }}
             okButtonProps={{ disabled: true }}
-            title="从属信息"
+            title={this.handleCongShuTitle()}
             maskClosable={false}
             visible={infoVisible}
             // onOk={this.handleShuInfoOnOk}

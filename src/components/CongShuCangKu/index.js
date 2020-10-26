@@ -236,11 +236,12 @@ export default class CongShuCangKu extends PureComponent {
     const congList = [];
     let cong = [];
     item.cong.forEach((data, index) => {
+      const key = index + 1;
       if (index % 3 === 0) {
         cong = [];
         congList.push(cong);
       }
-      cong.push(data);
+      cong.push({ ...data, index: key });
     });
     return(
       <div>
@@ -278,28 +279,29 @@ export default class CongShuCangKu extends PureComponent {
   };
 
   renderCongItem(item) {
-    return <List.Item style={{marginBottom: 0}}>
-      <Card
-        actions={this.renderActions(item)}
-        hoverable
-        style={{ width: '100%' }}
-        bodyStyle={{height: 100}}
-      >
-        <Card.Meta
-          avatar={<Avatar src=""/>}
-          title={<div>
-            <span>{item.congName}</span><br/>
-            {this.handleTab(item)}
-            {/* {item.congFenLeiName ? (<Tag color="#87d068">{item.congFenLeiName}</Tag>) : ''} */}
-            {/*{item.congStateName ? (<Tag color="#91d5ff">{item.congStateName}</Tag>) : ''}*/}
-            {/*{item.congShuXing ? item.congShuXing.split(' ').map(shuXing => <Tag color="#87d068">{shuXing}</Tag>) : ''}*/}
-            {/*{item.congShuLiang && item.danWei ? (<Tag*/}
-              {/*color={item.congShuLiang === '0' ? 'red' : '#87d068'}>{`${item.congShuLiang} ${item.danWei}`}</Tag>) : ''}*/}
-            {/*{item.congJingJieName && item.congJingJieName !== '无' ? (<Tag color="#87d068">{item.congJingJieName}</Tag>) : ''}*/}
-            {/*{item.congPinJiName && item.congPinJiName !== '无' ? (<Tag color="#87d068">{item.congPinJiName}</Tag>) : ''}*/}
-          </div>} description={this.renderDescription(item.congMiaoShu)}/>
-      </Card>
-    </List.Item>;
+    return (
+      <List.Item style={{marginBottom: 0}}>
+        <Card
+          actions={this.renderActions(item)}
+          hoverable
+          style={{ width: '100%' }}
+          bodyStyle={{height: 100}}
+        >
+          <Card.Meta
+            avatar={<Avatar src=""/>}
+            title={
+              <div>
+                <Badge
+                  size="small"
+                  style={{marginRight: '3px', marginBottom: '3px'}}
+                  count={item.index}
+                /><span>{item.congName}</span><br/>
+                {this.handleTab(item)}
+              </div>}
+            description={this.renderDescription(item.congMiaoShu)}/>
+        </Card>
+      </List.Item>
+    );
   }
 
   renderActions(item) {

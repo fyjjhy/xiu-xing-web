@@ -1,6 +1,7 @@
 import React from 'react';
 import { parse } from 'querystring';
 import pathRegexp from 'path-to-regexp';
+import { Badge } from 'antd';
 
 /* eslint no-useless-escape:0 import/prefer-default-export:0 */
 const reg = /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(?::\d+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/;
@@ -115,6 +116,40 @@ export function renderMiaoShu(text) {
         return <span><br/>{tent}</span>;
       }
       return <span>{tent}</span>;
+    });
+  }
+  return text;
+}
+
+// 处理描述种的换行
+export function renderBadgeMiaoShu(text) {
+  if (text) {
+    const content = text.replace(/\r\n/g, '\n').split('\n');
+    return content.map((tent, index) => {
+      const count = index + 1;
+      if (index > 0 && index < content.length) {
+        return (
+          <span>
+            <br/>
+            <Badge
+              style={{backgroundColor: '#52c41a', marginRight: '3px', marginBottom: '3px'}}
+              size="small"
+              count={count}
+            />
+            {tent}
+          </span>
+        );
+      }
+      return (
+        <span>
+          <Badge
+            style={{backgroundColor: '#52c41a', marginRight: '3px', marginBottom: '3px'}}
+            size="small"
+            count={count}
+          />
+          {tent}
+        </span>
+      );
     });
   }
   return text;

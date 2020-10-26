@@ -413,14 +413,14 @@ export default class AutoFormRow extends PureComponent {
     const {valueListData} = this.state;
     return (
       <Checkbox.Group>
-        {valueListData ? this.renderCheck() : ''}
+        {valueListData && valueListData.length> 0 ? this.renderCheck() : ''}
       </Checkbox.Group>
     );
   }
 
   renderCheck() {
     const {valueListData} = this.state;
-    return valueListData.map((data, index) => {
+    return valueListData && valueListData.map((data, index) => {
       let newLine;
       if (index > 0) {
         newLine = (<br/>);
@@ -514,7 +514,7 @@ export default class AutoFormRow extends PureComponent {
         optionFilterProp="title"
         placeholder={this.getPlaceHolder(column)}
       >
-        {valueListData ? this.renderOption() : ''}
+        {valueListData && valueListData.length > 0 ? this.renderOption() : ''}
       </Select>
     );
   }
@@ -532,14 +532,14 @@ export default class AutoFormRow extends PureComponent {
           this.onMultipleSelectChange(value, column);
         }}
       >
-        {valueListData ? this.renderOption() : ''}
+        {valueListData && valueListData.length > 0 ? this.renderOption() : ''}
       </Select>
     );
   }
 
   renderOption() {
     const {valueListData} = this.state;
-    return valueListData.map(data => <Option key={data.dataCode} value={data.dataCode} title={data.dataName}>{data.dataName}</Option>);
+    return valueListData && valueListData.map(data => <Option key={data.dataCode} value={data.dataCode} title={data.dataName}>{data.dataName}</Option>);
   }
 
   renderTreeSelect() {

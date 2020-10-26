@@ -1,6 +1,6 @@
 /* eslint-disable guard-for-in,no-restricted-syntax,no-restricted-syntax,no-nested-ternary */
 import React, { PureComponent, Fragment } from 'react';
-import { Form, Modal } from 'antd';
+import { Form, Modal, Row, Col } from 'antd';
 import moment from 'moment';
 import AutoFormRow from '../AutoFormRow';
 
@@ -82,7 +82,29 @@ export default class AutoForm extends PureComponent {
     if (onCancel) {
       onCancel();
     }
-  }
+  };
+
+  handleFormItemLayout = (grid) => {
+    if (grid === 24) {
+      return {
+        labelCol: { xs: { span: 24 }, sm: { span: 3 } },
+        wrapperCol: { xs: { span: 24 }, sm: { span: 12 }, md: { span: 21 } },
+      };
+    }
+    if (grid === 12) {
+      return {
+        labelCol: { xs: { span: 24 }, sm: { span: 6 } },
+        wrapperCol: { xs: { span: 24 }, sm: { span: 12 }, md: { span: 18 } },
+      };
+    }
+    if (grid === 8) {
+      return {
+        labelCol: { xs: { span: 24 }, sm: { span: 9 } },
+        wrapperCol: { xs: { span: 24 }, sm: { span: 12 }, md: { span: 15 } },
+      };
+    }
+    return { ...formItemLayout };
+  };
 
   // 初始化表单
   initForm = () => {
@@ -160,29 +182,89 @@ export default class AutoForm extends PureComponent {
     // const data = props.data || {};
     const { columnList } = metaModel;
     const displayFileds = [];
+    const rowCols = [];
+    const defaultCols = [];
+    let cols = [];
+    let grid = 0;
+    columnList.filter(column => {
+      const { addTable, editDisplayFlag, editable, columnCode } = column;
+      if (editDisplayFlag === 'Y' || editable === 'Y') {
+        displayFileds.push(columnCode);
+      }
+      return currentModel === 'add' ? addTable === 'Y' : (editDisplayFlag === 'Y' || editable === 'Y');
+    }).forEach(column => {
+      // 如果extStr02=24，则独占一行；
+      // 如果和值>24，则进入下一行
+      if (column.hasOwnProperty('extStr02')) {
+        grid += Number(column.extStr02);
+        if (grid < 24) {
+          cols.push(column);
+        } else if (grid === 24) {
+          cols.push(column);
+          rowCols.push(cols);
+          grid = 0;
+          cols = [];
+        } else {
+          rowCols.push(cols);
+          grid = 0;
+          cols = [];
+          cols.push(column);
+        }
+      } else {
+        defaultCols.push(column);
+      }
+    });
     return (
       <Fragment>
-        {
-            columnList.filter(column => {
-              const { addTable, editDisplayFlag, editable, columnCode } = column;
-              if (editDisplayFlag === 'Y' || editable === 'Y') {
-                displayFileds.push(columnCode);
-              }
-              return currentModel === 'add' ? addTable === 'Y' : (editDisplayFlag === 'Y' || editable === 'Y');
-            }).map(column => (
-              <AutoFormRow
-                {...props}
-                key={column.columnCode}
-                column={column}
-                form={this.formRef.current}
-                // initData={data}
-                // record={data}
-                // onExtraValueChange={this.onExtraValueChange}
-                // initialValue={data[column.columnCode]}
-                currentModel={this.props.currentModel}
-              />
-            ))
-              }
+        {rowCols && rowCols.length > 0 ? (
+          rowCols.map((rows, index) => {
+            const key = index + 1;
+            return (
+              <Row
+                key={key}
+                // gutter={[8, 8]}
+                style={{ width: '100%', marginLeft: '0px', marginRight: '0px' }}
+              >
+                {rows.map(column => (
+                  <Col key={column.columnCode} span={Number(column.extStr02)}>
+                    <AutoFormRow
+                      {...props}
+                      formItemLayout={this.handleFormItemLayout(Number(column.extStr02))}
+                      key={column.columnCode}
+                      column={column}
+                      form={this.formRef.current}
+                      // initData={data}
+                      // record={data}
+                      // onExtraValueChange={this.onExtraValueChange}
+                      // initialValue={data[column.columnCode]}
+                      currentModel={this.props.currentModel}
+                    />
+                  </Col>
+                ))}
+              </Row>
+            );
+          })
+        ) : (
+          columnList.filter(column => {
+          const { addTable, editDisplayFlag, editable, columnCode } = column;
+          if (editDisplayFlag === 'Y' || editable === 'Y') {
+          displayFileds.push(columnCode);
+        }
+          return currentModel === 'add' ? addTable === 'Y' : (editDisplayFlag === 'Y' || editable === 'Y');
+        }).map(column => (
+          <AutoFormRow
+          {...props}
+          key={column.columnCode}
+          column={column}
+          form={this.formRef.current}
+          // initData={data}
+          // record={data}
+          // onExtraValueChange={this.onExtraValueChange}
+          // initialValue={data[column.columnCode]}
+          currentModel={this.props.currentModel}
+          />
+          ))
+          )}
         {this.renderHidden(displayFileds)}
       </Fragment>
     );

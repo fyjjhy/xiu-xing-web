@@ -5,7 +5,7 @@ import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Tooltip, Typography, Modal, Select } from 'antd';
 
 import StandardPager from "../../template/StandardPager";
-import {renderMiaoShu} from "../../utils/utils";
+import {renderBadgeMiaoShu, renderMiaoShu} from "../../utils/utils";
 import {congMetaModel} from "../../json/cong";
 import {congHisMetaModel} from "../../json/congHis";
 import CongGuiJi from "../../components/CongGuiJi";
@@ -77,6 +77,11 @@ export default class Cong extends PureComponent {
   renderMiaoShu = text => {
     const title = renderMiaoShu(text);
     return text && text.length > 15 ? <Tooltip title={title}><Paragraph style={{ width: '250px', marginTop: '0px', marginBottom: '0px' }} ellipsis={{ row: 1 }}>{text}</Paragraph></Tooltip> : text
+  };
+
+  renderCengYongMing = text => {
+    const title = renderBadgeMiaoShu(text);
+    return (<Tooltip placement="topLeft" title={title}>{text}</Tooltip>);
   };
 
   renderCongMiaoShu = text => {
@@ -151,6 +156,24 @@ export default class Cong extends PureComponent {
     );
   };
 
+  renderAddrId = (FormItem, rowProps, rowState) => {
+    const { formItemLayout, column/* , searchArea */ } = rowProps;
+    const { valueListData } = rowState;
+    return (
+      <FormItem {...formItemLayout} label={column.columnName} name={column.columnCode} rules={[]}>
+        <Select
+          allowClear
+          showSearch
+          optionFilterProp="title"
+          dropdownMatchSelectWidth={/* searchArea || */700}
+          placeholder={`请选择${column.columnName}`}
+        >
+          {valueListData ? valueListData.map(data => <Option key={data.dataCode} value={data.dataCode} title={data.dataName}>{data.dataName}</Option>) : ''}
+        </Select>
+      </FormItem>
+    );
+  };
+
   render() {
     const { props } = this;
     const { currentModel, currentInfo, optVisible, guiJiVisible } = this.state;
@@ -159,8 +182,13 @@ export default class Cong extends PureComponent {
         <StandardPager
           columnWidth="230px"
           renderMiaoShu={this.renderCongMiaoShu}
+          renderCengYongMing={this.renderCengYongMing}
           showTotal={this.showTotal}
-          customFormItem={{ congType: this.renderCongType, zhangJieId: this.renderZhangJieId }}
+          customFormItem={{
+            congType: this.renderCongType,
+            zhangJieId: this.renderZhangJieId,
+            addrId: this.renderAddrId,
+          }}
           opt={this.handleOpt}
           guiJi={this.handleGuiJi}
           {...congMetaModel()}
@@ -182,7 +210,10 @@ export default class Cong extends PureComponent {
               fixed="right"
               chuangXin={this.handleChuangXin}
               // columnWidth="120px"
-              customFormItem={{ zhangJieId: this.renderZhangJieId }}
+              customFormItem={{
+                zhangJieId: this.renderZhangJieId,
+                addrId: this.renderAddrId,
+              }}
               searchBtn='search'
               showTotal={this.showTotal}
               renderMiaoShu={this.renderOptMiaoShu}

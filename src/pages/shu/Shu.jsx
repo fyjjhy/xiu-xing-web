@@ -5,7 +5,7 @@ import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Tooltip, Typography, Modal, Select } from 'antd';
 
 import StandardPager from "../../template/StandardPager";
-import {renderMiaoShu} from "../../utils/utils";
+import {renderBadgeMiaoShu, renderMiaoShu} from "../../utils/utils";
 import {shuHisMetaModel} from "../../json/shuHis";
 import HeBing from "../../components/HeBing";
 import {shuMetaModel} from "../../json/shu";
@@ -171,6 +171,11 @@ export default class Shu extends PureComponent {
     return (<Tooltip placement="topLeft" title={title}>{text}</Tooltip>);
   };
 
+  renderCengYongMing = text => {
+    const title = renderBadgeMiaoShu(text);
+    return (<Tooltip placement="topLeft" title={title}>{text}</Tooltip>);
+  };
+
   renderOptMiaoShu = text => {
     const title = renderMiaoShu(text);
     return (<Tooltip placement="topLeft" title={title}>{text}</Tooltip>);
@@ -272,7 +277,9 @@ export default class Shu extends PureComponent {
           columnWidth="150px"
           // scroll={{ x: '100vw' }}
           fixed="right"
+          autoApi={{ modal: { width: '700px' } }}
           renderMiaoShu={this.renderShuMiaoShu}
+          renderCengYongMing={this.renderCengYongMing}
           showTotal={this.showTotal}
           opt={this.handleOpt}
           ck={this.handleCk}
@@ -302,6 +309,7 @@ export default class Shu extends PureComponent {
               addrId: this.renderAddrId,
               zhangJieId: this.renderZhangJieId,
             }}
+            autoApi={{ modal: { width: '700px' } }}
             renderMiaoShu={this.renderOptMiaoShu}
             rowInfo={currentInfo}
             profile={false}
