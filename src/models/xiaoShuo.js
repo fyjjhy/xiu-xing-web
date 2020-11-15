@@ -4,7 +4,7 @@ const Model = {
   namespace: 'xiaoShuo',
 };
 const metaModel = createModel(Model.namespace);
-Model.state = Object.assign({}, metaModel.state, Model.state);
-Model.reducers = Object.assign({}, metaModel.reducers, Model.reducers);
-Model.effects = Object.assign({}, metaModel.effects, Model.effects);
+Model.state = { ...metaModel.state, ...Model.state};
+Model.reducers = { ...metaModel.reducers, ...Model.reducers};
+Model.effects = { ...metaModel.effects, ...Model.effects};
 export default Model;

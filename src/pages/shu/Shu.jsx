@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 
-import { Tooltip, Typography, Modal, Select } from 'antd';
+import { Tooltip, Typography, Modal, Select, Badge, Switch, List, Tag, Collapse, Avatar, Descriptions } from 'antd';
 
 import StandardPager from "../../template/StandardPager";
 import {renderBadgeMiaoShu, renderMiaoShu} from "../../utils/utils";
@@ -10,15 +10,16 @@ import {shuHisMetaModel} from "../../json/shuHis";
 import HeBing from "../../components/HeBing";
 import {shuMetaModel} from "../../json/shu";
 import CongShuCangKu from "../../components/CongShuCangKu";
-import GuiJi from "../../components/GuiJi";
 
 const { Paragraph } = Typography;
 const { Option } = Select;
+const { Panel } = Collapse;
 
-@connect(({ shu, shuHis, cangKuHis, loading }) => ({
+@connect(({ shu, shuHis, cangKuHis, zhangJie, loading }) => ({
   shu,
   shuHis,
   cangKuHis,
+  zhangJie,
   loading,
 }))
 export default class Shu extends PureComponent {
@@ -27,17 +28,19 @@ export default class Shu extends PureComponent {
     this.state = {
       currentModel: '',
       currentInfo: {},
+      shuInfo: {},
       optVisible: false,
       ckVisible: false,
       heBingVisible: false,
       guiJiVisible: false,
+      juSan: null,
     };
   }
 
   handleOpt = (record) => {
     this.setState({
       currentModel: 'opt',
-      currentInfo: { shuId: record.id },
+      shuInfo: { shuId: record.id },
       optVisible: true,
     });
   };
@@ -73,13 +76,29 @@ export default class Shu extends PureComponent {
   // 打开轨迹对话框
   handleGuiJi = (record) => {
     this.setState({
-      currentModel: 'guiJi',
+      juSan: '散',
       guiJiVisible: true,
+      currentInfo: record,
     });
+    this.handleEmptyCongShuGuiJiList();
     const { dispatch } = this.props;
     dispatch({
-      type: 'shuHis/query',
-      payload: { shuId: record.id },
+      type: 'zhangJie/getGuiJiList',
+      payload: { congShuId: record.id, type: '属' },
+    });
+  };
+
+  handleOptGuiJi = (record) => {
+    this.setState({
+      juSan: '散',
+      guiJiVisible: true,
+      currentInfo: record,
+    });
+    this.handleEmptyCongShuGuiJiList();
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'zhangJie/getGuiJiList',
+      payload: { congShuHisId: record.id, congShuId: record.shuId, type: '属' },
     });
   };
 
@@ -105,6 +124,7 @@ export default class Shu extends PureComponent {
   handleOptOnCancel = () => {
     this.setState({
       currentModel: '',
+      shuInfo: {},
       currentInfo: {},
       optVisible: false,
     });
@@ -114,7 +134,6 @@ export default class Shu extends PureComponent {
   handleCkOnCancel = () => {
     this.setState({
       currentModel: '',
-      currentInfo: {},
       ckVisible: false,
     });
     this.reloadShu();
@@ -126,13 +145,6 @@ export default class Shu extends PureComponent {
       heBingVisible: false,
     });
     this.reloadShu();
-  };
-
-  handleGuiJiOnCancel = () => {
-    this.setState({
-      currentModel: '',
-      guiJiVisible: false,
-    });
   };
 
   // 合并
@@ -150,6 +162,58 @@ export default class Shu extends PureComponent {
       type: 'cangKuHis/searchHisList',
       payload: values,
     });
+  };
+
+  handleZhangJieGuiJiDataSource = () => {
+    const {zhangJie: { congShuGuiJiList }} = this.props;
+    return congShuGuiJiList;
+  };
+
+  handleGuiJiOnCancel = () => {
+    this.setState({
+      guiJiVisible: false,
+      juSan: null,
+      currentInfo: {},
+    });
+  };
+
+  // 聚散
+  handleCongShuGuiJiJuSan = (juSan) => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'zhangJie/juSanGuiJiSwitch',
+      payload: juSan,
+    });
+    this.setState({ juSan });
+  };
+
+  handleEmptyCongShuGuiJiList = () => {
+    const {dispatch} = this.props;
+    dispatch({
+      type: 'zhangJie/emptyCongShuGuiJiList',
+    });
+  };
+
+  handleCongShuTitle = () => {
+    const { zhangJie: { congShuGuiJiList } } = this.props;
+    const { juSan, currentInfo } = this.state;
+    return (
+      <div>
+        <Badge
+          // size="small"
+          // offset={[16, 8]}
+          style={{marginBottom: '3px', marginRight: '3px'}}
+          count={congShuGuiJiList && congShuGuiJiList.length > 0 ? congShuGuiJiList.length : 0}
+        />
+        <span>{`${currentInfo.shuStateName ? `[${currentInfo.shuStateName}]`: ''}${currentInfo.shuJingJieName || ''}${currentInfo.shuPinJiName || ''}${currentInfo.shuFenLeiName || ''}${currentInfo.shuName}`}</span>
+        <Switch
+          style={{ marginLeft: '3px', marginBottom: '3px' }}
+          checkedChildren="聚"
+          unCheckedChildren="散"
+          onClick={() => this.handleCongShuGuiJiJuSan(juSan === '聚' ? '散' : '聚')}
+        />
+      </div>
+    );
   };
 
   // 重新加载coupons
@@ -171,9 +235,13 @@ export default class Shu extends PureComponent {
     return (<Tooltip placement="topLeft" title={title}>{text}</Tooltip>);
   };
 
-  renderCengYongMing = text => {
+  renderCengYongMingList = text => {
     const title = renderBadgeMiaoShu(text);
     return (<Tooltip placement="topLeft" title={title}>{text}</Tooltip>);
+  };
+
+  renderCengYongMingInfo = text => {
+    return renderBadgeMiaoShu(text);
   };
 
   renderOptMiaoShu = text => {
@@ -263,9 +331,188 @@ export default class Shu extends PureComponent {
     );
   };
 
+  renderCongShuTab = (item) => {
+    const tabList = [];
+    const tabs = [];
+    const options = [];
+    if (item.congShuStateName) {
+      tabList.push({
+        len: item.congShuStateName.length,
+        key: item.congShuStateName,
+        value: item.congShuStateName,
+        label: <Tag color="#91d5ff">{item.congShuStateName}</Tag>,
+      });
+    }
+
+    if (item.congShuFenLeiName) {
+      tabList.push({
+        len: item.congShuFenLeiName.length,
+        key: item.congShuFenLeiName,
+        value: item.congShuFenLeiName,
+        label: <Tag color="#87d068">{item.congShuFenLeiName}</Tag>,
+      });
+    }
+
+    if (item.congShuShuXing) {
+      item.congShuShuXing.split(' ').forEach(shuXing => {
+        tabList.push({
+          len: shuXing.length,
+          key: shuXing,
+          value: shuXing,
+          label: <Tag color="#87d068">{shuXing}</Tag>,
+        });
+      });
+    }
+
+    if (item.congShuType) {
+      tabList.push({
+        len: item.congShuType.length,
+        key: item.congShuType,
+        value: item.congShuType,
+        label: <Tag color="warning">{item.congShuType}</Tag>,
+      });
+    }
+
+    // if (item.congShuLiang && item.danWei) {
+    //   tabList.push({
+    //     len: `${item.congShuLiang}${item.danWei}`.length,
+    //     key: `${item.congShuLiang}${item.danWei}`,
+    //     value: `${item.congShuLiang}${item.danWei}`,
+    //     label: <Tag color={item.congShuLiang === '0' ? 'red' : '#87d068'}>{`${item.congShuLiang} ${item.danWei}`}</Tag>,
+    //   });
+    // }
+
+    if (item.congShuJingJieName && item.congShuJingJieName !== '无') {
+      tabList.push({
+        len: item.congShuJingJieName.length,
+        key: item.congShuJingJieName,
+        value: item.congShuJingJieName,
+        label: <Tag color="#87d068">{item.congShuJingJieName}</Tag>,
+      });
+    }
+
+    if (item.congShuPinJiName && item.congShuPinJiName !== '无') {
+      tabList.push({
+        len: item.congShuPinJiName.length,
+        key: item.congShuPinJiName,
+        value: item.congShuPinJiName,
+        label: <Tag color="#87d068">{item.congShuPinJiName}</Tag>,
+      });
+    }
+    if (tabList && tabList.length > 0) {
+      tabList.sort((tab1, tab2) => tab1.len - tab2.len);
+      // let length = 0;
+      if (tabList.length === 1) {
+        tabs.push(tabList[0].label);
+      } else {
+        tabList.forEach(tabInfo => {
+          // const { len, label, key, value } = tabInfo;
+          // if (length + len > 12) {
+          //   options.push(<Option disabled key={key} value={value}>{label}</Option>);
+          // } else {
+          //   tabs.push(label);
+          // }
+          // length += len;
+          const {label} = tabInfo;
+          tabs.push(label);
+        });
+      }
+    }
+    return (
+      <span>
+        {tabs.map(tab => tab)}
+        {options.length > 0 ? (
+          <Select
+            style={{width: 24}}
+            // defaultOpen
+            defaultActiveFirstOption
+            dropdownMatchSelectWidth={150}
+            bordered={false}>
+            {options.map(option => option)}
+          </Select>
+        ) : ''}
+      </span>
+    );
+  };
+
+  renderZhangJieSanGuiJi = (item, seq) => {
+    return (
+      <List.Item key={`item${seq}${item.seq}`}>
+        <List.Item.Meta
+          key={`meta${seq}${item.seq}`}
+          avatar={<Avatar/* src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" */ />}
+          title={
+            <span>
+              <Badge
+                size="small"
+                count={item.seq}
+                style={{marginBottom: '3px', marginRight: '3px', backgroundColor: '#108ee9'}}
+              />
+              <span style={{marginRight: '8px'}}>{item.congShuName}</span>
+              <span>{this.renderCongShuTab(item)}</span>
+            </span>
+          }
+          description={renderMiaoShu(item.congShuMiaoShu)}
+        />
+      </List.Item>
+    );
+  };
+
+  renderAddrFullName = (fullNames) => {
+    const title = renderBadgeMiaoShu(fullNames.join('\r\n'));
+    const fullName = fullNames[0];
+    return (<Tooltip placement="topLeft" title={title}>{fullName}</Tooltip>);
+  };
+
+  renderZhangJieTitle = (zhangJieTitles) => {
+    const title = renderBadgeMiaoShu(zhangJieTitles.join('\r\n'));
+    const zhangJieTitle = zhangJieTitles[0];
+    return (<Tooltip placement="topLeft" title={title}>{zhangJieTitle}</Tooltip>);
+  };
+
+  renderZhangJieJuGuiJi = (item) => {
+    return (
+      <List.Item key={`item${item.seq}`}>
+        <List.Item.Meta
+          key={`meta${item.seq}`}
+          avatar={<Avatar/* src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" */ />}
+          title={
+            <Descriptions
+              size="small"
+              // title={item.congShuName}
+              column={1}
+              colon={false}
+              bordered
+              // extra={<a onClick={() => (this.handleCongInfoSheZhi(item, this))}>设置</a>}
+            >
+              <Descriptions.Item>
+                <Badge
+                  size="small"
+                  count={item.seq}
+                  style={{marginBottom: '3px', marginRight: '3px'}}
+                />
+                <span>{item.congShuName}</span>
+              </Descriptions.Item>
+              <Descriptions.Item>{this.renderCongShuTab(item)}</Descriptions.Item>
+              {item.fullNames && item.fullNames.length > 0 ?
+                (<Descriptions.Item>
+                  {this.renderAddrFullName(item.fullNames)}
+                </Descriptions.Item>) : ''}
+              {item.zhangJieTitles && item.zhangJieTitles.length > 0 ?
+                (<Descriptions.Item>
+                  {this.renderZhangJieTitle(item.zhangJieTitles)}
+                </Descriptions.Item>) : ''}
+            </Descriptions>
+          }
+          description={renderMiaoShu(item.congShuMiaoShu)}
+        />
+      </List.Item>
+    );
+  };
+
   render() {
     const { props } = this;
-    const { currentModel, currentInfo, optVisible, ckVisible, heBingVisible, guiJiVisible } = this.state;
+    const { currentModel, shuInfo, optVisible, ckVisible, heBingVisible, guiJiVisible, juSan } = this.state;
     return (
       <PageHeaderWrapper>
         <StandardPager
@@ -279,7 +526,8 @@ export default class Shu extends PureComponent {
           fixed="right"
           autoApi={{ modal: { width: '700px' } }}
           renderMiaoShu={this.renderShuMiaoShu}
-          renderCengYongMing={this.renderCengYongMing}
+          renderCengYongMingList={this.renderCengYongMingList}
+          renderCengYongMingInfo={this.renderCengYongMingInfo}
           showTotal={this.showTotal}
           opt={this.handleOpt}
           ck={this.handleCk}
@@ -303,7 +551,7 @@ export default class Shu extends PureComponent {
             // scroll={{ x: '100vw' }} // 固定前后列，横向滚动查看其它数据
             fixed="right"
             searchBtn='search'
-            // columnWidth="60px"
+            columnWidth="125px"
             showTotal={this.showShuOptTotal}
             customFormItem={{
               addrId: this.renderAddrId,
@@ -311,7 +559,8 @@ export default class Shu extends PureComponent {
             }}
             autoApi={{ modal: { width: '700px' } }}
             renderMiaoShu={this.renderOptMiaoShu}
-            rowInfo={currentInfo}
+            rowInfo={shuInfo}
+            guiJi={this.handleOptGuiJi}
             profile={false}
             {...shuHisMetaModel()}
             {...props}
@@ -336,12 +585,67 @@ export default class Shu extends PureComponent {
             {...props}
           />
         ) : ''}
-        {currentModel === 'guiJi' ? (
-          <GuiJi
+        {guiJiVisible ? (
+          <Modal
+            // bodyStyle={{ padding: 0 }}
+            okButtonProps={{disabled: true}}
+            title={this.handleCongShuTitle()}
+            maskClosable={false}
             visible={guiJiVisible}
-            guiJiOnCancel={this.handleGuiJiOnCancel}
-            {...props}
-          />
+            // onOk={this.handleShuInfoOnOk}
+            onCancel={this.handleGuiJiOnCancel}
+            width={1150}
+            cancelText="取消"
+            okText="确定"
+          >
+            {juSan === '散' ? (this.handleZhangJieGuiJiDataSource().map((zhangJieInfo, zhangJieIndex) => (
+                <Collapse defaultActiveKey={zhangJieIndex + 1} key={`${zhangJieIndex + 1}`}>
+                  <Panel header={
+                    <span>
+                      <Badge
+                        size="small"
+                        count={zhangJieIndex + 1}
+                        style={{marginBottom: '3px', marginRight: '3px'}}
+                      />
+                      <span>{zhangJieInfo.zhangJieTitle}</span>
+                    </span>
+                  } key={`${zhangJieIndex + 1}`}>
+                    {zhangJieInfo.addrFullNames.map((addr, addrIndex) => (
+                      <Collapse
+                        defaultActiveKey={`panel${zhangJieIndex + 1}${addrIndex + 1}`}
+                        key={`collapse${zhangJieIndex + 1}${addrIndex + 1}`}
+                      >
+                        <Panel header={
+                          <span>
+                            <Badge
+                              size="small"
+                              count={addrIndex + 1}
+                              style={{marginBottom: '3px', marginRight: '3px', backgroundColor: '#87d068' }}
+                            />
+                            <span>{addr.addrFullName}</span>
+                          </span>
+                        } key={`panel${zhangJieIndex + 1}${addrIndex + 1}`}>
+                          <List
+                            // bordered
+                            itemLayout="horizontal"
+                            dataSource={addr.congShuList && addr.congShuList.length > 0 ? addr.congShuList : []}
+                            renderItem={item => this.renderZhangJieSanGuiJi(item, `${zhangJieIndex + 1}${addrIndex + 1}`)}
+                          />
+                        </Panel>
+                      </Collapse>
+                    ))}
+                  </Panel>
+                </Collapse>
+              ))
+            ) : (
+              <List
+                bordered
+                itemLayout="horizontal"
+                dataSource={this.handleZhangJieGuiJiDataSource()}
+                renderItem={item => this.renderZhangJieJuGuiJi(item)}
+              />
+            )}
+          </Modal>
         ) : ''}
       </PageHeaderWrapper>
     );

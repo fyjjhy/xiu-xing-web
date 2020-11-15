@@ -9,6 +9,12 @@ const congHis = {
   "configList": [],
   "funcComponentList": [
     {
+      "id": "1628104742114f16b4e639e7ab08a104",
+      "funcId": "29",
+      "name": "轨迹",
+      "code": "guiJi"
+    },
+    {
       "id": "71",
       "funcId": "29",
       "name": "新增",
@@ -328,7 +334,7 @@ const congHis = {
           "servAction": "get",
           "defaultFlag": "Y",
           "propFlag": "N",
-          "seq": 2
+          "seq": 3
         },
         {
           "id": "c9da280778fe40a3a95ab54a23d8dd99",
@@ -341,7 +347,7 @@ const congHis = {
           "defaultFlag": "N",
           "propFlag": "Y",
           "propMsg": "创新：创建新的从信息，并移除该信息。",
-          "seq": 4
+          "seq": 7
         },
         {
           "id": "130",
@@ -354,7 +360,19 @@ const congHis = {
           "defaultFlag": "Y",
           "propFlag": "Y",
           "propMsg": "编辑属性值：\r\n1、从无值到有值；\r\n2、从有值到有值。",
-          "seq": 5
+          "seq": 9
+        },
+        {
+          "id": "15707a376a614f6f9076c9075e27770a",
+          "modelId": "29",
+          "type": "L",
+          "code": "guiJi",
+          "name": "轨迹",
+          "servId": "29",
+          "servAction": "guiJi",
+          "defaultFlag": "N",
+          "propFlag": "N",
+          "seq": 11
         },
         {
           "id": "131",
@@ -367,7 +385,7 @@ const congHis = {
           "defaultFlag": "Y",
           "disableRule": "(data,column) => data.congHisCount>0",
           "propFlag": "Y",
-          "seq": 6
+          "seq": 13
         }
       ]
     }

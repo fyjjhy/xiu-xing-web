@@ -257,7 +257,7 @@ export default class StandardPager extends PureComponent {
     dispatch({
       type: `${listMetaModel.funcModelCode}/resetNeedLoad`,
     });
-  }
+  };
 
   // 点击显示
   handleDisplay = () => {
@@ -307,7 +307,7 @@ export default class StandardPager extends PureComponent {
       });
       this.handleResetDisplay();
     }
-  }
+  };
 
   // 编辑按钮点击
   handleEditClick = async params => {
