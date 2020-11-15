@@ -122,9 +122,9 @@ export function renderMiaoShu(text) {
 }
 
 // 处理描述种的换行
-export function renderBadgeMiaoShu(text) {
+export function renderBadgeMiaoShu(text, pattern) {
   if (text) {
-    const content = text.replace(/\r\n/g, '\n').split('\n');
+    const content = pattern ? text.split(pattern) : text.replace(/\r\n/g, '\n').split('\n');
     return content.map((tent, index) => {
       const count = index + 1;
       if (index > 0 && index < content.length) {

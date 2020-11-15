@@ -6,7 +6,7 @@ import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { Tooltip, Typography, Select, Button, Modal, Input } from 'antd';
 
 import StandardPager from "../../template/StandardPager";
-import {renderMiaoShu} from "../../utils/utils";
+import {renderBadgeMiaoShu, renderMiaoShu} from "../../utils/utils";
 import {cangKuMetaModel} from "../../json/cangKu";
 import {cangKuHisMetaModel} from "../../json/cangKuHis";
 import {henJiMetaModel} from "../../json/henJi";
@@ -303,7 +303,7 @@ export default class CangKu extends PureComponent {
         shuFenLei: shuSelectedRow.shuFenLei,
         shuMiaoShu: shuSelectedRow.shuMiaoShu || null,
         xiaoShuoId: shuSelectedRow.xiaoShuoId,
-        addrId: shuSelectedRow.addrId,
+        // addrId: shuSelectedRow.addrId,
         shuJingJieId: shuSelectedRow.shuJingJieId,
         shuPinJiId: shuSelectedRow.shuPinJiId,
         shuXiuXing: shuSelectedRow.shuXiuXing,
@@ -397,7 +397,16 @@ export default class CangKu extends PureComponent {
   renderCongShuXing = text => {
     const title = renderMiaoShu(text);
     return text && text.length > 15 ? <Tooltip title={title}><Paragraph style={{ marginTop: '0px', marginBottom: '0px' }} ellipsis={{ row: 1 }}>{text}</Paragraph></Tooltip> : text
-  }
+  };
+
+  renderCongShuXingList = (text) => {
+    const title = renderBadgeMiaoShu(text, ' ');
+    return (<Tooltip placement="topLeft" title={title}>{text}</Tooltip>);
+  };
+
+  renderCongShuXingInfo = (text) => {
+    return renderBadgeMiaoShu(text, ' ');
+  };
 
   //
   renderCongMiaoShu = text => {
@@ -678,6 +687,8 @@ export default class CangKu extends PureComponent {
             zhangJieId: this.renderZhangJieId,
           }}
           renderMiaoShu={this.renderCangKuMiaoShu}
+          renderCongShuXingList={this.renderCongShuXingList}
+          renderCongShuXingInfo={this.renderCongShuXingInfo}
           showTotal={this.showTotal}
           expandOnCancel={this.handleExpandOnCancel}
           {...cangKuMetaModel()}
@@ -805,6 +816,8 @@ export default class CangKu extends PureComponent {
               scroll={{ x: '230vw' }} // 固定前后列，横向滚动查看其它数据
               showTotal={this.showOptTotal}
               renderMiaoShu={this.renderOptMiaoShu}
+              renderCongShuXingList={this.renderCongShuXingList}
+              renderCongShuXingInfo={this.renderCongShuXingInfo}
               rowInfo={currentInfo}
               profile={false}
               searchBtn="search"

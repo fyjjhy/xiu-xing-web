@@ -494,7 +494,7 @@ export default class AutoTable extends PureComponent {
     if (onRef) {
       onRef(this);
     }
-  }
+  };
 
   // 处理搜索字段
   handleSorterColumn = (sorter, params) => {
