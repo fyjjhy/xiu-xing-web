@@ -24,15 +24,22 @@ export default class ShengWuFenLei extends PureComponent {
         yu: 'select',
         jie: 'select',
         yaJie: 'select',
+        zongMen: 'select',
         men: 'select',
         yaMen: 'select',
+        zongGang: 'select',
         gang: 'select',
         yaGang: 'select',
         zongMu: 'select',
         mu: 'select',
+        yaMu: 'select',
+        zongKe: 'select',
         ke: 'select',
+        yaKe: 'select',
         shu: 'select',
+        yaShu: 'select',
         zhong: 'select',
+        yaZhong: 'select',
       },
     };
   }
@@ -47,15 +54,22 @@ export default class ShengWuFenLei extends PureComponent {
         yu: 'select',
         jie: 'select',
         yaJie: 'select',
+        zongMen: 'select',
         men: 'select',
         yaMen: 'select',
+        zongGang: 'select',
         gang: 'select',
         yaGang: 'select',
         zongMu: 'select',
         mu: 'select',
+        yaMu: 'select',
+        zongKe: 'select',
         ke: 'select',
+        yaKe: 'select',
         shu: 'select',
+        yaShu: 'select',
         zhong: 'select',
+        yaZhong: 'select',
       },
     });
   };
@@ -198,6 +212,17 @@ export default class ShengWuFenLei extends PureComponent {
     return this.renderSwitch(FormItem, formItemLayout, column, valueListData, 'yaJie');
   };
 
+  renderZongMen = (FormItem, rowProps, rowState) => {
+    const { formItemLayout, column , searchArea  } = rowProps;
+    const { valueListData } = rowState;
+    // 搜索区域
+    if (searchArea) {
+      return this.renderSearchSelectFormItem(FormItem, formItemLayout, column, valueListData);
+    }
+
+    return this.renderSwitch(FormItem, formItemLayout, column, valueListData, 'zongMen');
+  };
+
   renderMen = (FormItem, rowProps, rowState) => {
     const { formItemLayout, column , searchArea  } = rowProps;
     const { valueListData } = rowState;
@@ -218,6 +243,16 @@ export default class ShengWuFenLei extends PureComponent {
     }
 
     return this.renderSwitch(FormItem, formItemLayout, column, valueListData, 'yaMen');
+  };
+
+  renderZongGang = (FormItem, rowProps, rowState) => {
+    const { formItemLayout, column , searchArea  } = rowProps;
+    const { valueListData } = rowState;
+    // 搜索区域
+    if (searchArea) {
+      return this.renderSearchSelectFormItem(FormItem, formItemLayout, column, valueListData);
+    }
+    return this.renderSwitch(FormItem, formItemLayout, column, valueListData, 'zongGang');
   };
 
   renderGang = (FormItem, rowProps, rowState) => {
@@ -260,6 +295,26 @@ export default class ShengWuFenLei extends PureComponent {
     return this.renderSwitch(FormItem, formItemLayout, column, valueListData, 'mu');
   };
 
+  renderYaMu = (FormItem, rowProps, rowState) => {
+    const { formItemLayout, column , searchArea  } = rowProps;
+    const { valueListData } = rowState;
+    // 搜索区域
+    if (searchArea) {
+      return this.renderSearchSelectFormItem(FormItem, formItemLayout, column, valueListData);
+    }
+    return this.renderSwitch(FormItem, formItemLayout, column, valueListData, 'yaMu');
+  };
+
+  renderZongKe = (FormItem, rowProps, rowState) => {
+    const { formItemLayout, column , searchArea  } = rowProps;
+    const { valueListData } = rowState;
+    // 搜索区域
+    if (searchArea) {
+      return this.renderSearchSelectFormItem(FormItem, formItemLayout, column, valueListData);
+    }
+    return this.renderSwitch(FormItem, formItemLayout, column, valueListData, 'zongKe');
+  };
+
   renderKe = (FormItem, rowProps, rowState) => {
     const { formItemLayout, column , searchArea  } = rowProps;
     const { valueListData } = rowState;
@@ -268,6 +323,16 @@ export default class ShengWuFenLei extends PureComponent {
       return this.renderSearchSelectFormItem(FormItem, formItemLayout, column, valueListData);
     }
     return this.renderSwitch(FormItem, formItemLayout, column, valueListData, 'ke');
+  };
+
+  renderYaKe = (FormItem, rowProps, rowState) => {
+    const { formItemLayout, column , searchArea  } = rowProps;
+    const { valueListData } = rowState;
+    // 搜索区域
+    if (searchArea) {
+      return this.renderSearchSelectFormItem(FormItem, formItemLayout, column, valueListData);
+    }
+    return this.renderSwitch(FormItem, formItemLayout, column, valueListData, 'yaKe');
   };
 
   renderShu = (FormItem, rowProps, rowState) => {
@@ -280,6 +345,16 @@ export default class ShengWuFenLei extends PureComponent {
     return this.renderSwitch(FormItem, formItemLayout, column, valueListData, 'shu');
   };
 
+  renderYaShu = (FormItem, rowProps, rowState) => {
+    const { formItemLayout, column , searchArea  } = rowProps;
+    const { valueListData } = rowState;
+    // 搜索区域
+    if (searchArea) {
+      return this.renderSearchSelectFormItem(FormItem, formItemLayout, column, valueListData);
+    }
+    return this.renderSwitch(FormItem, formItemLayout, column, valueListData, 'yaShu');
+  };
+
   renderZhong = (FormItem, rowProps, rowState) => {
     const { formItemLayout, column , searchArea  } = rowProps;
     const { valueListData } = rowState;
@@ -290,26 +365,45 @@ export default class ShengWuFenLei extends PureComponent {
     return this.renderSwitch(FormItem, formItemLayout, column, valueListData, 'zhong');
   };
 
+  renderYaZhong = (FormItem, rowProps, rowState) => {
+    const { formItemLayout, column , searchArea  } = rowProps;
+    const { valueListData } = rowState;
+    // 搜索区域
+    if (searchArea) {
+      return this.renderSearchSelectFormItem(FormItem, formItemLayout, column, valueListData);
+    }
+    return this.renderSwitch(FormItem, formItemLayout, column, valueListData, 'yaZhong');
+  };
+
   render() {
     const { props } = this;
     return (
       <PageHeaderWrapper>
         <StandardPager
+          scroll={{ x: 'max-content' }}
+          fixed="right"
           columnWidth="110px"
           expandOnCancel={this.handleExpandOnCancel}
           customFormItem={{
             yu: this.renderYu,
             jie: this.renderJie,
             yaJie: this.renderYaJie,
+            zongMen: this.renderZongMen,
             men: this.renderMen,
             yaMen: this.renderYaMen,
+            zongGang: this.renderZongGang,
             gang: this.renderGang,
             yaGang: this.renderYaGang,
             zongMu: this.renderZongMu,
             mu: this.renderMu,
+            yaMu: this.renderYaMu,
+            zongKe: this.renderZongKe,
             ke: this.renderKe,
+            yaKe: this.renderYaKe,
             shu: this.renderShu,
+            yaShu: this.renderYaShu,
             zhong: this.renderZhong,
+            yaZhong: this.renderYaZhong,
           }}
           autoApi={{ form: {
               labelCol: { xs: { span: 24 }, sm: { span: 2 } },

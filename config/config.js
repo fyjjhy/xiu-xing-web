@@ -130,6 +130,7 @@ export default {
                 { name: 'address', path: '/addressList', component: './address/Address' },
                 { name: 'fenLei', path: '/fenLeiList', component: './fenLei/FenLei' },
                 { name: 'shengWuFenLei', path: '/shengWuFenLeiList', component: './shengWuFenLei/ShengWuFenLei' },
+                { name: 'shengCheng', path: '/shengChengList', component: './shengCheng/ShengCheng' },
                 // { name: 'sheDing', path: '/sheDingList', component: './sheDingList/SheDing' },
                 { name: 'sheDing', path: '/sheDingList', component: './sheDing/SheDing' },
                 // { name: 'renWu', path: '/renWuList', component: './renWuList/RenWu' },

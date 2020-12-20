@@ -58,7 +58,7 @@ export default class StandardPager extends PureComponent {
     currentModel: null,
     selectedTableRow: {},
     tableSearchFlag: false,
-  }
+  };
 
   // 初始加载数据  初始加载数据移动到AutoTable组件中
   // 因为有的初始查询需要带上查询searchForm中的条件
@@ -270,6 +270,7 @@ export default class StandardPager extends PureComponent {
   handleResetDisplay = () => {
     this.setState({
       currentModel: null,
+      selectedTableRow: {},
     }, () => {
       const { expandOnCancel } = this.props;
       if (expandOnCancel) {
@@ -282,7 +283,7 @@ export default class StandardPager extends PureComponent {
   handleProfileClick = async params => {
     this.handleDisplay();
     await this.handleGetProfileData(params);
-  }
+  };
 
   handleGetProfileData = async params => {
     if (this.getAction) {
@@ -337,7 +338,11 @@ export default class StandardPager extends PureComponent {
     return '';
   }
 
-  handleAddClick = () => {
+  handleAddClick = (selectedRows) => {
+    if (selectedRows && selectedRows.length > 1) {
+      message.info('请选择单一新增模板');
+      return;
+    }
     if (this.relateParamCodes.length > 0) {
       const { rowInfo } = this.props;
       if (!rowInfo || Object.keys(rowInfo).length === 0) {
@@ -347,8 +352,9 @@ export default class StandardPager extends PureComponent {
     }
     this.setState({
       currentModel: 'add',
+      selectedTableRow: selectedRows && selectedRows.length > 0 ? selectedRows[0] : {},
     });
-  }
+  };
 
   handleAdd = async params => {
     let finalParam = { ...params };

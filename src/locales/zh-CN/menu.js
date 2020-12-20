@@ -11,6 +11,7 @@ export default {
   'menu.xiuXing.address': '地址管理',
   'menu.xiuXing.fenLei': '分类管理',
   'menu.xiuXing.shengWuFenLei': '生物分类管理',
+  'menu.xiuXing.shengCheng': '生成管理',
   'menu.xiuXing.sheDing': '设定管理',
   'menu.xiuXing.fuLu': '符箓管理',
   'menu.xiuXing.faShu': '法术管理',

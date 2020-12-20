@@ -108,54 +108,48 @@ export default class AutoForm extends PureComponent {
 
   // 初始化表单
   initForm = () => {
-    const { metaModel, data, currentModel } = this.props;
+    const { metaModel, data, currentModel, selectedTableRow } = this.props;
     const { columnList } = metaModel;
-    if (currentModel === 'add') {
-      return {};
-    }
-    if (currentModel === 'edit') {
-      const initForm = { ...data };
-      const editColumnList = columnList.filter(column => column.editDisplayFlag === 'Y' || column.editable === 'Y');
-      const formKeys = Object.keys(initForm);
-      if (formKeys.length > 0 && editColumnList.length > 0) {
-        for (const key in formKeys) {
-          const [editColumn] = editColumnList.filter(column => column.columnCode === formKeys[key]);
-          if (editColumn) {
-            const {defaultValue, displayType, valueType, columnCode} = editColumn;
-            if (displayType === 'D') {
-              initForm[columnCode] = [moment(moment().startOf('month'), dateFormat), moment(new Date(), dateFormat)];
-            } else if (displayType === 'MS') {
-              const initValue = initForm[columnCode];
-              initForm[columnCode] = initValue ? initValue.split(',') : [];
-            } else if (displayType === 'C') {
-              const initValue = initForm[columnCode];
-              initForm[columnCode] = initValue ? initValue.split(',') : [];
-            } else if (displayType === 'DP') {
-              const initValue = initForm[columnCode];
-              initForm[columnCode] = initValue ? moment(new Date(initValue), dateTimeFormat) : null;
-            } else if (displayType === 'DTP') { // 年月日时分秒
-              const initValue = initForm[columnCode];
-              initForm[columnCode] = initValue ? moment(new Date(initValue), dateTimeFormat) : null;
-            } else if (displayType === 'S') {
-              const initValue = initForm[columnCode];
-              initForm[columnCode] = initValue || defaultValue;
-            } else if (displayType === 'TS') {
-              const initValue = initForm[columnCode];
-              initForm[columnCode] = initValue || defaultValue;
-            } else if (valueType === 'N') {
-              const initValue = initForm[columnCode];
-              initForm[columnCode] = initValue === undefined ? '' : `${initValue}`;
-            }
-            // if (displayType === 'SD') {
-            //   return initialValue || {timeSelect: defaultValue, timeDatePicker: moment(new Date(), monthFormat)};
-            // }
+    const initForm = currentModel === 'add' ? { ...selectedTableRow }  : currentModel === 'edit' ? { ...data }  : {} ;
+    const editColumnList = columnList.filter(column => column.editDisplayFlag === 'Y' || column.editable === 'Y');
+    const formKeys = Object.keys(initForm);
+    if (formKeys.length > 0 && editColumnList.length > 0) {
+      for (const key in formKeys) {
+        const [editColumn] = editColumnList.filter(column => column.columnCode === formKeys[key]);
+        if (editColumn) {
+          const {defaultValue, displayType, valueType, columnCode} = editColumn;
+          if (displayType === 'D') {
+            initForm[columnCode] = [moment(moment().startOf('month'), dateFormat), moment(new Date(), dateFormat)];
+          } else if (displayType === 'MS') {
+            const initValue = initForm[columnCode];
+            initForm[columnCode] = initValue ? initValue.split(',') : [];
+          } else if (displayType === 'C') {
+            const initValue = initForm[columnCode];
+            initForm[columnCode] = initValue ? initValue.split(',') : [];
+          } else if (displayType === 'DP') {
+            const initValue = initForm[columnCode];
+            initForm[columnCode] = initValue ? moment(new Date(initValue), dateTimeFormat) : null;
+          } else if (displayType === 'DTP') { // 年月日时分秒
+            const initValue = initForm[columnCode];
+            initForm[columnCode] = initValue ? moment(new Date(initValue), dateTimeFormat) : null;
+          } else if (displayType === 'S') {
+            const initValue = initForm[columnCode];
+            initForm[columnCode] = initValue || defaultValue;
+          } else if (displayType === 'TS') {
+            const initValue = initForm[columnCode];
+            initForm[columnCode] = initValue || defaultValue;
+          } else if (valueType === 'N') {
+            const initValue = initForm[columnCode];
+            initForm[columnCode] = initValue === undefined ? '' : `${initValue}`;
           }
+          // if (displayType === 'SD') {
+          //   return initialValue || {timeSelect: defaultValue, timeDatePicker: moment(new Date(), monthFormat)};
+          // }
         }
-        return initForm;
       }
     }
-    return {};
-  }
+    return initForm;
+  };
 
   renderHidden(displayFileds) {
     const { data } = this.props;
