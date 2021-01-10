@@ -19,8 +19,8 @@ export default class StandardPager extends PureComponent {
       listParam = `${param}1`;
     }
     this.listMetaModel = getMetaModel(props.metaModelList, listParam);
-    this.queryActions = this.listMetaModel.actionList.filter(action => (
-      action.defaultFlag === 'Y' && action.servAction === 'query')
+    this.queryActions = this.listMetaModel.actionList.filter(
+      action => action.defaultFlag === 'Y' && action.servAction === 'query',
     );
     this.treeTableFlag = this.listMetaModel.treeTableFlag;
     this.parentColumnCode = this.listMetaModel.parentColumnCode;
@@ -37,7 +37,9 @@ export default class StandardPager extends PureComponent {
         this.relateParamCodes.push(keys);
       });
     }
-    this.listMetaModel.actionList.filter(action => (action.defaultFlag === 'Y' && !action.extStr05)).forEach(action => {
+    this.listMetaModel.actionList
+      .filter(action => action.defaultFlag === 'Y' && !action.extStr05)
+      .forEach(action => {
         if (action.servAction === 'get') {
           this.getAction = action;
         } else if (action.servAction === 'update') {
@@ -50,8 +52,7 @@ export default class StandardPager extends PureComponent {
           this.exportActoion = action;
           this.localtionData = action.extStr01;
         }
-      }
-    );
+      });
   }
 
   state = {
@@ -77,7 +78,9 @@ export default class StandardPager extends PureComponent {
       const { id: afterId } = afterRowInfo;
       if (Object.keys(afterRowInfo).length === 0) {
         // 左边选中的行为空，则需要清除右边的数据
-        const { datas: { list: beforeData } } = this.props[this.listMetaModel.funcModelCode];
+        const {
+          datas: { list: beforeData },
+        } = this.props[this.listMetaModel.funcModelCode];
         if (beforeData && beforeData.length > 0) {
           const { listMetaModel } = this;
           this.clearTable(listMetaModel);
@@ -92,7 +95,6 @@ export default class StandardPager extends PureComponent {
       }
     }
   }
-
 
   setCurrentRowInfo = record => {
     if (!record) {
@@ -127,13 +129,13 @@ export default class StandardPager extends PureComponent {
         getTemplateSelectedRowInfo(record);
       }
     }
-  }
+  };
 
   changeTableSearchFlag = flag => {
     this.setState({
       tableSearchFlag: flag,
     });
-  }
+  };
 
   listMetaModel = null;
 
@@ -161,9 +163,15 @@ export default class StandardPager extends PureComponent {
       return;
     }
     const queryAction = this.queryActions[0];
-    const { dispatch, location: { search }, rowInfo, extraInfo={} } = this.props;
+    const {
+      dispatch,
+      location: { search },
+      rowInfo,
+      extraInfo = {},
+      xiaoShuoId,
+    } = this.props;
     const { listMetaModel } = this;
-    let finalParam = { ...params, ...extraInfo };
+    let finalParam = { xiaoShuoId, ...params, ...extraInfo };
     // left right template need, right
     if (this.relateParamCodes.length > 0) {
       finalParam = this.addDefaultParam(finalParam, rowInfo);
@@ -177,7 +185,9 @@ export default class StandardPager extends PureComponent {
     // no pagination if expanded, expanded default false
     if (!expanded) {
       const urlParameters = getUrlParameters(search);
-      const { datas: { pagination } } = this.props[listMetaModel.funcModelCode];
+      const {
+        datas: { pagination },
+      } = this.props[listMetaModel.funcModelCode];
       finalParam = { ...urlParameters, ...pagination, ...finalParam };
     }
     await dispatch({
@@ -191,7 +201,9 @@ export default class StandardPager extends PureComponent {
     if (upProfile) {
       upProfile(params);
     }
-    const { datas: { list } } = this.props[listMetaModel.funcModelCode];
+    const {
+      datas: { list },
+    } = this.props[listMetaModel.funcModelCode];
     if (list.length === 0 && finalParam.current !== 1) {
       finalParam.current -= 1;
       await dispatch({
@@ -201,7 +213,7 @@ export default class StandardPager extends PureComponent {
         },
       });
     }
-  }
+  };
 
   autoCompleteSearch = param => {
     const { listMetaModel } = this;
@@ -210,7 +222,7 @@ export default class StandardPager extends PureComponent {
       type: `${listMetaModel.funcModelCode}/queryAutoCompleteSource`,
       payload: param,
     });
-  }
+  };
 
   addDefaultParam = (params, rowInfo = {}) => {
     const defaultParam = {};
@@ -221,27 +233,27 @@ export default class StandardPager extends PureComponent {
       });
     }
     return { ...defaultParam, ...params };
-  }
+  };
 
   addTreeTableDefaultParam = (param = {}) => {
     const defaultParam = {};
     defaultParam[this.parentColumnCode] = '0';
     return { ...defaultParam, ...param };
-  }
+  };
 
   exportFileParam = params => {
     const values = params;
     values.modelCode = this.modelCode;
     values.localtionData = this.localtionData;
     return values;
-  }
+  };
 
   clearTable = listMetaModel => {
     const { dispatch } = this.props;
     dispatch({
       type: `${listMetaModel.funcModelCode}/emptyList`,
     });
-  }
+  };
 
   clearProfile = () => {
     const { dispatch } = this.props;
@@ -249,7 +261,7 @@ export default class StandardPager extends PureComponent {
     dispatch({
       type: `${listMetaModel.funcModelCode}/emptyProfile`,
     });
-  }
+  };
 
   resetNeedLoad = () => {
     const { dispatch } = this.props;
@@ -264,19 +276,22 @@ export default class StandardPager extends PureComponent {
     this.setState({
       currentModel: 'display',
     });
-  }
+  };
 
   // 将display置为初始值 null
   handleResetDisplay = () => {
-    this.setState({
-      currentModel: null,
-      selectedTableRow: {},
-    }, () => {
-      const { expandOnCancel } = this.props;
-      if (expandOnCancel) {
-        expandOnCancel();
-      }
-    });
+    this.setState(
+      {
+        currentModel: null,
+        selectedTableRow: {},
+      },
+      () => {
+        const { expandOnCancel } = this.props;
+        if (expandOnCancel) {
+          expandOnCancel();
+        }
+      },
+    );
   };
 
   // 点击事件
@@ -293,17 +308,21 @@ export default class StandardPager extends PureComponent {
         payload: params,
       });
     }
-  }
+  };
 
   // 编辑
   handleEdit = async params => {
     if (this.updateAction) {
-      const { dispatch, location: { search } } = this.props;
+      const {
+        dispatch,
+        location: { search },
+      } = this.props;
       const urlParameters = getUrlParameters(search);
       await dispatch({
         type: `${this.listMetaModel.funcModelCode}/${this.updateAction.code}`,
         payload: {
-          ...params, ...urlParameters,
+          ...params,
+          ...urlParameters,
         },
       });
       this.handleResetDisplay();
@@ -321,7 +340,7 @@ export default class StandardPager extends PureComponent {
     this.setState({
       currentModel: 'edit',
     });
-  }
+  };
 
   // 删除
   handleDel = async params => {
@@ -336,9 +355,9 @@ export default class StandardPager extends PureComponent {
       });
     }
     return '';
-  }
+  };
 
-  handleAddClick = (selectedRows) => {
+  handleAddClick = selectedRows => {
     if (selectedRows && selectedRows.length > 1) {
       message.info('请选择单一新增模板');
       return;
@@ -369,12 +388,16 @@ export default class StandardPager extends PureComponent {
       finalParam = this.addDefaultParam(params, rowInfo);
     }
     if (this.addAction) {
-      const { dispatch, location: { search } } = this.props;
+      const {
+        dispatch,
+        location: { search },
+      } = this.props;
       const urlParameters = getUrlParameters(search);
       await dispatch({
         type: `${this.listMetaModel.funcModelCode}/${this.addAction.code}`,
         payload: {
-          ...finalParam, ...urlParameters,
+          ...finalParam,
+          ...urlParameters,
         },
       });
       this.handleResetDisplay();
@@ -392,7 +415,7 @@ export default class StandardPager extends PureComponent {
         payload: { ...exportDataParam, ...(rowInfo || {}) },
       });
     }
-  }
+  };
 
   render() {
     const { props } = this;
@@ -445,7 +468,9 @@ export default class StandardPager extends PureComponent {
             onCancel={this.handleResetDisplay}
             {...props}
           />
-        ) : ''}
+        ) : (
+          ''
+        )}
         {currentModel === 'display' ? (
           <AutoProfile
             visible
@@ -454,7 +479,9 @@ export default class StandardPager extends PureComponent {
             metaModel={this.listMetaModel}
             {...props}
           />
-        ) : ''}
+        ) : (
+          ''
+        )}
         {currentModel === 'add' ? (
           <AutoForm
             showDialog
@@ -473,7 +500,9 @@ export default class StandardPager extends PureComponent {
             selectedTableRow={selectedTableRow}
             {...props}
           />
-        ) : ''}
+        ) : (
+          ''
+        )}
       </Fragment>
     );
   }

@@ -21,57 +21,69 @@ export default class AutoForm extends PureComponent {
 
   state = {
     extraValues: {},
-  }
+  };
 
   onExtraValueChange = values => {
     const { extraValues } = this.state;
     this.setState({
       extraValues: { ...extraValues, ...values },
     });
-  }
+  };
 
   handleSubmit = e => {
     e.preventDefault();
-    const { addLoading, currentModel, addOnSubmit, editOnSubmit, metaModel } = this.props;
+    const {
+      addLoading,
+      currentModel,
+      addOnSubmit,
+      editOnSubmit,
+      metaModel,
+      xiaoShuoId,
+    } = this.props;
     const { current } = this.formRef;
     const { columnList, funcModelCode } = metaModel;
     if (!addLoading) {
-      current.validateFields().then(values => {
-        const { extraValues } = this.state;
-        const resultValues = {
-          ...values,
-          funcModelCode,
-          ...extraValues,
-        };
-        columnList.forEach(column => {
-          if (column.displayType === 'DP') {
-            const dp = values[column.columnCode];
-            if (dp) {
-              resultValues[column.columnCode] = dp.format(dateTimeFormat);
+      current
+        .validateFields()
+        .then(values => {
+          const { extraValues } = this.state;
+          const resultValues = {
+            xiaoShuoId,
+            ...values,
+            funcModelCode,
+            ...extraValues,
+          };
+          columnList.forEach(column => {
+            if (column.displayType === 'DP') {
+              const dp = values[column.columnCode];
+              if (dp) {
+                resultValues[column.columnCode] = dp.format(dateTimeFormat);
+              }
+            } else if (column.displayType === 'DTP') {
+              // 年月日时分秒
+              const dtp = values[column.columnCode];
+              if (dtp) {
+                resultValues[column.columnCode] = dtp.format(dateTimeFormat);
+              }
+            } else if (column.displayType === 'MS') {
+              const ms = values[column.columnCode];
+              if (ms && ms.length > 0) {
+                resultValues[column.columnCode] = ms.join(',');
+              } else {
+                resultValues[column.columnCode] = null;
+              }
             }
-          } else if (column.displayType === 'DTP') { // 年月日时分秒
-            const dtp = values[column.columnCode];
-            if (dtp) {
-              resultValues[column.columnCode] = dtp.format(dateTimeFormat);
-            }
-          } else if (column.displayType === 'MS') {
-            const ms = values[column.columnCode];
-            if (ms && ms.length > 0) {
-              resultValues[column.columnCode] = ms.join(',');
-            } else {
-              resultValues[column.columnCode] = null;
-            }
+          });
+          if (currentModel === 'add' && addOnSubmit) {
+            addOnSubmit(resultValues, currentModel);
           }
+          if (currentModel === 'edit' && editOnSubmit) {
+            editOnSubmit(resultValues, currentModel);
+          }
+        })
+        .catch(errorInfo => {
+          console.log(errorInfo);
         });
-        if (currentModel === 'add' && addOnSubmit) {
-          addOnSubmit(resultValues, currentModel);
-        }
-        if (currentModel === 'edit' && editOnSubmit) {
-          editOnSubmit(resultValues, currentModel);
-        }
-      }).catch(errorInfo => {
-        console.log(errorInfo);
-      });
     }
   };
 
@@ -84,7 +96,7 @@ export default class AutoForm extends PureComponent {
     }
   };
 
-  handleFormItemLayout = (grid) => {
+  handleFormItemLayout = grid => {
     if (grid === 24) {
       return {
         labelCol: { xs: { span: 24 }, sm: { span: 3 } },
@@ -110,16 +122,22 @@ export default class AutoForm extends PureComponent {
   initForm = () => {
     const { metaModel, data, currentModel, selectedTableRow } = this.props;
     const { columnList } = metaModel;
-    const initForm = currentModel === 'add' ? { ...selectedTableRow }  : currentModel === 'edit' ? { ...data }  : {} ;
-    const editColumnList = columnList.filter(column => column.editDisplayFlag === 'Y' || column.editable === 'Y');
+    const initForm =
+      currentModel === 'add' ? { ...selectedTableRow } : currentModel === 'edit' ? { ...data } : {};
+    const editColumnList = columnList.filter(
+      column => column.editDisplayFlag === 'Y' || column.editable === 'Y',
+    );
     const formKeys = Object.keys(initForm);
     if (formKeys.length > 0 && editColumnList.length > 0) {
       for (const key in formKeys) {
         const [editColumn] = editColumnList.filter(column => column.columnCode === formKeys[key]);
         if (editColumn) {
-          const {defaultValue, displayType, valueType, columnCode} = editColumn;
+          const { defaultValue, displayType, valueType, columnCode } = editColumn;
           if (displayType === 'D') {
-            initForm[columnCode] = [moment(moment().startOf('month'), dateFormat), moment(new Date(), dateFormat)];
+            initForm[columnCode] = [
+              moment(moment().startOf('month'), dateFormat),
+              moment(new Date(), dateFormat),
+            ];
           } else if (displayType === 'MS') {
             const initValue = initForm[columnCode];
             initForm[columnCode] = initValue ? initValue.split(',') : [];
@@ -129,7 +147,8 @@ export default class AutoForm extends PureComponent {
           } else if (displayType === 'DP') {
             const initValue = initForm[columnCode];
             initForm[columnCode] = initValue ? moment(new Date(initValue), dateTimeFormat) : null;
-          } else if (displayType === 'DTP') { // 年月日时分秒
+          } else if (displayType === 'DTP') {
+            // 年月日时分秒
             const initValue = initForm[columnCode];
             initForm[columnCode] = initValue ? moment(new Date(initValue), dateTimeFormat) : null;
           } else if (displayType === 'S') {
@@ -163,7 +182,7 @@ export default class AutoForm extends PureComponent {
       }
       return hiddenFileds.map(filed => (
         <FormItem key={filed} name={filed} noStyle>
-          <Input key={filed} type="hidden" name={filed}/>
+          <Input key={filed} type="hidden" name={filed} />
         </FormItem>
       ));
     }
@@ -180,85 +199,91 @@ export default class AutoForm extends PureComponent {
     const defaultCols = [];
     let cols = [];
     let grid = 0;
-    columnList.filter(column => {
-      const { addTable, editDisplayFlag, editable, columnCode } = column;
-      if (editDisplayFlag === 'Y' || editable === 'Y') {
-        displayFileds.push(columnCode);
-      }
-      return currentModel === 'add' ? addTable === 'Y' : (editDisplayFlag === 'Y' || editable === 'Y');
-    }).forEach(column => {
-      // 如果extStr02=24，则独占一行；
-      // 如果和值>24，则进入下一行
-      if (column.hasOwnProperty('extStr02')) {
-        grid += Number(column.extStr02);
-        if (grid < 24) {
-          cols.push(column);
-        } else if (grid === 24) {
-          cols.push(column);
-          rowCols.push(cols);
-          grid = 0;
-          cols = [];
-        } else {
-          rowCols.push(cols);
-          grid = 0;
-          cols = [];
-          cols.push(column);
-        }
-      } else {
-        defaultCols.push(column);
-      }
-    });
-    return (
-      <Fragment>
-        {rowCols && rowCols.length > 0 ? (
-          rowCols.map((rows, index) => {
-            const key = index + 1;
-            return (
-              <Row
-                key={key}
-                // gutter={[8, 8]}
-                style={{ width: '100%', marginLeft: '0px', marginRight: '0px' }}
-              >
-                {rows.map(column => (
-                  <Col key={column.columnCode} span={Number(column.extStr02)}>
-                    <AutoFormRow
-                      {...props}
-                      formItemLayout={this.handleFormItemLayout(Number(column.extStr02))}
-                      key={column.columnCode}
-                      column={column}
-                      form={this.formRef.current}
-                      // initData={data}
-                      // record={data}
-                      // onExtraValueChange={this.onExtraValueChange}
-                      // initialValue={data[column.columnCode]}
-                      currentModel={this.props.currentModel}
-                    />
-                  </Col>
-                ))}
-              </Row>
-            );
-          })
-        ) : (
-          columnList.filter(column => {
-          const { addTable, editDisplayFlag, editable, columnCode } = column;
-          if (editDisplayFlag === 'Y' || editable === 'Y') {
+    columnList
+      .filter(column => {
+        const { addTable, editDisplayFlag, editable, columnCode } = column;
+        if (editDisplayFlag === 'Y' || editable === 'Y') {
           displayFileds.push(columnCode);
         }
-          return currentModel === 'add' ? addTable === 'Y' : (editDisplayFlag === 'Y' || editable === 'Y');
-        }).map(column => (
-          <AutoFormRow
-          {...props}
-          key={column.columnCode}
-          column={column}
-          form={this.formRef.current}
-          // initData={data}
-          // record={data}
-          // onExtraValueChange={this.onExtraValueChange}
-          // initialValue={data[column.columnCode]}
-          currentModel={this.props.currentModel}
-          />
-          ))
-          )}
+        return currentModel === 'add'
+          ? addTable === 'Y'
+          : editDisplayFlag === 'Y' || editable === 'Y';
+      })
+      .forEach(column => {
+        // 如果extStr02=24，则独占一行；
+        // 如果和值>24，则进入下一行
+        if (column.hasOwnProperty('extStr02')) {
+          grid += Number(column.extStr02);
+          if (grid < 24) {
+            cols.push(column);
+          } else if (grid === 24) {
+            cols.push(column);
+            rowCols.push(cols);
+            grid = 0;
+            cols = [];
+          } else {
+            rowCols.push(cols);
+            grid = 0;
+            cols = [];
+            cols.push(column);
+          }
+        } else {
+          defaultCols.push(column);
+        }
+      });
+    return (
+      <Fragment>
+        {rowCols && rowCols.length > 0
+          ? rowCols.map((rows, index) => {
+              const key = index + 1;
+              return (
+                <Row
+                  key={key}
+                  // gutter={[8, 8]}
+                  style={{ width: '100%', marginLeft: '0px', marginRight: '0px' }}
+                >
+                  {rows.map(column => (
+                    <Col key={column.columnCode} span={Number(column.extStr02)}>
+                      <AutoFormRow
+                        {...props}
+                        formItemLayout={this.handleFormItemLayout(Number(column.extStr02))}
+                        key={column.columnCode}
+                        column={column}
+                        form={this.formRef.current}
+                        // initData={data}
+                        // record={data}
+                        // onExtraValueChange={this.onExtraValueChange}
+                        // initialValue={data[column.columnCode]}
+                        currentModel={this.props.currentModel}
+                      />
+                    </Col>
+                  ))}
+                </Row>
+              );
+            })
+          : columnList
+              .filter(column => {
+                const { addTable, editDisplayFlag, editable, columnCode } = column;
+                if (editDisplayFlag === 'Y' || editable === 'Y') {
+                  displayFileds.push(columnCode);
+                }
+                return currentModel === 'add'
+                  ? addTable === 'Y'
+                  : editDisplayFlag === 'Y' || editable === 'Y';
+              })
+              .map(column => (
+                <AutoFormRow
+                  {...props}
+                  key={column.columnCode}
+                  column={column}
+                  form={this.formRef.current}
+                  // initData={data}
+                  // record={data}
+                  // onExtraValueChange={this.onExtraValueChange}
+                  // initialValue={data[column.columnCode]}
+                  currentModel={this.props.currentModel}
+                />
+              ))}
         {this.renderHidden(displayFileds)}
       </Fragment>
     );
@@ -269,16 +294,18 @@ export default class AutoForm extends PureComponent {
     return (
       <Modal
         {...(autoApi && autoApi.modal ? autoApi.modal : {})}
-        title={`${title || metaModel.modelName}${currentModel === 'add' ? '新增' : currentModel === 'edit' ? '编辑' : ''}`}
+        title={`${title || metaModel.modelName}${
+          currentModel === 'add' ? '新增' : currentModel === 'edit' ? '编辑' : ''
+        }`}
         visible={visible}
         maskClosable={false}
         confirmLoading={addLoading}
         onCancel={() => {
-                  this.handleCancel();
-              }}
+          this.handleCancel();
+        }}
         onOk={e => {
-                  this.handleSubmit(e);
-              }}
+          this.handleSubmit(e);
+        }}
         cancelText="取消"
         okText="确定"
       >
@@ -288,7 +315,7 @@ export default class AutoForm extends PureComponent {
           initialValues={this.initForm()}
           ref={this.formRef}
           disabled={addLoading}
-          style={ { marginTop: 8 } }
+          style={{ marginTop: 8 }}
           {...(autoApi && autoApi.form ? autoApi.form : {})}
         >
           {this.renderFormItem()}

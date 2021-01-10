@@ -106,7 +106,7 @@ export default {
           routes: [
             {
               path: '/',
-              redirect: '/cangKuList',
+              redirect: '/xiaoShuoList',
             },
             // {
             //   path: '/welcome',
@@ -122,6 +122,7 @@ export default {
                 // { name: 'xiuXingRiZhi', path: '/xiuXingRiZhiList', component: './xiuXingRiZhi/XiuXingRiZhi' },
                 // { name: 'cangKu', path: '/cangKuList', component: './cangKuList/CangKu' },
                 // { name: 'riZhi', path: '/riZhiList', component: './riZhi/RiZhi' },
+                { name: 'xiaoShuo', path: '/xiaoShuoList', component: './xiaoShuo/XiaoShuo' },
                 { name: 'cangKu', path: '/cangKuList', component: './cangKu/CangKu' },
                 { name: 'zhangJie', path: '/zhangJieList', component: './zhangJie/ZhangJie' },
                 { name: 'cong', path: '/congList', component: './cong/Cong' },
@@ -129,8 +130,16 @@ export default {
                 // { name: 'congShu', path: '/congShuList', component: './congShu/CongShu' },
                 { name: 'address', path: '/addressList', component: './address/Address' },
                 { name: 'fenLei', path: '/fenLeiList', component: './fenLei/FenLei' },
-                { name: 'shengWuFenLei', path: '/shengWuFenLeiList', component: './shengWuFenLei/ShengWuFenLei' },
-                { name: 'shengCheng', path: '/shengChengList', component: './shengCheng/ShengCheng' },
+                {
+                  name: 'shengWuFenLei',
+                  path: '/shengWuFenLeiList',
+                  component: './shengWuFenLei/ShengWuFenLei',
+                },
+                {
+                  name: 'shengCheng',
+                  path: '/shengChengList',
+                  component: './shengCheng/ShengCheng',
+                },
                 // { name: 'sheDing', path: '/sheDingList', component: './sheDingList/SheDing' },
                 { name: 'sheDing', path: '/sheDingList', component: './sheDing/SheDing' },
                 // { name: 'renWu', path: '/renWuList', component: './renWuList/RenWu' },
@@ -166,9 +175,12 @@ export default {
                 // { name: 'pinJi', path: '/pinJiList', component: './pinJiList/PinJi' },
                 { name: 'pinJi', path: '/pinJiList', component: './pinJi/PinJi' },
                 // { name: 'xiaoShuo', path: '/xiaoShuoList', component: './xiaoShuoList/XiaoShuo' },
-                { name: 'xiaoShuo', path: '/xiaoShuoList', component: './xiaoShuo/XiaoShuo' },
                 // { name: 'baiJiaXing', path: '/baiJiaXingList', component: './baiJiaXingList/BaiJiaXing' },
-                { name: 'baiJiaXing', path: '/baiJiaXingList', component: './baiJiaXing/BaiJiaXing' },
+                {
+                  name: 'baiJiaXing',
+                  path: '/baiJiaXingList',
+                  component: './baiJiaXing/BaiJiaXing',
+                },
                 // { name: 'ziDian', path: '/ziDianList', component: './ziDianList/ZiDian' },
                 { name: 'ziDian', path: '/ziDianList', component: './ziDian/ZiDian' },
               ],

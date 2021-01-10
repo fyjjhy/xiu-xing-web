@@ -5,10 +5,10 @@ import { SwitcherOutlined } from '@ant-design/icons';
 
 import { Tooltip, Select, Button } from 'antd';
 
-import StandardPager from "../../template/StandardPager";
-import {renderMiaoShu} from "../../utils/utils";
-import {shengWuFenLeiMetaModel} from "../../json/shengWuFenLei";
-import {Input} from "../../components/InputArea";
+import StandardPager from '../../template/StandardPager';
+import { renderMiaoShu } from '../../utils/utils';
+import { shengWuFenLeiMetaModel } from '../../json/shengWuFenLei';
+import { Input } from '../../components/InputArea';
 
 const { Option } = Select;
 
@@ -17,7 +17,7 @@ const { Option } = Select;
   loading,
 }))
 export default class ShengWuFenLei extends PureComponent {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       formItemSwitch: {
@@ -74,7 +74,7 @@ export default class ShengWuFenLei extends PureComponent {
     });
   };
 
-  handleFormItemSwitch = (fenLei) => {
+  handleFormItemSwitch = fenLei => {
     const { formItemSwitch } = this.state;
     if (formItemSwitch[fenLei] === 'select') {
       this.setState({ formItemSwitch: { ...formItemSwitch, [fenLei]: 'input' } });
@@ -85,15 +85,28 @@ export default class ShengWuFenLei extends PureComponent {
 
   renderMiaoShu = text => {
     const title = renderMiaoShu(text);
-    return (<Tooltip placement="topLeft" title={title}>{text}</Tooltip>);
+    return (
+      <Tooltip placement="topLeft" title={title}>
+        {text}
+      </Tooltip>
+    );
   };
 
   // 其他灵物管理分页信息
   showTotal = metaModel => {
     if (metaModel && metaModel.funcModelCode) {
-      const { [metaModel.funcModelCode]: { datas: { pagination } } } = this.props;
+      const {
+        [metaModel.funcModelCode]: {
+          datas: { pagination },
+        },
+      } = this.props;
       if (pagination && pagination.total) {
-        return { showTotal: () => `共 ${pagination.total} 条记录 第 ${pagination.current} / ${Math.ceil(pagination.total / pagination.pageSize)} 页` };
+        return {
+          showTotal: () =>
+            `共 ${pagination.total} 条记录 第 ${pagination.current} / ${Math.ceil(
+              pagination.total / pagination.pageSize,
+            )} 页`,
+        };
       }
     }
     return { showTotal: () => '' };
@@ -108,17 +121,15 @@ export default class ShengWuFenLei extends PureComponent {
           optionFilterProp="title"
           placeholder={`请选择${column.columnName}`}
         >
-          {valueListData && valueListData.length > 0 ? valueListData.map(data => {
-            return (
-              <Option
-                key={data.dataCode}
-                value={data.dataCode}
-                title={data.dataName}
-              >
-                {data.dataName}
-              </Option>
-            );
-          }) : ''}
+          {valueListData && valueListData.length > 0
+            ? valueListData.map(data => {
+                return (
+                  <Option key={data.dataCode} value={data.dataCode} title={data.dataName}>
+                    {data.dataName}
+                  </Option>
+                );
+              })
+            : ''}
         </Select>
       </FormItem>
     );
@@ -129,34 +140,32 @@ export default class ShengWuFenLei extends PureComponent {
       <Select
         allowClear
         showSearch
-        style={{width: '80%'}}
+        style={{ width: '80%' }}
         optionFilterProp="title"
         placeholder={`请选择${column.columnName}`}
       >
-        {valueListData ? valueListData.map(data => {
-          return (
-            <Option
-              key={data.dataCode}
-              value={data.dataCode}
-              title={data.dataName}
-            >
-              {data.dataName}
-            </Option>
-          );
-        }) : ''}
+        {valueListData
+          ? valueListData.map(data => {
+              return (
+                <Option key={data.dataCode} value={data.dataCode} title={data.dataName}>
+                  {data.dataName}
+                </Option>
+              );
+            })
+          : ''}
       </Select>
     );
   };
 
-  renderInput = (column) => {
-    return <Input style={{width: '80%'}} placeholder={`请输入${column.columnName}`}/>;
+  renderInput = column => {
+    return <Input allowClear style={{ width: '80%' }} placeholder={`请输入${column.columnName}`} />;
   };
 
-  renderButtonIcon = (fenLei) => {
+  renderButtonIcon = fenLei => {
     return (
       <Button
-        style={{marginLeft: '4px'}}
-        icon={<SwitcherOutlined/>}
+        style={{ marginLeft: '4px' }}
+        icon={<SwitcherOutlined />}
         onClick={() => this.handleFormItemSwitch(fenLei)}
       >
         切换
@@ -165,16 +174,14 @@ export default class ShengWuFenLei extends PureComponent {
   };
 
   renderSwitch = (FormItem, formItemLayout, column, valueListData, fenLei) => {
-    const {formItemSwitch} = this.state;
+    const { formItemSwitch } = this.state;
     return (
       <Fragment>
         <FormItem {...formItemLayout} label={column.columnName} name={column.columnCode} rules={[]}>
-          <FormItem
-            name={column.columnCode}
-            noStyle
-            rules={[]}
-          >
-            {formItemSwitch[fenLei] === 'select' ? this.renderSelect(column, valueListData) : this.renderInput(column)}
+          <FormItem name={column.columnCode} noStyle rules={[]}>
+            {formItemSwitch[fenLei] === 'select'
+              ? this.renderSelect(column, valueListData)
+              : this.renderInput(column)}
           </FormItem>
           {this.renderButtonIcon(fenLei)}
         </FormItem>
@@ -183,7 +190,7 @@ export default class ShengWuFenLei extends PureComponent {
   };
 
   renderYu = (FormItem, rowProps, rowState) => {
-    const { formItemLayout, column , searchArea  } = rowProps;
+    const { formItemLayout, column, searchArea } = rowProps;
     const { valueListData } = rowState;
     // 搜索区域
     if (searchArea) {
@@ -193,7 +200,7 @@ export default class ShengWuFenLei extends PureComponent {
   };
 
   renderJie = (FormItem, rowProps, rowState) => {
-    const { formItemLayout, column , searchArea  } = rowProps;
+    const { formItemLayout, column, searchArea } = rowProps;
     const { valueListData } = rowState;
     // 搜索区域
     if (searchArea) {
@@ -203,7 +210,7 @@ export default class ShengWuFenLei extends PureComponent {
   };
 
   renderYaJie = (FormItem, rowProps, rowState) => {
-    const { formItemLayout, column , searchArea  } = rowProps;
+    const { formItemLayout, column, searchArea } = rowProps;
     const { valueListData } = rowState;
     // 搜索区域
     if (searchArea) {
@@ -213,7 +220,7 @@ export default class ShengWuFenLei extends PureComponent {
   };
 
   renderZongMen = (FormItem, rowProps, rowState) => {
-    const { formItemLayout, column , searchArea  } = rowProps;
+    const { formItemLayout, column, searchArea } = rowProps;
     const { valueListData } = rowState;
     // 搜索区域
     if (searchArea) {
@@ -224,7 +231,7 @@ export default class ShengWuFenLei extends PureComponent {
   };
 
   renderMen = (FormItem, rowProps, rowState) => {
-    const { formItemLayout, column , searchArea  } = rowProps;
+    const { formItemLayout, column, searchArea } = rowProps;
     const { valueListData } = rowState;
     // 搜索区域
     if (searchArea) {
@@ -235,7 +242,7 @@ export default class ShengWuFenLei extends PureComponent {
   };
 
   renderYaMen = (FormItem, rowProps, rowState) => {
-    const { formItemLayout, column , searchArea  } = rowProps;
+    const { formItemLayout, column, searchArea } = rowProps;
     const { valueListData } = rowState;
     // 搜索区域
     if (searchArea) {
@@ -246,7 +253,7 @@ export default class ShengWuFenLei extends PureComponent {
   };
 
   renderZongGang = (FormItem, rowProps, rowState) => {
-    const { formItemLayout, column , searchArea  } = rowProps;
+    const { formItemLayout, column, searchArea } = rowProps;
     const { valueListData } = rowState;
     // 搜索区域
     if (searchArea) {
@@ -256,7 +263,7 @@ export default class ShengWuFenLei extends PureComponent {
   };
 
   renderGang = (FormItem, rowProps, rowState) => {
-    const { formItemLayout, column , searchArea  } = rowProps;
+    const { formItemLayout, column, searchArea } = rowProps;
     const { valueListData } = rowState;
     // 搜索区域
     if (searchArea) {
@@ -266,7 +273,7 @@ export default class ShengWuFenLei extends PureComponent {
   };
 
   renderYaGang = (FormItem, rowProps, rowState) => {
-    const { formItemLayout, column , searchArea  } = rowProps;
+    const { formItemLayout, column, searchArea } = rowProps;
     const { valueListData } = rowState;
     // 搜索区域
     if (searchArea) {
@@ -276,7 +283,7 @@ export default class ShengWuFenLei extends PureComponent {
   };
 
   renderZongMu = (FormItem, rowProps, rowState) => {
-    const { formItemLayout, column , searchArea  } = rowProps;
+    const { formItemLayout, column, searchArea } = rowProps;
     const { valueListData } = rowState;
     // 搜索区域
     if (searchArea) {
@@ -286,7 +293,7 @@ export default class ShengWuFenLei extends PureComponent {
   };
 
   renderMu = (FormItem, rowProps, rowState) => {
-    const { formItemLayout, column , searchArea  } = rowProps;
+    const { formItemLayout, column, searchArea } = rowProps;
     const { valueListData } = rowState;
     // 搜索区域
     if (searchArea) {
@@ -296,7 +303,7 @@ export default class ShengWuFenLei extends PureComponent {
   };
 
   renderYaMu = (FormItem, rowProps, rowState) => {
-    const { formItemLayout, column , searchArea  } = rowProps;
+    const { formItemLayout, column, searchArea } = rowProps;
     const { valueListData } = rowState;
     // 搜索区域
     if (searchArea) {
@@ -306,7 +313,7 @@ export default class ShengWuFenLei extends PureComponent {
   };
 
   renderZongKe = (FormItem, rowProps, rowState) => {
-    const { formItemLayout, column , searchArea  } = rowProps;
+    const { formItemLayout, column, searchArea } = rowProps;
     const { valueListData } = rowState;
     // 搜索区域
     if (searchArea) {
@@ -316,7 +323,7 @@ export default class ShengWuFenLei extends PureComponent {
   };
 
   renderKe = (FormItem, rowProps, rowState) => {
-    const { formItemLayout, column , searchArea  } = rowProps;
+    const { formItemLayout, column, searchArea } = rowProps;
     const { valueListData } = rowState;
     // 搜索区域
     if (searchArea) {
@@ -326,7 +333,7 @@ export default class ShengWuFenLei extends PureComponent {
   };
 
   renderYaKe = (FormItem, rowProps, rowState) => {
-    const { formItemLayout, column , searchArea  } = rowProps;
+    const { formItemLayout, column, searchArea } = rowProps;
     const { valueListData } = rowState;
     // 搜索区域
     if (searchArea) {
@@ -336,7 +343,7 @@ export default class ShengWuFenLei extends PureComponent {
   };
 
   renderShu = (FormItem, rowProps, rowState) => {
-    const { formItemLayout, column , searchArea  } = rowProps;
+    const { formItemLayout, column, searchArea } = rowProps;
     const { valueListData } = rowState;
     // 搜索区域
     if (searchArea) {
@@ -346,7 +353,7 @@ export default class ShengWuFenLei extends PureComponent {
   };
 
   renderYaShu = (FormItem, rowProps, rowState) => {
-    const { formItemLayout, column , searchArea  } = rowProps;
+    const { formItemLayout, column, searchArea } = rowProps;
     const { valueListData } = rowState;
     // 搜索区域
     if (searchArea) {
@@ -356,7 +363,7 @@ export default class ShengWuFenLei extends PureComponent {
   };
 
   renderZhong = (FormItem, rowProps, rowState) => {
-    const { formItemLayout, column , searchArea  } = rowProps;
+    const { formItemLayout, column, searchArea } = rowProps;
     const { valueListData } = rowState;
     // 搜索区域
     if (searchArea) {
@@ -366,7 +373,7 @@ export default class ShengWuFenLei extends PureComponent {
   };
 
   renderYaZhong = (FormItem, rowProps, rowState) => {
-    const { formItemLayout, column , searchArea  } = rowProps;
+    const { formItemLayout, column, searchArea } = rowProps;
     const { valueListData } = rowState;
     // 搜索区域
     if (searchArea) {
@@ -405,10 +412,12 @@ export default class ShengWuFenLei extends PureComponent {
             zhong: this.renderZhong,
             yaZhong: this.renderYaZhong,
           }}
-          autoApi={{ form: {
+          autoApi={{
+            form: {
               labelCol: { xs: { span: 24 }, sm: { span: 2 } },
               wrapperCol: { xs: { span: 24 }, sm: { span: 12 }, md: { span: 22 } },
-            } }}
+            },
+          }}
           renderMiaoShu={this.renderMiaoShu}
           showTotal={this.showTotal}
           {...shengWuFenLeiMetaModel()}
@@ -418,4 +427,3 @@ export default class ShengWuFenLei extends PureComponent {
     );
   }
 }
-
