@@ -289,14 +289,30 @@ export default class AutoForm extends PureComponent {
     );
   }
 
+  // 渲染新增或编辑的title
+  renderFormTitle = () => {
+    const { metaModel, title, currentModel, fuGaiFormTitle } = this.props;
+    const formTitle = `${title || metaModel.modelName}${
+      currentModel === 'add' ? '新增' : currentModel === 'edit' ? '编辑' : ''
+    }`;
+    if (fuGaiFormTitle) {
+      const xiaoShuoName = fuGaiFormTitle();
+      return (
+        <span>
+          {formTitle}
+          <span style={{ color: 'blue' }}>{xiaoShuoName ? `（${xiaoShuoName}）` : ''}</span>
+        </span>
+      );
+    }
+    return formTitle;
+  };
+
   renderDialogForm() {
-    const { visible, metaModel, title, addLoading, autoApi, currentModel } = this.props;
+    const { visible, addLoading, autoApi } = this.props;
     return (
       <Modal
         {...(autoApi && autoApi.modal ? autoApi.modal : {})}
-        title={`${title || metaModel.modelName}${
-          currentModel === 'add' ? '新增' : currentModel === 'edit' ? '编辑' : ''
-        }`}
+        title={this.renderFormTitle()}
         visible={visible}
         maskClosable={false}
         confirmLoading={addLoading}

@@ -49,6 +49,18 @@ export default class Cong extends PureComponent {
     };
   }
 
+  handleFuGaiFormTitle = () => {
+    const { activeKey } = this.state;
+    const xiaoShuoList = JSON.parse(localStorage.getItem('xiaoShuoList'));
+    if (xiaoShuoList && xiaoShuoList.length > 0) {
+      const xiaoShuoId = xiaoShuoList.findIndex(xiaoShuo => xiaoShuo.id === activeKey);
+      if (xiaoShuoId !== -1) {
+        return xiaoShuoList[xiaoShuoId].name;
+      }
+    }
+    return '';
+  };
+
   handleTabsOnChange = activeKey => {
     this.setState({ activeKey });
     this.reloadCong();
@@ -536,6 +548,7 @@ export default class Cong extends PureComponent {
                   {data.id === activeKey ? (
                     <Fragment>
                       <StandardPager
+                        fuGaiFormTitle={this.handleFuGaiFormTitle}
                         autoApi={{ modal: { width: '700px' } }}
                         xiaoShuoId={data.id}
                         columnWidth="150px"
@@ -561,7 +574,7 @@ export default class Cong extends PureComponent {
                           visible={optVisible}
                           // onOk={this.handleOk}
                           onCancel={this.handleOptOnCancel}
-                          width={1300}
+                          width="100%"
                         >
                           <StandardPager
                             // scroll={{ x: '100vw' }} // 固定前后列，横向滚动查看其它数据
@@ -604,7 +617,7 @@ export default class Cong extends PureComponent {
             visible={guiJiVisible}
             // onOk={this.handleShuInfoOnOk}
             onCancel={this.handleGuiJiOnCancel}
-            width={1150}
+            width="100%"
             cancelText="取消"
             okText="确定"
           >
